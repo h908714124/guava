@@ -14,7 +14,6 @@
 
 package com.google.common.math;
 
-import com.google.common.annotations.GwtIncompatible;
 import junit.framework.TestCase;
 
 import java.math.BigDecimal;

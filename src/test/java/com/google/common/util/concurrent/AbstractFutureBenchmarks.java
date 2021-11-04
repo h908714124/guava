@@ -16,7 +16,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.CancellationException;
@@ -34,18 +33,18 @@ final class AbstractFutureBenchmarks {
     }
 
     interface Facade<T> extends ListenableFuture<T> {
-                boolean set(T t);
+        boolean set(T t);
 
-                boolean setException(Throwable t);
+        boolean setException(Throwable t);
     }
 
     private static class NewAbstractFutureFacade<T> extends AbstractFuture<T> implements Facade<T> {
-                @Override
+        @Override
         public boolean set(T t) {
             return super.set(t);
         }
 
-                @Override
+        @Override
         public boolean setException(Throwable t) {
             return super.setException(t);
         }
@@ -53,12 +52,12 @@ final class AbstractFutureBenchmarks {
 
     private static class OldAbstractFutureFacade<T> extends OldAbstractFuture<T>
             implements Facade<T> {
-                @Override
+        @Override
         public boolean set(T t) {
             return super.set(t);
         }
 
-                @Override
+        @Override
         public boolean setException(Throwable t) {
             return super.setException(t);
         }
@@ -125,7 +124,7 @@ final class AbstractFutureBenchmarks {
          *     (optional but recommended).
          * @throws CancellationException {@inheritDoc}
          */
-                @Override
+        @Override
         public V get(long timeout, TimeUnit unit)
                 throws InterruptedException, TimeoutException, ExecutionException {
             return sync.get(unit.toNanos(timeout));
@@ -147,7 +146,7 @@ final class AbstractFutureBenchmarks {
          *     (optional but recommended).
          * @throws CancellationException {@inheritDoc}
          */
-                @Override
+        @Override
         public V get() throws InterruptedException, ExecutionException {
             return sync.get();
         }
@@ -162,7 +161,7 @@ final class AbstractFutureBenchmarks {
             return sync.isCancelled();
         }
 
-                @Override
+        @Override
         public boolean cancel(boolean mayInterruptIfRunning) {
             if (!sync.cancel(mayInterruptIfRunning)) {
                 return false;
@@ -214,7 +213,7 @@ final class AbstractFutureBenchmarks {
          * @param value the value that was the result of the task.
          * @return true if the state was successfully changed.
          */
-                protected boolean set(@Nullable V value) {
+        protected boolean set(@Nullable V value) {
             boolean result = sync.set(value);
             if (result) {
                 executionList.execute();
@@ -230,7 +229,7 @@ final class AbstractFutureBenchmarks {
          * @param throwable the exception that the task failed with.
          * @return true if the state was successfully changed.
          */
-                protected boolean setException(Throwable throwable) {
+        protected boolean setException(Throwable throwable) {
             boolean result = sync.setException(checkNotNull(throwable));
             if (result) {
                 executionList.execute();

@@ -19,7 +19,6 @@ package com.google.common.io;
 import com.google.common.collect.Iterables;
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.TestCase;
 
 import java.io.IOException;
@@ -108,13 +107,13 @@ public class MoreFilesFileTraverserTest extends TestCase {
                 .containsExactly(rootDir, fileA, fileB, dir1, dir2);
     }
 
-        private Path newDir(String name) throws IOException {
+    private Path newDir(String name) throws IOException {
         Path dir = rootDir.resolve(name);
         Files.createDirectory(dir);
         return dir;
     }
 
-        private Path newFile(String name) throws IOException {
+    private Path newFile(String name) throws IOException {
         Path file = rootDir.resolve(name);
         MoreFiles.touch(file);
         return file;

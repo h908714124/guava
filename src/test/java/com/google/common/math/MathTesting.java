@@ -16,7 +16,6 @@
 
 package com.google.common.math;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;

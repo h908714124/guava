@@ -150,7 +150,7 @@ public class ExecutionSequencerTest extends TestCase {
         assertThat(getDone(future2)).isFalse();
     }
 
-        @J2ObjCIncompatible // gc
+    @J2ObjCIncompatible // gc
     @AndroidIncompatible
     public void testCancellationWithReferencedObject() throws Exception {
         Object toBeGCed = new Object();

@@ -21,8 +21,6 @@ import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Table;
 import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
-import sun.security.jca.ProviderList;
-import sun.security.jca.Providers;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -75,19 +73,6 @@ public class MacHashFunctionTest extends TestCase {
                 HashFunction hashFunc = cell.getValue();
                 assertMacHashing(HashTestUtils.ascii(stringToTest), algorithm, key, hashFunc);
             }
-        }
-    }
-
-    @AndroidIncompatible // sun.security
-    public void testNoProviders() {
-        ProviderList providers = Providers.getProviderList();
-        Providers.setProviderList(ProviderList.newList());
-        try {
-            Hashing.hmacMd5(MD5_KEY);
-            fail("expected ISE");
-        } catch (IllegalStateException expected) {
-        } finally {
-            Providers.setProviderList(providers);
         }
     }
 

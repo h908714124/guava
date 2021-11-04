@@ -370,7 +370,7 @@ public class ImmutableMapTest extends TestCase {
             assertMapEquals(map, "one", 1, "two", 2, "three", 3, "four", 4, "five", 5);
         }
 
-                public void testBuilderExactlySizedReusesArray() {
+        public void testBuilderExactlySizedReusesArray() {
             ImmutableMap.Builder<Integer, Integer> builder = ImmutableMap.builderWithExpectedSize(10);
             Entry<Integer, Integer>[] builderArray = builder.entries;
             for (int i = 0; i < 10; i++) {

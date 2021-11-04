@@ -156,7 +156,7 @@ public class IntsTest extends TestCase {
         assertEquals(3, Ints.lastIndexOf(new int[]{(int) 2, (int) 3, (int) 2, (int) 3}, (int) 3));
     }
 
-        public void testMax_noArgs() {
+    public void testMax_noArgs() {
         try {
             Ints.max();
             fail();
@@ -170,7 +170,7 @@ public class IntsTest extends TestCase {
         assertEquals((int) 9, Ints.max((int) 8, (int) 6, (int) 7, (int) 5, (int) 3, (int) 0, (int) 9));
     }
 
-        public void testMin_noArgs() {
+    public void testMin_noArgs() {
         try {
             Ints.min();
             fail();

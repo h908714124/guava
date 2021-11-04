@@ -17,7 +17,6 @@
 package com.google.common.io;
 
 import com.google.common.collect.Sets;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.TestCase;
 
 import java.io.File;
@@ -171,7 +170,7 @@ public abstract class IoTestCase extends TestCase {
         }
     }
 
-        private boolean delete(File file) {
+    private boolean delete(File file) {
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             if (files != null) {

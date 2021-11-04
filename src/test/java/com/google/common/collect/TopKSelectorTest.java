@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.math.IntMath;
 import com.google.common.primitives.Ints;
 import junit.framework.TestCase;

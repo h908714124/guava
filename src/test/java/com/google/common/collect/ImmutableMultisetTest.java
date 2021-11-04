@@ -32,7 +32,6 @@ import com.google.common.testing.CollectorTester;
 import com.google.common.testing.EqualsTester;
 import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -716,7 +715,7 @@ public class ImmutableMultisetTest extends TestCase {
                 }
             };
 
-                        @Override
+            @Override
             public abstract ImmutableMultiset<Object> create(List<?> keys);
         }
     }

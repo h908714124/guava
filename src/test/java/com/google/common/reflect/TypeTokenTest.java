@@ -26,7 +26,6 @@ import com.google.common.testing.EqualsTester;
 import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import com.google.common.truth.IterableSubject;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.TestCase;
 
 import java.io.Serializable;
@@ -43,6 +42,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -471,7 +471,7 @@ public class TypeTokenTest extends TestCase {
         }.getGenericSuperclass());
     }
 
-    public <T extends List<String> & CharSequence>
+    public <T extends Optional<String> & CharSequence>
     void testGetGenericSuperclass_typeVariable_boundIsInterface() {
         assertNull(TypeToken.of(new TypeCapture<T>() {
         }.capture()).getGenericSuperclass());
@@ -490,7 +490,7 @@ public class TypeTokenTest extends TestCase {
         }.getGenericSuperclass());
     }
 
-    public <T extends List<String> & CharSequence, T1 extends T>
+    public <T extends Optional<String> & CharSequence, T1 extends T>
     void testGetGenericSuperclass_typeVariable_boundIsTypeVariableAndInterface() {
         assertNull(TypeToken.of(new TypeCapture<T1>() {
         }.capture()).getGenericSuperclass());
@@ -2290,7 +2290,7 @@ public class TypeTokenTest extends TestCase {
         }
     }
 
-        private static <T> T reserialize(T object) {
+    private static <T> T reserialize(T object) {
         T copy = SerializableTester.reserialize(object);
         new EqualsTester().addEqualityGroup(object, copy).testEquals();
         return copy;

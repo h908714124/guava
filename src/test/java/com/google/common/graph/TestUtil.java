@@ -18,7 +18,6 @@ package com.google.common.graph;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.util.Set;
 
@@ -80,7 +79,7 @@ final class TestUtil {
      * In some cases our graph implementations return custom sets that define their own size() and
      * contains(). Verify that these sets are consistent with the elements of their iterator.
      */
-        static <T> Set<T> sanityCheckSet(Set<T> set) {
+    static <T> Set<T> sanityCheckSet(Set<T> set) {
         assertThat(set).hasSize(Iterators.size(set.iterator()));
         for (Object element : set) {
             assertThat(set).contains(element);

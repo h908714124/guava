@@ -27,7 +27,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.testing.ClassSanityTester;
 import com.google.common.testing.GcFinalization;
 import com.google.common.testing.TestLogHandler;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -195,7 +194,7 @@ public class FuturesTest extends TestCase {
         assertTrue(future.isCancelled());
     }
 
-        public void testImmediateCancelledFutureStack() throws Exception {
+    public void testImmediateCancelledFutureStack() throws Exception {
         ListenableFuture<String> future = CallerClass1.makeImmediateCancelledFuture();
         assertTrue(future.isCancelled());
 
@@ -232,7 +231,7 @@ public class FuturesTest extends TestCase {
     }
 
     private static final class CallerClass2 {
-                static <V> V get(ListenableFuture<V> future) throws ExecutionException, InterruptedException {
+        static <V> V get(ListenableFuture<V> future) throws ExecutionException, InterruptedException {
             return getDone(future);
         }
     }
@@ -2929,7 +2928,7 @@ public class FuturesTest extends TestCase {
     }
 
     @AndroidIncompatible
-        public void testWhenAllSucceed_releasesInputFuturesUponSubmission() throws Exception {
+    public void testWhenAllSucceed_releasesInputFuturesUponSubmission() throws Exception {
         SettableFuture<Long> future1 = SettableFuture.create();
         SettableFuture<Long> future2 = SettableFuture.create();
         WeakReference<SettableFuture<Long>> future1Ref = new WeakReference<>(future1);
@@ -2963,7 +2962,7 @@ public class FuturesTest extends TestCase {
     }
 
     @AndroidIncompatible
-        public void testWhenAllComplete_releasesInputFuturesUponCancellation() throws Exception {
+    public void testWhenAllComplete_releasesInputFuturesUponCancellation() throws Exception {
         SettableFuture<Long> future = SettableFuture.create();
         WeakReference<SettableFuture<Long>> futureRef = new WeakReference<>(future);
 
@@ -2985,7 +2984,7 @@ public class FuturesTest extends TestCase {
     }
 
     @AndroidIncompatible
-        public void testWhenAllSucceed_releasesCallable() throws Exception {
+    public void testWhenAllSucceed_releasesCallable() throws Exception {
         AsyncCallable<Long> combiner =
                 new AsyncCallable<Long>() {
                     @Override
@@ -3251,7 +3250,7 @@ public class FuturesTest extends TestCase {
      * <p>We need this to test the behavior of no-arg get methods without hanging the main test thread
      * forever in the case of failure.
      */
-        @GwtIncompatible // threads
+    @GwtIncompatible // threads
     static <V> V pseudoTimedGetUninterruptibly(final Future<V> input, long timeout, TimeUnit unit)
             throws ExecutionException, TimeoutException {
         ExecutorService executor = newSingleThreadExecutor();
@@ -3860,7 +3859,7 @@ public class FuturesTest extends TestCase {
     }
 
     @AndroidIncompatible // reference is never cleared under some versions of the emulator
-        public void testInputGCedIfUnreferenced() throws Exception {
+    public void testInputGCedIfUnreferenced() throws Exception {
         SettableFuture<Long> future1 = SettableFuture.create();
         SettableFuture<Long> future2 = SettableFuture.create();
         WeakReference<SettableFuture<Long>> future1Ref = new WeakReference<>(future1);

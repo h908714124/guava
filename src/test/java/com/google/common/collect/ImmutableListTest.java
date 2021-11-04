@@ -690,7 +690,7 @@ public class ImmutableListTest extends TestCase {
             }
         }
 
-                public void testBuilderExactlySizedReusesArray() {
+        public void testBuilderExactlySizedReusesArray() {
             ImmutableList.Builder<Integer> builder = ImmutableList.builderWithExpectedSize(10);
             Object[] builderArray = builder.contents;
             for (int i = 0; i < 10; i++) {

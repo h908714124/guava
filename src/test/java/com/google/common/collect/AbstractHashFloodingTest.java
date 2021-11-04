@@ -15,9 +15,6 @@
  */
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.TestCase;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -107,7 +104,7 @@ public abstract class AbstractHashFloodingTest<T> extends TestCase {
 
     @FunctionalInterface
     interface Construction<T> {
-                abstract T create(List<?> keys);
+        abstract T create(List<?> keys);
 
         static Construction<Map<Object, Object>> mapFromKeys(
                 Supplier<Map<Object, Object>> mutableSupplier) {
@@ -187,7 +184,7 @@ public abstract class AbstractHashFloodingTest<T> extends TestCase {
         return result;
     }
 
-        public void testResistsHashFloodingInConstruction() {
+    public void testResistsHashFloodingInConstruction() {
         CallsCounter smallCounter = new CallsCounter();
         List<CountsHashCodeAndEquals> haveSameHashesSmall = createAdversarialInput(10, smallCounter);
         int smallSize = haveSameHashesSmall.size();
@@ -219,7 +216,7 @@ public abstract class AbstractHashFloodingTest<T> extends TestCase {
         }
     }
 
-        public void testResistsHashFloodingOnQuery() {
+    public void testResistsHashFloodingOnQuery() {
         CallsCounter smallCounter = new CallsCounter();
         List<CountsHashCodeAndEquals> haveSameHashesSmall = createAdversarialInput(10, smallCounter);
         int smallSize = haveSameHashesSmall.size();

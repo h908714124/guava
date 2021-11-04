@@ -990,7 +990,7 @@ public class LongMathTest extends TestCase {
             Long.MIN_VALUE
     };
 
-        public void testRoundToDoubleAgainstBigInteger() {
+    public void testRoundToDoubleAgainstBigInteger() {
         for (RoundingMode roundingMode : EnumSet.complementOf(EnumSet.of(UNNECESSARY))) {
             for (long candidate : roundToDoubleTestCandidates) {
                 assertThat(LongMath.roundToDouble(candidate, roundingMode))
@@ -999,7 +999,7 @@ public class LongMathTest extends TestCase {
         }
     }
 
-        public void testRoundToDoubleAgainstBigIntegerUnnecessary() {
+    public void testRoundToDoubleAgainstBigIntegerUnnecessary() {
         for (long candidate : roundToDoubleTestCandidates) {
             Double expectedDouble = null;
             try {

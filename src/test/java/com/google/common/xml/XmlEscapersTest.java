@@ -16,7 +16,6 @@
 
 package com.google.common.xml;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.escape.CharEscaper;
 import junit.framework.TestCase;
 

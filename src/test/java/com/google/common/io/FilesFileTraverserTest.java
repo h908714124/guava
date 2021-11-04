@@ -17,7 +17,6 @@
 package com.google.common.io;
 
 import com.google.common.collect.Iterables;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.TestCase;
 
 import java.io.File;
@@ -127,13 +126,13 @@ public class FilesFileTraverserTest extends TestCase {
                 .containsExactly(rootDir, fileA, fileB, dir1, dir2);
     }
 
-        private File newDir(String name) {
+    private File newDir(String name) {
         File file = new File(rootDir, name);
         file.mkdir();
         return file;
     }
 
-        private File newFile(String name) throws IOException {
+    private File newFile(String name) throws IOException {
         File file = new File(rootDir, name);
         file.createNewFile();
         return file;

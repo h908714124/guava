@@ -187,7 +187,7 @@ public class FloatsTest extends TestCase {
         assertEquals(-1, Floats.lastIndexOf(new float[]{NaN, 5f}, NaN));
     }
 
-        public void testMax_noArgs() {
+    public void testMax_noArgs() {
         try {
             Floats.max();
             fail();
@@ -208,7 +208,7 @@ public class FloatsTest extends TestCase {
         assertTrue(Float.isNaN(Floats.max(VALUES)));
     }
 
-        public void testMin_noArgs() {
+    public void testMin_noArgs() {
         try {
             Floats.min();
             fail();
@@ -636,7 +636,7 @@ public class FloatsTest extends TestCase {
         tester.testAllPublicInstanceMethods(Floats.stringConverter());
     }
 
-        public void testTryParse_withNullNoGwt() {
+    public void testTryParse_withNullNoGwt() {
         assertNull(Floats.tryParse("null"));
         try {
             Floats.tryParse(null);

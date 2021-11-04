@@ -1831,7 +1831,7 @@ public class MapsTest extends TestCase {
         }
     }
 
-            // NavigableMap
+    // NavigableMap
     void ensureNotDirectlyModifiable(NavigableMap<Integer, String> unmod) {
         try {
             unmod.put(4, "four");

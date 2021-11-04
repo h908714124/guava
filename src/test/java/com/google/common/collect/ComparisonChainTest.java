@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 

@@ -14,7 +14,6 @@
 
 package com.google.common.html;
 
-import com.google.common.annotations.GwtCompatible;
 import junit.framework.TestCase;
 
 import static com.google.common.html.HtmlEscapers.htmlEscaper;

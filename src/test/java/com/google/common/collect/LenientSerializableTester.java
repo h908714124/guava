@@ -19,7 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.testing.SerializableTester;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.util.Collection;
 import java.util.Set;
@@ -44,7 +43,7 @@ final class LenientSerializableTester {
      * TODO(cpovirk): move this to c.g.c.testing if we allow for c.g.c.annotations dependencies so
      * that it can be GWTified?
      */
-        @GwtIncompatible // SerializableTester
+    @GwtIncompatible // SerializableTester
     static <E> Set<E> reserializeAndAssertLenient(Set<E> original) {
         Set<E> copy = reserialize(original);
         assertEquals(original, copy);
@@ -52,7 +51,7 @@ final class LenientSerializableTester {
         return copy;
     }
 
-        @GwtIncompatible // SerializableTester
+    @GwtIncompatible // SerializableTester
     static <E> Multiset<E> reserializeAndAssertLenient(Multiset<E> original) {
         Multiset<E> copy = reserialize(original);
         assertEquals(original, copy);
@@ -60,7 +59,7 @@ final class LenientSerializableTester {
         return copy;
     }
 
-        @GwtIncompatible // SerializableTester
+    @GwtIncompatible // SerializableTester
     static <E> Collection<E> reserializeAndAssertElementsEqual(Collection<E> original) {
         Collection<E> copy = reserialize(original);
         assertTrue(Iterables.elementsEqual(original, copy));

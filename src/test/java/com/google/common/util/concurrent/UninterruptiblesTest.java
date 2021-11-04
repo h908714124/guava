@@ -21,7 +21,6 @@ import com.google.common.base.Stopwatch;
 import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.TearDown;
 import com.google.common.testing.TearDownStack;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.TestCase;
 
 import java.time.Duration;
@@ -856,7 +855,7 @@ public class UninterruptiblesTest extends TestCase {
         InterruptionUtil.requestInterruptIn(millis, MILLISECONDS);
     }
 
-        private static Thread acquireFor(final Lock lock, final long duration, final TimeUnit unit) {
+    private static Thread acquireFor(final Lock lock, final long duration, final TimeUnit unit) {
         final CountDownLatch latch = new CountDownLatch(1);
         Thread thread =
                 new Thread() {

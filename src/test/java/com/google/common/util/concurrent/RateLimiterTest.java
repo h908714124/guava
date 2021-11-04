@@ -23,7 +23,6 @@ import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.NullPointerTester.Visibility;
 import com.google.common.util.concurrent.RateLimiter.SleepingStopwatch;
 import junit.framework.TestCase;
-import org.easymock.EasyMock;
 import org.mockito.Mockito;
 
 import java.lang.reflect.Method;
@@ -572,13 +571,6 @@ public class RateLimiterTest extends TestCase {
      */
     public void testMockingMockito() throws Exception {
         RateLimiter mock = Mockito.mock(RateLimiter.class);
-        doTestMocking(mock);
-    }
-
-    @AndroidIncompatible // EasyMock Class Extension doesn't appear to work on Android.
-    public void testMockingEasyMock() throws Exception {
-        RateLimiter mock = EasyMock.createNiceMock(RateLimiter.class);
-        EasyMock.replay(mock);
         doTestMocking(mock);
     }
 

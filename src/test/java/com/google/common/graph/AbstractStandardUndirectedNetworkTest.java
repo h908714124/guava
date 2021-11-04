@@ -18,12 +18,13 @@ package com.google.common.graph;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.testing.EqualsTester;
+import com.google.common.truth.Truth8;
 import org.junit.After;
 import org.junit.Test;
 
 import java.util.Set;
 
-import static com.google.common.truth.Truth8.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.TruthJUnit.assume;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -210,8 +211,8 @@ public abstract class AbstractStandardUndirectedNetworkTest extends AbstractNetw
     @Test
     public void edgeConnecting_orderMismatch() {
         addEdge(N1, N2, E12);
-        assertThat(network.edgeConnecting(ENDPOINTS_N2N1)).hasValue(E12);
-        assertThat(network.edgeConnecting(ENDPOINTS_N1N2)).hasValue(E12);
+        Truth8.assertThat(network.edgeConnecting(ENDPOINTS_N2N1)).hasValue(E12);
+        Truth8.assertThat(network.edgeConnecting(ENDPOINTS_N1N2)).hasValue(E12);
     }
 
     @Test

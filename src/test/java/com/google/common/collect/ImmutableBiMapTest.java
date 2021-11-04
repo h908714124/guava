@@ -33,7 +33,6 @@ import com.google.common.collect.testing.google.BiMapTestSuiteBuilder;
 import com.google.common.collect.testing.google.TestStringBiMapGenerator;
 import com.google.common.testing.CollectorTester;
 import com.google.common.testing.SerializableTester;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -238,7 +237,7 @@ public class ImmutableBiMapTest extends TestCase {
             assertMapEquals(map.inverse(), 1, "one", 2, "two", 3, "three", 4, "four", 5, "five");
         }
 
-                public void testBuilderExactlySizedReusesArray() {
+        public void testBuilderExactlySizedReusesArray() {
             ImmutableBiMap.Builder<Integer, Integer> builder = ImmutableBiMap.builderWithExpectedSize(10);
             Entry<Integer, Integer>[] builderArray = builder.entries;
             for (int i = 0; i < 10; i++) {
@@ -870,7 +869,7 @@ public class ImmutableBiMapTest extends TestCase {
                 }
             };
 
-                        public abstract ImmutableBiMap<Object, Object> create(List<Map.Entry<?, ?>> entries);
+            public abstract ImmutableBiMap<Object, Object> create(List<Map.Entry<?, ?>> entries);
         }
     }
 

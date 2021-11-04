@@ -16,7 +16,6 @@
 
 package com.google.common.net;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.testing.EqualsTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.TestCase;

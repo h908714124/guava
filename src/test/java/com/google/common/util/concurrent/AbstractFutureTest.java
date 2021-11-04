@@ -16,7 +16,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Range;
 import com.google.common.collect.Sets;
@@ -850,7 +849,7 @@ public class AbstractFutureTest extends TestCase {
 
     // Verify that StackOverflowError in a long chain of SetFuture doesn't cause the entire toString
     // call to fail
-        @AndroidIncompatible
+    @AndroidIncompatible
     public void testSetFutureToString_stackOverflow() {
         SettableFuture<String> orig = SettableFuture.create();
         SettableFuture<String> prev = orig;

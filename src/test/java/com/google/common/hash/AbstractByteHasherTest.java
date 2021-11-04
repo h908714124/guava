@@ -14,7 +14,6 @@
 
 package com.google.common.hash;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;
@@ -111,7 +110,7 @@ public class AbstractByteHasherTest extends TestCase {
         }
     }
 
-        private class TestHasher extends AbstractByteHasher {
+    private class TestHasher extends AbstractByteHasher {
 
         private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
