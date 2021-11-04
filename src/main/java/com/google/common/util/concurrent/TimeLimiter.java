@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.time.Duration;
 import java.util.concurrent.Callable;
@@ -33,8 +32,6 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * @since 1.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public interface TimeLimiter {
 
     /**

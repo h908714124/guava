@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
@@ -27,7 +26,6 @@ import com.google.common.graph.SuccessorsFunction;
 import com.google.common.graph.Traverser;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -64,8 +62,6 @@ import static com.google.common.io.FileWriteMode.APPEND;
  * @author Colin Decker
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class Files {
 
     /** Maximum loop count when creating temp directories. */
@@ -590,8 +586,6 @@ public final class Files {
      */
     @Beta
     @Deprecated
-    @CanIgnoreReturnValue // some processors won't return a useful result
-    @ParametricNullness
     public
     static <T> T readLines(
             File file, Charset charset, LineProcessor<T> callback) throws IOException {
@@ -612,8 +606,6 @@ public final class Files {
      */
     @Beta
     @Deprecated
-    @CanIgnoreReturnValue // some processors won't return a useful result
-    @ParametricNullness
     public
     static <T> T readBytes(File file, ByteProcessor<T> processor)
             throws IOException {

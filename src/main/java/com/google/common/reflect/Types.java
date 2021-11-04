@@ -51,7 +51,6 @@ import static java.util.Objects.requireNonNull;
  *
  * @author Ben Yu
  */
-@ElementTypesAreNonnullByDefault
 final class Types {
 
     /** Class#toString without the "class " and "interface " prefixes */

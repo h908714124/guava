@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -109,8 +107,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Gregory Kick
  * @since 16.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 /*
  * 1. The type parameter is <T> rather than <T extends @Nullable> so that we can use T in the
  * doForward and doBackward methods to indicate that the parameter cannot be null. (We also take

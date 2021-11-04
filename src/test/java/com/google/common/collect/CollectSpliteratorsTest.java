@@ -29,7 +29,6 @@ import java.util.stream.LongStream;
 import static com.google.common.truth.Truth.assertThat;
 
 /** Tests for {@code CollectSpliterators}. */
-@GwtCompatible
 public class CollectSpliteratorsTest extends TestCase {
     public void testMap() {
         SpliteratorTester.of(

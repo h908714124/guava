@@ -15,9 +15,7 @@
 package com.google.common.primitives;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Preconditions;
-import com.google.errorprone.annotations.Immutable;
 
 import java.io.Serializable;
 import java.util.AbstractList;
@@ -84,8 +82,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 22.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class ImmutableDoubleArray implements Serializable {
     private static final ImmutableDoubleArray EMPTY = new ImmutableDoubleArray(new double[0]);
 

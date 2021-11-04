@@ -33,7 +33,6 @@ import static com.google.common.graph.GraphConstants.EXPECTED_DEGREE;
  * @param <N> Node parameter type
  * @param <E> Edge parameter type
  */
-@ElementTypesAreNonnullByDefault
 final class UndirectedNetworkConnections<N, E> extends AbstractUndirectedNetworkConnections<N, E> {
 
     UndirectedNetworkConnections(Map<E, N> incidentEdgeMap) {

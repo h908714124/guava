@@ -14,8 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -29,8 +27,6 @@ import java.util.Spliterator;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class AbstractTable<
         R, C, V>
         implements Table<R, C, V> {
@@ -95,7 +91,7 @@ abstract class AbstractTable<
 
     @Override
     public V put(
-            @ParametricNullness R rowKey, @ParametricNullness C columnKey, @ParametricNullness V value) {
+            R rowKey, C columnKey, V value) {
         return row(rowKey).put(columnKey, value);
     }
 
@@ -183,8 +179,7 @@ abstract class AbstractTable<
     Iterator<V> valuesIterator() {
         return new TransformedIterator<Cell<R, C, V>, V>(cellSet().iterator()) {
             @Override
-            @ParametricNullness
-            V transform(Cell<R, C, V> cell) {
+                V transform(Cell<R, C, V> cell) {
                 return cell.getValue();
             }
         };

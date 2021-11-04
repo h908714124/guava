@@ -77,7 +77,6 @@ import static java.util.Objects.requireNonNull;
  * @author Jon Noack
  */
 @GwtIncompatible // not worth using in GWT for now
-@ElementTypesAreNonnullByDefault
 class CompactHashMap<K, V>
         extends AbstractMap<K, V> implements Serializable {
     /*
@@ -330,7 +329,7 @@ class CompactHashMap<K, V>
     }
 
     @Override
-    public V put(@ParametricNullness K key, @ParametricNullness V value) {
+    public V put(K key, V value) {
         if (needsAllocArrays()) {
             allocArrays();
         }
@@ -398,7 +397,7 @@ class CompactHashMap<K, V>
      * Creates a fresh entry with the specified object at the specified position in the entry arrays.
      */
     void insertEntry(
-            int entryIndex, @ParametricNullness K key, @ParametricNullness V value, int hash, int mask) {
+            int entryIndex, K key, V value, int hash, int mask) {
         this.setEntry(entryIndex, CompactHashing.maskCombine(hash, UNSET, mask));
         this.setKey(entryIndex, key);
         this.setValue(entryIndex, value);
@@ -628,11 +627,9 @@ class CompactHashMap<K, V>
             return currentIndex >= 0;
         }
 
-        @ParametricNullness
         abstract T getOutput(int entry);
 
         @Override
-        @ParametricNullness
         public T next() {
             checkForConcurrentModification();
             if (!hasNext()) {
@@ -767,8 +764,7 @@ class CompactHashMap<K, V>
         }
         return new Itr<K>() {
             @Override
-            @ParametricNullness
-            K getOutput(int entry) {
+                K getOutput(int entry) {
                 return key(entry);
             }
         };
@@ -879,7 +875,6 @@ class CompactHashMap<K, V>
     }
 
     final class MapEntry extends AbstractMapEntry<K, V> {
-        @ParametricNullness
         private final K key;
 
         private int lastKnownIndex;
@@ -890,7 +885,6 @@ class CompactHashMap<K, V>
         }
 
         @Override
-        @ParametricNullness
         public K getKey() {
             return key;
         }
@@ -904,7 +898,6 @@ class CompactHashMap<K, V>
         }
 
         @Override
-        @ParametricNullness
         public V getValue() {
             Map<K, V> delegate = delegateOrNull();
             if (delegate != null) {
@@ -927,8 +920,7 @@ class CompactHashMap<K, V>
         }
 
         @Override
-        @ParametricNullness
-        public V setValue(@ParametricNullness V value) {
+        public V setValue(V value) {
             Map<K, V> delegate = delegateOrNull();
             if (delegate != null) {
                 return uncheckedCastNullableTToT(delegate.put(key, value)); // See discussion in getValue().
@@ -1050,8 +1042,7 @@ class CompactHashMap<K, V>
         }
         return new Itr<V>() {
             @Override
-            @ParametricNullness
-            V getOutput(int entry) {
+                V getOutput(int entry) {
                 return value(entry);
             }
         };

@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 import java.util.Map;
 
 /** @author David Beaumont */
-@GwtCompatible
 public class ArrayBasedEscaperMapTest extends TestCase {
     public void testNullMap() {
         try {

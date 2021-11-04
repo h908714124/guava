@@ -16,9 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.util.NoSuchElementException;
 
 import static com.google.common.base.Preconditions.checkState;
@@ -61,8 +58,6 @@ import static com.google.common.collect.NullnessCasts.uncheckedCastNullableTToT;
  */
 // When making changes to this class, please also update the copy at
 // com.google.common.base.AbstractIterator
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractIterator<T> extends UnmodifiableIterator<T> {
     private State state = State.NOT_READY;
 
@@ -124,7 +119,6 @@ public abstract class AbstractIterator<T> extends UnmodifiableIterator<T> {
         return null;
     }
 
-    @CanIgnoreReturnValue // TODO(kak): Should we remove this? Some people are using it to prefetch?
     @Override
     public final boolean hasNext() {
         checkState(state != State.FAILED);
@@ -148,9 +142,7 @@ public abstract class AbstractIterator<T> extends UnmodifiableIterator<T> {
         return false;
     }
 
-    @CanIgnoreReturnValue // TODO(kak): Should we remove this?
     @Override
-    @ParametricNullness
     public final T next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
@@ -169,7 +161,6 @@ public abstract class AbstractIterator<T> extends UnmodifiableIterator<T> {
      * <p>Implementations of {@code AbstractIterator} that wish to expose this functionality should
      * implement {@code PeekingIterator}.
      */
-    @ParametricNullness
     public final T peek() {
         if (!hasNext()) {
             throw new NoSuchElementException();

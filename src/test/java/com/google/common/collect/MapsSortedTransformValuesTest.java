@@ -27,7 +27,6 @@ import java.util.SortedMap;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
 public class MapsSortedTransformValuesTest extends MapsTransformValuesTest {
 
     @Override

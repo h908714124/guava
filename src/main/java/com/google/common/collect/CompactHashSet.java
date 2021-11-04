@@ -74,7 +74,6 @@ import static java.util.Objects.requireNonNull;
  * @author Jon Noack
  */
 @GwtIncompatible // not worth using in GWT for now
-@ElementTypesAreNonnullByDefault
 class CompactHashSet<E> extends AbstractSet<E> implements Serializable {
     // TODO(user): cache all field accesses in local vars
 
@@ -290,7 +289,7 @@ class CompactHashSet<E> extends AbstractSet<E> implements Serializable {
     }
 
     @Override
-    public boolean add(@ParametricNullness E object) {
+    public boolean add(E object) {
         if (needsAllocArrays()) {
             allocArrays();
         }
@@ -351,7 +350,7 @@ class CompactHashSet<E> extends AbstractSet<E> implements Serializable {
     /**
      * Creates a fresh entry with the specified object at the specified position in the entry arrays.
      */
-    void insertEntry(int entryIndex, @ParametricNullness E object, int hash, int mask) {
+    void insertEntry(int entryIndex, E object, int hash, int mask) {
         setEntry(entryIndex, CompactHashing.maskCombine(hash, UNSET, mask));
         setElement(entryIndex, object);
     }
@@ -549,8 +548,7 @@ class CompactHashSet<E> extends AbstractSet<E> implements Serializable {
             }
 
             @Override
-            @ParametricNullness
-            public E next() {
+                public E next() {
                 checkForConcurrentModification();
                 if (!hasNext()) {
                     throw new NoSuchElementException();

@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Supplier;
 
 import java.time.Duration;
@@ -33,8 +32,6 @@ import java.util.logging.Logger;
  * @author Jesse Wilson
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractExecutionThreadService implements Service {
     private static final Logger logger =
             Logger.getLogger(AbstractExecutionThreadService.class.getName());

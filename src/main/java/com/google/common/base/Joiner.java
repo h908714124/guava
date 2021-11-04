@@ -15,7 +15,6 @@
 package com.google.common.base;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.io.IOException;
 import java.util.AbstractList;
@@ -62,8 +61,6 @@ import static java.util.Objects.requireNonNull;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public class Joiner {
     /** Returns a joiner which automatically places {@code separator} between consecutive elements. */
     public static Joiner on(String separator) {

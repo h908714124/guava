@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
 
 import java.util.Collection;
@@ -37,8 +35,6 @@ import java.util.stream.Stream;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /** Collectors utilities for {@code common.collect} internals. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class CollectCollectors {
 
     private static final Collector<Object, ?, ImmutableList<Object>> TO_IMMUTABLE_LIST =
@@ -55,8 +51,7 @@ final class CollectCollectors {
                     ImmutableSet.Builder::combine,
                     ImmutableSet.Builder::build);
 
-    @GwtIncompatible
-    private static final Collector<Range<Comparable<?>>, ?, ImmutableRangeSet<Comparable<?>>>
+        private static final Collector<Range<Comparable<?>>, ?, ImmutableRangeSet<Comparable<?>>>
             TO_IMMUTABLE_RANGE_SET =
             Collector.of(
                     ImmutableRangeSet::builder,
@@ -130,8 +125,7 @@ final class CollectCollectors {
         }
     }
 
-    @GwtIncompatible
-    @SuppressWarnings({"rawtypes", "unchecked"})
+        @SuppressWarnings({"rawtypes", "unchecked"})
     static <E extends Comparable<? super E>>
     Collector<Range<E>, ?, ImmutableRangeSet<E>> toImmutableRangeSet() {
         return (Collector) TO_IMMUTABLE_RANGE_SET;
@@ -332,8 +326,7 @@ final class CollectCollectors {
         }
     }
 
-    @GwtIncompatible
-    static <T, K extends Comparable<? super K>, V>
+        static <T, K extends Comparable<? super K>, V>
     Collector<T, ?, ImmutableRangeMap<K, V>> toImmutableRangeMap(
             Function<? super T, Range<K>> keyFunction,
             Function<? super T, ? extends V> valueFunction) {

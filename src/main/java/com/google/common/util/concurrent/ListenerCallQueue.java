@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Queues;
 
@@ -52,8 +51,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * the listeners can be delayed slightly so that locks can be dropped. Also, because {@link
  * #dispatch} is expected to be called concurrently, it is idempotent.
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class ListenerCallQueue<L> {
     // TODO(cpovirk): consider using the logger associated with listener.getClass().
     private static final Logger logger = Logger.getLogger(ListenerCallQueue.class.getName());

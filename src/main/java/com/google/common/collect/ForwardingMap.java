@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 
 import java.util.Collection;
@@ -53,8 +52,6 @@ import java.util.Set;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingMap<K, V>
         extends ForwardingObject implements Map<K, V> {
     // TODO(lowasser): identify places where thread safety is actually lost
@@ -102,7 +99,7 @@ public abstract class ForwardingMap<K, V>
     }
 
     @Override
-    public V put(@ParametricNullness K key, @ParametricNullness V value) {
+    public V put(K key, V value) {
         return delegate().put(key, value);
     }
 

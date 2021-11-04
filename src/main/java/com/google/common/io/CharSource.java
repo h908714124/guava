@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Ascii;
 import com.google.common.base.Optional;
 import com.google.common.base.Splitter;
@@ -23,8 +22,6 @@ import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Streams;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.MustBeClosed;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -80,8 +77,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 14.0
  * @author Colin Decker
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class CharSource {
 
     /** Constructor for use by subclasses. */
@@ -156,7 +151,6 @@ public abstract class CharSource {
      * @since 22.0
      */
     @Beta
-    @MustBeClosed
     public Stream<String> lines() throws IOException {
         BufferedReader reader = openBufferedStream();
         return reader
@@ -362,8 +356,6 @@ public abstract class CharSource {
      * @since 16.0
      */
     @Beta
-    @CanIgnoreReturnValue // some processors won't return a useful result
-    @ParametricNullness
     public <T> T readLines(LineProcessor<T> processor) throws IOException {
         checkNotNull(processor);
 
@@ -606,7 +598,6 @@ public abstract class CharSource {
         }
 
         @Override
-        @ParametricNullness
         public <T> T readLines(LineProcessor<T> processor) throws IOException {
             Iterator<String> lines = linesIterator();
             while (lines.hasNext()) {

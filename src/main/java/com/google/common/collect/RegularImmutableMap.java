@@ -38,7 +38,6 @@ import static java.util.Objects.requireNonNull;
  * @author Gregory Kick
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     @SuppressWarnings("unchecked")
     static final ImmutableMap<Object, Object> EMPTY =

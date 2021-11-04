@@ -34,7 +34,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Anthony Zana
  */
-@GwtCompatible
 final class UncheckedThrowingFuture<V> extends AbstractFuture<V> {
 
     public static <V> ListenableFuture<V> throwingError(Error error) {

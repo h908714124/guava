@@ -40,7 +40,6 @@ import static com.google.common.graph.GraphConstants.ENDPOINTS_MISMATCH;
  * @author James Sexton
  * @param <N> Node parameter type
  */
-@ElementTypesAreNonnullByDefault
 abstract class AbstractBaseGraph<N> implements BaseGraph<N> {
 
     /**

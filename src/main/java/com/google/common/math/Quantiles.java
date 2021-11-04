@@ -15,7 +15,6 @@
 package com.google.common.math;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Doubles;
 import com.google.common.primitives.Ints;
 
@@ -128,8 +127,6 @@ import static java.util.Collections.unmodifiableMap;
  * @since 20.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class Quantiles {
 
     /** Specifies the computation of a median (i.e. the 1st 2-quantile). */

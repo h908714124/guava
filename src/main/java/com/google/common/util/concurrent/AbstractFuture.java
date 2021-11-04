@@ -19,7 +19,6 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.internal.InternalFutureFailureAccess;
 import com.google.common.util.concurrent.internal.InternalFutures;
-import com.google.j2objc.annotations.ReflectionSupport;
 
 import java.security.AccessController;
 import java.security.PrivilegedActionException;
@@ -69,8 +68,6 @@ import static java.util.concurrent.atomic.AtomicReferenceFieldUpdater.newUpdater
         "nullness", // TODO(b/147136275): Remove once our checker understands & and |.
 })
 @GwtCompatible(emulated = true)
-@ReflectionSupport(value = ReflectionSupport.Level.FULL)
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
         implements ListenableFuture<V> {
     // NOTE: Whenever both tests are cheap and functional, it's faster to use &, | instead of &&, ||
@@ -105,13 +102,11 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
     abstract static class TrustedFuture<V> extends AbstractFuture<V>
             implements Trusted<V> {
         @Override
-        @ParametricNullness
         public final V get() throws InterruptedException, ExecutionException {
             return super.get();
         }
 
         @Override
-        @ParametricNullness
         public final V get(long timeout, TimeUnit unit)
                 throws InterruptedException, ExecutionException, TimeoutException {
             return super.get(timeout, unit);
@@ -420,7 +415,6 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
      * @throws CancellationException {@inheritDoc}
      */
     @Override
-    @ParametricNullness
     public V get(long timeout, TimeUnit unit)
             throws InterruptedException, TimeoutException, ExecutionException {
         // NOTE: if timeout < 0, remainingNanos will be < 0 and we will fall into the while(true) loop
@@ -532,7 +526,6 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
      * @throws CancellationException {@inheritDoc}
      */
     @Override
-    @ParametricNullness
     public V get() throws InterruptedException, ExecutionException {
         if (Thread.interrupted()) {
             throw new InterruptedException();
@@ -573,7 +566,6 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
     }
 
     /** Unboxes {@code obj}. Assumes that obj is not {@code null} or a {@link SetFuture}. */
-    @ParametricNullness
     private V getDoneValue(Object obj) throws ExecutionException {
         // While this seems like it might be too branch-y, simple benchmarking proves it to be
         // unmeasurable (comparing done AbstractFutures with immediateFuture)
@@ -771,7 +763,7 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
      * @param value the value to be used as the result
      * @return true if the attempt was accepted, completing the {@code Future}
      */
-    protected boolean set(@ParametricNullness V value) {
+    protected boolean set(V value) {
         Object valueToSet = value == null ? NULL : value;
         if (ATOMIC_HELPER.casValue(this, null, valueToSet)) {
             complete(this);
@@ -962,7 +954,6 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
      * An inlined private copy of {@link Uninterruptibles#getUninterruptibly} used to break an
      * internal dependency on other /util/concurrent classes.
      */
-    @ParametricNullness
     private static <V> V getUninterruptibly(Future<V> future)
             throws ExecutionException {
         boolean interrupted = false;

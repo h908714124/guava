@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,8 +35,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Laurence Gonsalves
  * @since 18.0 (since 2.0 as {@code Objects})
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class MoreObjects {
     /**
      * Returns the first of two given parameters that is not {@code null}, if either is, or otherwise

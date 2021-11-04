@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Objects;
 import com.google.common.primitives.Ints;
 
@@ -27,8 +26,6 @@ import java.util.Arrays;
  *
  * @author Jon Noack
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class CompactHashing {
     private CompactHashing() {
     }

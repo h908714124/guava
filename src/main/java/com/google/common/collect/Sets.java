@@ -65,7 +65,6 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Sets {
     private Sets() {
     }
@@ -592,7 +591,7 @@ public final class Sets {
          */
         @Deprecated
         @Override
-        public final boolean add(@ParametricNullness E e) {
+        public final boolean add(E e) {
             throw new UnsupportedOperationException();
         }
 
@@ -1135,29 +1134,27 @@ public final class Sets {
         }
 
         @Override
-        public SortedSet<E> subSet(@ParametricNullness E fromElement, @ParametricNullness E toElement) {
+        public SortedSet<E> subSet(E fromElement, E toElement) {
             return new FilteredSortedSet<E>(
                     ((SortedSet<E>) unfiltered).subSet(fromElement, toElement), predicate);
         }
 
         @Override
-        public SortedSet<E> headSet(@ParametricNullness E toElement) {
+        public SortedSet<E> headSet(E toElement) {
             return new FilteredSortedSet<E>(((SortedSet<E>) unfiltered).headSet(toElement), predicate);
         }
 
         @Override
-        public SortedSet<E> tailSet(@ParametricNullness E fromElement) {
+        public SortedSet<E> tailSet(E fromElement) {
             return new FilteredSortedSet<E>(((SortedSet<E>) unfiltered).tailSet(fromElement), predicate);
         }
 
         @Override
-        @ParametricNullness
         public E first() {
             return Iterators.find(unfiltered.iterator(), predicate);
         }
 
         @Override
-        @ParametricNullness
         public E last() {
             SortedSet<E> sortedUnfiltered = (SortedSet<E>) unfiltered;
             while (true) {
@@ -1182,22 +1179,22 @@ public final class Sets {
         }
 
         @Override
-        public E lower(@ParametricNullness E e) {
+        public E lower(E e) {
             return Iterators.find(unfiltered().headSet(e, false).descendingIterator(), predicate, null);
         }
 
         @Override
-        public E floor(@ParametricNullness E e) {
+        public E floor(E e) {
             return Iterators.find(unfiltered().headSet(e, true).descendingIterator(), predicate, null);
         }
 
         @Override
-        public E ceiling(@ParametricNullness E e) {
+        public E ceiling(E e) {
             return Iterables.find(unfiltered().tailSet(e, true), predicate, null);
         }
 
         @Override
-        public E higher(@ParametricNullness E e) {
+        public E higher(E e) {
             return Iterables.find(unfiltered().tailSet(e, false), predicate, null);
         }
 
@@ -1222,28 +1219,27 @@ public final class Sets {
         }
 
         @Override
-        @ParametricNullness
         public E last() {
             return Iterators.find(unfiltered().descendingIterator(), predicate);
         }
 
         @Override
         public NavigableSet<E> subSet(
-                @ParametricNullness E fromElement,
+                E fromElement,
                 boolean fromInclusive,
-                @ParametricNullness E toElement,
+                E toElement,
                 boolean toInclusive) {
             return filter(
                     unfiltered().subSet(fromElement, fromInclusive, toElement, toInclusive), predicate);
         }
 
         @Override
-        public NavigableSet<E> headSet(@ParametricNullness E toElement, boolean inclusive) {
+        public NavigableSet<E> headSet(E toElement, boolean inclusive) {
             return filter(unfiltered().headSet(toElement, inclusive), predicate);
         }
 
         @Override
-        public NavigableSet<E> tailSet(@ParametricNullness E fromElement, boolean inclusive) {
+        public NavigableSet<E> tailSet(E fromElement, boolean inclusive) {
             return filter(unfiltered().tailSet(fromElement, inclusive), predicate);
         }
     }
@@ -1808,22 +1804,22 @@ public final class Sets {
         }
 
         @Override
-        public E lower(@ParametricNullness E e) {
+        public E lower(E e) {
             return delegate.lower(e);
         }
 
         @Override
-        public E floor(@ParametricNullness E e) {
+        public E floor(E e) {
             return delegate.floor(e);
         }
 
         @Override
-        public E ceiling(@ParametricNullness E e) {
+        public E ceiling(E e) {
             return delegate.ceiling(e);
         }
 
         @Override
-        public E higher(@ParametricNullness E e) {
+        public E higher(E e) {
             return delegate.higher(e);
         }
 
@@ -1856,21 +1852,21 @@ public final class Sets {
 
         @Override
         public NavigableSet<E> subSet(
-                @ParametricNullness E fromElement,
+                E fromElement,
                 boolean fromInclusive,
-                @ParametricNullness E toElement,
+                E toElement,
                 boolean toInclusive) {
             return unmodifiableNavigableSet(
                     delegate.subSet(fromElement, fromInclusive, toElement, toInclusive));
         }
 
         @Override
-        public NavigableSet<E> headSet(@ParametricNullness E toElement, boolean inclusive) {
+        public NavigableSet<E> headSet(E toElement, boolean inclusive) {
             return unmodifiableNavigableSet(delegate.headSet(toElement, inclusive));
         }
 
         @Override
-        public NavigableSet<E> tailSet(@ParametricNullness E fromElement, boolean inclusive) {
+        public NavigableSet<E> tailSet(E fromElement, boolean inclusive) {
             return unmodifiableNavigableSet(delegate.tailSet(fromElement, inclusive));
         }
 
@@ -1970,22 +1966,22 @@ public final class Sets {
         }
 
         @Override
-        public E lower(@ParametricNullness E e) {
+        public E lower(E e) {
             return forward.higher(e);
         }
 
         @Override
-        public E floor(@ParametricNullness E e) {
+        public E floor(E e) {
             return forward.ceiling(e);
         }
 
         @Override
-        public E ceiling(@ParametricNullness E e) {
+        public E ceiling(E e) {
             return forward.floor(e);
         }
 
         @Override
-        public E higher(@ParametricNullness E e) {
+        public E higher(E e) {
             return forward.lower(e);
         }
 
@@ -2011,35 +2007,35 @@ public final class Sets {
 
         @Override
         public NavigableSet<E> subSet(
-                @ParametricNullness E fromElement,
+                E fromElement,
                 boolean fromInclusive,
-                @ParametricNullness E toElement,
+                E toElement,
                 boolean toInclusive) {
             return forward.subSet(toElement, toInclusive, fromElement, fromInclusive).descendingSet();
         }
 
         @Override
-        public SortedSet<E> subSet(@ParametricNullness E fromElement, @ParametricNullness E toElement) {
+        public SortedSet<E> subSet(E fromElement, E toElement) {
             return standardSubSet(fromElement, toElement);
         }
 
         @Override
-        public NavigableSet<E> headSet(@ParametricNullness E toElement, boolean inclusive) {
+        public NavigableSet<E> headSet(E toElement, boolean inclusive) {
             return forward.tailSet(toElement, inclusive).descendingSet();
         }
 
         @Override
-        public SortedSet<E> headSet(@ParametricNullness E toElement) {
+        public SortedSet<E> headSet(E toElement) {
             return standardHeadSet(toElement);
         }
 
         @Override
-        public NavigableSet<E> tailSet(@ParametricNullness E fromElement, boolean inclusive) {
+        public NavigableSet<E> tailSet(E fromElement, boolean inclusive) {
             return forward.headSet(fromElement, inclusive).descendingSet();
         }
 
         @Override
-        public SortedSet<E> tailSet(@ParametricNullness E fromElement) {
+        public SortedSet<E> tailSet(E fromElement) {
             return standardTailSet(fromElement);
         }
 
@@ -2060,13 +2056,11 @@ public final class Sets {
         }
 
         @Override
-        @ParametricNullness
         public E first() {
             return forward.last();
         }
 
         @Override
-        @ParametricNullness
         public E last() {
             return forward.first();
         }

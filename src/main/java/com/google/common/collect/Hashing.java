@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.primitives.Ints;
 
 /**
@@ -26,8 +25,6 @@ import com.google.common.primitives.Ints;
  * @author Jesse Wilson
  * @author Austin Appleby
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class Hashing {
     private Hashing() {
     }

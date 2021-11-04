@@ -30,13 +30,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Callables {
     private Callables() {
     }
 
     /** Creates a {@code Callable} which immediately returns a preset value each time it is called. */
-    public static <T> Callable<T> returning(@ParametricNullness T value) {
+    public static <T> Callable<T> returning(T value) {
         return () -> value;
     }
 
@@ -49,8 +48,7 @@ public final class Callables {
      * @since 20.0
      */
     @Beta
-    @GwtIncompatible
-    public static <T> AsyncCallable<T> asAsyncCallable(
+        public static <T> AsyncCallable<T> asAsyncCallable(
             Callable<T> callable, ListeningExecutorService listeningExecutorService) {
         checkNotNull(callable);
         checkNotNull(listeningExecutorService);

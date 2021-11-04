@@ -14,7 +14,6 @@
 
 package com.google.common.html;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.escape.Escaper;
 import com.google.common.escape.Escapers;
 
@@ -34,8 +33,6 @@ import com.google.common.escape.Escapers;
  * @author David Beaumont
  * @since 15.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class HtmlEscapers {
     /**
      * Returns an {@link Escaper} instance that escapes HTML metacharacters as specified by <a

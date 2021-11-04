@@ -22,34 +22,28 @@ import java.io.Serializable;
 
 /** @see com.google.common.collect.Maps#immutableEntry(Object, Object) */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 class ImmutableEntry<K, V>
         extends AbstractMapEntry<K, V> implements Serializable {
-    @ParametricNullness
     final K key;
-    @ParametricNullness
     final V value;
 
-    ImmutableEntry(@ParametricNullness K key, @ParametricNullness V value) {
+    ImmutableEntry(K key, V value) {
         this.key = key;
         this.value = value;
     }
 
     @Override
-    @ParametricNullness
     public final K getKey() {
         return key;
     }
 
     @Override
-    @ParametricNullness
     public final V getValue() {
         return value;
     }
 
     @Override
-    @ParametricNullness
-    public final V setValue(@ParametricNullness V value) {
+    public final V setValue(V value) {
         throw new UnsupportedOperationException();
     }
 

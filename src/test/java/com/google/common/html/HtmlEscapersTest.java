@@ -24,7 +24,6 @@ import static com.google.common.html.HtmlEscapers.htmlEscaper;
  *
  * @author David Beaumont
  */
-@GwtCompatible
 public class HtmlEscapersTest extends TestCase {
 
     public void testHtmlEscaper() throws Exception {

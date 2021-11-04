@@ -14,9 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
-import com.google.j2objc.annotations.ReflectionSupport;
-
 import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 
 import static java.lang.Double.doubleToRawLongBits;
@@ -51,9 +48,6 @@ import static java.lang.Double.longBitsToDouble;
  * @author Martin Buchholz
  * @since 11.0
  */
-@GwtIncompatible
-@ReflectionSupport(value = ReflectionSupport.Level.FULL)
-@ElementTypesAreNonnullByDefault
 public class AtomicDouble extends Number implements java.io.Serializable {
     private static final long serialVersionUID = 0L;
 

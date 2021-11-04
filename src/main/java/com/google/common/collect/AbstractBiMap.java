@@ -44,7 +44,6 @@ import static com.google.common.collect.NullnessCasts.uncheckedCastNullableTToT;
  * @author Mike Bostock
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 abstract class AbstractBiMap<K, V>
         extends ForwardingMap<K, V> implements BiMap<K, V>, Serializable {
 
@@ -68,14 +67,12 @@ abstract class AbstractBiMap<K, V>
     }
 
     /** Returns its input, or throws an exception if this is not a valid key. */
-    @ParametricNullness
-    K checkKey(@ParametricNullness K key) {
+    K checkKey(K key) {
         return key;
     }
 
     /** Returns its input, or throws an exception if this is not a valid value. */
-    @ParametricNullness
-    V checkValue(@ParametricNullness V value) {
+    V checkValue(V value) {
         return value;
     }
 
@@ -111,16 +108,16 @@ abstract class AbstractBiMap<K, V>
     // Modification Operations
 
     @Override
-    public V put(@ParametricNullness K key, @ParametricNullness V value) {
+    public V put(K key, V value) {
         return putInBothMaps(key, value, false);
     }
 
     @Override
-    public V forcePut(@ParametricNullness K key, @ParametricNullness V value) {
+    public V forcePut(K key, V value) {
         return putInBothMaps(key, value, true);
     }
 
-    private V putInBothMaps(@ParametricNullness K key, @ParametricNullness V value, boolean force) {
+    private V putInBothMaps(K key, V value, boolean force) {
         checkKey(key);
         checkValue(value);
         boolean containedKey = containsKey(key);
@@ -138,10 +135,10 @@ abstract class AbstractBiMap<K, V>
     }
 
     private void updateInverseMap(
-            @ParametricNullness K key,
+            K key,
             boolean containedKey,
             V oldValue,
-            @ParametricNullness V newValue) {
+            V newValue) {
         if (containedKey) {
             // The cast is safe because of the containedKey check.
             removeFromInverseMap(uncheckedCastNullableTToT(oldValue));
@@ -154,7 +151,6 @@ abstract class AbstractBiMap<K, V>
         return containsKey(key) ? removeFromBothMaps(key) : null;
     }
 
-    @ParametricNullness
     private V removeFromBothMaps(Object key) {
         // The cast is safe because the callers of this method first check that the key is present.
         V oldValue = uncheckedCastNullableTToT(delegate.remove(key));
@@ -162,7 +158,7 @@ abstract class AbstractBiMap<K, V>
         return oldValue;
     }
 
-    private void removeFromInverseMap(@ParametricNullness V oldValue) {
+    private void removeFromInverseMap(V oldValue) {
         inverse.delegate.remove(oldValue);
     }
 
@@ -460,14 +456,12 @@ abstract class AbstractBiMap<K, V>
          */
 
         @Override
-        @ParametricNullness
-        K checkKey(@ParametricNullness K key) {
+        K checkKey(K key) {
             return inverse.checkValue(key);
         }
 
         @Override
-        @ParametricNullness
-        V checkValue(@ParametricNullness V value) {
+        V checkValue(V value) {
             return inverse.checkKey(value);
         }
 
@@ -485,8 +479,7 @@ abstract class AbstractBiMap<K, V>
             setInverse((AbstractBiMap<V, K>) stream.readObject());
         }
 
-        @GwtIncompatible
-            // Not needed in the emulated source.
+                    // Not needed in the emulated source.
         Object readResolve() {
             return inverse().inverse();
         }

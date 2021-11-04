@@ -38,7 +38,6 @@ import static com.google.common.graph.GraphConstants.INNER_LOAD_FACTOR;
  * @param <N> Node parameter type
  * @param <E> Edge parameter type
  */
-@ElementTypesAreNonnullByDefault
 final class UndirectedMultiNetworkConnections<N, E>
         extends AbstractUndirectedNetworkConnections<N, E> {
 

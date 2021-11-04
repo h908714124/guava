@@ -202,8 +202,7 @@ public class EnumsTest extends TestCase {
      * System#getProperty system property}.
      */
     // TODO(b/65488446): Make this a public API.
-    @GwtIncompatible
-    private static ImmutableList<URL> parseJavaClassPath() {
+        private static ImmutableList<URL> parseJavaClassPath() {
         ImmutableList.Builder<URL> urls = ImmutableList.builder();
         for (String entry : Splitter.on(PATH_SEPARATOR.value()).split(JAVA_CLASS_PATH.value())) {
             try {

@@ -15,8 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.Closeable;
 import java.io.EOFException;
@@ -44,8 +42,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @author Colin Decker
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class CharStreams {
 
     // 2K chars (4K bytes)
@@ -213,8 +209,6 @@ public final class CharStreams {
      * @since 14.0
      */
     @Beta
-    @CanIgnoreReturnValue // some processors won't return a useful result
-    @ParametricNullness
     public static <T> T readLines(
             Readable readable, LineProcessor<T> processor) throws IOException {
         checkNotNull(readable);

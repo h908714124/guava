@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -57,8 +56,6 @@ import static java.util.Objects.requireNonNull;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Multisets {
     private Multisets() {
     }
@@ -165,12 +162,12 @@ public final class Multisets {
         }
 
         @Override
-        public boolean add(@ParametricNullness E element) {
+        public boolean add(E element) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public int add(@ParametricNullness E element, int occurrences) {
+        public int add(E element, int occurrences) {
             throw new UnsupportedOperationException();
         }
 
@@ -205,12 +202,12 @@ public final class Multisets {
         }
 
         @Override
-        public int setCount(@ParametricNullness E element, int count) {
+        public int setCount(E element, int count) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public boolean setCount(@ParametricNullness E element, int oldCount, int newCount) {
+        public boolean setCount(E element, int oldCount, int newCount) {
             throw new UnsupportedOperationException();
         }
 
@@ -244,24 +241,22 @@ public final class Multisets {
      * @throws IllegalArgumentException if {@code n} is negative
      */
     public static <E> Multiset.Entry<E> immutableEntry(
-            @ParametricNullness E e, int n) {
+            E e, int n) {
         return new ImmutableEntry<E>(e, n);
     }
 
     static class ImmutableEntry<E> extends AbstractEntry<E>
             implements Serializable {
-        @ParametricNullness
         private final E element;
         private final int count;
 
-        ImmutableEntry(@ParametricNullness E element, int count) {
+        ImmutableEntry(E element, int count) {
             this.element = element;
             this.count = count;
             checkNonnegative(count, "count");
         }
 
         @Override
-        @ParametricNullness
         public final E getElement() {
             return element;
         }
@@ -369,7 +364,7 @@ public final class Multisets {
         }
 
         @Override
-        public int add(@ParametricNullness E element, int occurrences) {
+        public int add(E element, int occurrences) {
             checkArgument(
                     predicate.apply(element), "Element %s does not match predicate %s", element, predicate);
             return unfiltered.add(element, occurrences);
@@ -936,7 +931,7 @@ public final class Multisets {
 
     /** An implementation of {@link Multiset#setCount(Object, int)}. */
     static <E> int setCountImpl(
-            Multiset<E> self, @ParametricNullness E element, int count) {
+            Multiset<E> self, E element, int count) {
         checkNonnegative(count, "count");
 
         int oldCount = self.count(element);
@@ -953,7 +948,7 @@ public final class Multisets {
 
     /** An implementation of {@link Multiset#setCount(Object, int, int)}. */
     static <E> boolean setCountImpl(
-            Multiset<E> self, @ParametricNullness E element, int oldCount, int newCount) {
+            Multiset<E> self, E element, int oldCount, int newCount) {
         checkNonnegative(oldCount, "oldCount");
         checkNonnegative(newCount, "newCount");
 
@@ -969,8 +964,7 @@ public final class Multisets {
             Iterator<Entry<E>> entryIterator) {
         return new TransformedIterator<Entry<E>, E>(entryIterator) {
             @Override
-            @ParametricNullness
-            E transform(Entry<E> entry) {
+                E transform(Entry<E> entry) {
                 return entry.getElement();
             }
         };
@@ -1088,7 +1082,6 @@ public final class Multisets {
         }
 
         @Override
-        @ParametricNullness
         public E next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();

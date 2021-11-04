@@ -29,7 +29,6 @@ import static com.google.common.truth.Truth.assertThat;
  *
  * @author Jared Levy
  */
-@GwtCompatible
 public class NewCustomTableTest extends AbstractTableTest {
 
     @Override

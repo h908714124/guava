@@ -26,7 +26,6 @@ import static java.util.Collections.unmodifiableList;
 
 /** Aggregate future that collects (stores) results of each future. */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 abstract class CollectionFuture<V, C>
         extends AggregateFuture<V, C> {
     /*
@@ -56,7 +55,7 @@ abstract class CollectionFuture<V, C>
     }
 
     @Override
-    final void collectOneValue(int index, @ParametricNullness V returnValue) {
+    final void collectOneValue(int index, V returnValue) {
         List<Present<V>> localValues = values;
         if (localValues != null) {
             localValues.set(index, new Present<>(returnValue));

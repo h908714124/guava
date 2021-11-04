@@ -477,8 +477,7 @@ public abstract class AbstractImmutableSetTest extends TestCase {
      */
     // TODO(benyu): turn this into a test once all copyOf(Collection) are
     // thread-safe
-    @GwtIncompatible
-    // GWT is single threaded
+        // GWT is single threaded
     void verifyThreadSafe() {
         List<String> sample = Lists.newArrayList("a", "b", "c");
         for (int delta : new int[]{-1, 0, 1}) {

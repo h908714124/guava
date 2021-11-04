@@ -14,11 +14,7 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 /** A utility method to perform unchecked casts to suppress errors produced by nullness analyses. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class NullnessCasts {
     /**
      * Accepts a {@code T} and returns a plain {@code T}, without performing any check that
@@ -48,7 +44,6 @@ final class NullnessCasts {
      * addressed by this method is the case in which {@code T} has parametric nullness -- and thus its
      * value may be legitimately {@code null}.)
      */
-    @ParametricNullness
     @SuppressWarnings("nullness")
     static <T> T uncheckedCastNullableTToT(T t) {
         return t;
@@ -57,7 +52,6 @@ final class NullnessCasts {
     /** Returns {@code null} as any type, even one that does not include {@code null}. */
     @SuppressWarnings({"nullness", "TypeParameterUnusedInFormals"})
     // The warnings are legitimate. Each time we use this method, we document why.
-    @ParametricNullness
     static <T> T unsafeNull() {
         return null;
     }

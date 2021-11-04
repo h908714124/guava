@@ -1,5 +1,6 @@
 module com.google.common {
     requires java.logging;
+    requires jdk.unsupported;
 
     exports com.google.common.util.concurrent;
     exports com.google.common.util.concurrent.internal;

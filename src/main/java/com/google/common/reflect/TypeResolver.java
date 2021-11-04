@@ -52,7 +52,6 @@ import static java.util.Arrays.asList;
  * @since 15.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class TypeResolver {
 
     private final TypeTable typeTable;

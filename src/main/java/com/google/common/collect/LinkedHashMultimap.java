@@ -81,7 +81,6 @@ import static java.util.Objects.requireNonNull;
  * @since 2.0
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class LinkedHashMultimap<K, V>
         extends LinkedHashMultimapGwtSerializationDependencies<K, V> {
 
@@ -197,8 +196,8 @@ public final class LinkedHashMultimap<K, V>
         ValueEntry<K, V> successorInMultimap;
 
         ValueEntry(
-                @ParametricNullness K key,
-                @ParametricNullness V value,
+                K key,
+                V value,
                 int smearedValueHash,
                 ValueEntry<K, V> nextInValueBucket) {
             super(key, value);
@@ -292,7 +291,7 @@ public final class LinkedHashMultimap<K, V>
      * @return a new decorated set containing a collection of values for one key
      */
     @Override
-    Collection<V> createCollection(@ParametricNullness K key) {
+    Collection<V> createCollection(K key) {
         return new ValueSet(key, valueSetCapacity);
     }
 
@@ -304,7 +303,7 @@ public final class LinkedHashMultimap<K, V>
      * the {@link #entries()} and {@link #values()} iteration orderings.
      */
     @Override
-    public Set<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public Set<V> replaceValues(K key, Iterable<? extends V> values) {
         return super.replaceValues(key, values);
     }
 
@@ -358,7 +357,6 @@ public final class LinkedHashMultimap<K, V>
          * consumption.
          */
 
-        @ParametricNullness
         private final K key;
         @VisibleForTesting
         ValueEntry<K, V>[] hashTable;
@@ -370,7 +368,7 @@ public final class LinkedHashMultimap<K, V>
         private ValueSetLink<K, V> firstEntry;
         private ValueSetLink<K, V> lastEntry;
 
-        ValueSet(@ParametricNullness K key, int expectedValues) {
+        ValueSet(K key, int expectedValues) {
             this.key = key;
             this.firstEntry = this;
             this.lastEntry = this;
@@ -426,8 +424,7 @@ public final class LinkedHashMultimap<K, V>
                 }
 
                 @Override
-                @ParametricNullness
-                public V next() {
+                        public V next() {
                     if (!hasNext()) {
                         throw new NoSuchElementException();
                     }
@@ -478,7 +475,7 @@ public final class LinkedHashMultimap<K, V>
         }
 
         @Override
-        public boolean add(@ParametricNullness V value) {
+        public boolean add(V value) {
             int smearedHash = Hashing.smearedHash(value);
             int bucket = smearedHash & mask();
             ValueEntry<K, V> rowHead = hashTable[bucket];

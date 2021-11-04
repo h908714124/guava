@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.util.Spliterator;
 import java.util.function.Consumer;
@@ -25,7 +24,6 @@ import java.util.function.Consumer;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 abstract class IndexedImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
     abstract E get(int index);
 
@@ -49,8 +47,7 @@ abstract class IndexedImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
     }
 
     @Override
-    @GwtIncompatible
-    int copyIntoArray(Object[] dst, int offset) {
+        int copyIntoArray(Object[] dst, int offset) {
         return asList().copyIntoArray(dst, offset);
     }
 

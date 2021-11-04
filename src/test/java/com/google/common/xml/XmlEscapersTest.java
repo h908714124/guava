@@ -29,7 +29,6 @@ import static com.google.common.escape.testing.EscaperAsserts.assertUnescaped;
  * @author Alex Matevossian
  * @author David Beaumont
  */
-@GwtCompatible
 public class XmlEscapersTest extends TestCase {
 
     public void testXmlContentEscaper() throws Exception {

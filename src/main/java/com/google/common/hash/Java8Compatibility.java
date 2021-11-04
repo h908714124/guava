@@ -14,16 +14,12 @@
 
 package com.google.common.hash;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.nio.Buffer;
 
 /**
  * Wrappers around {@link Buffer} methods that are covariantly overridden in Java 9+. See
  * https://github.com/google/guava/issues/3990
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class Java8Compatibility {
     static void clear(Buffer b) {
         b.clear();

@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.primitives.Booleans;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
@@ -56,8 +55,6 @@ import java.util.Comparator;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ComparisonChain {
     private ComparisonChain() {
     }
@@ -77,7 +74,7 @@ public abstract class ComparisonChain {
 
                 @Override
                 public <T> ComparisonChain compare(
-                        @ParametricNullness T left, @ParametricNullness T right, Comparator<T> comparator) {
+                        T left, T right, Comparator<T> comparator) {
                     return classify(comparator.compare(left, right));
                 }
 
@@ -139,7 +136,7 @@ public abstract class ComparisonChain {
 
         @Override
         public <T> ComparisonChain compare(
-                @ParametricNullness T left, @ParametricNullness T right, Comparator<T> comparator) {
+                T left, T right, Comparator<T> comparator) {
             return this;
         }
 
@@ -202,7 +199,7 @@ public abstract class ComparisonChain {
      * already been determined.
      */
     public abstract <T> ComparisonChain compare(
-            @ParametricNullness T left, @ParametricNullness T right, Comparator<T> comparator);
+            T left, T right, Comparator<T> comparator);
 
     /**
      * Compares two {@code int} values as specified by {@link Ints#compare}, <i>if</i> the result of

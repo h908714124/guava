@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -30,8 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 1.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class CountingInputStream extends FilterInputStream {
 
     private long count;

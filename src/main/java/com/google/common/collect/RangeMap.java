@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.util.Collection;
 import java.util.Map;
@@ -36,8 +35,6 @@ import java.util.function.BiFunction;
  * @since 14.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public interface RangeMap<K extends Comparable, V> {
     /*
      * TODO(cpovirk): These docs sometimes say "map" and sometimes say "range map." Pick one, or at

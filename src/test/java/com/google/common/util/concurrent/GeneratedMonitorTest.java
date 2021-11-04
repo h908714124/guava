@@ -724,8 +724,7 @@ public class GeneratedMonitorTest extends TestCase {
         awaitUninterruptibly(enteredLatch);
     }
 
-    @CanIgnoreReturnValue
-    static Thread startThread(Runnable runnable) {
+        static Thread startThread(Runnable runnable) {
         Thread thread = new Thread(runnable);
         thread.setDaemon(true);
         thread.start();

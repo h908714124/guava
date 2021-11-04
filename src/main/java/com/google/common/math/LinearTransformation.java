@@ -15,7 +15,6 @@
 package com.google.common.math;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.math.DoubleUtils.isFinite;
@@ -33,8 +32,6 @@ import static java.lang.Double.NaN;
  * @since 20.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class LinearTransformation {
 
     /**

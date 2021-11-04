@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ForwardingObject;
 
@@ -33,8 +32,6 @@ import java.util.concurrent.TimeoutException;
  * @author Sven Mawson
  * @since 1.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingFuture<V> extends ForwardingObject
         implements Future<V> {
     /** Constructor for use by subclasses. */
@@ -60,13 +57,11 @@ public abstract class ForwardingFuture<V> extends ForwardingObject
     }
 
     @Override
-    @ParametricNullness
     public V get() throws InterruptedException, ExecutionException {
         return delegate().get();
     }
 
     @Override
-    @ParametricNullness
     public V get(long timeout, TimeUnit unit)
             throws InterruptedException, ExecutionException, TimeoutException {
         return delegate().get(timeout, unit);

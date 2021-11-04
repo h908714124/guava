@@ -15,7 +15,6 @@
 package com.google.common.net;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.MoreObjects;
 import com.google.common.hash.Hashing;
@@ -96,8 +95,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 5.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class InetAddresses {
     private static final int IPV4_PART_COUNT = 4;
     private static final int IPV6_PART_COUNT = 8;

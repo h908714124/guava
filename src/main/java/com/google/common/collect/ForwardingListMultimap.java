@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.List;
 
 /**
@@ -32,8 +30,6 @@ import java.util.List;
  * @author Kurt Alfred Kluever
  * @since 3.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingListMultimap<K, V>
         extends ForwardingMultimap<K, V> implements ListMultimap<K, V> {
 
@@ -45,7 +41,7 @@ public abstract class ForwardingListMultimap<K, V>
     protected abstract ListMultimap<K, V> delegate();
 
     @Override
-    public List<V> get(@ParametricNullness K key) {
+    public List<V> get(K key) {
         return delegate().get(key);
     }
 
@@ -55,7 +51,7 @@ public abstract class ForwardingListMultimap<K, V>
     }
 
     @Override
-    public List<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public List<V> replaceValues(K key, Iterable<? extends V> values) {
         return delegate().replaceValues(key, values);
     }
 }

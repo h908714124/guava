@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -24,8 +22,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Ben Yu
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class Defaults {
     private Defaults() {
     }

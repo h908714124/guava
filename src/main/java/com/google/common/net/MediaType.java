@@ -15,7 +15,6 @@
 package com.google.common.net;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Ascii;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
@@ -29,7 +28,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import com.google.errorprone.annotations.Immutable;
 
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
@@ -70,8 +68,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @author Gregory Kick
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class MediaType {
     private static final String CHARSET_ATTRIBUTE = "charset";
     private static final ImmutableListMultimap<String, String> UTF_8_CONSTANT_PARAMETERS =

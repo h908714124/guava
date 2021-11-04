@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RunnableFuture;
@@ -28,8 +26,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * <p>This should be used in preference to {@link ListenableFutureTask} when possible for
  * performance reasons.
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 class TrustedListenableFutureTask<V> extends FluentFuture.TrustedFuture<V>
         implements RunnableFuture<V> {
 
@@ -52,7 +48,7 @@ class TrustedListenableFutureTask<V> extends FluentFuture.TrustedFuture<V>
      *     ListenableFutureTask.create(runnable, null)}
      */
     static <V> TrustedListenableFutureTask<V> create(
-            Runnable runnable, @ParametricNullness V result) {
+            Runnable runnable, V result) {
         return new TrustedListenableFutureTask<>(Executors.callable(runnable, result));
     }
 
@@ -122,13 +118,12 @@ class TrustedListenableFutureTask<V> extends FluentFuture.TrustedFuture<V>
         }
 
         @Override
-        @ParametricNullness
         V runInterruptibly() throws Exception {
             return callable.call();
         }
 
         @Override
-        void afterRanInterruptiblySuccess(@ParametricNullness V result) {
+        void afterRanInterruptiblySuccess(V result) {
             TrustedListenableFutureTask.this.set(result);
         }
 

@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 import java.time.Duration;
 
 /** Unit test for the {@code java.time} support in {@link Stopwatch}. */
-@GwtIncompatible
 public class StopwatchJavaTimeTest extends TestCase {
     private final FakeTicker ticker = new FakeTicker();
     private final Stopwatch stopwatch = new Stopwatch(ticker);

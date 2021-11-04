@@ -20,7 +20,6 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class PairwiseEquivalence<E, T extends E> extends Equivalence<Iterable<T>>
         implements Serializable {
     final Equivalence<E> elementEquivalence;

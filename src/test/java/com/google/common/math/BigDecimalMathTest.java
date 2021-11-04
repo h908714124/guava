@@ -36,7 +36,6 @@ import static java.math.RoundingMode.UNNECESSARY;
 import static java.math.RoundingMode.UP;
 import static java.math.RoundingMode.values;
 
-@GwtIncompatible
 public class BigDecimalMathTest extends TestCase {
     private static final class RoundToDoubleTester {
         private final BigDecimal input;

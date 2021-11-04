@@ -14,8 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -30,8 +28,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Gregory Kick
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class RegularImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
     RegularImmutableTable() {
     }

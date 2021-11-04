@@ -64,7 +64,6 @@ import static java.util.Objects.requireNonNull;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public abstract class ImmutableMultimap<K, V> extends BaseImmutableMultimap<K, V>
         implements Serializable {
 
@@ -651,15 +650,13 @@ public abstract class ImmutableMultimap<K, V> extends BaseImmutableMultimap<K, V
             return true;
         }
 
-        @GwtIncompatible
-        @Override
+                @Override
         Object writeReplace() {
             return new KeysSerializedForm(ImmutableMultimap.this);
         }
     }
 
-    @GwtIncompatible
-    private static final class KeysSerializedForm implements Serializable {
+        private static final class KeysSerializedForm implements Serializable {
         final ImmutableMultimap<?, ?> multimap;
 
         KeysSerializedForm(ImmutableMultimap<?, ?> multimap) {

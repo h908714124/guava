@@ -15,11 +15,9 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Charsets;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,8 +42,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 1.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class Resources {
     private Resources() {
     }
@@ -123,8 +119,6 @@ public final class Resources {
      * @return the output of processing the lines
      * @throws IOException if an I/O error occurs
      */
-    @CanIgnoreReturnValue // some processors won't return a useful result
-    @ParametricNullness
     public static <T> T readLines(
             URL url, Charset charset, LineProcessor<T> callback) throws IOException {
         return asCharSource(url, charset).readLines(callback);
@@ -188,7 +182,6 @@ public final class Resources {
      *
      * @throws IllegalArgumentException if the resource is not found
      */
-    @CanIgnoreReturnValue // being used to check if a resource exists
     // TODO(cgdecker): maybe add a better way to check if a resource exists
     // e.g. Optional<URL> tryGetResource or boolean resourceExists
     public static URL getResource(String resourceName) {
@@ -206,7 +199,6 @@ public final class Resources {
      *
      * @throws IllegalArgumentException if the resource is not found
      */
-    @CanIgnoreReturnValue // being used to check if a resource exists
     public static URL getResource(Class<?> contextClass, String resourceName) {
         URL url = contextClass.getResource(resourceName);
         checkArgument(

@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -39,8 +37,6 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
  * @author Sven Mawson
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public class ListenableFutureTask<V> extends FutureTask<V>
         implements ListenableFuture<V> {
     // TODO(cpovirk): explore ways of making ListenableFutureTask final. There are some valid reasons
@@ -72,7 +68,7 @@ public class ListenableFutureTask<V> extends FutureTask<V>
      * @since 10.0
      */
     public static <V> ListenableFutureTask<V> create(
-            Runnable runnable, @ParametricNullness V result) {
+            Runnable runnable, V result) {
         return new ListenableFutureTask<>(runnable, result);
     }
 
@@ -80,7 +76,7 @@ public class ListenableFutureTask<V> extends FutureTask<V>
         super(callable);
     }
 
-    ListenableFutureTask(Runnable runnable, @ParametricNullness V result) {
+    ListenableFutureTask(Runnable runnable, V result) {
         super(runnable, result);
     }
 
@@ -90,7 +86,6 @@ public class ListenableFutureTask<V> extends FutureTask<V>
     }
 
     @Override
-    @ParametricNullness
     public V get(long timeout, TimeUnit unit)
             throws TimeoutException, InterruptedException, ExecutionException {
 

@@ -45,7 +45,6 @@ import static java.util.Objects.requireNonNull;
  * @author Kevin Bourrillion
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E>
         implements Serializable {
     // TODO(lowasser): consider overhauling this back to Map<E, Integer>
@@ -95,8 +94,7 @@ abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E>
             }
 
             @Override
-            @ParametricNullness
-            public E next() {
+                public E next() {
                 final Map.Entry<E, Count> mapEntry = backingEntries.next();
                 toRemove = mapEntry;
                 return mapEntry.getKey();
@@ -129,8 +127,7 @@ abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E>
                 toRemove = mapEntry;
                 return new Multisets.AbstractEntry<E>() {
                     @Override
-                    @ParametricNullness
-                    public E getElement() {
+                                public E getElement() {
                         return mapEntry.getKey();
                     }
 
@@ -211,7 +208,6 @@ abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E>
         }
 
         @Override
-        @ParametricNullness
         public E next() {
             if (occurrencesLeft == 0) {
                 currentEntry = entryIterator.next();
@@ -260,7 +256,7 @@ abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E>
      *     Integer#MAX_VALUE} occurrences of {@code element} in this multiset.
      */
     @Override
-    public int add(@ParametricNullness E element, int occurrences) {
+    public int add(E element, int occurrences) {
         if (occurrences == 0) {
             return count(element);
         }
@@ -308,7 +304,7 @@ abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E>
 
     // Roughly a 33% performance improvement over AbstractMultiset.setCount().
     @Override
-    public int setCount(@ParametricNullness E element, int count) {
+    public int setCount(E element, int count) {
         checkNonnegative(count, "count");
 
         Count existingCounter;

@@ -14,8 +14,6 @@
 
 package com.google.common.hash;
 
-import com.google.errorprone.annotations.Immutable;
-
 import javax.crypto.Mac;
 import java.nio.ByteBuffer;
 import java.security.InvalidKeyException;
@@ -30,7 +28,6 @@ import static com.google.common.base.Preconditions.checkState;
  *
  * @author Kurt Alfred Kluever
  */
-@ElementTypesAreNonnullByDefault
 final class MacHashFunction extends AbstractHashFunction {
 
     @SuppressWarnings("Immutable") // cloned before each use

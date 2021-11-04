@@ -22,7 +22,6 @@ import java.io.Serializable;
 
 /** An ordering that treats {@code null} as greater than all other values. */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class NullsLastOrdering<T> extends Ordering<T>
         implements Serializable {
     final Ordering<? super T> ordering;

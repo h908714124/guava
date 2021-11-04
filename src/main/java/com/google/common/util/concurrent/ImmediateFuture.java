@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.util.concurrent.AbstractFuture.TrustedFuture;
 
 import java.util.concurrent.ExecutionException;
@@ -26,18 +25,15 @@ import java.util.logging.Logger;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /** Implementation of {@link Futures#immediateFuture}. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 // TODO(cpovirk): Make this final (but that may break Mockito spy calls).
 class ImmediateFuture<V> implements ListenableFuture<V> {
     static final ListenableFuture<?> NULL = new ImmediateFuture<Object>(null);
 
     private static final Logger log = Logger.getLogger(ImmediateFuture.class.getName());
 
-    @ParametricNullness
     private final V value;
 
-    ImmediateFuture(@ParametricNullness V value) {
+    ImmediateFuture(V value) {
         this.value = value;
     }
 
@@ -64,13 +60,11 @@ class ImmediateFuture<V> implements ListenableFuture<V> {
 
     // TODO(lukes): Consider throwing InterruptedException when appropriate.
     @Override
-    @ParametricNullness
     public V get() {
         return value;
     }
 
     @Override
-    @ParametricNullness
     public V get(long timeout, TimeUnit unit) throws ExecutionException {
         checkNotNull(unit);
         return get();

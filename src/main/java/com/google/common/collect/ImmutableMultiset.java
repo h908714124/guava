@@ -50,7 +50,6 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization
-@ElementTypesAreNonnullByDefault
 public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializationDependencies<E>
         implements Multiset<E> {
 
@@ -388,8 +387,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
             return ImmutableMultiset.this.hashCode();
         }
 
-        @GwtIncompatible
-        @Override
+                @Override
         Object writeReplace() {
             return new EntrySetSerializedForm<E>(ImmutableMultiset.this);
         }
@@ -397,8 +395,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
         private static final long serialVersionUID = 0;
     }
 
-    @GwtIncompatible
-    static class EntrySetSerializedForm<E> implements Serializable {
+        static class EntrySetSerializedForm<E> implements Serializable {
         final ImmutableMultiset<E> multiset;
 
         EntrySetSerializedForm(ImmutableMultiset<E> multiset) {
@@ -410,8 +407,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
         }
     }
 
-    @GwtIncompatible
-    @Override
+        @Override
     Object writeReplace() {
         return new SerializedForm(this);
     }

@@ -23,7 +23,6 @@ import static com.google.common.util.concurrent.Futures.immediateFailedFuture;
 /**
  * Classes and futures used in {@link FuturesGetCheckedTest} and {@link FuturesGetUncheckedTest}.
  */
-@GwtCompatible
 final class FuturesGetCheckedInputs {
     static final Exception CHECKED_EXCEPTION = new Exception("mymessage");
     static final Future<String> FAILED_FUTURE_CHECKED_EXCEPTION =

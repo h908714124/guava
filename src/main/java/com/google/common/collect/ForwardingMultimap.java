@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,8 +33,6 @@ import java.util.Set;
  * @author Robert Konigsberg
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingMultimap<K, V>
         extends ForwardingObject implements Multimap<K, V> {
 
@@ -78,7 +74,7 @@ public abstract class ForwardingMultimap<K, V>
     }
 
     @Override
-    public Collection<V> get(@ParametricNullness K key) {
+    public Collection<V> get(K key) {
         return delegate().get(key);
     }
 
@@ -98,12 +94,12 @@ public abstract class ForwardingMultimap<K, V>
     }
 
     @Override
-    public boolean put(@ParametricNullness K key, @ParametricNullness V value) {
+    public boolean put(K key, V value) {
         return delegate().put(key, value);
     }
 
     @Override
-    public boolean putAll(@ParametricNullness K key, Iterable<? extends V> values) {
+    public boolean putAll(K key, Iterable<? extends V> values) {
         return delegate().putAll(key, values);
     }
 
@@ -123,7 +119,7 @@ public abstract class ForwardingMultimap<K, V>
     }
 
     @Override
-    public Collection<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public Collection<V> replaceValues(K key, Iterable<? extends V> values) {
         return delegate().replaceValues(key, values);
     }
 

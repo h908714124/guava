@@ -55,7 +55,5 @@
  * </ul>
  *
  */
-@CheckReturnValue
-@ParametersAreNonnullByDefault
 package com.google.common.base;
 

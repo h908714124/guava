@@ -14,7 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.primitives.Ints;
 
@@ -31,8 +30,6 @@ import static com.google.common.collect.BoundType.CLOSED;
  * @author Louis Wasserman
  */
 @SuppressWarnings("serial") // uses writeReplace, not default serialization
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class RegularImmutableSortedMultiset<E> extends ImmutableSortedMultiset<E> {
     private static final long[] ZERO_CUMULATIVE_COUNTS = {0};
 

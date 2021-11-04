@@ -27,7 +27,6 @@ import static com.google.common.util.concurrent.Futures.immediateFailedFuture;
 import static com.google.common.util.concurrent.Futures.immediateFuture;
 
 /** Unit tests for {@link Futures#getDone}. */
-@GwtCompatible
 public class FuturesGetDoneTest extends TestCase {
     public void testSuccessful() throws ExecutionException {
         assertThat(getDone(immediateFuture("a"))).isEqualTo("a");

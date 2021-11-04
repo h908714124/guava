@@ -33,7 +33,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Kevin Bourrillion
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
     private final ImmutableMap<K, V> map;
 

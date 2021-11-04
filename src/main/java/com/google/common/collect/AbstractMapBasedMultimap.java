@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.Maps.ViewCachingAbstractMap;
 
 import java.io.Serializable;
@@ -83,8 +82,6 @@ import static java.util.Objects.requireNonNull;
  * @author Jared Levy
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class AbstractMapBasedMultimap<K, V>
         extends AbstractMultimap<K, V> implements Serializable {
     /*
@@ -159,7 +156,7 @@ abstract class AbstractMapBasedMultimap<K, V>
      * @param key key to associate with values in the collection
      * @return an empty collection of values
      */
-    Collection<V> createCollection(@ParametricNullness K key) {
+    Collection<V> createCollection(K key) {
         return createCollection();
     }
 
@@ -182,7 +179,7 @@ abstract class AbstractMapBasedMultimap<K, V>
     // Modification Operations
 
     @Override
-    public boolean put(@ParametricNullness K key, @ParametricNullness V value) {
+    public boolean put(K key, V value) {
         Collection<V> collection = map.get(key);
         if (collection == null) {
             collection = createCollection(key);
@@ -201,7 +198,7 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
     }
 
-    private Collection<V> getOrCreateCollection(@ParametricNullness K key) {
+    private Collection<V> getOrCreateCollection(K key) {
         Collection<V> collection = map.get(key);
         if (collection == null) {
             collection = createCollection(key);
@@ -218,7 +215,7 @@ abstract class AbstractMapBasedMultimap<K, V>
      * <p>The returned collection is immutable.
      */
     @Override
-    public Collection<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public Collection<V> replaceValues(K key, Iterable<? extends V> values) {
         Iterator<? extends V> iterator = values.iterator();
         if (!iterator.hasNext()) {
             return removeAll(key);
@@ -285,7 +282,7 @@ abstract class AbstractMapBasedMultimap<K, V>
      * <p>The returned collection is not serializable.
      */
     @Override
-    public Collection<V> get(@ParametricNullness K key) {
+    public Collection<V> get(K key) {
         Collection<V> collection = map.get(key);
         if (collection == null) {
             collection = createCollection(key);
@@ -297,12 +294,12 @@ abstract class AbstractMapBasedMultimap<K, V>
      * Generates a decorated collection that remains consistent with the values in the multimap for
      * the provided key. Changes to the multimap may alter the returned collection, and vice versa.
      */
-    Collection<V> wrapCollection(@ParametricNullness K key, Collection<V> collection) {
+    Collection<V> wrapCollection(K key, Collection<V> collection) {
         return new WrappedCollection(key, collection, null);
     }
 
     final List<V> wrapList(
-            @ParametricNullness K key, List<V> list, WrappedCollection ancestor) {
+            K key, List<V> list, WrappedCollection ancestor) {
         return (list instanceof RandomAccess)
                 ? new RandomAccessWrappedList(key, list, ancestor)
                 : new WrappedList(key, list, ancestor);
@@ -324,14 +321,13 @@ abstract class AbstractMapBasedMultimap<K, V>
      * the corresponding methods of the full wrapped collection.
      */
     class WrappedCollection extends AbstractCollection<V> {
-        @ParametricNullness
         final K key;
         Collection<V> delegate;
         final WrappedCollection ancestor;
         final Collection<V> ancestorDelegate;
 
         WrappedCollection(
-                @ParametricNullness K key,
+                K key,
                 Collection<V> delegate,
                 WrappedCollection ancestor) {
             this.key = key;
@@ -373,7 +369,6 @@ abstract class AbstractMapBasedMultimap<K, V>
             }
         }
 
-        @ParametricNullness
         K getKey() {
             return key;
         }
@@ -465,8 +460,7 @@ abstract class AbstractMapBasedMultimap<K, V>
             }
 
             @Override
-            @ParametricNullness
-            public V next() {
+                public V next() {
                 validateIterator();
                 return delegateIterator.next();
             }
@@ -485,7 +479,7 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        public boolean add(@ParametricNullness V value) {
+        public boolean add(V value) {
             refreshIfEmpty();
             boolean wasEmpty = delegate.isEmpty();
             boolean changed = delegate.add(value);
@@ -593,7 +587,7 @@ abstract class AbstractMapBasedMultimap<K, V>
 
     /** Set decorator that stays in sync with the multimap values for a key. */
     class WrappedSet extends WrappedCollection implements Set<V> {
-        WrappedSet(@ParametricNullness K key, Set<V> delegate) {
+        WrappedSet(K key, Set<V> delegate) {
             super(key, delegate, null);
         }
 
@@ -620,7 +614,7 @@ abstract class AbstractMapBasedMultimap<K, V>
     /** SortedSet decorator that stays in sync with the multimap values for a key. */
     class WrappedSortedSet extends WrappedCollection implements SortedSet<V> {
         WrappedSortedSet(
-                @ParametricNullness K key,
+                K key,
                 SortedSet<V> delegate,
                 WrappedCollection ancestor) {
             super(key, delegate, ancestor);
@@ -636,21 +630,19 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        @ParametricNullness
         public V first() {
             refreshIfEmpty();
             return getSortedSetDelegate().first();
         }
 
         @Override
-        @ParametricNullness
         public V last() {
             refreshIfEmpty();
             return getSortedSetDelegate().last();
         }
 
         @Override
-        public SortedSet<V> headSet(@ParametricNullness V toElement) {
+        public SortedSet<V> headSet(V toElement) {
             refreshIfEmpty();
             return new WrappedSortedSet(
                     getKey(),
@@ -659,7 +651,7 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        public SortedSet<V> subSet(@ParametricNullness V fromElement, @ParametricNullness V toElement) {
+        public SortedSet<V> subSet(V fromElement, V toElement) {
             refreshIfEmpty();
             return new WrappedSortedSet(
                     getKey(),
@@ -668,7 +660,7 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        public SortedSet<V> tailSet(@ParametricNullness V fromElement) {
+        public SortedSet<V> tailSet(V fromElement) {
             refreshIfEmpty();
             return new WrappedSortedSet(
                     getKey(),
@@ -679,7 +671,7 @@ abstract class AbstractMapBasedMultimap<K, V>
 
     class WrappedNavigableSet extends WrappedSortedSet implements NavigableSet<V> {
         WrappedNavigableSet(
-                @ParametricNullness K key,
+                K key,
                 NavigableSet<V> delegate,
                 WrappedCollection ancestor) {
             super(key, delegate, ancestor);
@@ -691,22 +683,22 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        public V lower(@ParametricNullness V v) {
+        public V lower(V v) {
             return getSortedSetDelegate().lower(v);
         }
 
         @Override
-        public V floor(@ParametricNullness V v) {
+        public V floor(V v) {
             return getSortedSetDelegate().floor(v);
         }
 
         @Override
-        public V ceiling(@ParametricNullness V v) {
+        public V ceiling(V v) {
             return getSortedSetDelegate().ceiling(v);
         }
 
         @Override
-        public V higher(@ParametricNullness V v) {
+        public V higher(V v) {
             return getSortedSetDelegate().higher(v);
         }
 
@@ -736,21 +728,21 @@ abstract class AbstractMapBasedMultimap<K, V>
 
         @Override
         public NavigableSet<V> subSet(
-                @ParametricNullness V fromElement,
+                V fromElement,
                 boolean fromInclusive,
-                @ParametricNullness V toElement,
+                V toElement,
                 boolean toInclusive) {
             return wrap(
                     getSortedSetDelegate().subSet(fromElement, fromInclusive, toElement, toInclusive));
         }
 
         @Override
-        public NavigableSet<V> headSet(@ParametricNullness V toElement, boolean inclusive) {
+        public NavigableSet<V> headSet(V toElement, boolean inclusive) {
             return wrap(getSortedSetDelegate().headSet(toElement, inclusive));
         }
 
         @Override
-        public NavigableSet<V> tailSet(@ParametricNullness V fromElement, boolean inclusive) {
+        public NavigableSet<V> tailSet(V fromElement, boolean inclusive) {
             return wrap(getSortedSetDelegate().tailSet(fromElement, inclusive));
         }
     }
@@ -758,7 +750,7 @@ abstract class AbstractMapBasedMultimap<K, V>
     /** List decorator that stays in sync with the multimap values for a key. */
     class WrappedList extends WrappedCollection implements List<V> {
         WrappedList(
-                @ParametricNullness K key, List<V> delegate, WrappedCollection ancestor) {
+                K key, List<V> delegate, WrappedCollection ancestor) {
             super(key, delegate, ancestor);
         }
 
@@ -784,21 +776,19 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        @ParametricNullness
         public V get(int index) {
             refreshIfEmpty();
             return getListDelegate().get(index);
         }
 
         @Override
-        @ParametricNullness
-        public V set(int index, @ParametricNullness V element) {
+        public V set(int index, V element) {
             refreshIfEmpty();
             return getListDelegate().set(index, element);
         }
 
         @Override
-        public void add(int index, @ParametricNullness V element) {
+        public void add(int index, V element) {
             refreshIfEmpty();
             boolean wasEmpty = getDelegate().isEmpty();
             getListDelegate().add(index, element);
@@ -809,7 +799,6 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        @ParametricNullness
         public V remove(int index) {
             refreshIfEmpty();
             V value = getListDelegate().remove(index);
@@ -870,8 +859,7 @@ abstract class AbstractMapBasedMultimap<K, V>
             }
 
             @Override
-            @ParametricNullness
-            public V previous() {
+                public V previous() {
                 return getDelegateListIterator().previous();
             }
 
@@ -886,12 +874,12 @@ abstract class AbstractMapBasedMultimap<K, V>
             }
 
             @Override
-            public void set(@ParametricNullness V value) {
+            public void set(V value) {
                 getDelegateListIterator().set(value);
             }
 
             @Override
-            public void add(@ParametricNullness V value) {
+            public void add(V value) {
                 boolean wasEmpty = isEmpty();
                 getDelegateListIterator().add(value);
                 totalSize++;
@@ -908,7 +896,7 @@ abstract class AbstractMapBasedMultimap<K, V>
      */
     private class RandomAccessWrappedList extends WrappedList implements RandomAccess {
         RandomAccessWrappedList(
-                @ParametricNullness K key, List<V> delegate, WrappedCollection ancestor) {
+                K key, List<V> delegate, WrappedCollection ancestor) {
             super(key, delegate, ancestor);
         }
     }
@@ -945,8 +933,7 @@ abstract class AbstractMapBasedMultimap<K, V>
                 }
 
                 @Override
-                @ParametricNullness
-                public K next() {
+                        public K next() {
                     entry = entryIterator.next();
                     return entry.getKey();
                 }
@@ -1019,29 +1006,27 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        @ParametricNullness
         public K first() {
             return sortedMap().firstKey();
         }
 
         @Override
-        public SortedSet<K> headSet(@ParametricNullness K toElement) {
+        public SortedSet<K> headSet(K toElement) {
             return new SortedKeySet(sortedMap().headMap(toElement));
         }
 
         @Override
-        @ParametricNullness
         public K last() {
             return sortedMap().lastKey();
         }
 
         @Override
-        public SortedSet<K> subSet(@ParametricNullness K fromElement, @ParametricNullness K toElement) {
+        public SortedSet<K> subSet(K fromElement, K toElement) {
             return new SortedKeySet(sortedMap().subMap(fromElement, toElement));
         }
 
         @Override
-        public SortedSet<K> tailSet(@ParametricNullness K fromElement) {
+        public SortedSet<K> tailSet(K fromElement) {
             return new SortedKeySet(sortedMap().tailMap(fromElement));
         }
     }
@@ -1057,22 +1042,22 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        public K lower(@ParametricNullness K k) {
+        public K lower(K k) {
             return sortedMap().lowerKey(k);
         }
 
         @Override
-        public K floor(@ParametricNullness K k) {
+        public K floor(K k) {
             return sortedMap().floorKey(k);
         }
 
         @Override
-        public K ceiling(@ParametricNullness K k) {
+        public K ceiling(K k) {
             return sortedMap().ceilingKey(k);
         }
 
         @Override
-        public K higher(@ParametricNullness K k) {
+        public K higher(K k) {
             return sortedMap().higherKey(k);
         }
 
@@ -1097,38 +1082,38 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        public NavigableSet<K> headSet(@ParametricNullness K toElement) {
+        public NavigableSet<K> headSet(K toElement) {
             return headSet(toElement, false);
         }
 
         @Override
-        public NavigableSet<K> headSet(@ParametricNullness K toElement, boolean inclusive) {
+        public NavigableSet<K> headSet(K toElement, boolean inclusive) {
             return new NavigableKeySet(sortedMap().headMap(toElement, inclusive));
         }
 
         @Override
         public NavigableSet<K> subSet(
-                @ParametricNullness K fromElement, @ParametricNullness K toElement) {
+                K fromElement, K toElement) {
             return subSet(fromElement, true, toElement, false);
         }
 
         @Override
         public NavigableSet<K> subSet(
-                @ParametricNullness K fromElement,
+                K fromElement,
                 boolean fromInclusive,
-                @ParametricNullness K toElement,
+                K toElement,
                 boolean toInclusive) {
             return new NavigableKeySet(
                     sortedMap().subMap(fromElement, fromInclusive, toElement, toInclusive));
         }
 
         @Override
-        public NavigableSet<K> tailSet(@ParametricNullness K fromElement) {
+        public NavigableSet<K> tailSet(K fromElement) {
             return tailSet(fromElement, true);
         }
 
         @Override
-        public NavigableSet<K> tailSet(@ParametricNullness K fromElement, boolean inclusive) {
+        public NavigableSet<K> tailSet(K fromElement, boolean inclusive) {
             return new NavigableKeySet(sortedMap().tailMap(fromElement, inclusive));
         }
     }
@@ -1157,7 +1142,7 @@ abstract class AbstractMapBasedMultimap<K, V>
             valueIterator = Iterators.emptyModifiableIterator();
         }
 
-        abstract T output(@ParametricNullness K key, @ParametricNullness V value);
+        abstract T output(K key, V value);
 
         @Override
         public boolean hasNext() {
@@ -1213,8 +1198,7 @@ abstract class AbstractMapBasedMultimap<K, V>
     Iterator<V> valueIterator() {
         return new Itr<V>() {
             @Override
-            @ParametricNullness
-            V output(@ParametricNullness K key, @ParametricNullness V value) {
+                V output(K key, V value) {
                 return value;
             }
         };
@@ -1272,7 +1256,7 @@ abstract class AbstractMapBasedMultimap<K, V>
     Iterator<Entry<K, V>> entryIterator() {
         return new Itr<Entry<K, V>>() {
             @Override
-            Entry<K, V> output(@ParametricNullness K key, @ParametricNullness V value) {
+            Entry<K, V> output(K key, V value) {
                 return Maps.immutableEntry(key, value);
             }
         };
@@ -1479,30 +1463,28 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        @ParametricNullness
         public K firstKey() {
             return sortedMap().firstKey();
         }
 
         @Override
-        @ParametricNullness
         public K lastKey() {
             return sortedMap().lastKey();
         }
 
         @Override
-        public SortedMap<K, Collection<V>> headMap(@ParametricNullness K toKey) {
+        public SortedMap<K, Collection<V>> headMap(K toKey) {
             return new SortedAsMap(sortedMap().headMap(toKey));
         }
 
         @Override
         public SortedMap<K, Collection<V>> subMap(
-                @ParametricNullness K fromKey, @ParametricNullness K toKey) {
+                K fromKey, K toKey) {
             return new SortedAsMap(sortedMap().subMap(fromKey, toKey));
         }
 
         @Override
-        public SortedMap<K, Collection<V>> tailMap(@ParametricNullness K fromKey) {
+        public SortedMap<K, Collection<V>> tailMap(K fromKey) {
             return new SortedAsMap(sortedMap().tailMap(fromKey));
         }
 
@@ -1534,46 +1516,46 @@ abstract class AbstractMapBasedMultimap<K, V>
         }
 
         @Override
-        public Entry<K, Collection<V>> lowerEntry(@ParametricNullness K key) {
+        public Entry<K, Collection<V>> lowerEntry(K key) {
             Entry<K, Collection<V>> entry = sortedMap().lowerEntry(key);
             return (entry == null) ? null : wrapEntry(entry);
         }
 
         @Override
-        public K lowerKey(@ParametricNullness K key) {
+        public K lowerKey(K key) {
             return sortedMap().lowerKey(key);
         }
 
         @Override
-        public Entry<K, Collection<V>> floorEntry(@ParametricNullness K key) {
+        public Entry<K, Collection<V>> floorEntry(K key) {
             Entry<K, Collection<V>> entry = sortedMap().floorEntry(key);
             return (entry == null) ? null : wrapEntry(entry);
         }
 
         @Override
-        public K floorKey(@ParametricNullness K key) {
+        public K floorKey(K key) {
             return sortedMap().floorKey(key);
         }
 
         @Override
-        public Entry<K, Collection<V>> ceilingEntry(@ParametricNullness K key) {
+        public Entry<K, Collection<V>> ceilingEntry(K key) {
             Entry<K, Collection<V>> entry = sortedMap().ceilingEntry(key);
             return (entry == null) ? null : wrapEntry(entry);
         }
 
         @Override
-        public K ceilingKey(@ParametricNullness K key) {
+        public K ceilingKey(K key) {
             return sortedMap().ceilingKey(key);
         }
 
         @Override
-        public Entry<K, Collection<V>> higherEntry(@ParametricNullness K key) {
+        public Entry<K, Collection<V>> higherEntry(K key) {
             Entry<K, Collection<V>> entry = sortedMap().higherEntry(key);
             return (entry == null) ? null : wrapEntry(entry);
         }
 
         @Override
-        public K higherKey(@ParametricNullness K key) {
+        public K higherKey(K key) {
             return sortedMap().higherKey(key);
         }
 
@@ -1637,37 +1619,37 @@ abstract class AbstractMapBasedMultimap<K, V>
 
         @Override
         public NavigableMap<K, Collection<V>> subMap(
-                @ParametricNullness K fromKey, @ParametricNullness K toKey) {
+                K fromKey, K toKey) {
             return subMap(fromKey, true, toKey, false);
         }
 
         @Override
         public NavigableMap<K, Collection<V>> subMap(
-                @ParametricNullness K fromKey,
+                K fromKey,
                 boolean fromInclusive,
-                @ParametricNullness K toKey,
+                K toKey,
                 boolean toInclusive) {
             return new NavigableAsMap(sortedMap().subMap(fromKey, fromInclusive, toKey, toInclusive));
         }
 
         @Override
-        public NavigableMap<K, Collection<V>> headMap(@ParametricNullness K toKey) {
+        public NavigableMap<K, Collection<V>> headMap(K toKey) {
             return headMap(toKey, false);
         }
 
         @Override
-        public NavigableMap<K, Collection<V>> headMap(@ParametricNullness K toKey, boolean inclusive) {
+        public NavigableMap<K, Collection<V>> headMap(K toKey, boolean inclusive) {
             return new NavigableAsMap(sortedMap().headMap(toKey, inclusive));
         }
 
         @Override
-        public NavigableMap<K, Collection<V>> tailMap(@ParametricNullness K fromKey) {
+        public NavigableMap<K, Collection<V>> tailMap(K fromKey) {
             return tailMap(fromKey, true);
         }
 
         @Override
         public NavigableMap<K, Collection<V>> tailMap(
-                @ParametricNullness K fromKey, boolean inclusive) {
+                K fromKey, boolean inclusive) {
             return new NavigableAsMap(sortedMap().tailMap(fromKey, inclusive));
         }
     }

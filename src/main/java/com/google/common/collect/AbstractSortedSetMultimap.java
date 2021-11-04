@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -31,8 +29,6 @@ import java.util.SortedSet;
  *
  * @author Jared Levy
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class AbstractSortedSetMultimap<K, V>
         extends AbstractSetMultimap<K, V> implements SortedSetMultimap<K, V> {
     /**
@@ -63,7 +59,7 @@ abstract class AbstractSortedSetMultimap<K, V>
     }
 
     @Override
-    Collection<V> wrapCollection(@ParametricNullness K key, Collection<V> collection) {
+    Collection<V> wrapCollection(K key, Collection<V> collection) {
         if (collection instanceof NavigableSet) {
             return new WrappedNavigableSet(key, (NavigableSet<V>) collection, null);
         } else {
@@ -84,7 +80,7 @@ abstract class AbstractSortedSetMultimap<K, V>
      * Multimap} interface.
      */
     @Override
-    public SortedSet<V> get(@ParametricNullness K key) {
+    public SortedSet<V> get(K key) {
         return (SortedSet<V>) super.get(key);
     }
 
@@ -111,7 +107,7 @@ abstract class AbstractSortedSetMultimap<K, V>
      * <p>Any duplicates in {@code values} will be stored in the multimap once.
      */
     @Override
-    public SortedSet<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public SortedSet<V> replaceValues(K key, Iterable<? extends V> values) {
         return (SortedSet<V>) super.replaceValues(key, values);
     }
 

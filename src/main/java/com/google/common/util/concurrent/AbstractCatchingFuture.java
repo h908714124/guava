@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.internal.InternalFutureFailureAccess;
 import com.google.common.util.concurrent.internal.InternalFutures;
@@ -29,8 +28,6 @@ import static com.google.common.util.concurrent.NullnessCasts.uncheckedCastNulla
 import static com.google.common.util.concurrent.Platform.isInstanceOfThrowableClass;
 
 /** Implementations of {@code Futures.catching*}. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 @SuppressWarnings("nullness") // TODO(b/147136275): Remove once our checker understands & and |.
 abstract class AbstractCatchingFuture<
         V, X extends Throwable, F, T>
@@ -164,11 +161,10 @@ abstract class AbstractCatchingFuture<
     }
 
     /** Template method for subtypes to actually run the fallback. */
-    @ParametricNullness
     abstract T doFallback(F fallback, X throwable) throws Exception;
 
     /** Template method for subtypes to actually set the result. */
-    abstract void setResult(@ParametricNullness T result);
+    abstract void setResult(T result);
 
     @Override
     protected final void afterDone() {
@@ -224,13 +220,12 @@ abstract class AbstractCatchingFuture<
         }
 
         @Override
-        @ParametricNullness
         V doFallback(Function<? super X, ? extends V> fallback, X cause) throws Exception {
             return fallback.apply(cause);
         }
 
         @Override
-        void setResult(@ParametricNullness V result) {
+        void setResult(V result) {
             set(result);
         }
     }

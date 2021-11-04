@@ -15,7 +15,6 @@
 package com.google.common.escape;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,8 +32,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 15.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class CharEscaperBuilder {
     /**
      * Simple decorator that turns an array of replacement char[]s into a CharEscaper, this results in

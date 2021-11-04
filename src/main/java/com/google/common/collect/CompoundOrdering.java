@@ -24,7 +24,6 @@ import java.util.Comparator;
 
 /** An ordering that tries several comparators in order. */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class CompoundOrdering<T> extends Ordering<T>
         implements Serializable {
     final Comparator<? super T>[] comparators;
@@ -38,7 +37,7 @@ final class CompoundOrdering<T> extends Ordering<T>
     }
 
     @Override
-    public int compare(@ParametricNullness T left, @ParametricNullness T right) {
+    public int compare(T left, T right) {
         for (int i = 0; i < comparators.length; i++) {
             int result = comparators[i].compare(left, right);
             if (result != 0) {

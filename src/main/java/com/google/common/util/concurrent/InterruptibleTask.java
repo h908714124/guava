@@ -16,7 +16,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.j2objc.annotations.ReflectionSupport;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.AbstractOwnableSynchronizer;
@@ -25,8 +24,6 @@ import java.util.concurrent.locks.LockSupport;
 import static com.google.common.util.concurrent.NullnessCasts.uncheckedCastNullableTToT;
 
 @GwtCompatible(emulated = true)
-@ReflectionSupport(value = ReflectionSupport.Level.FULL)
-@ElementTypesAreNonnullByDefault
 // Some Android 5.0.x Samsung devices have bugs in JDK reflection APIs that cause
 // getDeclaredField to throw a NoSuchFieldException when the field is definitely there.
 // Since this class only needs CAS on one field, we can avoid this bug by extending AtomicReference
@@ -169,14 +166,13 @@ abstract class InterruptibleTask<T>
      * Do interruptible work here - do not complete Futures here, as their listeners could be
      * interrupted.
      */
-    @ParametricNullness
     abstract T runInterruptibly() throws Exception;
 
     /**
      * Any interruption that happens as a result of calling interruptTask will arrive before this
      * method is called. Complete Futures here.
      */
-    abstract void afterRanInterruptiblySuccess(@ParametricNullness T result);
+    abstract void afterRanInterruptiblySuccess(T result);
 
     /**
      * Any interruption that happens as a result of calling interruptTask will arrive before this

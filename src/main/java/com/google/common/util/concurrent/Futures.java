@@ -73,7 +73,6 @@ import static java.util.Objects.requireNonNull;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Futures extends GwtFuturesCatchingSpecialization {
 
     // A note on memory visibility.
@@ -130,7 +129,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
      * {@code isDone()} method always returns {@code true}.
      */
     public static <V> ListenableFuture<V> immediateFuture(
-            @ParametricNullness V value) {
+            V value) {
         if (value == null) {
             // This cast is safe because null is assignable to V for all V (i.e. it is bivariant)
             @SuppressWarnings("unchecked")
@@ -692,8 +691,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
      * @since 20.0
      */
     @Beta
-    @GwtCompatible
-    public static final class FutureCombiner<V> {
+        public static final class FutureCombiner<V> {
         private final boolean allMustSucceed;
         private final ImmutableList<ListenableFuture<? extends V>> futures;
 
@@ -1159,7 +1157,6 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
      * @since 20.0
      */
     // TODO(cpovirk): Consider calling getDone() in our own code.
-    @ParametricNullness
     public static <V> V getDone(Future<V> future) throws ExecutionException {
         /*
          * We throw IllegalStateException, since the call could succeed later. Perhaps we "should" throw
@@ -1219,7 +1216,6 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
      */
     @Beta
     @GwtIncompatible // reflection
-    @ParametricNullness
     public static <V, X extends Exception> V getChecked(
             Future<V> future, Class<X> exceptionClass) throws X {
         return FuturesGetChecked.getChecked(future, exceptionClass);
@@ -1270,7 +1266,6 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
      */
     @Beta
     @GwtIncompatible // reflection
-    @ParametricNullness
     public static <V, X extends Exception> V getChecked(
             Future<V> future, Class<X> exceptionClass, Duration timeout) throws X {
         return getChecked(future, exceptionClass, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
@@ -1322,7 +1317,6 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
     @Beta
     @GwtIncompatible // reflection
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
-    @ParametricNullness
     public static <V, X extends Exception> V getChecked(
             Future<V> future, Class<X> exceptionClass, long timeout, TimeUnit unit) throws X {
         return FuturesGetChecked.getChecked(future, exceptionClass, timeout, unit);
@@ -1362,7 +1356,6 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
      * @throws CancellationException if {@code get} throws a {@code CancellationException}
      * @since 10.0
      */
-    @ParametricNullness
     public static <V> V getUnchecked(Future<V> future) {
         checkNotNull(future);
         try {

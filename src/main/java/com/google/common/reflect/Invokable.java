@@ -62,7 +62,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *     31.0)
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public abstract class Invokable<T, R> implements AnnotatedElement, Member {
     private final AccessibleObject accessibleObject;
     private final Member member;

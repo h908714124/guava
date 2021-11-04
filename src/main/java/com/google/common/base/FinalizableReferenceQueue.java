@@ -14,7 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.io.Closeable;
@@ -88,8 +87,6 @@ import java.util.logging.Logger;
  * @author Bob Lee
  * @since 2.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public class FinalizableReferenceQueue implements Closeable {
     /*
      * The Finalizer thread keeps a phantom reference to this object. When the client (for example, a

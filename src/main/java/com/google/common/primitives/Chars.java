@@ -46,7 +46,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Chars {
     private Chars() {
     }
@@ -508,8 +507,7 @@ public final class Chars {
         return new CharArrayAsList(backingArray);
     }
 
-    @GwtCompatible
-    private static class CharArrayAsList extends AbstractList<Character>
+        private static class CharArrayAsList extends AbstractList<Character>
             implements RandomAccess, Serializable {
         final char[] array;
         final int start;

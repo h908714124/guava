@@ -101,7 +101,6 @@ import java.util.Set;
  * @since 20.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public interface Graph<N> extends BaseGraph<N> {
     //
     // Graph-level accessors

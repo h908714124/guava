@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 
 import java.util.Collection;
@@ -44,8 +43,6 @@ import java.util.Iterator;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingCollection<E> extends ForwardingObject
         implements Collection<E> {
     // TODO(lowasser): identify places where thread safety is actually lost
@@ -83,7 +80,7 @@ public abstract class ForwardingCollection<E> extends ForwardingObject
     }
 
     @Override
-    public boolean add(@ParametricNullness E element) {
+    public boolean add(E element) {
         return delegate().add(element);
     }
 

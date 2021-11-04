@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.ImmutableList;
 
 import java.util.Collection;
@@ -40,8 +39,6 @@ import static com.google.common.base.Throwables.throwIfUnchecked;
  *
  * @author Chris Nokleberg
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 abstract class WrappingExecutorService implements ExecutorService {
     private final ExecutorService delegate;
 
@@ -103,7 +100,7 @@ abstract class WrappingExecutorService implements ExecutorService {
 
     @Override
     public final <T> Future<T> submit(
-            Runnable task, @ParametricNullness T result) {
+            Runnable task, T result) {
         return delegate.submit(wrapTask(task), result);
     }
 

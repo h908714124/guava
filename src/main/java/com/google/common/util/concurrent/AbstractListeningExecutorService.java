@@ -15,8 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.Callable;
@@ -34,16 +32,13 @@ import java.util.concurrent.RunnableFuture;
  * @since 14.0
  */
 @Beta
-@CanIgnoreReturnValue
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractListeningExecutorService extends AbstractExecutorService
         implements ListeningExecutorService {
 
     /** @since 19.0 (present with return type {@code ListenableFutureTask} since 14.0) */
     @Override
     protected final <T> RunnableFuture<T> newTaskFor(
-            Runnable runnable, @ParametricNullness T value) {
+            Runnable runnable, T value) {
         return TrustedListenableFutureTask.create(runnable, value);
     }
 
@@ -60,7 +55,7 @@ public abstract class AbstractListeningExecutorService extends AbstractExecutorS
 
     @Override
     public <T> ListenableFuture<T> submit(
-            Runnable task, @ParametricNullness T result) {
+            Runnable task, T result) {
         return (ListenableFuture<T>) super.submit(task, result);
     }
 

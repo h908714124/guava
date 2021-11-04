@@ -15,7 +15,6 @@
 package com.google.common.hash;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -27,8 +26,6 @@ import java.nio.charset.Charset;
  * @since 12.0 (in 11.0 as {@code Sink})
  */
 @Beta
-@CanIgnoreReturnValue
-@ElementTypesAreNonnullByDefault
 public interface PrimitiveSink {
     /**
      * Puts a byte into this sink.

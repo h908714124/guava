@@ -49,7 +49,6 @@ import static java.lang.Double.POSITIVE_INFINITY;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Doubles extends DoublesMethodsForWeb {
     private Doubles() {
     }
@@ -523,8 +522,7 @@ public final class Doubles extends DoublesMethodsForWeb {
         return new DoubleArrayAsList(backingArray);
     }
 
-    @GwtCompatible
-    private static class DoubleArrayAsList extends AbstractList<Double>
+        private static class DoubleArrayAsList extends AbstractList<Double>
             implements RandomAccess, Serializable {
         final double[] array;
         final int start;

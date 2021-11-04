@@ -27,7 +27,6 @@ import java.util.List;
  * @author Emily Soldal
  */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class AllEqualOrdering extends Ordering<Object> implements Serializable {
     static final AllEqualOrdering INSTANCE = new AllEqualOrdering();
 

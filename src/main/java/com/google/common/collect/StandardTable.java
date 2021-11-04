@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
@@ -63,8 +62,6 @@ import static java.util.Objects.requireNonNull;
  *
  * @author Jared Levy
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 class StandardTable<R, C, V> extends AbstractTable<R, C, V> implements Serializable {
     @GwtTransient
     final Map<R, Map<C, V>> backingMap;

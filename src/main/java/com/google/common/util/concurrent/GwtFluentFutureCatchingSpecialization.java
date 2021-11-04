@@ -22,7 +22,6 @@ import com.google.common.annotations.GwtCompatible;
  * FluentFuture.catching} family of methods. Those versions have slightly different signatures.
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 abstract class GwtFluentFutureCatchingSpecialization<V>
         extends AbstractFuture<V> {
     /*

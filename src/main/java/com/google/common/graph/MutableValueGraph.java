@@ -28,7 +28,6 @@ import com.google.common.annotations.Beta;
  * @since 20.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public interface MutableValueGraph<N, V> extends ValueGraph<N, V> {
 
     /**

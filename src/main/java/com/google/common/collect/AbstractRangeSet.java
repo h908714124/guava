@@ -14,15 +14,11 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
-
 /**
  * A skeletal implementation of {@code RangeSet}.
  *
  * @author Louis Wasserman
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 abstract class AbstractRangeSet<C extends Comparable> implements RangeSet<C> {
     AbstractRangeSet() {
     }

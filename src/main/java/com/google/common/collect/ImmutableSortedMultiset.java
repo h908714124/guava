@@ -47,7 +47,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 12.0
  */
 @GwtIncompatible // hasn't been tested yet
-@ElementTypesAreNonnullByDefault
 public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultisetFauxverideShim<E>
         implements SortedMultiset<E> {
     // TODO(lowasser): GWT compatibility

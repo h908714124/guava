@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.util.Comparator;
 import java.util.NoSuchElementException;
@@ -50,8 +49,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingSortedMap<K, V>
         extends ForwardingMap<K, V> implements SortedMap<K, V> {
     // TODO(lowasser): identify places where thread safety is actually lost
@@ -69,29 +66,27 @@ public abstract class ForwardingSortedMap<K, V>
     }
 
     @Override
-    @ParametricNullness
     public K firstKey() {
         return delegate().firstKey();
     }
 
     @Override
-    public SortedMap<K, V> headMap(@ParametricNullness K toKey) {
+    public SortedMap<K, V> headMap(K toKey) {
         return delegate().headMap(toKey);
     }
 
     @Override
-    @ParametricNullness
     public K lastKey() {
         return delegate().lastKey();
     }
 
     @Override
-    public SortedMap<K, V> subMap(@ParametricNullness K fromKey, @ParametricNullness K toKey) {
+    public SortedMap<K, V> subMap(K fromKey, K toKey) {
         return delegate().subMap(fromKey, toKey);
     }
 
     @Override
-    public SortedMap<K, V> tailMap(@ParametricNullness K fromKey) {
+    public SortedMap<K, V> tailMap(K fromKey) {
         return delegate().tailMap(fromKey);
     }
 

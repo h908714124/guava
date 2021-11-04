@@ -1220,8 +1220,7 @@ public class SetsTest extends TestCase {
         }
     }
 
-    @GwtIncompatible
-        // NavigableSet
+            // NavigableSet
     void ensureNotDirectlyModifiable(NavigableSet<Integer> unmod) {
         try {
             unmod.add(4);

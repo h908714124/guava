@@ -15,7 +15,6 @@
 package com.google.common.net;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 /**
  * Contains constant definitions for the HTTP header field names. See:
@@ -31,8 +30,6 @@ import com.google.common.annotations.GwtCompatible;
  * @author Kurt Alfred Kluever
  * @since 11.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class HttpHeaders {
     private HttpHeaders() {
     }

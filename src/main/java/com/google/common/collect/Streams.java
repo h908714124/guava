@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.math.LongMath;
 
 import java.util.ArrayDeque;
@@ -53,8 +52,6 @@ import static java.util.Objects.requireNonNull;
  *
  * @since 21.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Streams {
     /**
      * Returns a sequential {@link Stream} of the contents of {@code iterable}, delegating to {@link
@@ -382,12 +379,10 @@ public final class Streams {
 
     // Use this carefully - it doesn't implement value semantics
     private static class TemporaryPair<A, B> {
-        @ParametricNullness
         final A a;
-        @ParametricNullness
         final B b;
 
-        TemporaryPair(@ParametricNullness A a, @ParametricNullness B b) {
+        TemporaryPair(A a, B b) {
             this.a = a;
             this.b = b;
         }
@@ -451,7 +446,7 @@ public final class Streams {
             }
 
             @Override
-            public void accept(@ParametricNullness T t) {
+            public void accept(T t) {
                 this.holder = t;
             }
 
@@ -728,8 +723,7 @@ public final class Streams {
     @Beta
     public interface FunctionWithIndex<T, R> {
         /** Applies this function to the given argument and its index within a stream. */
-        @ParametricNullness
-        R apply(@ParametricNullness T from, long index);
+        R apply(T from, long index);
     }
 
     private abstract static class MapWithIndexSpliterator<
@@ -783,7 +777,6 @@ public final class Streams {
     @Beta
     public interface IntFunctionWithIndex<R> {
         /** Applies this function to the given argument and its index within a stream. */
-        @ParametricNullness
         R apply(int from, long index);
     }
 
@@ -798,7 +791,6 @@ public final class Streams {
     @Beta
     public interface LongFunctionWithIndex<R> {
         /** Applies this function to the given argument and its index within a stream. */
-        @ParametricNullness
         R apply(long from, long index);
     }
 
@@ -813,7 +805,6 @@ public final class Streams {
     @Beta
     public interface DoubleFunctionWithIndex<R> {
         /** Applies this function to the given argument and its index within a stream. */
-        @ParametricNullness
         R apply(double from, long index);
     }
 

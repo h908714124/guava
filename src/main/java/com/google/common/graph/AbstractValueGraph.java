@@ -39,7 +39,6 @@ import static java.util.Objects.requireNonNull;
  * @since 20.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractValueGraph<N, V> extends AbstractBaseGraph<N>
         implements ValueGraph<N, V> {
 

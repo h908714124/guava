@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -156,8 +154,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public interface Multimap<K, V> {
     // Query Operations
 
@@ -208,7 +204,7 @@ public interface Multimap<K, V> {
      * @return {@code true} if the method increased the size of the multimap, or {@code false} if the
      *     multimap already contained the key-value pair and doesn't allow duplicates
      */
-    boolean put(@ParametricNullness K key, @ParametricNullness V value);
+    boolean put(K key, V value);
 
     /**
      * Removes a single key-value pair with the key {@code key} and the value {@code value} from this
@@ -237,7 +233,7 @@ public interface Multimap<K, V> {
      *
      * @return {@code true} if the multimap changed
      */
-    boolean putAll(@ParametricNullness K key, Iterable<? extends V> values);
+    boolean putAll(K key, Iterable<? extends V> values);
 
     /**
      * Stores all key-value pairs of {@code multimap} in this multimap, in the order returned by
@@ -256,7 +252,7 @@ public interface Multimap<K, V> {
      *     associated with the key. The collection <i>may</i> be modifiable, but updating it will have
      *     no effect on the multimap.
      */
-    Collection<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values);
+    Collection<V> replaceValues(K key, Iterable<? extends V> values);
 
     /**
      * Removes all values associated with the key {@code key}.
@@ -281,7 +277,7 @@ public interface Multimap<K, V> {
      *
      * <p>Changes to the returned collection will update the underlying multimap, and vice versa.
      */
-    Collection<V> get(@ParametricNullness K key);
+    Collection<V> get(K key);
 
     /**
      * Returns a view collection of all <i>distinct</i> keys contained in this multimap. Note that the

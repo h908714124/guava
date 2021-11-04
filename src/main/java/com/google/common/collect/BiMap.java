@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Map;
 import java.util.Set;
 
@@ -32,8 +30,6 @@ import java.util.Set;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public interface BiMap<K, V> extends Map<K, V> {
     // Modification Operations
 
@@ -45,7 +41,7 @@ public interface BiMap<K, V> extends Map<K, V> {
      *     #forcePut} instead.
      */
     @Override
-    V put(@ParametricNullness K key, @ParametricNullness V value);
+    V put(K key, V value);
 
     /**
      * An alternate form of {@code put} that silently removes any existing entry with the value {@code
@@ -65,7 +61,7 @@ public interface BiMap<K, V> extends Map<K, V> {
      *     put}, returns {@code null} both if the key is absent and if it is present with a null
      *     value.)
      */
-    V forcePut(@ParametricNullness K key, @ParametricNullness V value);
+    V forcePut(K key, V value);
 
     // Bulk Operations
 

@@ -14,7 +14,6 @@
 
 package com.google.thirdparty.publicsuffix;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Queues;
@@ -22,7 +21,6 @@ import com.google.common.collect.Queues;
 import java.util.Deque;
 
 /** Parser for a map of reversed domain names stored as a serialized radix tree. */
-@GwtCompatible
 final class TrieParser {
     private static final Joiner PREFIX_JOINER = Joiner.on("");
 

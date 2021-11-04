@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 import static com.google.common.base.Strings.lenientFormat;
 
 /**
@@ -110,8 +108,6 @@ import static com.google.common.base.Strings.lenientFormat;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Preconditions {
     private Preconditions() {
     }

@@ -40,7 +40,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class EnumHashBiMap<K extends Enum<K>, V>
         extends AbstractBiMap<K, V> {
     private transient Class<K> keyType;
@@ -89,14 +88,14 @@ public final class EnumHashBiMap<K extends Enum<K>, V>
     @Override
     @SuppressWarnings("RedundantOverride") // b/192446478: RedundantOverride ignores some annotations.
     // TODO(b/192446998): Remove this override after tools understand nullness better.
-    public V put(K key, @ParametricNullness V value) {
+    public V put(K key, V value) {
         return super.put(key, value);
     }
 
     @Override
     @SuppressWarnings("RedundantOverride") // b/192446478: RedundantOverride ignores some annotations.
     // TODO(b/192446998): Remove this override after tools understand nullness better.
-    public V forcePut(K key, @ParametricNullness V value) {
+    public V forcePut(K key, V value) {
         return super.forcePut(key, value);
     }
 

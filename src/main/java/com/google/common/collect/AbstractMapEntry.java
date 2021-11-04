@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 
 import java.util.Map.Entry;
@@ -27,22 +26,17 @@ import java.util.Map.Entry;
  *
  * @author Jared Levy
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class AbstractMapEntry<K, V>
         implements Entry<K, V> {
 
     @Override
-    @ParametricNullness
     public abstract K getKey();
 
     @Override
-    @ParametricNullness
     public abstract V getValue();
 
     @Override
-    @ParametricNullness
-    public V setValue(@ParametricNullness V value) {
+    public V setValue(V value) {
         throw new UnsupportedOperationException();
     }
 

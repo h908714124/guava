@@ -46,7 +46,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Ints extends IntsMethodsForWeb {
     private Ints() {
     }
@@ -563,8 +562,7 @@ public final class Ints extends IntsMethodsForWeb {
         return new IntArrayAsList(backingArray);
     }
 
-    @GwtCompatible
-    private static class IntArrayAsList extends AbstractList<Integer>
+        private static class IntArrayAsList extends AbstractList<Integer>
             implements RandomAccess, Serializable {
         final int[] array;
         final int start;

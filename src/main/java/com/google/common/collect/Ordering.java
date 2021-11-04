@@ -142,8 +142,6 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class Ordering<T> implements Comparator<T> {
     // Natural order
 
@@ -530,7 +528,7 @@ public abstract class Ordering<T> implements Comparator<T> {
     // Regular instance methods
 
     @Override
-    public abstract int compare(@ParametricNullness T left, @ParametricNullness T right);
+    public abstract int compare(T left, T right);
 
     /**
      * Returns the least of the specified values according to this ordering. If there are multiple
@@ -546,7 +544,6 @@ public abstract class Ordering<T> implements Comparator<T> {
      *     ordering.
      * @since 11.0
      */
-    @ParametricNullness
     public <E extends T> E min(Iterator<E> iterator) {
         // let this throw NoSuchElementException as necessary
         E minSoFar = iterator.next();
@@ -572,7 +569,6 @@ public abstract class Ordering<T> implements Comparator<T> {
      * @throws ClassCastException if the parameters are not <i>mutually comparable</i> under this
      *     ordering.
      */
-    @ParametricNullness
     public <E extends T> E min(Iterable<E> iterable) {
         return min(iterable.iterator());
     }
@@ -592,8 +588,7 @@ public abstract class Ordering<T> implements Comparator<T> {
      * @throws ClassCastException if the parameters are not <i>mutually comparable</i> under this
      *     ordering.
      */
-    @ParametricNullness
-    public <E extends T> E min(@ParametricNullness E a, @ParametricNullness E b) {
+    public <E extends T> E min(E a, E b) {
         return (compare(a, b) <= 0) ? a : b;
     }
 
@@ -611,9 +606,8 @@ public abstract class Ordering<T> implements Comparator<T> {
      * @throws ClassCastException if the parameters are not <i>mutually comparable</i> under this
      *     ordering.
      */
-    @ParametricNullness
     public <E extends T> E min(
-            @ParametricNullness E a, @ParametricNullness E b, @ParametricNullness E c, E... rest) {
+            E a, E b, E c, E... rest) {
         E minSoFar = min(min(a, b), c);
 
         for (E r : rest) {
@@ -637,7 +631,6 @@ public abstract class Ordering<T> implements Comparator<T> {
      *     ordering.
      * @since 11.0
      */
-    @ParametricNullness
     public <E extends T> E max(Iterator<E> iterator) {
         // let this throw NoSuchElementException as necessary
         E maxSoFar = iterator.next();
@@ -663,7 +656,6 @@ public abstract class Ordering<T> implements Comparator<T> {
      * @throws ClassCastException if the parameters are not <i>mutually comparable</i> under this
      *     ordering.
      */
-    @ParametricNullness
     public <E extends T> E max(Iterable<E> iterable) {
         return max(iterable.iterator());
     }
@@ -683,8 +675,7 @@ public abstract class Ordering<T> implements Comparator<T> {
      * @throws ClassCastException if the parameters are not <i>mutually comparable</i> under this
      *     ordering.
      */
-    @ParametricNullness
-    public <E extends T> E max(@ParametricNullness E a, @ParametricNullness E b) {
+    public <E extends T> E max(E a, E b) {
         return (compare(a, b) >= 0) ? a : b;
     }
 
@@ -702,9 +693,8 @@ public abstract class Ordering<T> implements Comparator<T> {
      * @throws ClassCastException if the parameters are not <i>mutually comparable</i> under this
      *     ordering.
      */
-    @ParametricNullness
     public <E extends T> E max(
-            @ParametricNullness E a, @ParametricNullness E b, @ParametricNullness E c, E... rest) {
+            E a, E b, E c, E... rest) {
         E maxSoFar = max(max(a, b), c);
 
         for (E r : rest) {
@@ -932,7 +922,7 @@ public abstract class Ordering<T> implements Comparator<T> {
      */
     @Deprecated
     public int binarySearch(
-            List<? extends T> sortedList, @ParametricNullness T key) {
+            List<? extends T> sortedList, T key) {
         return Collections.binarySearch(sortedList, key, this);
     }
 

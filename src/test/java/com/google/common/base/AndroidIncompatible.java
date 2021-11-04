@@ -67,6 +67,5 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  */
 @Retention(CLASS)
 @Target({ANNOTATION_TYPE, CONSTRUCTOR, FIELD, METHOD, TYPE})
-@GwtCompatible
 @interface AndroidIncompatible {
 }

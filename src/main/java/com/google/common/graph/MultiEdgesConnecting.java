@@ -35,7 +35,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author James Sexton
  * @param <E> Edge parameter type
  */
-@ElementTypesAreNonnullByDefault
 abstract class MultiEdgesConnecting<E> extends AbstractSet<E> {
 
     private final Map<E, ?> outEdgeToNode;

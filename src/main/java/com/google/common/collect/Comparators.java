@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -43,8 +42,6 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * @since 21.0
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Comparators {
     private Comparators() {
     }
@@ -234,9 +231,8 @@ public final class Comparators {
      * @since 30.0
      */
     @Beta
-    @ParametricNullness
     public static <T> T min(
-            @ParametricNullness T a, @ParametricNullness T b, Comparator<T> comparator) {
+            T a, T b, Comparator<T> comparator) {
         return (comparator.compare(a, b) <= 0) ? a : b;
     }
 
@@ -274,9 +270,8 @@ public final class Comparators {
      * @since 30.0
      */
     @Beta
-    @ParametricNullness
     public static <T> T max(
-            @ParametricNullness T a, @ParametricNullness T b, Comparator<T> comparator) {
+            T a, T b, Comparator<T> comparator) {
         return (comparator.compare(a, b) >= 0) ? a : b;
     }
 }

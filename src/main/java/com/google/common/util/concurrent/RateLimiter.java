@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Stopwatch;
 import com.google.common.util.concurrent.SmoothRateLimiter.SmoothBursty;
@@ -92,8 +91,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 // TODO(user): switch to nano precision. A natural unit of cost is "bytes", and a micro precision
 // would mean a maximum rate of "1MB/s", which might be small in some cases.
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class RateLimiter {
     /**
      * Creates a {@code RateLimiter} with the specified stable throughput, given as "permits per

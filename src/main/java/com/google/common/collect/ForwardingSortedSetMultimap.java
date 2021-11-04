@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Comparator;
 import java.util.SortedSet;
 
@@ -33,8 +31,6 @@ import java.util.SortedSet;
  * @author Kurt Alfred Kluever
  * @since 3.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingSortedSetMultimap<
         K, V>
         extends ForwardingSetMultimap<K, V> implements SortedSetMultimap<K, V> {
@@ -47,7 +43,7 @@ public abstract class ForwardingSortedSetMultimap<
     protected abstract SortedSetMultimap<K, V> delegate();
 
     @Override
-    public SortedSet<V> get(@ParametricNullness K key) {
+    public SortedSet<V> get(K key) {
         return delegate().get(key);
     }
 
@@ -57,7 +53,7 @@ public abstract class ForwardingSortedSetMultimap<
     }
 
     @Override
-    public SortedSet<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public SortedSet<V> replaceValues(K key, Iterable<? extends V> values) {
         return delegate().replaceValues(key, values);
     }
 

@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
@@ -47,8 +45,6 @@ import java.util.SortedSet;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public interface SortedSetMultimap<K, V>
         extends SetMultimap<K, V> {
     // Following Javadoc copied from Multimap.
@@ -64,7 +60,7 @@ public interface SortedSetMultimap<K, V>
      * {@link Multimap} interface.
      */
     @Override
-    SortedSet<V> get(@ParametricNullness K key);
+    SortedSet<V> get(K key);
 
     /**
      * Removes all values associated with a given key.
@@ -86,7 +82,7 @@ public interface SortedSetMultimap<K, V>
      * <p>Any duplicates in {@code values} will be stored in the multimap once.
      */
     @Override
-    SortedSet<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values);
+    SortedSet<V> replaceValues(K key, Iterable<? extends V> values);
 
     /**
      * Returns a map view that associates each key with the corresponding values in the multimap.

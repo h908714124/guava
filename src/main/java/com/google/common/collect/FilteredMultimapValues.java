@@ -14,7 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -31,8 +30,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class FilteredMultimapValues<K, V>
         extends AbstractCollection<V> {
     private final FilteredMultimap<K, V> multimap;

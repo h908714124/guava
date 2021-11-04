@@ -14,8 +14,6 @@
 
 package com.google.common.hash;
 
-import com.google.errorprone.annotations.Immutable;
-
 import java.io.Serializable;
 import java.util.zip.Checksum;
 
@@ -27,7 +25,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Colin Decker
  */
-@ElementTypesAreNonnullByDefault
 final class ChecksumHashFunction extends AbstractHashFunction implements Serializable {
     private final ImmutableSupplier<? extends Checksum> checksumSupplier;
     private final int bits;

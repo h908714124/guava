@@ -15,7 +15,6 @@
 package com.google.common.hash;
 
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.Immutable;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -115,7 +114,6 @@ import java.nio.charset.Charset;
  * @author Kevin Bourrillion
  * @since 11.0
  */
-@ElementTypesAreNonnullByDefault
 public interface HashFunction {
     /**
      * Begins a new hash code computation by returning an initialized, stateful {@code Hasher}
@@ -211,7 +209,7 @@ public interface HashFunction {
      * @since 14.0
      */
     <T> HashCode hashObject(
-            @ParametricNullness T instance, Funnel<? super T> funnel);
+            T instance, Funnel<? super T> funnel);
 
     /**
      * Returns the number of bits (a multiple of 32) that each hash code produced by this hash

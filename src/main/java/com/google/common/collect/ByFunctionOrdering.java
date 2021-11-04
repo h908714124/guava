@@ -29,7 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * elements.
  */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class ByFunctionOrdering<F, T>
         extends Ordering<F> implements Serializable {
     final Function<F, ? extends T> function;
@@ -41,7 +40,7 @@ final class ByFunctionOrdering<F, T>
     }
 
     @Override
-    public int compare(@ParametricNullness F left, @ParametricNullness F right) {
+    public int compare(F left, F right) {
         return ordering.compare(function.apply(left), function.apply(right));
     }
 

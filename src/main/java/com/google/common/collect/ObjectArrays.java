@@ -32,7 +32,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class ObjectArrays {
 
     private ObjectArrays() {
@@ -83,7 +82,7 @@ public final class ObjectArrays {
      * @return an array whose size is one larger than {@code array}, with {@code element} occupying
      *     the first position, and the elements of {@code array} occupying the remaining elements.
      */
-    public static <T> T[] concat(@ParametricNullness T element, T[] array) {
+    public static <T> T[] concat(T element, T[] array) {
         T[] result = newArray(array, array.length + 1);
         result[0] = element;
         System.arraycopy(array, 0, result, 1, array.length);
@@ -98,7 +97,7 @@ public final class ObjectArrays {
      * @return an array whose size is one larger than {@code array}, with the same contents as {@code
      *     array}, plus {@code element} occupying the last position.
      */
-    public static <T> T[] concat(T[] array, @ParametricNullness T element) {
+    public static <T> T[] concat(T[] array, T element) {
         T[] result = Arrays.copyOf(array, array.length + 1);
         result[array.length] = element;
         return result;

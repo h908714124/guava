@@ -19,7 +19,6 @@
 package com.google.thirdparty.publicsuffix;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableMap;
 
 /**
@@ -34,7 +33,6 @@ import com.google.common.collect.ImmutableMap;
  *
  * @since 16.0
  */
-@GwtCompatible
 @Beta
 public final class PublicSuffixPatterns {
     private PublicSuffixPatterns() {

@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -36,8 +34,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Gregory Kick
  * @since 7.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Ascii {
 
     private Ascii() {

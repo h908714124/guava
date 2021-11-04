@@ -15,7 +15,6 @@
 package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -88,7 +87,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  */
 @GwtCompatible(emulated = true)
 @SuppressWarnings("GoodTime") // lots of violations
-@ElementTypesAreNonnullByDefault
 public final class Stopwatch {
     private final Ticker ticker;
     private boolean isRunning;
@@ -213,8 +211,7 @@ public final class Stopwatch {
      *
      * @since 22.0
      */
-    @GwtIncompatible
-    public Duration elapsed() {
+        public Duration elapsed() {
         return Duration.ofNanos(elapsedNanos());
     }
 

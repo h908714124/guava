@@ -32,7 +32,6 @@ import static com.google.common.net.UrlEscapers.urlPathSegmentEscaper;
  *
  * @author David Beaumont
  */
-@GwtCompatible
 public class UrlEscapersTest extends TestCase {
     /**
      * Helper to assert common expected behaviour of uri escapers. You should call

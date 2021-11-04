@@ -16,9 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
@@ -44,8 +41,6 @@ import java.util.Queue;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingQueue<E> extends ForwardingCollection<E>
         implements Queue<E> {
 
@@ -56,20 +51,17 @@ public abstract class ForwardingQueue<E> extends ForwardingCollection<E>
     @Override
     protected abstract Queue<E> delegate();
 
-    @CanIgnoreReturnValue // TODO(cpovirk): Consider removing this?
     @Override
-    public boolean offer(@ParametricNullness E o) {
+    public boolean offer(E o) {
         return delegate().offer(o);
     }
 
-    @CanIgnoreReturnValue // TODO(cpovirk): Consider removing this?
     @Override
     public E poll() {
         return delegate().poll();
     }
 
     @Override
-    @ParametricNullness
     public E remove() {
         return delegate().remove();
     }
@@ -80,7 +72,6 @@ public abstract class ForwardingQueue<E> extends ForwardingCollection<E>
     }
 
     @Override
-    @ParametricNullness
     public E element() {
         return delegate().element();
     }
@@ -91,7 +82,7 @@ public abstract class ForwardingQueue<E> extends ForwardingCollection<E>
      *
      * @since 7.0
      */
-    protected boolean standardOffer(@ParametricNullness E e) {
+    protected boolean standardOffer(E e) {
         try {
             return add(e);
         } catch (IllegalStateException caught) {

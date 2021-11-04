@@ -14,8 +14,6 @@
 
 package com.google.common.hash;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -29,8 +27,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author Dimitris Andreou
  */
 // TODO(kevinb): this class still needs some design-and-document-for-inheritance love
-@CanIgnoreReturnValue
-@ElementTypesAreNonnullByDefault
 abstract class AbstractStreamingHasher extends AbstractHasher {
     /** Buffer via which we pass data to the hash algorithm (the implementor) */
     private final ByteBuffer buffer;

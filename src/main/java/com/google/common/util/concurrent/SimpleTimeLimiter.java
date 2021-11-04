@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Sets;
 
@@ -44,8 +43,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 1.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class SimpleTimeLimiter implements TimeLimiter {
 
     private final ExecutorService executor;

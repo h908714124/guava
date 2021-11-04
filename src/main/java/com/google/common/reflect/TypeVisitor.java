@@ -54,7 +54,6 @@ import java.util.Set;
  *
  * @author Ben Yu
  */
-@ElementTypesAreNonnullByDefault
 abstract class TypeVisitor {
 
     private final Set<Type> visited = Sets.newHashSet();

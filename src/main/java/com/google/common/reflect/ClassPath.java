@@ -92,7 +92,6 @@ import static java.util.logging.Level.WARNING;
  * @since 14.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class ClassPath {
     private static final Logger logger = Logger.getLogger(ClassPath.class.getName());
 

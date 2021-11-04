@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -30,8 +28,6 @@ import java.util.Set;
  * @author Gregory Kick
  * @since 7.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingTable<
         R, C, V>
         extends ForwardingObject implements Table<R, C, V> {
@@ -53,7 +49,7 @@ public abstract class ForwardingTable<
     }
 
     @Override
-    public Map<R, V> column(@ParametricNullness C columnKey) {
+    public Map<R, V> column(C columnKey) {
         return delegate().column(columnKey);
     }
 
@@ -99,7 +95,7 @@ public abstract class ForwardingTable<
 
     @Override
     public V put(
-            @ParametricNullness R rowKey, @ParametricNullness C columnKey, @ParametricNullness V value) {
+            R rowKey, C columnKey, V value) {
         return delegate().put(rowKey, columnKey, value);
     }
 
@@ -114,7 +110,7 @@ public abstract class ForwardingTable<
     }
 
     @Override
-    public Map<C, V> row(@ParametricNullness R rowKey) {
+    public Map<C, V> row(R rowKey) {
         return delegate().row(rowKey);
     }
 

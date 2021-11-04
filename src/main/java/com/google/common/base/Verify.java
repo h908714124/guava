@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 import static com.google.common.base.Strings.lenientFormat;
 
 /**
@@ -84,8 +82,6 @@ import static com.google.common.base.Strings.lenientFormat;
  *
  * @since 17.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Verify {
     /**
      * Ensures that {@code expression} is {@code true}, throwing a {@code VerifyException} with no

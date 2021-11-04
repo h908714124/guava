@@ -27,7 +27,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Cliff Biffle
  * @since 10.0
  */
-@ElementTypesAreNonnullByDefault
 public class DeadEvent {
 
     private final Object source;

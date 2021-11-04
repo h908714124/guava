@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 
 import java.util.Collection;
@@ -46,8 +45,6 @@ import java.util.Set;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingMultiset<E> extends ForwardingCollection<E>
         implements Multiset<E> {
 
@@ -64,7 +61,7 @@ public abstract class ForwardingMultiset<E> extends ForwardingCollection<E>
     }
 
     @Override
-    public int add(@ParametricNullness E element, int occurrences) {
+    public int add(E element, int occurrences) {
         return delegate().add(element, occurrences);
     }
 
@@ -94,12 +91,12 @@ public abstract class ForwardingMultiset<E> extends ForwardingCollection<E>
     }
 
     @Override
-    public int setCount(@ParametricNullness E element, int count) {
+    public int setCount(E element, int count) {
         return delegate().setCount(element, count);
     }
 
     @Override
-    public boolean setCount(@ParametricNullness E element, int oldCount, int newCount) {
+    public boolean setCount(E element, int oldCount, int newCount) {
         return delegate().setCount(element, oldCount, newCount);
     }
 
@@ -150,7 +147,7 @@ public abstract class ForwardingMultiset<E> extends ForwardingCollection<E>
      *
      * @since 7.0
      */
-    protected boolean standardAdd(@ParametricNullness E element) {
+    protected boolean standardAdd(E element) {
         add(element, 1);
         return true;
     }
@@ -212,7 +209,7 @@ public abstract class ForwardingMultiset<E> extends ForwardingCollection<E>
      *
      * @since 7.0
      */
-    protected int standardSetCount(@ParametricNullness E element, int count) {
+    protected int standardSetCount(E element, int count) {
         return Multisets.setCountImpl(this, element, count);
     }
 
@@ -223,7 +220,7 @@ public abstract class ForwardingMultiset<E> extends ForwardingCollection<E>
      *
      * @since 7.0
      */
-    protected boolean standardSetCount(@ParametricNullness E element, int oldCount, int newCount) {
+    protected boolean standardSetCount(E element, int oldCount, int newCount) {
         return Multisets.setCountImpl(this, element, oldCount, newCount);
     }
 

@@ -14,7 +14,6 @@
 
 package com.google.common.net;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.escape.Escaper;
 
 /**
@@ -28,8 +27,6 @@ import com.google.common.escape.Escaper;
  * @author Chris Povirk
  * @since 15.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class UrlEscapers {
     private UrlEscapers() {
     }

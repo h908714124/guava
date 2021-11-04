@@ -188,7 +188,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @since 10.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class CacheBuilder<K, V> {
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
     private static final int DEFAULT_CONCURRENCY_LEVEL = 4;
@@ -337,8 +336,7 @@ public final class CacheBuilder<K, V> {
      *
      * @return this {@code CacheBuilder} instance (for chaining)
      */
-    @GwtIncompatible
-    // To be supported
+        // To be supported
     CacheBuilder<K, V> lenientParsing() {
         strictParsing = false;
         return this;
@@ -352,8 +350,7 @@ public final class CacheBuilder<K, V> {
      *
      * @return this {@code CacheBuilder} instance (for chaining)
      */
-    @GwtIncompatible
-    // To be supported
+        // To be supported
     CacheBuilder<K, V> keyEquivalence(Equivalence<Object> equivalence) {
         checkState(keyEquivalence == null, "key equivalence was already set to %s", keyEquivalence);
         keyEquivalence = checkNotNull(equivalence);
@@ -373,8 +370,7 @@ public final class CacheBuilder<K, V> {
      *
      * @return this {@code CacheBuilder} instance (for chaining)
      */
-    @GwtIncompatible
-    // To be supported
+        // To be supported
     CacheBuilder<K, V> valueEquivalence(Equivalence<Object> equivalence) {
         checkState(
                 valueEquivalence == null, "value equivalence was already set to %s", valueEquivalence);

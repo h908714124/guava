@@ -20,7 +20,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.google.errorprone.annotations.Immutable;
 
 import java.util.Map;
 
@@ -44,9 +43,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 20.0
  */
 @Beta
-@Immutable(containerOf = {"N", "E"})
 @SuppressWarnings("Immutable") // Extends StandardNetwork but uses ImmutableMaps.
-@ElementTypesAreNonnullByDefault
 public final class ImmutableNetwork<N, E> extends StandardNetwork<N, E> {
 
     private ImmutableNetwork(Network<N, E> network) {

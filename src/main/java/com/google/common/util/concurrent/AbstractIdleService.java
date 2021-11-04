@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Supplier;
 
 import java.time.Duration;
@@ -30,8 +29,6 @@ import java.util.concurrent.TimeoutException;
  * @author Chris Nokleberg
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractIdleService implements Service {
 
     /* Thread names will look like {@code "MyService STARTING"}. */

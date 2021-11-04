@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
@@ -25,8 +23,6 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * @author Kurt Alfred Kluever
  * @since 10.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class Atomics {
     private Atomics() {
     }
@@ -47,7 +43,7 @@ public final class Atomics {
      * @return a new {@code AtomicReference} with the given initial value
      */
     public static <V> AtomicReference<V> newReference(
-            @ParametricNullness V initialValue) {
+            V initialValue) {
         return new AtomicReference<>(initialValue);
     }
 

@@ -37,7 +37,6 @@ import static java.util.Comparator.naturalOrder;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
 public class ComparatorsTest extends TestCase {
     @SuppressWarnings("unchecked") // dang varargs
     public void testLexicographical() {

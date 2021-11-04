@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
@@ -34,8 +32,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class AbstractMultimap<K, V>
         implements Multimap<K, V> {
     @Override
@@ -67,12 +63,12 @@ abstract class AbstractMultimap<K, V>
     }
 
     @Override
-    public boolean put(@ParametricNullness K key, @ParametricNullness V value) {
+    public boolean put(K key, V value) {
         return get(key).add(value);
     }
 
     @Override
-    public boolean putAll(@ParametricNullness K key, Iterable<? extends V> values) {
+    public boolean putAll(K key, Iterable<? extends V> values) {
         checkNotNull(values);
         // make sure we only call values.iterator() once
         // and we only call get(key) if values is nonempty
@@ -95,7 +91,7 @@ abstract class AbstractMultimap<K, V>
     }
 
     @Override
-    public Collection<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public Collection<V> replaceValues(K key, Iterable<? extends V> values) {
         checkNotNull(values);
         Collection<V> result = removeAll(key);
         putAll(key, values);

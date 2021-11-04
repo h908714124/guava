@@ -15,7 +15,6 @@
 package com.google.common.escape;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -40,8 +39,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 15.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class CharEscaper extends Escaper {
     /** Constructor for use by subclasses. */
     protected CharEscaper() {

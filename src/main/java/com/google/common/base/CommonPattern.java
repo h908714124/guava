@@ -14,15 +14,11 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * The subset of the {@link java.util.regex.Pattern} API which is used by this package, and also
  * shared with the {@code re2j} library. For internal use only. Please refer to the {@code Pattern}
  * javadoc for details.
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class CommonPattern {
     public abstract CommonMatcher matcher(CharSequence t);
 

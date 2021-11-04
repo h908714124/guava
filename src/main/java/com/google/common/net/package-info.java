@@ -21,6 +21,5 @@
  *
  * @author Craig Berry
  */
-@ParametersAreNonnullByDefault
 package com.google.common.net;
 

@@ -14,11 +14,9 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
 import com.google.common.collect.Ordering;
-import com.google.j2objc.annotations.J2ObjCIncompatible;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
@@ -37,10 +35,7 @@ import static java.lang.Thread.currentThread;
 import static java.util.Arrays.asList;
 
 /** Static methods used to implement {@link Futures#getChecked(Future, Class)}. */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class FuturesGetChecked {
-    @ParametricNullness
     static <V, X extends Exception> V getChecked(
             Future<V> future, Class<X> exceptionClass) throws X {
         return getChecked(bestGetCheckedTypeValidator(), future, exceptionClass);
@@ -48,7 +43,6 @@ final class FuturesGetChecked {
 
     /** Implementation of {@link Futures#getChecked(Future, Class)}. */
     @VisibleForTesting
-    @ParametricNullness
     static <V, X extends Exception> V getChecked(
             GetCheckedTypeValidator validator, Future<V> future, Class<X> exceptionClass) throws X {
         validator.validateClass(exceptionClass);
@@ -64,7 +58,6 @@ final class FuturesGetChecked {
     }
 
     /** Implementation of {@link Futures#getChecked(Future, Class, long, TimeUnit)}. */
-    @ParametricNullness
     static <V, X extends Exception> V getChecked(
             Future<V> future, Class<X> exceptionClass, long timeout, TimeUnit unit) throws X {
         // TODO(cpovirk): benchmark a version of this method that accepts a GetCheckedTypeValidator
@@ -96,7 +89,6 @@ final class FuturesGetChecked {
         return GetCheckedTypeValidatorHolder.WeakSetValidator.INSTANCE;
     }
 
-    @J2ObjCIncompatible // ClassValue
     @VisibleForTesting
     static GetCheckedTypeValidator classValueValidator() {
         return GetCheckedTypeValidatorHolder.ClassValueValidator.INSTANCE;
@@ -115,7 +107,6 @@ final class FuturesGetChecked {
 
         static final GetCheckedTypeValidator BEST_VALIDATOR = getBestValidator();
 
-        @J2ObjCIncompatible // ClassValue
         enum ClassValueValidator implements GetCheckedTypeValidator {
             INSTANCE;
 

@@ -38,7 +38,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Jon Donovan
  */
-@GwtCompatible
 public class CacheBuilderGwtTest extends TestCase {
 
     private FakeTicker fakeTicker;

@@ -2290,8 +2290,7 @@ public class TypeTokenTest extends TestCase {
         }
     }
 
-    @CanIgnoreReturnValue
-    private static <T> T reserialize(T object) {
+        private static <T> T reserialize(T object) {
         T copy = SerializableTester.reserialize(object);
         new EqualsTester().addEqualityGroup(object, copy).testEquals();
         return copy;

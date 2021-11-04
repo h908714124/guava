@@ -30,7 +30,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Hayward Chan
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 final class Platform {
     private static final java.util.logging.Logger logger =
             java.util.logging.Logger.getLogger(Platform.class.getName());

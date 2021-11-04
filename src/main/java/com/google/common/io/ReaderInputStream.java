@@ -14,7 +14,6 @@
 
 package com.google.common.io;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.UnsignedBytes;
 
 import java.io.IOException;
@@ -44,8 +43,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  *
  * @author Chris Nokleberg
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class ReaderInputStream extends InputStream {
     private final Reader reader;
     private final CharsetEncoder encoder;

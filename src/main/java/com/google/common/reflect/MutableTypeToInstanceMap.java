@@ -37,7 +37,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 13.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class MutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken<? extends B>, B>
         implements TypeToInstanceMap<B> {
 

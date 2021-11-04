@@ -22,7 +22,6 @@ import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
-import com.google.errorprone.annotations.Immutable;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -45,7 +44,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @since 20.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class ElementOrder<T> {
     private final Type type;
 

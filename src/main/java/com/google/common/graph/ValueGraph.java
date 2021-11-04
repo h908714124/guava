@@ -108,7 +108,6 @@ import java.util.Set;
  * @since 20.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public interface ValueGraph<N, V> extends BaseGraph<N> {
     //
     // ValueGraph-level accessors

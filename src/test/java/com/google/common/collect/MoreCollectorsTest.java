@@ -29,7 +29,6 @@ import static com.google.common.truth.Truth8.assertThat;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
 public class MoreCollectorsTest extends TestCase {
     public void testToOptionalEmpty() {
         assertThat(Stream.empty().collect(MoreCollectors.toOptional())).isEmpty();

@@ -15,9 +15,7 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.math.IntMath;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -50,8 +48,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @author Colin Decker
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class ByteStreams {
 
     private static final int BUFFER_SIZE = 8192;
@@ -869,8 +865,6 @@ public final class ByteStreams {
      * @since 14.0
      */
     @Beta
-    @CanIgnoreReturnValue // some processors won't return a useful result
-    @ParametricNullness
     public static <T> T readBytes(
             InputStream input, ByteProcessor<T> processor) throws IOException {
         checkNotNull(input);

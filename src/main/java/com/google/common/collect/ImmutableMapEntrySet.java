@@ -31,7 +31,6 @@ import java.util.function.Consumer;
  * @author Kevin Bourrillion
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 abstract class ImmutableMapEntrySet<K, V> extends ImmutableSet.CachingAsList<Entry<K, V>> {
     static final class RegularEntrySet<K, V> extends ImmutableMapEntrySet<K, V> {
         private final transient ImmutableMap<K, V> map;
@@ -104,8 +103,7 @@ abstract class ImmutableMapEntrySet<K, V> extends ImmutableSet.CachingAsList<Ent
     }
 
     @Override
-    @GwtIncompatible
-        // not used in GWT
+            // not used in GWT
     boolean isHashCodeFast() {
         return map().isHashCodeFast();
     }

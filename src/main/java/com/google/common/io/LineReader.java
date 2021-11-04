@@ -15,8 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -36,8 +34,6 @@ import static com.google.common.io.CharStreams.createBuffer;
  * @since 1.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class LineReader {
     private final Readable readable;
     private final Reader reader;
@@ -68,7 +64,6 @@ public final class LineReader {
      *     line-termination characters, or {@code null} if the end of the stream has been reached.
      * @throws IOException if an I/O error occurs
      */
-    @CanIgnoreReturnValue // to skip a line
     public String readLine() throws IOException {
         while (lines.peek() == null) {
             Java8Compatibility.clear(cbuf);

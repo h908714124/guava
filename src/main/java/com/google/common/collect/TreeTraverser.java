@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 
 import java.util.ArrayDeque;
@@ -74,8 +73,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 // TODO(b/68134636): Remove by 2019-10
 @Deprecated
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class TreeTraverser<T> {
 
     /**

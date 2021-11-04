@@ -856,8 +856,7 @@ public class UninterruptiblesTest extends TestCase {
         InterruptionUtil.requestInterruptIn(millis, MILLISECONDS);
     }
 
-    @CanIgnoreReturnValue
-    private static Thread acquireFor(final Lock lock, final long duration, final TimeUnit unit) {
+        private static Thread acquireFor(final Lock lock, final long duration, final TimeUnit unit) {
         final CountDownLatch latch = new CountDownLatch(1);
         Thread thread =
                 new Thread() {

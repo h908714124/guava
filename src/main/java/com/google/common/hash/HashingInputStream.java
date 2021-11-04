@@ -29,7 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 16.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class HashingInputStream extends FilterInputStream {
     private final Hasher hasher;
 

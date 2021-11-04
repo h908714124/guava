@@ -102,7 +102,6 @@ import java.util.Set;
  * @since 20.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public interface Network<N, E> extends SuccessorsFunction<N>, PredecessorsFunction<N> {
     //
     // Network-level accessors

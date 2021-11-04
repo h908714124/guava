@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Primitives;
 
 import java.io.Serializable;
@@ -43,9 +42,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtIncompatible
 @SuppressWarnings("serial") // using writeReplace instead of standard serialization
-@ElementTypesAreNonnullByDefault
 public final class MutableClassToInstanceMap<B> extends ForwardingMap<Class<? extends B>, B>
         implements ClassToInstanceMap<B>, Serializable {
 

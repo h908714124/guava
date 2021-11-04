@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableCollection;
 
 import java.util.Set;
@@ -37,8 +36,6 @@ import static java.util.logging.Level.SEVERE;
  * @param <InputT> the type of the individual inputs
  * @param <OutputT> the type of the output (i.e. this) future
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class AggregateFuture<InputT, OutputT>
         extends AggregateFutureState<OutputT> {
     private static final Logger logger = Logger.getLogger(AggregateFuture.class.getName());
@@ -323,7 +320,7 @@ abstract class AggregateFuture<InputT, OutputT>
      * If {@code allMustSucceed} is true, called as each future completes; otherwise, if {@code
      * collectsValues} is true, called for each future when all futures complete.
      */
-    abstract void collectOneValue(int index, @ParametricNullness InputT returnValue);
+    abstract void collectOneValue(int index, InputT returnValue);
 
     abstract void handleAllCompleted();
 

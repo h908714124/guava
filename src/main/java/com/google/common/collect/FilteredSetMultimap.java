@@ -16,15 +16,11 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * A supertype for filtered {@link SetMultimap} implementations.
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 interface FilteredSetMultimap<K, V>
         extends FilteredMultimap<K, V>, SetMultimap<K, V> {
     @Override

@@ -35,7 +35,6 @@ import static com.google.common.collect.BoundType.OPEN;
  * @author Louis Wasserman
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 final class SortedMultisets {
     private SortedMultisets() {
     }
@@ -66,28 +65,26 @@ final class SortedMultisets {
         }
 
         @Override
-        public SortedSet<E> subSet(@ParametricNullness E fromElement, @ParametricNullness E toElement) {
+        public SortedSet<E> subSet(E fromElement, E toElement) {
             return multiset().subMultiset(fromElement, CLOSED, toElement, OPEN).elementSet();
         }
 
         @Override
-        public SortedSet<E> headSet(@ParametricNullness E toElement) {
+        public SortedSet<E> headSet(E toElement) {
             return multiset().headMultiset(toElement, OPEN).elementSet();
         }
 
         @Override
-        public SortedSet<E> tailSet(@ParametricNullness E fromElement) {
+        public SortedSet<E> tailSet(E fromElement) {
             return multiset().tailMultiset(fromElement, CLOSED).elementSet();
         }
 
         @Override
-        @ParametricNullness
         public E first() {
             return getElementOrThrow(multiset().firstEntry());
         }
 
         @Override
-        @ParametricNullness
         public E last() {
             return getElementOrThrow(multiset().lastEntry());
         }
@@ -102,22 +99,22 @@ final class SortedMultisets {
         }
 
         @Override
-        public E lower(@ParametricNullness E e) {
+        public E lower(E e) {
             return getElementOrNull(multiset().headMultiset(e, OPEN).lastEntry());
         }
 
         @Override
-        public E floor(@ParametricNullness E e) {
+        public E floor(E e) {
             return getElementOrNull(multiset().headMultiset(e, CLOSED).lastEntry());
         }
 
         @Override
-        public E ceiling(@ParametricNullness E e) {
+        public E ceiling(E e) {
             return getElementOrNull(multiset().tailMultiset(e, CLOSED).firstEntry());
         }
 
         @Override
-        public E higher(@ParametricNullness E e) {
+        public E higher(E e) {
             return getElementOrNull(multiset().tailMultiset(e, OPEN).firstEntry());
         }
 
@@ -143,9 +140,9 @@ final class SortedMultisets {
 
         @Override
         public NavigableSet<E> subSet(
-                @ParametricNullness E fromElement,
+                E fromElement,
                 boolean fromInclusive,
-                @ParametricNullness E toElement,
+                E toElement,
                 boolean toInclusive) {
             return new NavigableElementSet<>(
                     multiset()
@@ -155,13 +152,13 @@ final class SortedMultisets {
         }
 
         @Override
-        public NavigableSet<E> headSet(@ParametricNullness E toElement, boolean inclusive) {
+        public NavigableSet<E> headSet(E toElement, boolean inclusive) {
             return new NavigableElementSet<>(
                     multiset().headMultiset(toElement, BoundType.forBoolean(inclusive)));
         }
 
         @Override
-        public NavigableSet<E> tailSet(@ParametricNullness E fromElement, boolean inclusive) {
+        public NavigableSet<E> tailSet(E fromElement, boolean inclusive) {
             return new NavigableElementSet<>(
                     multiset().tailMultiset(fromElement, BoundType.forBoolean(inclusive)));
         }

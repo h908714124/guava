@@ -14,8 +14,6 @@
 
 package com.google.common.hash;
 
-import com.google.errorprone.annotations.Immutable;
-
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
@@ -32,7 +30,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @author Kevin Bourrillion
  * @author Dimitris Andreou
  */
-@ElementTypesAreNonnullByDefault
 final class MessageDigestHashFunction extends AbstractHashFunction implements Serializable {
 
     @SuppressWarnings("Immutable") // cloned before each use

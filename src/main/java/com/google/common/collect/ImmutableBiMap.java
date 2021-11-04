@@ -39,7 +39,6 @@ import static java.util.Objects.requireNonNull;
  * @since 2.0
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<K, V>
         implements BiMap<K, V> {
 

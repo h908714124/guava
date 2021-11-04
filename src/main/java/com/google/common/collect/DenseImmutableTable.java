@@ -14,7 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableMap.IteratorBasedImmutableMap;
 
 import java.util.Map;
@@ -22,8 +21,6 @@ import java.util.Map;
 import static java.util.Objects.requireNonNull;
 
 /** A {@code RegularImmutableTable} optimized for dense data. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> {
     private final ImmutableMap<R, Integer> rowKeyToIndex;
     private final ImmutableMap<C, Integer> columnKeyToIndex;

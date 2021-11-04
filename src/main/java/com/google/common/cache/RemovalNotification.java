@@ -14,8 +14,6 @@
 
 package com.google.common.cache;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.AbstractMap.SimpleImmutableEntry;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -31,8 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Charles Fry
  * @since 10.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class RemovalNotification<K, V>
         extends SimpleImmutableEntry<K, V> {
     private final RemovalCause cause;

@@ -35,7 +35,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @since 12.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 /*
  * A nullable bound would let users create a TypeParameter instance for a parameter with a nullable
  * bound. However, it would also let them create `new TypeParameter<T>() {}`, which

@@ -52,7 +52,6 @@ import static java.util.Objects.requireNonNull;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class HashBiMap<K, V>
         extends IteratorBasedAbstractMap<K, V> implements BiMap<K, V>, Serializable {
 
@@ -100,7 +99,7 @@ public final class HashBiMap<K, V>
         BiEntry<K, V> nextInKeyInsertionOrder;
         BiEntry<K, V> prevInKeyInsertionOrder;
 
-        BiEntry(@ParametricNullness K key, int keyHash, @ParametricNullness V value, int valueHash) {
+        BiEntry(K key, int keyHash, V value, int valueHash) {
             super(key, value);
             this.keyHash = keyHash;
             this.valueHash = valueHash;
@@ -276,11 +275,11 @@ public final class HashBiMap<K, V>
     }
 
     @Override
-    public V put(@ParametricNullness K key, @ParametricNullness V value) {
+    public V put(K key, V value) {
         return put(key, value, false);
     }
 
-    private V put(@ParametricNullness K key, @ParametricNullness V value, boolean force) {
+    private V put(K key, V value, boolean force) {
         int keyHash = smearedHash(key);
         int valueHash = smearedHash(value);
 
@@ -315,11 +314,11 @@ public final class HashBiMap<K, V>
     }
 
     @Override
-    public V forcePut(@ParametricNullness K key, @ParametricNullness V value) {
+    public V forcePut(K key, V value) {
         return put(key, value, true);
     }
 
-    private K putInverse(@ParametricNullness V value, @ParametricNullness K key, boolean force) {
+    private K putInverse(V value, K key, boolean force) {
         int valueHash = smearedHash(value);
         int keyHash = smearedHash(key);
 
@@ -602,12 +601,12 @@ public final class HashBiMap<K, V>
         }
 
         @Override
-        public K put(@ParametricNullness V value, @ParametricNullness K key) {
+        public K put(V value, K key) {
             return putInverse(value, key, false);
         }
 
         @Override
-        public K forcePut(@ParametricNullness V value, @ParametricNullness K key) {
+        public K forcePut(V value, K key) {
             return putInverse(value, key, true);
         }
 

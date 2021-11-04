@@ -36,7 +36,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author Dimitris Andreou
  * @author Kurt Alfred Kluever
  */
-@ElementTypesAreNonnullByDefault
 enum BloomFilterStrategies implements BloomFilter.Strategy {
     /**
      * See "Less Hashing, Same Performance: Building a Better Bloom Filter" by Adam Kirsch and Michael
@@ -46,7 +45,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
     MURMUR128_MITZ_32() {
         @Override
         public <T> boolean put(
-                @ParametricNullness T object,
+                T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
                 LockFreeBitArray bits) {
@@ -69,7 +68,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
 
         @Override
         public <T> boolean mightContain(
-                @ParametricNullness T object,
+                T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
                 LockFreeBitArray bits) {
@@ -100,7 +99,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
     MURMUR128_MITZ_64() {
         @Override
         public <T> boolean put(
-                @ParametricNullness T object,
+                T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
                 LockFreeBitArray bits) {
@@ -121,7 +120,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
 
         @Override
         public <T> boolean mightContain(
-                @ParametricNullness T object,
+                T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
                 LockFreeBitArray bits) {

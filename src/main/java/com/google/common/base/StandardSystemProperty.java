@@ -23,7 +23,6 @@ import com.google.common.annotations.GwtIncompatible;
  * @since 15.0
  */
 @GwtIncompatible // java.lang.System#getProperty
-@ElementTypesAreNonnullByDefault
 public enum StandardSystemProperty {
 
     /** Java Runtime Environment version. */

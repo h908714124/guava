@@ -14,7 +14,6 @@
 
 package com.google.common.math;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.math.BigInteger;
@@ -33,8 +32,6 @@ import static java.lang.Math.getExponent;
  *
  * @author Louis Wasserman
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class DoubleUtils {
     private DoubleUtils() {
     }

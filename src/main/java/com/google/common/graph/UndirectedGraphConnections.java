@@ -37,7 +37,6 @@ import static com.google.common.graph.GraphConstants.INNER_LOAD_FACTOR;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
-@ElementTypesAreNonnullByDefault
 final class UndirectedGraphConnections<N, V> implements GraphConnections<N, V> {
     private final Map<N, V> adjacentNodeValues;
 

@@ -14,8 +14,6 @@
 
 package com.google.common.io;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.CharBuffer;
@@ -32,8 +30,6 @@ import static java.util.Objects.requireNonNull;
  * @author Colin Decker
  */
 // TODO(cgdecker): make this public? as a type, or a method in CharStreams?
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class CharSequenceReader extends Reader {
 
     private CharSequence seq;

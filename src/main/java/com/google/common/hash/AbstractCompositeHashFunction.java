@@ -14,8 +14,6 @@
 
 package com.google.common.hash;
 
-import com.google.errorprone.annotations.Immutable;
-
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
@@ -29,7 +27,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Dimitris Andreou
  */
-@ElementTypesAreNonnullByDefault
 abstract class AbstractCompositeHashFunction extends AbstractHashFunction {
 
     @SuppressWarnings("Immutable") // array not modified after creation
@@ -180,7 +177,7 @@ abstract class AbstractCompositeHashFunction extends AbstractHashFunction {
 
             @Override
             public <T> Hasher putObject(
-                    @ParametricNullness T instance, Funnel<? super T> funnel) {
+                    T instance, Funnel<? super T> funnel) {
                 for (Hasher hasher : hashers) {
                     hasher.putObject(instance, funnel);
                 }

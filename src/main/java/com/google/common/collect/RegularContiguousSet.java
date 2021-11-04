@@ -33,7 +33,6 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtCompatible(emulated = true)
 @SuppressWarnings("unchecked") // allow ungenerified Comparable types
-@ElementTypesAreNonnullByDefault
 final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> {
     private final Range<C> range;
 

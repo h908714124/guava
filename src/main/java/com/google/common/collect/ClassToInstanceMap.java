@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Map;
 
 /**
@@ -50,8 +48,6 @@ import java.util.Map;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 // If we ever support non-null projections (https://github.com/jspecify/jspecify/issues/86), we
 // we might annotate this as...
 // ClassToInstanceMap<B> extends Map<Class<? extends @Nonnull B>, B>

@@ -30,7 +30,6 @@ import java.util.Set;
  * @author Louis Wasserman
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 abstract class DescendingMultiset<E> extends ForwardingMultiset<E>
         implements SortedMultiset<E> {
     abstract SortedMultiset<E> forwardMultiset();
@@ -68,15 +67,15 @@ abstract class DescendingMultiset<E> extends ForwardingMultiset<E>
     }
 
     @Override
-    public SortedMultiset<E> headMultiset(@ParametricNullness E toElement, BoundType boundType) {
+    public SortedMultiset<E> headMultiset(E toElement, BoundType boundType) {
         return forwardMultiset().tailMultiset(toElement, boundType).descendingMultiset();
     }
 
     @Override
     public SortedMultiset<E> subMultiset(
-            @ParametricNullness E fromElement,
+            E fromElement,
             BoundType fromBoundType,
-            @ParametricNullness E toElement,
+            E toElement,
             BoundType toBoundType) {
         return forwardMultiset()
                 .subMultiset(toElement, toBoundType, fromElement, fromBoundType)
@@ -84,7 +83,7 @@ abstract class DescendingMultiset<E> extends ForwardingMultiset<E>
     }
 
     @Override
-    public SortedMultiset<E> tailMultiset(@ParametricNullness E fromElement, BoundType boundType) {
+    public SortedMultiset<E> tailMultiset(E fromElement, BoundType boundType) {
         return forwardMultiset().headMultiset(fromElement, boundType).descendingMultiset();
     }
 

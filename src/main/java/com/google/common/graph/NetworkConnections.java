@@ -26,7 +26,6 @@ import java.util.Set;
  * @param <N> Node parameter type
  * @param <E> Edge parameter type
  */
-@ElementTypesAreNonnullByDefault
 interface NetworkConnections<N, E> {
 
     Set<N> adjacentNodes();

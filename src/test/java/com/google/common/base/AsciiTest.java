@@ -25,7 +25,6 @@ import junit.framework.TestCase;
  *
  * @author Craig Berry
  */
-@GwtCompatible
 public class AsciiTest extends TestCase {
 
     /**

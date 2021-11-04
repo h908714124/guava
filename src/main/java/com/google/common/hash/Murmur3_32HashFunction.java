@@ -29,7 +29,6 @@ import com.google.common.base.Charsets;
 import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
-import com.google.errorprone.annotations.Immutable;
 
 import java.io.Serializable;
 import java.nio.ByteBuffer;
@@ -49,7 +48,6 @@ import static com.google.common.primitives.UnsignedBytes.toInt;
  * @author Dimitris Andreou
  * @author Kurt Alfred Kluever
  */
-@ElementTypesAreNonnullByDefault
 final class Murmur3_32HashFunction extends AbstractHashFunction implements Serializable {
     static final HashFunction MURMUR3_32 =
             new Murmur3_32HashFunction(0, /* supplementaryPlaneFix= */ false);

@@ -106,7 +106,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 12.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public abstract class FluentIterable<E> implements Iterable<E> {
     // We store 'iterable' and use it instead of 'this' to allow Iterables to perform instanceof
     // checks on the _original_ iterable when FluentIterable.from is used.
@@ -324,7 +323,7 @@ public abstract class FluentIterable<E> implements Iterable<E> {
      */
     @Beta
     public static <E> FluentIterable<E> of(
-            @ParametricNullness E element, E... elements) {
+            E element, E... elements) {
         return from(Lists.asList(element, elements));
     }
 
@@ -844,7 +843,6 @@ public abstract class FluentIterable<E> implements Iterable<E> {
      * @throws IndexOutOfBoundsException if {@code position} is negative or greater than or equal to
      *     the size of this fluent iterable
      */
-    @ParametricNullness
     public final E get(int position) {
         return Iterables.get(getDelegate(), position);
     }

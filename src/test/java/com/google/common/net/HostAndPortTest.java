@@ -26,7 +26,6 @@ import junit.framework.TestCase;
  *
  * @author Paul Marks
  */
-@GwtCompatible
 public class HostAndPortTest extends TestCase {
 
     public void testFromStringWellFormed() {

@@ -24,7 +24,6 @@ import junit.framework.TestCase;
  *
  * @author David Beaumont
  */
-@GwtCompatible
 public class UnicodeEscaperTest extends TestCase {
 
     private static final String SMALLEST_SURROGATE =

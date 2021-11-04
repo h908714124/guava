@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +36,6 @@ import java.util.Map;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public interface ListMultimap<K, V>
         extends Multimap<K, V> {
     /**
@@ -50,7 +46,7 @@ public interface ListMultimap<K, V>
      * the {@link Multimap} interface.
      */
     @Override
-    List<V> get(@ParametricNullness K key);
+    List<V> get(K key);
 
     /**
      * {@inheritDoc}
@@ -70,7 +66,7 @@ public interface ListMultimap<K, V>
      * the {@link Multimap} interface.
      */
     @Override
-    List<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values);
+    List<V> replaceValues(K key, Iterable<? extends V> values);
 
     /**
      * {@inheritDoc}

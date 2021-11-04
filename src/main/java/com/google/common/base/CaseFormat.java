@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -28,8 +26,6 @@ import static java.util.Objects.requireNonNull;
  * @author Mike Bostock
  * @since 1.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public enum CaseFormat {
     /** Hyphenated variable naming convention, e.g., "lower-hyphen". */
     LOWER_HYPHEN(CharMatcher.is('-'), "-") {

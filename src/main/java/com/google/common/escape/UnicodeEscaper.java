@@ -15,7 +15,6 @@
 package com.google.common.escape;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -50,8 +49,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 15.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class UnicodeEscaper extends Escaper {
     /** The amount of padding (chars) to use when growing the escape buffer. */
     private static final int DEST_PAD = 32;

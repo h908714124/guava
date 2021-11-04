@@ -25,8 +25,6 @@
 
 package com.google.common.hash;
 
-import com.google.errorprone.annotations.Immutable;
-
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -40,7 +38,6 @@ import static com.google.common.primitives.UnsignedBytes.toInt;
  * @author Austin Appleby
  * @author Dimitris Andreou
  */
-@ElementTypesAreNonnullByDefault
 final class Murmur3_128HashFunction extends AbstractHashFunction implements Serializable {
     static final HashFunction MURMUR3_128 = new Murmur3_128HashFunction(0);
 

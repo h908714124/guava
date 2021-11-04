@@ -29,7 +29,6 @@ import static com.google.common.truth.Truth.assertThat;
  *
  * @author Ben Yu
  */
-@GwtCompatible
 public class MathPreconditionsTest extends TestCase {
 
     public void testCheckPositive_zeroInt() {

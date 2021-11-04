@@ -15,7 +15,6 @@
 package com.google.common.primitives;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import sun.misc.Unsafe;
 
@@ -43,8 +42,6 @@ import static java.util.Objects.requireNonNull;
  * @author Louis Wasserman
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class UnsignedBytes {
     private UnsignedBytes() {
     }

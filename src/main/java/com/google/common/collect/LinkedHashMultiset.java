@@ -40,7 +40,6 @@ import java.util.LinkedHashMap;
  * @since 2.0
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class LinkedHashMultiset<E>
         extends AbstractMapBasedMultiset<E> {
 

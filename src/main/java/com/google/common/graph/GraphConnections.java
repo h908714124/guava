@@ -27,7 +27,6 @@ import java.util.Set;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
-@ElementTypesAreNonnullByDefault
 interface GraphConnections<N, V> {
 
     Set<N> adjacentNodes();

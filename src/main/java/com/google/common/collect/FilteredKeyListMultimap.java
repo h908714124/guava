@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Predicate;
 
 import java.util.List;
@@ -26,8 +25,6 @@ import java.util.List;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class FilteredKeyListMultimap<K, V>
         extends FilteredKeyMultimap<K, V> implements ListMultimap<K, V> {
     FilteredKeyListMultimap(ListMultimap<K, V> unfiltered, Predicate<? super K> keyPredicate) {
@@ -40,7 +37,7 @@ final class FilteredKeyListMultimap<K, V>
     }
 
     @Override
-    public List<V> get(@ParametricNullness K key) {
+    public List<V> get(K key) {
         return (List<V>) super.get(key);
     }
 
@@ -50,7 +47,7 @@ final class FilteredKeyListMultimap<K, V>
     }
 
     @Override
-    public List<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public List<V> replaceValues(K key, Iterable<? extends V> values) {
         return (List<V>) super.replaceValues(key, values);
     }
 }

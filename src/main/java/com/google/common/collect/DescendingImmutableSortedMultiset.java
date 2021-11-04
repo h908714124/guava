@@ -14,16 +14,12 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
-
 /**
  * A descending wrapper around an {@code ImmutableSortedMultiset}
  *
  * @author Louis Wasserman
  */
 @SuppressWarnings("serial") // uses writeReplace, not default serialization
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class DescendingImmutableSortedMultiset<E> extends ImmutableSortedMultiset<E> {
     private final transient ImmutableSortedMultiset<E> forward;
 

@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.io.IOException;
 
@@ -29,8 +28,6 @@ import java.io.IOException;
  * @since 1.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public interface LineProcessor<T> {
 
     /**
@@ -43,6 +40,5 @@ public interface LineProcessor<T> {
     boolean processLine(String line) throws IOException;
 
     /** Return the result of processing all the lines. */
-    @ParametricNullness
     T getResult();
 }

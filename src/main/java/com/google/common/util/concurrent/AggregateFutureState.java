@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.j2objc.annotations.ReflectionSupport;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
@@ -38,8 +37,6 @@ import static java.util.concurrent.atomic.AtomicReferenceFieldUpdater.newUpdater
  * </ul>
  */
 @GwtCompatible(emulated = true)
-@ReflectionSupport(value = ReflectionSupport.Level.FULL)
-@ElementTypesAreNonnullByDefault
 abstract class AggregateFutureState<OutputT>
         extends AbstractFuture.TrustedFuture<OutputT> {
     // Lazily initialized the first time we see an exception; not released until all the input futures

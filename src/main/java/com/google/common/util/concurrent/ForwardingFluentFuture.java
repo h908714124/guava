@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -33,8 +31,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * existing {@code ListenableFuture}, implemented atop a {@link ForwardingListenableFuture} that
  * forwards to that future and adds the desired methods.
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class ForwardingFluentFuture<V> extends FluentFuture<V> {
     private final ListenableFuture<V> delegate;
 
@@ -63,13 +59,11 @@ final class ForwardingFluentFuture<V> extends FluentFuture<V> {
     }
 
     @Override
-    @ParametricNullness
     public V get() throws InterruptedException, ExecutionException {
         return delegate.get();
     }
 
     @Override
-    @ParametricNullness
     public V get(long timeout, TimeUnit unit)
             throws InterruptedException, ExecutionException, TimeoutException {
         return delegate.get(timeout, unit);

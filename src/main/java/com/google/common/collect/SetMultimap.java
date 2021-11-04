@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -50,8 +48,6 @@ import java.util.Set;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public interface SetMultimap<K, V>
         extends Multimap<K, V> {
     /**
@@ -62,7 +58,7 @@ public interface SetMultimap<K, V>
      * interface.
      */
     @Override
-    Set<V> get(@ParametricNullness K key);
+    Set<V> get(K key);
 
     /**
      * {@inheritDoc}
@@ -84,7 +80,7 @@ public interface SetMultimap<K, V>
      * <p>Any duplicates in {@code values} will be stored in the multimap once.
      */
     @Override
-    Set<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values);
+    Set<V> replaceValues(K key, Iterable<? extends V> values);
 
     /**
      * {@inheritDoc}

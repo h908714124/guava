@@ -42,7 +42,6 @@ import static com.google.common.graph.Graphs.checkNonNegative;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
-@ElementTypesAreNonnullByDefault
 class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
     private final boolean isDirected;
     private final boolean allowsSelfLoops;

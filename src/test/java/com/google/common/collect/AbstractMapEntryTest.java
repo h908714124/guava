@@ -27,7 +27,6 @@ import java.util.Map.Entry;
  *
  * @author Mike Bostock
  */
-@GwtCompatible
 public class AbstractMapEntryTest extends TestCase {
     private static final String NK = null;
     private static final Integer NV = null;

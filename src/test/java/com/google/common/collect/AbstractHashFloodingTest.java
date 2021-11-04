@@ -36,7 +36,6 @@ import static com.google.common.truth.Truth.assertWithMessage;
  * Abstract superclass for tests that hash flooding a collection has controlled worst-case
  * performance.
  */
-@GwtCompatible
 public abstract class AbstractHashFloodingTest<T> extends TestCase {
     private final List<Construction<T>> constructions;
     private final IntToDoubleFunction constructionAsymptotics;
@@ -108,8 +107,7 @@ public abstract class AbstractHashFloodingTest<T> extends TestCase {
 
     @FunctionalInterface
     interface Construction<T> {
-        @CanIgnoreReturnValue
-        abstract T create(List<?> keys);
+                abstract T create(List<?> keys);
 
         static Construction<Map<Object, Object>> mapFromKeys(
                 Supplier<Map<Object, Object>> mutableSupplier) {
@@ -189,8 +187,7 @@ public abstract class AbstractHashFloodingTest<T> extends TestCase {
         return result;
     }
 
-    @GwtIncompatible
-    public void testResistsHashFloodingInConstruction() {
+        public void testResistsHashFloodingInConstruction() {
         CallsCounter smallCounter = new CallsCounter();
         List<CountsHashCodeAndEquals> haveSameHashesSmall = createAdversarialInput(10, smallCounter);
         int smallSize = haveSameHashesSmall.size();
@@ -222,8 +219,7 @@ public abstract class AbstractHashFloodingTest<T> extends TestCase {
         }
     }
 
-    @GwtIncompatible
-    public void testResistsHashFloodingOnQuery() {
+        public void testResistsHashFloodingOnQuery() {
         CallsCounter smallCounter = new CallsCounter();
         List<CountsHashCodeAndEquals> haveSameHashesSmall = createAdversarialInput(10, smallCounter);
         int smallSize = haveSameHashesSmall.size();

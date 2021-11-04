@@ -28,7 +28,5 @@
  *
  * @author Chris Nokleberg
  */
-@CheckReturnValue
-@ParametersAreNonnullByDefault
 package com.google.common.io;
 

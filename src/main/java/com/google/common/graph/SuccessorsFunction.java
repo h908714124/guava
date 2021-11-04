@@ -78,7 +78,6 @@ import com.google.common.annotations.Beta;
  * @since 23.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public interface SuccessorsFunction<N> {
 
     /**

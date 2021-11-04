@@ -14,7 +14,6 @@
 
 package com.google.common.cache;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.cache.LocalCache.ValueReference;
 
 /**
@@ -37,8 +36,6 @@ import com.google.common.cache.LocalCache.ValueReference;
  *   <li>Unset: marked as unset, awaiting cleanup or reuse
  * </ul>
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 interface ReferenceEntry<K, V> {
     /** Returns the value reference from this entry. */
     ValueReference<K, V> getValueReference();

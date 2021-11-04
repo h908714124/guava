@@ -15,11 +15,9 @@
 package com.google.common.net;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.google.errorprone.annotations.Immutable;
 
 import java.io.Serializable;
 
@@ -61,8 +59,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @since 10.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class HostAndPort implements Serializable {
     /** Magic value indicating the absence of a port number. */
     private static final int NO_PORT = -1;

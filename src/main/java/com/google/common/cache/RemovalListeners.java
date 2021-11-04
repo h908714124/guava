@@ -14,8 +14,6 @@
 
 package com.google.common.cache;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.util.concurrent.Executor;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -26,8 +24,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Charles Fry
  * @since 10.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class RemovalListeners {
 
     private RemovalListeners() {

@@ -60,7 +60,6 @@ import static java.util.Objects.requireNonNull;
  * @since 23.1
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public abstract class Traverser<N> {
     private final SuccessorsFunction<N> successorFunction;
 

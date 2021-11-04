@@ -38,7 +38,6 @@ import static java.lang.Long.rotateRight;
  * @author Kyle Maddison
  * @author Geoff Pike
  */
-@ElementTypesAreNonnullByDefault
 final class FarmHashFingerprint64 extends AbstractNonStreamingHashFunction {
     static final HashFunction FARMHASH_FINGERPRINT_64 = new FarmHashFingerprint64();
 

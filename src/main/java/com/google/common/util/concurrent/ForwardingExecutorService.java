@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.ForwardingObject;
 
 import java.util.Collection;
@@ -34,8 +33,6 @@ import java.util.concurrent.TimeoutException;
  * @author Kurt Alfred Kluever
  * @since 10.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingExecutorService extends ForwardingObject
         implements ExecutorService {
     /** Constructor for use by subclasses. */
@@ -113,7 +110,7 @@ public abstract class ForwardingExecutorService extends ForwardingObject
 
     @Override
     public <T> Future<T> submit(
-            Runnable task, @ParametricNullness T result) {
+            Runnable task, T result) {
         return delegate().submit(task, result);
     }
 }

@@ -24,7 +24,6 @@ import com.google.common.util.concurrent.AbstractFuture.TrustedFuture;
  * Tests for {@link AbstractFuture} that use a non-{@link TrustedFuture} for {@link
  * AbstractFuture#setFuture} calls.
  */
-@GwtCompatible
 public class UntrustedInputFutureTest extends AbstractAbstractFutureTest {
     @Override
     AbstractFuture<Integer> newDelegate() {

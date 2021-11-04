@@ -32,7 +32,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Louis Wasserman
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 abstract class AbstractSortedMultiset<E> extends AbstractMultiset<E>
         implements SortedMultiset<E> {
     @GwtTransient
@@ -101,9 +100,9 @@ abstract class AbstractSortedMultiset<E> extends AbstractMultiset<E>
 
     @Override
     public SortedMultiset<E> subMultiset(
-            @ParametricNullness E fromElement,
+            E fromElement,
             BoundType fromBoundType,
-            @ParametricNullness E toElement,
+            E toElement,
             BoundType toBoundType) {
         // These are checked elsewhere, but NullPointerTester wants them checked eagerly.
         checkNotNull(fromBoundType);

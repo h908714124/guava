@@ -26,7 +26,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author James Sexton
  */
-@ElementTypesAreNonnullByDefault
 final class MapRetrievalCache<K, V> extends MapIteratorCache<K, V> {
     // See the note about volatile in the superclass.
     private transient volatile CacheEntry<K, V> cacheEntry1;

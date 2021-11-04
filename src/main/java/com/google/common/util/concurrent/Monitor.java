@@ -15,9 +15,7 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Longs;
-import com.google.errorprone.annotations.concurrent.GuardedBy;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -200,9 +198,7 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * @since 10.0
  */
 @Beta
-@GwtIncompatible
 @SuppressWarnings("GuardedBy") // TODO(b/35466881): Fix or suppress.
-@ElementTypesAreNonnullByDefault
 public final class Monitor {
     // TODO(user): Use raw LockSupport or AbstractQueuedSynchronizer instead of ReentrantLock.
     // TODO(user): "Port" jsr166 tests for ReentrantLock.
@@ -309,11 +305,9 @@ public final class Monitor {
         final Monitor monitor;
         final Condition condition;
 
-        @GuardedBy("monitor.lock")
         int waiterCount = 0;
 
         /** The next active guard */
-        @GuardedBy("monitor.lock")
         Guard next;
 
         protected Guard(Monitor monitor) {
@@ -339,7 +333,6 @@ public final class Monitor {
      * The guards associated with this monitor that currently have waiters ({@code waiterCount > 0}).
      * A linked list threaded through the Guard.next field.
      */
-    @GuardedBy("lock")
     private Guard activeGuards = null;
 
     /**
@@ -1085,7 +1078,6 @@ public final class Monitor {
      * <p>This method must not be called from within a beginWaitingFor/endWaitingFor block, or else
      * the current thread's guard might be mistakenly signalled, leading to a lost signal.
      */
-    @GuardedBy("lock")
     private void signalNextWaiter() {
         for (Guard guard = activeGuards; guard != null; guard = guard.next) {
             if (isSatisfied(guard)) {
@@ -1117,7 +1109,6 @@ public final class Monitor {
      * Exactly like guard.isSatisfied(), but in addition signals all waiting threads in the (hopefully
      * unlikely) event that isSatisfied() throws.
      */
-    @GuardedBy("lock")
     private boolean isSatisfied(Guard guard) {
         try {
             return guard.isSatisfied();
@@ -1128,7 +1119,6 @@ public final class Monitor {
     }
 
     /** Signals all threads waiting on guards. */
-    @GuardedBy("lock")
     private void signalAllWaiters() {
         for (Guard guard = activeGuards; guard != null; guard = guard.next) {
             guard.condition.signalAll();
@@ -1136,7 +1126,6 @@ public final class Monitor {
     }
 
     /** Records that the current thread is about to wait on the specified guard. */
-    @GuardedBy("lock")
     private void beginWaitingFor(Guard guard) {
         int waiters = guard.waiterCount++;
         if (waiters == 0) {
@@ -1147,7 +1136,6 @@ public final class Monitor {
     }
 
     /** Records that the current thread is no longer waiting on the specified guard. */
-    @GuardedBy("lock")
     private void endWaitingFor(Guard guard) {
         int waiters = --guard.waiterCount;
         if (waiters == 0) {
@@ -1172,7 +1160,6 @@ public final class Monitor {
      * responsibility to ensure that the guard is *not* currently satisfied.
      */
 
-    @GuardedBy("lock")
     private void await(Guard guard, boolean signalBeforeWaiting) throws InterruptedException {
         if (signalBeforeWaiting) {
             signalNextWaiter();
@@ -1187,7 +1174,6 @@ public final class Monitor {
         }
     }
 
-    @GuardedBy("lock")
     private void awaitUninterruptibly(Guard guard, boolean signalBeforeWaiting) {
         if (signalBeforeWaiting) {
             signalNextWaiter();
@@ -1203,7 +1189,6 @@ public final class Monitor {
     }
 
     /** Caller should check before calling that guard is not satisfied. */
-    @GuardedBy("lock")
     private boolean awaitNanos(Guard guard, long nanos, boolean signalBeforeWaiting)
             throws InterruptedException {
         boolean firstTime = true;

@@ -23,7 +23,6 @@ import com.google.common.annotations.GwtCompatible;
  *
  * @author Jared Levy
  */
-@GwtCompatible
 public class TransposedTableTest extends AbstractTableTest {
 
     @Override

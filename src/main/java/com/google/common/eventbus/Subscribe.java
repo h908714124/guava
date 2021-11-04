@@ -35,6 +35,5 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@ElementTypesAreNonnullByDefault
 public @interface Subscribe {
 }

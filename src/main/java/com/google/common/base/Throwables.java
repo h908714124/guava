@@ -45,7 +45,6 @@ import static java.util.Objects.requireNonNull;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Throwables {
     private Throwables() {
     }
@@ -155,8 +154,7 @@ public final class Throwables {
      *     null}.
      */
     @Deprecated
-    @GwtIncompatible
-    public static void propagateIfPossible(Throwable throwable) {
+        public static void propagateIfPossible(Throwable throwable) {
         if (throwable != null) {
             throwIfUnchecked(throwable);
         }
@@ -235,8 +233,7 @@ public final class Throwables {
      *     background on the deprecation, read <a href="https://goo.gl/Ivn2kc">Why we deprecated
      *     {@code Throwables.propagate}</a>.
      */
-    @GwtIncompatible
-    @Deprecated
+        @Deprecated
     public static RuntimeException propagate(Throwable throwable) {
         throwIfUnchecked(throwable);
         throw new RuntimeException(throwable);

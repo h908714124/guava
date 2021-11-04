@@ -66,7 +66,6 @@ import static java.util.Objects.requireNonNull;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Iterators {
     private Iterators() {
     }
@@ -140,8 +139,7 @@ public final class Iterators {
             }
 
             @Override
-            @ParametricNullness
-            public T next() {
+                public T next() {
                 return iterator.next();
             }
         };
@@ -300,7 +298,6 @@ public final class Iterators {
      * @throws IllegalArgumentException if the iterator contains multiple elements. The state of the
      *     iterator is unspecified.
      */
-    @ParametricNullness
     public static <T> T getOnlyElement(Iterator<T> iterator) {
         T first = iterator.next();
         if (!iterator.hasNext()) {
@@ -326,9 +323,8 @@ public final class Iterators {
      * @throws IllegalArgumentException if the iterator contains multiple elements. The state of the
      *     iterator is unspecified.
      */
-    @ParametricNullness
     public static <T> T getOnlyElement(
-            Iterator<? extends T> iterator, @ParametricNullness T defaultValue) {
+            Iterator<? extends T> iterator, T defaultValue) {
         return iterator.hasNext() ? getOnlyElement(iterator) : defaultValue;
     }
 
@@ -412,8 +408,7 @@ public final class Iterators {
             }
 
             @Override
-            @ParametricNullness
-            public T next() {
+                public T next() {
                 if (!iterator.hasNext()) {
                     iterator = iterable.iterator();
                     if (!iterator.hasNext()) {
@@ -716,7 +711,6 @@ public final class Iterators {
      *
      * @throws NoSuchElementException if no element in {@code iterator} matches the given predicate
      */
-    @ParametricNullness
     public static <T> T find(
             Iterator<T> iterator, Predicate<? super T> predicate) {
         checkNotNull(iterator);
@@ -815,9 +809,8 @@ public final class Iterators {
             Iterator<F> fromIterator, Function<? super F, ? extends T> function) {
         checkNotNull(function);
         return new TransformedIterator<F, T>(fromIterator) {
-            @ParametricNullness
-            @Override
-            T transform(@ParametricNullness F from) {
+                @Override
+            T transform(F from) {
                 return function.apply(from);
             }
         };
@@ -832,7 +825,6 @@ public final class Iterators {
      * @throws IndexOutOfBoundsException if {@code position} is negative or greater than or equal to
      *     the number of elements remaining in {@code iterator}
      */
-    @ParametricNullness
     public static <T> T get(Iterator<T> iterator, int position) {
         checkNonnegative(position);
         int skipped = advance(iterator, position);
@@ -859,9 +851,8 @@ public final class Iterators {
      * @throws IndexOutOfBoundsException if {@code position} is negative
      * @since 4.0
      */
-    @ParametricNullness
     public static <T> T get(
-            Iterator<? extends T> iterator, int position, @ParametricNullness T defaultValue) {
+            Iterator<? extends T> iterator, int position, T defaultValue) {
         checkNonnegative(position);
         advance(iterator, position);
         return getNext(iterator, defaultValue);
@@ -881,9 +872,8 @@ public final class Iterators {
      * @return the next element of {@code iterator} or the default value
      * @since 7.0
      */
-    @ParametricNullness
     public static <T> T getNext(
-            Iterator<? extends T> iterator, @ParametricNullness T defaultValue) {
+            Iterator<? extends T> iterator, T defaultValue) {
         return iterator.hasNext() ? iterator.next() : defaultValue;
     }
 
@@ -893,7 +883,6 @@ public final class Iterators {
      * @return the last element of {@code iterator}
      * @throws NoSuchElementException if the iterator is empty
      */
-    @ParametricNullness
     public static <T> T getLast(Iterator<T> iterator) {
         while (true) {
             T current = iterator.next();
@@ -911,9 +900,8 @@ public final class Iterators {
      * @return the last element of {@code iterator}
      * @since 3.0
      */
-    @ParametricNullness
     public static <T> T getLast(
-            Iterator<? extends T> iterator, @ParametricNullness T defaultValue) {
+            Iterator<? extends T> iterator, T defaultValue) {
         return iterator.hasNext() ? getLast(iterator) : defaultValue;
     }
 
@@ -958,8 +946,7 @@ public final class Iterators {
             }
 
             @Override
-            @ParametricNullness
-            public T next() {
+                public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
@@ -994,8 +981,7 @@ public final class Iterators {
             }
 
             @Override
-            @ParametricNullness
-            public T next() {
+                public T next() {
                 T next = iterator.next();
                 iterator.remove();
                 return next;
@@ -1083,7 +1069,6 @@ public final class Iterators {
         }
 
         @Override
-        @ParametricNullness
         protected T get(int index) {
             return array[offset + index];
         }
@@ -1095,7 +1080,7 @@ public final class Iterators {
      * <p>The {@link Iterable} equivalent of this method is {@link Collections#singleton}.
      */
     public static <T> UnmodifiableIterator<T> singletonIterator(
-            @ParametricNullness T value) {
+            T value) {
         return new UnmodifiableIterator<T>() {
             boolean done;
 
@@ -1105,8 +1090,7 @@ public final class Iterators {
             }
 
             @Override
-            @ParametricNullness
-            public T next() {
+                public T next() {
                 if (done) {
                     throw new NoSuchElementException();
                 }
@@ -1136,8 +1120,7 @@ public final class Iterators {
             }
 
             @Override
-            @ParametricNullness
-            public T next() {
+                public T next() {
                 return enumeration.nextElement();
             }
         };
@@ -1158,8 +1141,7 @@ public final class Iterators {
             }
 
             @Override
-            @ParametricNullness
-            public T nextElement() {
+                public T nextElement() {
                 return iterator.next();
             }
         };
@@ -1182,7 +1164,6 @@ public final class Iterators {
         }
 
         @Override
-        @ParametricNullness
         public E next() {
             if (!hasPeeked) {
                 return iterator.next();
@@ -1201,7 +1182,6 @@ public final class Iterators {
         }
 
         @Override
-        @ParametricNullness
         public E peek() {
             if (!hasPeeked) {
                 peekedElement = iterator.next();
@@ -1328,7 +1308,6 @@ public final class Iterators {
         }
 
         @Override
-        @ParametricNullness
         public T next() {
             PeekingIterator<T> nextIter = queue.remove();
             T next = nextIter.next();
@@ -1414,7 +1393,6 @@ public final class Iterators {
         }
 
         @Override
-        @ParametricNullness
         public T next() {
             if (hasNext()) {
                 toRemove = iterator;

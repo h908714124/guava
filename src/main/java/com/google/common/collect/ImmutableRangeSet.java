@@ -44,8 +44,6 @@ import static java.util.Objects.requireNonNull;
  * @since 14.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class ImmutableRangeSet<C extends Comparable> extends AbstractRangeSet<C>
         implements Serializable {
 

@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * A time source; returns a time value representing the number of nanoseconds elapsed since some
  * fixed but arbitrary point in time. Note that most users should use {@link Stopwatch} instead of
@@ -27,8 +25,6 @@ import com.google.common.annotations.GwtCompatible;
  * @since 10.0 (<a href="https://github.com/google/guava/wiki/Compatibility">mostly
  *     source-compatible</a> since 9.0)
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class Ticker {
     /** Constructor for use by subclasses. */
     protected Ticker() {

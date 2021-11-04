@@ -46,7 +46,6 @@ import static java.lang.Math.rint;
  * @since 11.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class DoubleMath {
     /*
      * This method returns a value y such that rounding y DOWN (towards zero) gives the same result as
@@ -178,8 +177,7 @@ public final class DoubleMath {
      *     </ul>
      */
     // #roundIntermediate, java.lang.Math.getExponent, com.google.common.math.DoubleUtils
-    @GwtIncompatible
-    public static BigInteger roundToBigInteger(double x, RoundingMode mode) {
+        public static BigInteger roundToBigInteger(double x, RoundingMode mode) {
         x = roundIntermediate(x, mode);
         if (MIN_LONG_AS_DOUBLE - x < 1.0 & x < MAX_LONG_AS_DOUBLE_PLUS_ONE) {
             return BigInteger.valueOf((long) x);
@@ -403,8 +401,7 @@ public final class DoubleMath {
      */
     @Deprecated
     // com.google.common.math.DoubleUtils
-    @GwtIncompatible
-    public static double mean(double... values) {
+        public static double mean(double... values) {
         checkArgument(values.length > 0, "Cannot take mean of 0 values");
         long count = 1;
         double mean = checkFinite(values[0]);
@@ -483,8 +480,7 @@ public final class DoubleMath {
      */
     @Deprecated
     // com.google.common.math.DoubleUtils
-    @GwtIncompatible
-    public static double mean(Iterable<? extends Number> values) {
+        public static double mean(Iterable<? extends Number> values) {
         return mean(values.iterator());
     }
 
@@ -503,8 +499,7 @@ public final class DoubleMath {
      */
     @Deprecated
     // com.google.common.math.DoubleUtils
-    @GwtIncompatible
-    public static double mean(Iterator<? extends Number> values) {
+        public static double mean(Iterator<? extends Number> values) {
         checkArgument(values.hasNext(), "Cannot take mean of 0 values");
         long count = 1;
         double mean = checkFinite(values.next().doubleValue());

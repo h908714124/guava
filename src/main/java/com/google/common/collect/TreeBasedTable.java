@@ -66,7 +66,6 @@ import static java.util.Objects.requireNonNull;
  * @since 7.0
  */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
     private final Comparator<? super C> columnComparator;
 

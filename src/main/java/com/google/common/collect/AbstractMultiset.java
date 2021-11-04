@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
@@ -38,8 +36,6 @@ import static com.google.common.collect.Multisets.setCountImpl;
  * @author Kevin Bourrillion
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class AbstractMultiset<E> extends AbstractCollection<E>
         implements Multiset<E> {
     // Query Operations
@@ -56,13 +52,13 @@ abstract class AbstractMultiset<E> extends AbstractCollection<E>
 
     // Modification Operations
     @Override
-    public final boolean add(@ParametricNullness E element) {
+    public final boolean add(E element) {
         add(element, 1);
         return true;
     }
 
     @Override
-    public int add(@ParametricNullness E element, int occurrences) {
+    public int add(E element, int occurrences) {
         throw new UnsupportedOperationException();
     }
 
@@ -77,12 +73,12 @@ abstract class AbstractMultiset<E> extends AbstractCollection<E>
     }
 
     @Override
-    public int setCount(@ParametricNullness E element, int count) {
+    public int setCount(E element, int count) {
         return setCountImpl(this, element, count);
     }
 
     @Override
-    public boolean setCount(@ParametricNullness E element, int oldCount, int newCount) {
+    public boolean setCount(E element, int oldCount, int newCount) {
         return setCountImpl(this, element, oldCount, newCount);
     }
 

@@ -14,7 +14,6 @@
 
 package com.google.common.escape;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 
 /**
@@ -53,8 +52,6 @@ import com.google.common.base.Function;
  * @author David Beaumont
  * @since 15.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class Escaper {
     // TODO(dbeaumont): evaluate custom implementations, considering package private constructor.
 

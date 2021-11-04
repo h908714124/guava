@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.math.IntMath;
 
 import java.math.RoundingMode;
@@ -52,8 +51,6 @@ import static com.google.common.collect.NullnessCasts.uncheckedCastNullableTToT;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class TopKSelector<
         T> {
 
@@ -132,7 +129,7 @@ final class TopKSelector<
      * Adds {@code elem} as a candidate for the top {@code k} elements. This operation takes amortized
      * O(1) time.
      */
-    public void offer(@ParametricNullness T elem) {
+    public void offer(T elem) {
         if (k == 0) {
             return;
         } else if (bufferSize == 0) {

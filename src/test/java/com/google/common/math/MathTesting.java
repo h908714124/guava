@@ -43,7 +43,6 @@ import static java.util.Arrays.asList;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
 public class MathTesting {
     static final ImmutableSet<RoundingMode> ALL_ROUNDING_MODES =
             ImmutableSet.copyOf(RoundingMode.values());

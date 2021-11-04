@@ -33,7 +33,6 @@ import java.util.Set;
  *
  * @author Isaac Shum
  */
-@GwtCompatible
 public class MapsTransformValuesTest extends MapInterfaceTest<String, String> {
 
     /**

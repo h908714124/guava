@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Ascii;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
@@ -23,7 +22,6 @@ import com.google.common.hash.Funnels;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hasher;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -73,8 +71,6 @@ import static com.google.common.io.ByteStreams.skipUpTo;
  * @since 14.0
  * @author Colin Decker
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ByteSource {
 
     /** Constructor for use by subclasses. */
@@ -314,7 +310,6 @@ public abstract class ByteSource {
      * @since 16.0
      */
     @Beta
-    @CanIgnoreReturnValue // some processors won't return a useful result
     public <T> T read(ByteProcessor<T> processor) throws IOException {
         checkNotNull(processor);
 
@@ -619,7 +614,6 @@ public abstract class ByteSource {
 
         @SuppressWarnings("CheckReturnValue") // it doesn't matter what processBytes returns here
         @Override
-        @ParametricNullness
         public <T> T read(ByteProcessor<T> processor) throws IOException {
             processor.processBytes(bytes, offset, length);
             return processor.getResult();

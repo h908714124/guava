@@ -15,7 +15,6 @@
 package com.google.common.hash;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -54,8 +53,6 @@ import java.nio.charset.Charset;
  * @since 11.0
  */
 @Beta
-@CanIgnoreReturnValue
-@ElementTypesAreNonnullByDefault
 public interface Hasher extends PrimitiveSink {
     @Override
     Hasher putByte(byte b);
@@ -122,7 +119,7 @@ public interface Hasher extends PrimitiveSink {
 
     /** A simple convenience for {@code funnel.funnel(object, this)}. */
     <T> Hasher putObject(
-            @ParametricNullness T instance, Funnel<? super T> funnel);
+            T instance, Funnel<? super T> funnel);
 
     /**
      * Computes a hash code based on the data that have been provided to this hasher. The result is

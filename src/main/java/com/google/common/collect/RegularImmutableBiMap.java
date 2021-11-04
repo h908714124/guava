@@ -38,7 +38,6 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
-@ElementTypesAreNonnullByDefault
 class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     static final RegularImmutableBiMap<Object, Object> EMPTY =
             new RegularImmutableBiMap<>(

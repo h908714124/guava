@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Throwables;
 
@@ -86,8 +85,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 // Coffee's for {@link Closer closers} only.
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class Closer implements Closeable {
 
     /** The suppressor implementation to use for the current Java version. */
@@ -122,8 +119,7 @@ public final class Closer implements Closeable {
      * @return the given {@code closeable}
      */
     // close. this word no longer has any meaning to me.
-    @ParametricNullness
-    public <C extends Closeable> C register(@ParametricNullness C closeable) {
+    public <C extends Closeable> C register(C closeable) {
         if (closeable != null) {
             stack.addFirst(closeable);
         }

@@ -28,7 +28,6 @@ import java.util.Map;
  * @author George van den Driessche
  * @author Jared Levy
  */
-@GwtCompatible
 public abstract class AbstractMultimapAsMapImplementsMapTest
         extends MapInterfaceTest<String, Collection<Integer>> {
 

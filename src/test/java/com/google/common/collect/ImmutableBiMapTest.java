@@ -238,8 +238,7 @@ public class ImmutableBiMapTest extends TestCase {
             assertMapEquals(map.inverse(), 1, "one", 2, "two", 3, "three", 4, "four", 5, "five");
         }
 
-        @GwtIncompatible
-        public void testBuilderExactlySizedReusesArray() {
+                public void testBuilderExactlySizedReusesArray() {
             ImmutableBiMap.Builder<Integer, Integer> builder = ImmutableBiMap.builderWithExpectedSize(10);
             Entry<Integer, Integer>[] builderArray = builder.entries;
             for (int i = 0; i < 10; i++) {
@@ -871,8 +870,7 @@ public class ImmutableBiMapTest extends TestCase {
                 }
             };
 
-            @CanIgnoreReturnValue
-            public abstract ImmutableBiMap<Object, Object> create(List<Map.Entry<?, ?>> entries);
+                        public abstract ImmutableBiMap<Object, Object> create(List<Map.Entry<?, ?>> entries);
         }
     }
 

@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Supplier;
 
 import java.io.Serializable;
@@ -61,8 +60,6 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * @param <V0> An upper bound on the value type of the generated multimap.
  * @since 16.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class MultimapBuilder<K0, V0> {
     /*
      * Leaving K and V as upper bounds rather than the actual key and value types allows type

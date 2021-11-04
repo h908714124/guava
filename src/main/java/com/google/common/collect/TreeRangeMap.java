@@ -52,7 +52,6 @@ import static java.util.Objects.requireNonNull;
  */
 @Beta
 @GwtIncompatible // NavigableMap
-@ElementTypesAreNonnullByDefault
 public final class TreeRangeMap<K extends Comparable, V> implements RangeMap<K, V> {
 
     private final NavigableMap<Cut<K>, RangeMapEntry<K, V>> entriesByLowerBound;

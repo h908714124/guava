@@ -44,7 +44,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Shorts extends ShortsMethodsForWeb {
     private Shorts() {
     }
@@ -560,8 +559,7 @@ public final class Shorts extends ShortsMethodsForWeb {
         return new ShortArrayAsList(backingArray);
     }
 
-    @GwtCompatible
-    private static class ShortArrayAsList extends AbstractList<Short>
+        private static class ShortArrayAsList extends AbstractList<Short>
             implements RandomAccess, Serializable {
         final short[] array;
         final int start;

@@ -29,7 +29,6 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible
 public class StopwatchTest extends TestCase {
 
     private final FakeTicker ticker = new FakeTicker();

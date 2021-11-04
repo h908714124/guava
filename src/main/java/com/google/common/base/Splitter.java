@@ -100,7 +100,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Splitter {
     private final CharMatcher trimmer;
     private final boolean omitEmptyStrings;

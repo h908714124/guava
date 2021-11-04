@@ -87,7 +87,6 @@ import static java.util.Collections.emptyMap;
  */
 @Beta
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class ArrayTable<R, C, V> extends AbstractTable<R, C, V>
         implements Serializable {
 
@@ -201,11 +200,9 @@ public final class ArrayTable<R, C, V> extends AbstractTable<R, C, V>
 
         abstract String getKeyRole();
 
-        @ParametricNullness
         abstract V getValue(int index);
 
-        @ParametricNullness
-        abstract V setValue(int index, @ParametricNullness V newValue);
+        abstract V setValue(int index, V newValue);
 
         @Override
         public int size() {
@@ -226,14 +223,12 @@ public final class ArrayTable<R, C, V> extends AbstractTable<R, C, V>
                 }
 
                 @Override
-                @ParametricNullness
-                public V getValue() {
+                        public V getValue() {
                     return ArrayMap.this.getValue(index);
                 }
 
                 @Override
-                @ParametricNullness
-                public V setValue(@ParametricNullness V value) {
+                        public V setValue(V value) {
                     return ArrayMap.this.setValue(index, value);
                 }
             };
@@ -272,7 +267,7 @@ public final class ArrayTable<R, C, V> extends AbstractTable<R, C, V>
         }
 
         @Override
-        public V put(K key, @ParametricNullness V value) {
+        public V put(K key, V value) {
             Integer index = keyIndex.get(key);
             if (index == null) {
                 throw new IllegalArgumentException(

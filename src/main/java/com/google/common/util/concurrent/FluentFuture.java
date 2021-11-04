@@ -72,7 +72,6 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  */
 @Beta
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public abstract class FluentFuture<V>
         extends GwtFluentFutureCatchingSpecialization<V> {
 
@@ -83,13 +82,11 @@ public abstract class FluentFuture<V>
     abstract static class TrustedFuture<V> extends FluentFuture<V>
             implements AbstractFuture.Trusted<V> {
         @Override
-        @ParametricNullness
         public final V get() throws InterruptedException, ExecutionException {
             return super.get();
         }
 
         @Override
-        @ParametricNullness
         public final V get(long timeout, TimeUnit unit)
                 throws InterruptedException, ExecutionException, TimeoutException {
             return super.get(timeout, unit);

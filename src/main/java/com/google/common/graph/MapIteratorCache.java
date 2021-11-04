@@ -40,7 +40,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author James Sexton
  */
-@ElementTypesAreNonnullByDefault
 class MapIteratorCache<K, V> {
     private final Map<K, V> backingMap;
 

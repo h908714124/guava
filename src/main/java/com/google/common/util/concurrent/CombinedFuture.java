@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableCollection;
 
 import java.util.concurrent.Callable;
@@ -27,8 +26,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.util.concurrent.AggregateFuture.ReleaseResourcesReason.OUTPUT_FUTURE_DONE;
 
 /** Aggregate future that computes its value by calling a callable. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class CombinedFuture<V>
         extends AggregateFuture<Object, V> {
     private CombinedFutureInterruptibleTask<?> task;
@@ -110,7 +107,7 @@ final class CombinedFuture<V>
         }
 
         @Override
-        final void afterRanInterruptiblySuccess(@ParametricNullness T result) {
+        final void afterRanInterruptiblySuccess(T result) {
             /*
              * The future no longer needs to interrupt this task, so it no longer needs a reference to it.
              *
@@ -145,7 +142,7 @@ final class CombinedFuture<V>
             }
         }
 
-        abstract void setValue(@ParametricNullness T value);
+        abstract void setValue(T value);
     }
 
     private final class AsyncCallableInterruptibleTask
@@ -187,13 +184,12 @@ final class CombinedFuture<V>
         }
 
         @Override
-        @ParametricNullness
         V runInterruptibly() throws Exception {
             return callable.call();
         }
 
         @Override
-        void setValue(@ParametricNullness V value) {
+        void setValue(V value) {
             CombinedFuture.this.set(value);
         }
 

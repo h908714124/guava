@@ -13,7 +13,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.ImmutableLongArray;
 
 import java.util.concurrent.atomic.AtomicLongArray;
@@ -43,8 +42,6 @@ import static java.lang.Double.longBitsToDouble;
  * @author Martin Buchholz
  * @since 11.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public class AtomicDoubleArray implements java.io.Serializable {
     private static final long serialVersionUID = 0L;
 

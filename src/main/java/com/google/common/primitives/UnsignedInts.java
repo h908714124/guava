@@ -15,7 +15,6 @@
 package com.google.common.primitives;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -46,8 +45,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @since 11.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class UnsignedInts {
     static final long INT_MASK = 0xffffffffL;
 

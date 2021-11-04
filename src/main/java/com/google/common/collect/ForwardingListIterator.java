@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.ListIterator;
 
 /**
@@ -35,8 +33,6 @@ import java.util.ListIterator;
  * @author Mike Bostock
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingListIterator<E>
         extends ForwardingIterator<E> implements ListIterator<E> {
 
@@ -48,7 +44,7 @@ public abstract class ForwardingListIterator<E>
     protected abstract ListIterator<E> delegate();
 
     @Override
-    public void add(@ParametricNullness E element) {
+    public void add(E element) {
         delegate().add(element);
     }
 
@@ -63,7 +59,6 @@ public abstract class ForwardingListIterator<E>
     }
 
     @Override
-    @ParametricNullness
     public E previous() {
         return delegate().previous();
     }
@@ -74,7 +69,7 @@ public abstract class ForwardingListIterator<E>
     }
 
     @Override
-    public void set(@ParametricNullness E element) {
+    public void set(E element) {
         delegate().set(element);
     }
 }

@@ -15,7 +15,6 @@
 package com.google.common.primitives;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -49,8 +48,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @since 10.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class UnsignedLongs {
     private UnsignedLongs() {
     }

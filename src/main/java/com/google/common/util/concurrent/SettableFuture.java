@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * A {@link ListenableFuture} whose result can be set by a {@link #set(Object)}, {@link
  * #setException(Throwable)} or {@link #setFuture(ListenableFuture)} call. It can also, like any
@@ -30,8 +28,6 @@ import com.google.common.annotations.GwtCompatible;
  * @author Sven Mawson
  * @since 9.0 (in 1.0 as {@code ValueFuture})
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class SettableFuture<V>
         extends AbstractFuture.TrustedFuture<V> {
     /**
@@ -42,7 +38,7 @@ public final class SettableFuture<V>
     }
 
     @Override
-    public boolean set(@ParametricNullness V value) {
+    public boolean set(V value) {
         return super.set(value);
     }
 

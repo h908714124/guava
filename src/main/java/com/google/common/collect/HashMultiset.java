@@ -32,7 +32,6 @@ import java.util.HashMap;
  * @since 2.0
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class HashMultiset<E> extends AbstractMapBasedMultiset<E> {
 
     /** Creates a new, empty {@code HashMultiset} using the default initial capacity. */

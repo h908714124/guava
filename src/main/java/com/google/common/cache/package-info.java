@@ -29,6 +29,5 @@
  *
  * @author Charles Fry
  */
-@ParametersAreNonnullByDefault
 package com.google.common.cache;
 

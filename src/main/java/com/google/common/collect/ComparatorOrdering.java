@@ -25,7 +25,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /** An ordering for a pre-existing comparator. */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class ComparatorOrdering<T> extends Ordering<T>
         implements Serializable {
     final Comparator<T> comparator;
@@ -35,7 +34,7 @@ final class ComparatorOrdering<T> extends Ordering<T>
     }
 
     @Override
-    public int compare(@ParametricNullness T a, @ParametricNullness T b) {
+    public int compare(T a, T b) {
         return comparator.compare(a, b);
     }
 

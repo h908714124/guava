@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.io.Serializable;
 
 /**
@@ -44,8 +42,6 @@ import java.io.Serializable;
  * @author Mike Bostock
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingObject {
 
     /** Constructor for use by subclasses. */

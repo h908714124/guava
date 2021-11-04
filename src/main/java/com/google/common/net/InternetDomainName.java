@@ -22,7 +22,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
-import com.google.errorprone.annotations.Immutable;
 import com.google.thirdparty.publicsuffix.PublicSuffixPatterns;
 import com.google.thirdparty.publicsuffix.PublicSuffixType;
 
@@ -73,7 +72,6 @@ import static com.google.common.base.Preconditions.checkState;
  */
 @Beta
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class InternetDomainName {
 
     private static final CharMatcher DOTS_MATCHER = CharMatcher.anyOf(".\u3002\uFF0E\uFF61");

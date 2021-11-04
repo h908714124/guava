@@ -28,7 +28,6 @@ import java.nio.charset.Charset;
  * @since 11.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class Funnels {
     private Funnels() {
     }

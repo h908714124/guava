@@ -28,7 +28,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 12.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class Reflection {
 
     /**

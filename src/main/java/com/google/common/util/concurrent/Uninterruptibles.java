@@ -45,7 +45,6 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
  * @since 10.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Uninterruptibles {
 
     // Implementation Note: As of 3-7-11, the logic for each blocking/timeout
@@ -230,7 +229,6 @@ public final class Uninterruptibles {
      * @throws ExecutionException if the computation threw an exception
      * @throws CancellationException if the computation was cancelled
      */
-    @ParametricNullness
     public static <V> V getUninterruptibly(Future<V> future)
             throws ExecutionException {
         boolean interrupted = false;
@@ -270,7 +268,6 @@ public final class Uninterruptibles {
      */
     @GwtIncompatible // java.time.Duration
     @Beta
-    @ParametricNullness
     public static <V> V getUninterruptibly(
             Future<V> future, Duration timeout) throws ExecutionException, TimeoutException {
         return getUninterruptibly(future, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
@@ -296,7 +293,6 @@ public final class Uninterruptibles {
      */
     @GwtIncompatible // TODO
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
-    @ParametricNullness
     public static <V> V getUninterruptibly(
             Future<V> future, long timeout, TimeUnit unit) throws ExecutionException, TimeoutException {
         boolean interrupted = false;

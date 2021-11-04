@@ -27,7 +27,6 @@ import java.util.Map;
  *
  * @author Jared Levy
  */
-@GwtCompatible
 public class UnmodifiableMultimapAsMapImplementsMapTest
         extends AbstractMultimapAsMapImplementsMapTest {
 

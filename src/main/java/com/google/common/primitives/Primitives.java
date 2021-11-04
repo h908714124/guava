@@ -14,8 +14,6 @@
 
 package com.google.common.primitives;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,8 +28,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Kevin Bourrillion
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class Primitives {
     private Primitives() {
     }

@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Iterator;
 
 /**
@@ -35,8 +33,6 @@ import java.util.Iterator;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingIterator<T> extends ForwardingObject
         implements Iterator<T> {
 
@@ -53,7 +49,6 @@ public abstract class ForwardingIterator<T> extends ForwardingObject
     }
 
     @Override
-    @ParametricNullness
     public T next() {
         return delegate().next();
     }

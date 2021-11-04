@@ -56,7 +56,6 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization
-@ElementTypesAreNonnullByDefault
 public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     /**

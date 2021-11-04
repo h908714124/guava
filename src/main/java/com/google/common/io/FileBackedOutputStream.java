@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.io.ByteArrayInputStream;
@@ -50,8 +49,6 @@ import static java.util.Objects.requireNonNull;
  * @since 1.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class FileBackedOutputStream extends OutputStream {
     private final int fileThreshold;
     private final boolean resetOnFinalize;

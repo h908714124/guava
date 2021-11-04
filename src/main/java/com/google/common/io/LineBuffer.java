@@ -14,8 +14,6 @@
 
 package com.google.common.io;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.io.IOException;
 
 /**
@@ -29,8 +27,6 @@ import java.io.IOException;
  * @author Chris Nokleberg
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 abstract class LineBuffer {
     /** Holds partial line contents. */
     private StringBuilder line = new StringBuilder();

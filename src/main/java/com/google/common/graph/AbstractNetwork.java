@@ -50,7 +50,6 @@ import static java.util.Collections.unmodifiableSet;
  * @since 20.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractNetwork<N, E> implements Network<N, E> {
 
     @Override

@@ -15,7 +15,6 @@
 package com.google.common.math;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Doubles;
 
 import static com.google.common.base.Preconditions.checkState;
@@ -31,8 +30,6 @@ import static java.lang.Double.isNaN;
  * @since 20.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class PairedStatsAccumulator {
 
     // These fields must satisfy the requirements of PairedStats' constructor as well as those of the

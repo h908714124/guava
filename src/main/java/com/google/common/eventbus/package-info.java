@@ -249,7 +249,5 @@
  * <p>Because subscriber methods on your listener classes are normal methods, you can simply call
  * them from your test code to simulate the EventBus.
  */
-@CheckReturnValue
-@ParametersAreNonnullByDefault
 package com.google.common.eventbus;
 

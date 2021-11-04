@@ -28,7 +28,6 @@ import java.util.NoSuchElementException;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
 public class UnmodifiableListIteratorTest extends TestCase {
     @SuppressWarnings("DoNotCall")
     public void testRemove() {

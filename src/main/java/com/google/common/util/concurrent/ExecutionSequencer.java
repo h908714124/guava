@@ -80,7 +80,6 @@ import static java.util.Objects.requireNonNull;
  * @since 26.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class ExecutionSequencer {
 
     private ExecutionSequencer() {

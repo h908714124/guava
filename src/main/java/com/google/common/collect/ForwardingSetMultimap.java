@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -33,8 +31,6 @@ import java.util.Set;
  * @author Kurt Alfred Kluever
  * @since 3.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingSetMultimap<K, V>
         extends ForwardingMultimap<K, V> implements SetMultimap<K, V> {
 
@@ -47,7 +43,7 @@ public abstract class ForwardingSetMultimap<K, V>
     }
 
     @Override
-    public Set<V> get(@ParametricNullness K key) {
+    public Set<V> get(K key) {
         return delegate().get(key);
     }
 
@@ -57,7 +53,7 @@ public abstract class ForwardingSetMultimap<K, V>
     }
 
     @Override
-    public Set<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
+    public Set<V> replaceValues(K key, Iterable<? extends V> values) {
         return delegate().replaceValues(key, values);
     }
 }

@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * Exception thrown upon the failure of a <a
  * href="https://github.com/google/guava/wiki/ConditionalFailuresExplained">verification check</a>,
@@ -23,8 +21,6 @@ import com.google.common.annotations.GwtCompatible;
  *
  * @since 17.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public class VerifyException extends RuntimeException {
     /** Constructs a {@code VerifyException} with no message. */
     public VerifyException() {

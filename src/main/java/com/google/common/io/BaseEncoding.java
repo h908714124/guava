@@ -121,7 +121,6 @@ import static java.math.RoundingMode.UNNECESSARY;
  * @since 14.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public abstract class BaseEncoding {
     // TODO(lowasser): consider making encodeTo(Appendable, byte[], int, int) public.
 
@@ -991,8 +990,7 @@ public abstract class BaseEncoding {
         }
     }
 
-    @GwtIncompatible
-    static Reader ignoringReader(Reader delegate, String toIgnore) {
+        static Reader ignoringReader(Reader delegate, String toIgnore) {
         checkNotNull(delegate);
         checkNotNull(toIgnore);
         return new Reader() {

@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.io.Serializable;
@@ -44,8 +43,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 15.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class EvictingQueue<E> extends ForwardingQueue<E> implements Serializable {
 
     private final Queue<E> delegate;

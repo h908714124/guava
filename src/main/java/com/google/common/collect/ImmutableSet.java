@@ -48,7 +48,6 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization
-@ElementTypesAreNonnullByDefault
 public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements Set<E> {
     static final int SPLITERATOR_CHARACTERISTICS =
             ImmutableCollection.SPLITERATOR_CHARACTERISTICS | Spliterator.DISTINCT;
@@ -332,8 +331,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     @Override
     public abstract UnmodifiableIterator<E> iterator();
 
-    @GwtCompatible
-    abstract static class CachingAsList<E> extends ImmutableSet<E> {
+        abstract static class CachingAsList<E> extends ImmutableSet<E> {
         private transient ImmutableList<E> asList;
 
         @Override

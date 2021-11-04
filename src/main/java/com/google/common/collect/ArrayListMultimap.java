@@ -60,7 +60,6 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * @since 2.0
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class ArrayListMultimap<K, V>
         extends ArrayListMultimapGwtSerializationDependencies<K, V> {
     // Default from ArrayList

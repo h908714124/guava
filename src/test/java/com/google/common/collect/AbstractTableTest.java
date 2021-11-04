@@ -28,7 +28,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author Jared Levy
  * @author Louis Wasserman
  */
-@GwtCompatible
 public abstract class AbstractTableTest extends AbstractTableReadTest {
 
     protected void populate(Table<String, Integer, Character> table, Object... data) {

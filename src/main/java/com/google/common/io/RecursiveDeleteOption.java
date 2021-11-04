@@ -17,7 +17,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.nio.file.SecureDirectoryStream;
 
@@ -29,8 +28,6 @@ import java.nio.file.SecureDirectoryStream;
  * @author Colin Decker
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public enum RecursiveDeleteOption {
     /**
      * Specifies that the recursive delete should not throw an exception when it can't be guaranteed

@@ -44,8 +44,7 @@ final class LenientSerializableTester {
      * TODO(cpovirk): move this to c.g.c.testing if we allow for c.g.c.annotations dependencies so
      * that it can be GWTified?
      */
-    @CanIgnoreReturnValue
-    @GwtIncompatible // SerializableTester
+        @GwtIncompatible // SerializableTester
     static <E> Set<E> reserializeAndAssertLenient(Set<E> original) {
         Set<E> copy = reserialize(original);
         assertEquals(original, copy);
@@ -53,8 +52,7 @@ final class LenientSerializableTester {
         return copy;
     }
 
-    @CanIgnoreReturnValue
-    @GwtIncompatible // SerializableTester
+        @GwtIncompatible // SerializableTester
     static <E> Multiset<E> reserializeAndAssertLenient(Multiset<E> original) {
         Multiset<E> copy = reserialize(original);
         assertEquals(original, copy);
@@ -62,8 +60,7 @@ final class LenientSerializableTester {
         return copy;
     }
 
-    @CanIgnoreReturnValue
-    @GwtIncompatible // SerializableTester
+        @GwtIncompatible // SerializableTester
     static <E> Collection<E> reserializeAndAssertElementsEqual(Collection<E> original) {
         Collection<E> copy = reserialize(original);
         assertTrue(Iterables.elementsEqual(original, copy));

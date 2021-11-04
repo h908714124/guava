@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -53,8 +52,6 @@ import static com.google.common.collect.ForwardingSortedMap.unsafeCompare;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingSortedSet<E> extends ForwardingSet<E>
         implements SortedSet<E> {
 
@@ -71,29 +68,27 @@ public abstract class ForwardingSortedSet<E> extends ForwardingSet<E>
     }
 
     @Override
-    @ParametricNullness
     public E first() {
         return delegate().first();
     }
 
     @Override
-    public SortedSet<E> headSet(@ParametricNullness E toElement) {
+    public SortedSet<E> headSet(E toElement) {
         return delegate().headSet(toElement);
     }
 
     @Override
-    @ParametricNullness
     public E last() {
         return delegate().last();
     }
 
     @Override
-    public SortedSet<E> subSet(@ParametricNullness E fromElement, @ParametricNullness E toElement) {
+    public SortedSet<E> subSet(E fromElement, E toElement) {
         return delegate().subSet(fromElement, toElement);
     }
 
     @Override
-    public SortedSet<E> tailSet(@ParametricNullness E fromElement) {
+    public SortedSet<E> tailSet(E fromElement) {
         return delegate().tailSet(fromElement);
     }
 
@@ -155,7 +150,7 @@ public abstract class ForwardingSortedSet<E> extends ForwardingSet<E>
      */
     @Beta
     protected SortedSet<E> standardSubSet(
-            @ParametricNullness E fromElement, @ParametricNullness E toElement) {
+            E fromElement, E toElement) {
         return tailSet(fromElement).headSet(toElement);
     }
 }

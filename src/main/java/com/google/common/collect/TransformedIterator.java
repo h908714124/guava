@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Iterator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -28,8 +26,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class TransformedIterator<F, T>
         implements Iterator<T> {
     final Iterator<? extends F> backingIterator;
@@ -38,8 +34,7 @@ abstract class TransformedIterator<F, T>
         this.backingIterator = checkNotNull(backingIterator);
     }
 
-    @ParametricNullness
-    abstract T transform(@ParametricNullness F from);
+    abstract T transform(F from);
 
     @Override
     public final boolean hasNext() {
@@ -47,7 +42,6 @@ abstract class TransformedIterator<F, T>
     }
 
     @Override
-    @ParametricNullness
     public final T next() {
         return transform(backingIterator.next());
     }

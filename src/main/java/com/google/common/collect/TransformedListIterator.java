@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 
 import java.util.ListIterator;
@@ -27,8 +26,6 @@ import java.util.ListIterator;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 abstract class TransformedListIterator<F, T>
         extends TransformedIterator<F, T> implements ListIterator<T> {
     TransformedListIterator(ListIterator<? extends F> backingIterator) {
@@ -45,7 +42,6 @@ abstract class TransformedListIterator<F, T>
     }
 
     @Override
-    @ParametricNullness
     public final T previous() {
         return transform(backingIterator().previous());
     }
@@ -61,12 +57,12 @@ abstract class TransformedListIterator<F, T>
     }
 
     @Override
-    public void set(@ParametricNullness T element) {
+    public void set(T element) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void add(@ParametricNullness T element) {
+    public void add(T element) {
         throw new UnsupportedOperationException();
     }
 }

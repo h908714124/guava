@@ -85,7 +85,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class MapMaker {
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
     private static final int DEFAULT_CONCURRENCY_LEVEL = 4;
@@ -117,8 +116,7 @@ public final class MapMaker {
      * #weakKeys} is specified, and {@link Equivalence#equals()} otherwise. The only place this is
      * used is in {@link Interners.WeakInterner}.
      */
-    @GwtIncompatible
-    // To be supported
+        // To be supported
     MapMaker keyEquivalence(Equivalence<Object> equivalence) {
         checkState(keyEquivalence == null, "key equivalence was already set to %s", keyEquivalence);
         keyEquivalence = checkNotNull(equivalence);

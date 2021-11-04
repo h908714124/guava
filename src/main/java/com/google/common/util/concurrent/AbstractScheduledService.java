@@ -14,9 +14,7 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Supplier;
-import com.google.errorprone.annotations.concurrent.GuardedBy;
 
 import java.time.Duration;
 import java.util.concurrent.Callable;
@@ -96,8 +94,6 @@ import static java.util.Objects.requireNonNull;
  * @author Luke Sandberg
  * @since 11.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractScheduledService implements Service {
     private static final Logger logger = Logger.getLogger(AbstractScheduledService.class.getName());
 
@@ -560,7 +556,6 @@ public abstract class AbstractScheduledService implements Service {
             private final ReentrantLock lock = new ReentrantLock();
 
             /** The future that represents the next execution of this task. */
-            @GuardedBy("lock")
             private SupplantableFuture cancellationDelegate;
 
             ReschedulableCallable(
@@ -620,7 +615,6 @@ public abstract class AbstractScheduledService implements Service {
                 return toReturn;
             }
 
-            @GuardedBy("lock")
             /*
              * The GuardedBy checker warns us that we're not holding cancellationDelegate.lock. But in
              * fact we are holding it because it is the same as this.lock, which we know we are holding,
@@ -650,7 +644,6 @@ public abstract class AbstractScheduledService implements Service {
         private static final class SupplantableFuture implements Cancellable {
             private final ReentrantLock lock;
 
-            @GuardedBy("lock")
             private Future<Void> currentFuture;
 
             SupplantableFuture(ReentrantLock lock, Future<Void> currentFuture) {

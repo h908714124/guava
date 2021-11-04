@@ -39,7 +39,6 @@ import static java.util.Objects.requireNonNull;
  * @param <N> Node parameter type
  * @param <E> Edge parameter type
  */
-@ElementTypesAreNonnullByDefault
 final class StandardMutableNetwork<N, E> extends StandardNetwork<N, E>
         implements MutableNetwork<N, E> {
 

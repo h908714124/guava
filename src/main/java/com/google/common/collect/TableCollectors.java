@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.Tables.AbstractCell;
 
 import java.util.ArrayList;
@@ -29,8 +28,6 @@ import java.util.stream.Collector;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /** Collectors utilities for {@code common.collect.Table} internals. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class TableCollectors {
 
     static <T, R, C, V>
@@ -199,9 +196,9 @@ final class TableCollectors {
             R, C, V>
     void mergeTables(
             Table<R, C, V> table,
-            @ParametricNullness R row,
-            @ParametricNullness C column,
-            @ParametricNullness V value,
+            R row,
+            C column,
+            V value,
             BinaryOperator<V> mergeFunction) {
         checkNotNull(value);
         V oldValue = table.get(row, column);

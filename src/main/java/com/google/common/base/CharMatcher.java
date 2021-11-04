@@ -62,7 +62,6 @@ import static com.google.common.base.Preconditions.checkPositionIndex;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public abstract class CharMatcher implements Predicate<Character> {
     /*
      *           N777777777NO
@@ -414,8 +413,7 @@ public abstract class CharMatcher implements Predicate<Character> {
      * constructs an eight-kilobyte bit array and queries that. In many situations this produces a
      * matcher which is faster to query than the original.
      */
-    @GwtIncompatible
-    // SmallCharMatcher
+        // SmallCharMatcher
     CharMatcher precomputedInternal() {
         final BitSet table = new BitSet();
         setBits(table);
@@ -472,8 +470,7 @@ public abstract class CharMatcher implements Predicate<Character> {
     }
 
     /** Sets bits in {@code table} matched by this matcher. */
-    @GwtIncompatible
-    // used only from other GwtIncompatible code
+        // used only from other GwtIncompatible code
     void setBits(BitSet table) {
         for (int c = Character.MAX_VALUE; c >= Character.MIN_VALUE; c--) {
             if (matches((char) c)) {
@@ -1744,8 +1741,7 @@ public abstract class CharMatcher implements Predicate<Character> {
         }
 
         @Override
-        @GwtIncompatible
-            // used only from other GwtIncompatible code
+                    // used only from other GwtIncompatible code
         void setBits(BitSet table) {
             for (char c : chars) {
                 table.set(c);

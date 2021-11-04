@@ -14,7 +14,6 @@
 
 package com.google.common.cache;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -78,8 +77,6 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  * @since 12.0
  */
 @SuppressWarnings("GoodTime") // lots of violations (nanosecond math)
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class CacheBuilderSpec {
     /** Parses a single value. */
     private interface ValueParser {

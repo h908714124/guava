@@ -15,7 +15,6 @@
 package com.google.thirdparty.publicsuffix;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 /**
  * <b>Do not use this class directly. For access to public-suffix information, use {@link
@@ -26,7 +25,6 @@ import com.google.common.annotations.GwtCompatible;
  * @since 23.3
  */
 @Beta
-@GwtCompatible
 public enum PublicSuffixType {
 
     /** Public suffix that is provided by a private company, e.g. "blogspot.com" */

@@ -40,7 +40,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @Beta
 @GwtIncompatible // uses NavigableMap
-@ElementTypesAreNonnullByDefault
 public class TreeRangeSet<C extends Comparable<?>> extends AbstractRangeSet<C>
         implements Serializable {
 

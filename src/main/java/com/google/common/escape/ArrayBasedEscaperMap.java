@@ -15,7 +15,6 @@
 package com.google.common.escape;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.Collections;
@@ -38,8 +37,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 15.0
  */
 @Beta
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class ArrayBasedEscaperMap {
     /**
      * Returns a new ArrayBasedEscaperMap for creating ArrayBasedCharEscaper or

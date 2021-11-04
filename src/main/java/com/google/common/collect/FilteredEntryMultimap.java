@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps.ViewCachingAbstractMap;
@@ -40,8 +39,6 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * @author Jared Levy
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 class FilteredEntryMultimap<K, V>
         extends AbstractMultimap<K, V> implements FilteredMultimap<K, V> {
     final Multimap<K, V> unfiltered;
@@ -67,20 +64,19 @@ class FilteredEntryMultimap<K, V>
         return entries().size();
     }
 
-    private boolean satisfies(@ParametricNullness K key, @ParametricNullness V value) {
+    private boolean satisfies(K key, V value) {
         return predicate.apply(Maps.immutableEntry(key, value));
     }
 
     final class ValuePredicate implements Predicate<V> {
-        @ParametricNullness
         private final K key;
 
-        ValuePredicate(@ParametricNullness K key) {
+        ValuePredicate(K key) {
             this.key = key;
         }
 
         @Override
-        public boolean apply(@ParametricNullness V value) {
+        public boolean apply(V value) {
             return satisfies(key, value);
         }
     }
@@ -117,7 +113,7 @@ class FilteredEntryMultimap<K, V>
     }
 
     @Override
-    public Collection<V> get(@ParametricNullness K key) {
+    public Collection<V> get(K key) {
         return filterCollection(unfiltered.get(key), new ValuePredicate(key));
     }
 

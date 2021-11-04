@@ -113,7 +113,6 @@ import java.util.concurrent.RejectedExecutionException;
  * that affects users, especially users of the Android Gradle Plugin, since the plugin developers
  * put in a special hack for us: https://issuetracker.google.com/issues/131431257)
  */
-@ElementTypesAreNonnullByDefault
 public interface ListenableFuture<V> extends Future<V> {
     /**
      * Registers a listener to be {@linkplain Executor#execute(Runnable) run} on the given executor.

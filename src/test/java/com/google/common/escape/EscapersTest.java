@@ -24,7 +24,6 @@ import junit.framework.TestCase;
 import java.io.IOException;
 
 /** @author David Beaumont */
-@GwtCompatible
 public class EscapersTest extends TestCase {
     public void testNullEscaper() throws IOException {
         Escaper escaper = Escapers.nullEscaper();

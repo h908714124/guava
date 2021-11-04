@@ -11,8 +11,6 @@
 
 package com.google.common.hash;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.util.Random;
 
 /**
@@ -20,8 +18,6 @@ import java.util.Random;
  * striping on 64bit values. The class extends Number so that concrete subclasses must publicly do
  * so.
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 abstract class Striped64 extends Number {
     /*
      * This class maintains a lazily-initialized table of atomically

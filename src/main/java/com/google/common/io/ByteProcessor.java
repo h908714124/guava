@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.io.IOException;
 
@@ -29,8 +28,6 @@ import java.io.IOException;
  * @since 1.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public interface ByteProcessor<T> {
     /**
      * This method will be called for each chunk of bytes in an input stream. The implementation
@@ -45,6 +42,5 @@ public interface ByteProcessor<T> {
     boolean processBytes(byte[] buf, int off, int len) throws IOException;
 
     /** Return the result of processing all the bytes. */
-    @ParametricNullness
     T getResult();
 }

@@ -14,8 +14,6 @@
 
 package com.google.common.hash;
 
-import com.google.errorprone.annotations.Immutable;
-
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
@@ -27,11 +25,10 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  *
  * <p>TODO(lowasser): make public
  */
-@ElementTypesAreNonnullByDefault
 abstract class AbstractHashFunction implements HashFunction {
     @Override
     public <T> HashCode hashObject(
-            @ParametricNullness T instance, Funnel<? super T> funnel) {
+            T instance, Funnel<? super T> funnel) {
         return newHasher().putObject(instance, funnel).hash();
     }
 

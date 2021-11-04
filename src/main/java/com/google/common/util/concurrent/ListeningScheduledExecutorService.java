@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.time.Duration;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledExecutorService;
@@ -32,8 +30,6 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * @author Chris Povirk
  * @since 10.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public interface ListeningScheduledExecutorService
         extends ScheduledExecutorService, ListeningExecutorService {
 

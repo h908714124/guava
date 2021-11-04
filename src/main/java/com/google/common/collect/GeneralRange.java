@@ -36,7 +36,6 @@ import static com.google.common.collect.NullnessCasts.uncheckedCastNullableTToT;
  * @author Louis Wasserman
  */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class GeneralRange<T> implements Serializable {
     /** Converts a Range to a GeneralRange. */
     static <T extends Comparable> GeneralRange<T> from(Range<T> range) {
@@ -65,7 +64,7 @@ final class GeneralRange<T> implements Serializable {
      * endpoint behavior.
      */
     static <T> GeneralRange<T> downTo(
-            Comparator<? super T> comparator, @ParametricNullness T endpoint, BoundType boundType) {
+            Comparator<? super T> comparator, T endpoint, BoundType boundType) {
         return new GeneralRange<>(comparator, true, endpoint, boundType, false, null, OPEN);
     }
 
@@ -74,7 +73,7 @@ final class GeneralRange<T> implements Serializable {
      * endpoint behavior.
      */
     static <T> GeneralRange<T> upTo(
-            Comparator<? super T> comparator, @ParametricNullness T endpoint, BoundType boundType) {
+            Comparator<? super T> comparator, T endpoint, BoundType boundType) {
         return new GeneralRange<>(comparator, false, null, OPEN, true, endpoint, boundType);
     }
 
@@ -84,9 +83,9 @@ final class GeneralRange<T> implements Serializable {
      */
     static <T> GeneralRange<T> range(
             Comparator<? super T> comparator,
-            @ParametricNullness T lower,
+            T lower,
             BoundType lowerType,
-            @ParametricNullness T upper,
+            T upper,
             BoundType upperType) {
         return new GeneralRange<>(comparator, true, lower, lowerType, true, upper, upperType);
     }
@@ -160,7 +159,7 @@ final class GeneralRange<T> implements Serializable {
                 || (hasLowerBound() && tooHigh(uncheckedCastNullableTToT(getLowerEndpoint())));
     }
 
-    boolean tooLow(@ParametricNullness T t) {
+    boolean tooLow(T t) {
         if (!hasLowerBound()) {
             return false;
         }
@@ -170,7 +169,7 @@ final class GeneralRange<T> implements Serializable {
         return cmp < 0 | (cmp == 0 & getLowerBoundType() == OPEN);
     }
 
-    boolean tooHigh(@ParametricNullness T t) {
+    boolean tooHigh(T t) {
         if (!hasUpperBound()) {
             return false;
         }
@@ -180,7 +179,7 @@ final class GeneralRange<T> implements Serializable {
         return cmp > 0 | (cmp == 0 & getUpperBoundType() == OPEN);
     }
 
-    boolean contains(@ParametricNullness T t) {
+    boolean contains(T t) {
         return !tooLow(t) && !tooHigh(t);
     }
 

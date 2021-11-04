@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -31,8 +29,6 @@ import java.util.NoSuchElementException;
  * @author Mick Killianey
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public interface PeekingIterator<E> extends Iterator<E> {
     /**
      * Returns the next element in the iteration, without advancing the iteration.
@@ -43,7 +39,6 @@ public interface PeekingIterator<E> extends Iterator<E> {
      * @throws NoSuchElementException if the iteration has no more elements according to {@link
      *     #hasNext()}
      */
-    @ParametricNullness
     E peek();
 
     /**
@@ -53,7 +48,6 @@ public interface PeekingIterator<E> extends Iterator<E> {
      * guaranteed to be equal to each other.
      */
     @Override
-    @ParametricNullness
     E next();
 
     /**

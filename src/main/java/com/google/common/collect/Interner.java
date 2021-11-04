@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
-
 /**
  * Provides similar behavior to {@link String#intern} for any immutable type. Common implementations
  * are available from the {@link Interners} class.
@@ -29,8 +27,6 @@ import com.google.common.annotations.GwtIncompatible;
  * @author Kevin Bourrillion
  * @since 3.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public interface Interner<E> {
     /**
      * Chooses and returns the representative instance for any of a collection of instances that are

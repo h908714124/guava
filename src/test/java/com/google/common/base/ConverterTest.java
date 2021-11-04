@@ -30,7 +30,6 @@ import java.util.List;
 import static com.google.common.base.Functions.toStringFunction;
 
 /** Unit tests for {@link Converter}. */
-@GwtCompatible
 public class ConverterTest extends TestCase {
 
     private static final Converter<String, Long> STR_TO_LONG =

@@ -44,7 +44,6 @@ import java.util.stream.Stream;
  * @since 2.0
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
         implements ListMultimap<K, V> {
     /**

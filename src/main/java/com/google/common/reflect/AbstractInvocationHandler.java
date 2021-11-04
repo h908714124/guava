@@ -39,7 +39,6 @@ import java.util.Arrays;
  * @since 12.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractInvocationHandler implements InvocationHandler {
 
     private static final Object[] NO_ARGS = {};

@@ -15,7 +15,6 @@
 package com.google.common.hash;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.Immutable;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
@@ -43,7 +42,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 11.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class Hashing {
     /**
      * Returns a general-purpose, <b>temporary-use</b>, non-cryptographic hash function. The algorithm

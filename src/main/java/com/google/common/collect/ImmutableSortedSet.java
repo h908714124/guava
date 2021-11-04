@@ -58,7 +58,6 @@ import static com.google.common.collect.ObjectArrays.checkElementsNotNull;
 // TODO(benyu): benchmark and optimize all creation paths, which are a mess now
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization
-@ElementTypesAreNonnullByDefault
 public abstract class ImmutableSortedSet<E> extends ImmutableSortedSetFauxverideShim<E>
         implements NavigableSet<E>, SortedIterable<E> {
     static final int SPLITERATOR_CHARACTERISTICS =

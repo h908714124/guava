@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -34,8 +32,6 @@ import static java.util.Collections.emptyList;
  * @author Louis Wasserman
  * @since 21.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class MoreCollectors {
 
     /*

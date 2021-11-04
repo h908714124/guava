@@ -50,7 +50,6 @@ import static java.math.RoundingMode.HALF_UP;
  * @since 11.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class LongMath {
     // NOTE: Whenever both tests are cheap and functional, it's faster to use &, | instead of &&, ||
 
@@ -1247,8 +1246,7 @@ public final class LongMath {
      * @since 30.0
      */
     @SuppressWarnings("deprecation")
-    @GwtIncompatible
-    public static double roundToDouble(long x, RoundingMode mode) {
+        public static double roundToDouble(long x, RoundingMode mode) {
         // Logic adapted from ToDoubleRounder.
         double roundArbitrarily = (double) x;
         long roundArbitrarilyAsLong = (long) roundArbitrarily;

@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.util.Iterator;
 import java.util.NavigableMap;
@@ -54,8 +53,6 @@ import static com.google.common.collect.Maps.keyOrNull;
  * @author Louis Wasserman
  * @since 12.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingNavigableMap<K, V>
         extends ForwardingSortedMap<K, V> implements NavigableMap<K, V> {
 
@@ -67,7 +64,7 @@ public abstract class ForwardingNavigableMap<K, V>
     protected abstract NavigableMap<K, V> delegate();
 
     @Override
-    public Entry<K, V> lowerEntry(@ParametricNullness K key) {
+    public Entry<K, V> lowerEntry(K key) {
         return delegate().lowerEntry(key);
     }
 
@@ -76,12 +73,12 @@ public abstract class ForwardingNavigableMap<K, V>
      * #headMap(Object, boolean)}. If you override {@code headMap}, you may wish to override {@code
      * lowerEntry} to forward to this implementation.
      */
-    protected Entry<K, V> standardLowerEntry(@ParametricNullness K key) {
+    protected Entry<K, V> standardLowerEntry(K key) {
         return headMap(key, false).lastEntry();
     }
 
     @Override
-    public K lowerKey(@ParametricNullness K key) {
+    public K lowerKey(K key) {
         return delegate().lowerKey(key);
     }
 
@@ -90,12 +87,12 @@ public abstract class ForwardingNavigableMap<K, V>
      * {@link #lowerEntry}, you may wish to override {@code lowerKey} to forward to this
      * implementation.
      */
-    protected K standardLowerKey(@ParametricNullness K key) {
+    protected K standardLowerKey(K key) {
         return keyOrNull(lowerEntry(key));
     }
 
     @Override
-    public Entry<K, V> floorEntry(@ParametricNullness K key) {
+    public Entry<K, V> floorEntry(K key) {
         return delegate().floorEntry(key);
     }
 
@@ -104,12 +101,12 @@ public abstract class ForwardingNavigableMap<K, V>
      * #headMap(Object, boolean)}. If you override {@code headMap}, you may wish to override {@code
      * floorEntry} to forward to this implementation.
      */
-    protected Entry<K, V> standardFloorEntry(@ParametricNullness K key) {
+    protected Entry<K, V> standardFloorEntry(K key) {
         return headMap(key, true).lastEntry();
     }
 
     @Override
-    public K floorKey(@ParametricNullness K key) {
+    public K floorKey(K key) {
         return delegate().floorKey(key);
     }
 
@@ -118,12 +115,12 @@ public abstract class ForwardingNavigableMap<K, V>
      * {@code floorEntry}, you may wish to override {@code floorKey} to forward to this
      * implementation.
      */
-    protected K standardFloorKey(@ParametricNullness K key) {
+    protected K standardFloorKey(K key) {
         return keyOrNull(floorEntry(key));
     }
 
     @Override
-    public Entry<K, V> ceilingEntry(@ParametricNullness K key) {
+    public Entry<K, V> ceilingEntry(K key) {
         return delegate().ceilingEntry(key);
     }
 
@@ -132,12 +129,12 @@ public abstract class ForwardingNavigableMap<K, V>
      * #tailMap(Object, boolean)}. If you override {@code tailMap}, you may wish to override {@code
      * ceilingEntry} to forward to this implementation.
      */
-    protected Entry<K, V> standardCeilingEntry(@ParametricNullness K key) {
+    protected Entry<K, V> standardCeilingEntry(K key) {
         return tailMap(key, true).firstEntry();
     }
 
     @Override
-    public K ceilingKey(@ParametricNullness K key) {
+    public K ceilingKey(K key) {
         return delegate().ceilingKey(key);
     }
 
@@ -146,12 +143,12 @@ public abstract class ForwardingNavigableMap<K, V>
      * {@code ceilingEntry}, you may wish to override {@code ceilingKey} to forward to this
      * implementation.
      */
-    protected K standardCeilingKey(@ParametricNullness K key) {
+    protected K standardCeilingKey(K key) {
         return keyOrNull(ceilingEntry(key));
     }
 
     @Override
-    public Entry<K, V> higherEntry(@ParametricNullness K key) {
+    public Entry<K, V> higherEntry(K key) {
         return delegate().higherEntry(key);
     }
 
@@ -160,12 +157,12 @@ public abstract class ForwardingNavigableMap<K, V>
      * #tailMap(Object, boolean)}. If you override {@code tailMap}, you may wish to override {@code
      * higherEntry} to forward to this implementation.
      */
-    protected Entry<K, V> standardHigherEntry(@ParametricNullness K key) {
+    protected Entry<K, V> standardHigherEntry(K key) {
         return tailMap(key, false).firstEntry();
     }
 
     @Override
-    public K higherKey(@ParametricNullness K key) {
+    public K higherKey(K key) {
         return delegate().higherKey(key);
     }
 
@@ -174,7 +171,7 @@ public abstract class ForwardingNavigableMap<K, V>
      * {@code higherEntry}, you may wish to override {@code higherKey} to forward to this
      * implementation.
      */
-    protected K standardHigherKey(@ParametricNullness K key) {
+    protected K standardHigherKey(K key) {
         return keyOrNull(higherEntry(key));
     }
 
@@ -374,26 +371,26 @@ public abstract class ForwardingNavigableMap<K, V>
      */
     @Override
     protected SortedMap<K, V> standardSubMap(
-            @ParametricNullness K fromKey, @ParametricNullness K toKey) {
+            K fromKey, K toKey) {
         return subMap(fromKey, true, toKey, false);
     }
 
     @Override
     public NavigableMap<K, V> subMap(
-            @ParametricNullness K fromKey,
+            K fromKey,
             boolean fromInclusive,
-            @ParametricNullness K toKey,
+            K toKey,
             boolean toInclusive) {
         return delegate().subMap(fromKey, fromInclusive, toKey, toInclusive);
     }
 
     @Override
-    public NavigableMap<K, V> headMap(@ParametricNullness K toKey, boolean inclusive) {
+    public NavigableMap<K, V> headMap(K toKey, boolean inclusive) {
         return delegate().headMap(toKey, inclusive);
     }
 
     @Override
-    public NavigableMap<K, V> tailMap(@ParametricNullness K fromKey, boolean inclusive) {
+    public NavigableMap<K, V> tailMap(K fromKey, boolean inclusive) {
         return delegate().tailMap(fromKey, inclusive);
     }
 
@@ -402,7 +399,7 @@ public abstract class ForwardingNavigableMap<K, V>
      * boolean)}. If you override {@code headMap(K, boolean)}, you may wish to override {@code
      * headMap} to forward to this implementation.
      */
-    protected SortedMap<K, V> standardHeadMap(@ParametricNullness K toKey) {
+    protected SortedMap<K, V> standardHeadMap(K toKey) {
         return headMap(toKey, false);
     }
 
@@ -411,7 +408,7 @@ public abstract class ForwardingNavigableMap<K, V>
      * boolean)}. If you override {@code tailMap(K, boolean)}, you may wish to override {@code
      * tailMap} to forward to this implementation.
      */
-    protected SortedMap<K, V> standardTailMap(@ParametricNullness K fromKey) {
+    protected SortedMap<K, V> standardTailMap(K fromKey) {
         return tailMap(fromKey, true);
     }
 }

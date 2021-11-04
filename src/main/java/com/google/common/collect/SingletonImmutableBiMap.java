@@ -31,7 +31,6 @@ import static com.google.common.collect.CollectPreconditions.checkEntryNotNull;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
-@ElementTypesAreNonnullByDefault
 final class SingletonImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
 
     final transient K singleKey;

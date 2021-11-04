@@ -15,7 +15,6 @@
 package com.google.common.hash;
 
 import com.google.common.base.Preconditions;
-import com.google.errorprone.annotations.Immutable;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
@@ -30,7 +29,6 @@ import java.util.Arrays;
  *
  * @author Dimitris Andreou
  */
-@ElementTypesAreNonnullByDefault
 abstract class AbstractNonStreamingHashFunction extends AbstractHashFunction {
     @Override
     public Hasher newHasher() {

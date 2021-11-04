@@ -14,16 +14,12 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
-
 /**
  * Unchecked version of {@link java.util.concurrent.TimeoutException}.
  *
  * @author Kevin Bourrillion
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public class UncheckedTimeoutException extends RuntimeException {
     public UncheckedTimeoutException() {
     }

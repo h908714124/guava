@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 
 import java.util.concurrent.CancellationException;
@@ -26,8 +25,6 @@ import static com.google.common.util.concurrent.Futures.getDone;
 import static com.google.common.util.concurrent.MoreExecutors.rejectionPropagatingExecutor;
 
 /** Implementations of {@code Futures.transform*}. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 @SuppressWarnings("nullness") // TODO(b/147136275): Remove once our checker understands & and |.
 abstract class AbstractTransformFuture<
         I, O, F, T>
@@ -166,11 +163,10 @@ abstract class AbstractTransformFuture<
     }
 
     /** Template method for subtypes to actually run the transform. */
-    @ParametricNullness
-    abstract T doTransform(F function, @ParametricNullness I result) throws Exception;
+    abstract T doTransform(F function, I result) throws Exception;
 
     /** Template method for subtypes to actually set the result. */
-    abstract void setResult(@ParametricNullness T result);
+    abstract void setResult(T result);
 
     @Override
     protected final void afterDone() {
@@ -211,7 +207,7 @@ abstract class AbstractTransformFuture<
 
         @Override
         ListenableFuture<? extends O> doTransform(
-                AsyncFunction<? super I, ? extends O> function, @ParametricNullness I input)
+                AsyncFunction<? super I, ? extends O> function, I input)
                 throws Exception {
             ListenableFuture<? extends O> outputFuture = function.apply(input);
             checkNotNull(
@@ -240,13 +236,12 @@ abstract class AbstractTransformFuture<
         }
 
         @Override
-        @ParametricNullness
-        O doTransform(Function<? super I, ? extends O> function, @ParametricNullness I input) {
+        O doTransform(Function<? super I, ? extends O> function, I input) {
             return function.apply(input);
         }
 
         @Override
-        void setResult(@ParametricNullness O result) {
+        void setResult(O result) {
             set(result);
         }
     }

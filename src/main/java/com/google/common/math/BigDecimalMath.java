@@ -14,8 +14,6 @@
 
 package com.google.common.math;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -25,8 +23,6 @@ import java.math.RoundingMode;
  * @author Louis Wasserman
  * @since 30.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public class BigDecimalMath {
     private BigDecimalMath() {
     }

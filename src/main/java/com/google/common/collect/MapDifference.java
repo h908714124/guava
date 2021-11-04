@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Map;
 
 /**
@@ -26,8 +24,6 @@ import java.util.Map;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public interface MapDifference<K, V> {
     /**
      * Returns {@code true} if there are no differences between the two maps; that is, if the maps are
@@ -87,11 +83,9 @@ public interface MapDifference<K, V> {
      */
     interface ValueDifference<V> {
         /** Returns the value from the left map (possibly null). */
-        @ParametricNullness
         V leftValue();
 
         /** Returns the value from the right map (possibly null). */
-        @ParametricNullness
         V rightValue();
 
         /**

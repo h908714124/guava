@@ -50,7 +50,6 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtCompatible(emulated = true)
 @SuppressWarnings("rawtypes") // allow ungenerified Comparable types
-@ElementTypesAreNonnullByDefault
 public abstract class ContiguousSet<C extends Comparable> extends ImmutableSortedSet<C> {
     /**
      * Returns a {@code ContiguousSet} containing the same values in the given domain {@linkplain
@@ -240,8 +239,7 @@ public abstract class ContiguousSet<C extends Comparable> extends ImmutableSorte
     public abstract Range<C> range(BoundType lowerBoundType, BoundType upperBoundType);
 
     @Override
-    @GwtIncompatible
-        // NavigableSet
+            // NavigableSet
     ImmutableSortedSet<C> createDescendingSet() {
         return new DescendingImmutableSortedSet<>(this);
     }

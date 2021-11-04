@@ -22,7 +22,6 @@ import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.graph.GraphConstants.Presence;
-import com.google.errorprone.annotations.Immutable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -43,8 +42,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 20.0
  */
 @Beta
-@Immutable(containerOf = {"N"})
-@ElementTypesAreNonnullByDefault
 public class ImmutableGraph<N> extends ForwardingGraph<N> {
     @SuppressWarnings("Immutable") // The backing graph must be immutable.
     private final BaseGraph<N> backingGraph;

@@ -26,7 +26,6 @@ import java.util.Set;
  * @author Louis Wasserman
  */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class JdkBackedImmutableSet<E> extends IndexedImmutableSet<E> {
     private final Set<?> delegate;
     private final ImmutableList<E> delegateList;

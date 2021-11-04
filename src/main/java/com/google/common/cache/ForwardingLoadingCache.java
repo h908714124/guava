@@ -14,7 +14,6 @@
 
 package com.google.common.cache;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 
@@ -31,8 +30,6 @@ import java.util.concurrent.ExecutionException;
  * @author Charles Fry
  * @since 11.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingLoadingCache<K, V> extends ForwardingCache<K, V>
         implements LoadingCache<K, V> {
 

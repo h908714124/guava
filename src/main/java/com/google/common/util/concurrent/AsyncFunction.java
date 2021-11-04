@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.concurrent.Future;
 
 /**
@@ -25,9 +23,7 @@ import java.util.concurrent.Future;
  * @author Chris Povirk
  * @since 11.0
  */
-@GwtCompatible
 @FunctionalInterface
-@ElementTypesAreNonnullByDefault
 public interface AsyncFunction<I, O> {
     /**
      * Returns an output {@code Future} to use in place of the given {@code input}. The output {@code
@@ -36,5 +32,5 @@ public interface AsyncFunction<I, O> {
      *
      * <p>Throwing an exception from this method is equivalent to returning a failing {@code Future}.
      */
-    ListenableFuture<O> apply(@ParametricNullness I input) throws Exception;
+    ListenableFuture<O> apply(I input) throws Exception;
 }

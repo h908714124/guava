@@ -39,7 +39,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Predicates {
     private Predicates() {
     }
@@ -157,7 +156,7 @@ public final class Predicates {
      * Returns a predicate that evaluates to {@code true} if the object being tested {@code equals()}
      * the given target or both are null.
      */
-    public static <T> Predicate<T> equalTo(@ParametricNullness T target) {
+    public static <T> Predicate<T> equalTo(T target) {
         return (target == null)
                 ? Predicates.<T>isNull()
                 : new IsEqualToPredicate(target).withNarrowedType();
@@ -322,7 +321,7 @@ public final class Predicates {
         }
 
         @Override
-        public boolean apply(@ParametricNullness T t) {
+        public boolean apply(T t) {
             return !predicate.apply(t);
         }
 
@@ -358,7 +357,7 @@ public final class Predicates {
         }
 
         @Override
-        public boolean apply(@ParametricNullness T t) {
+        public boolean apply(T t) {
             // Avoid using the Iterator to avoid generating garbage (issue 820).
             for (int i = 0; i < components.size(); i++) {
                 if (!components.get(i).apply(t)) {
@@ -401,7 +400,7 @@ public final class Predicates {
         }
 
         @Override
-        public boolean apply(@ParametricNullness T t) {
+        public boolean apply(T t) {
             // Avoid using the Iterator to avoid generating garbage (issue 820).
             for (int i = 0; i < components.size(); i++) {
                 if (components.get(i).apply(t)) {
@@ -499,7 +498,7 @@ public final class Predicates {
         }
 
         @Override
-        public boolean apply(@ParametricNullness T o) {
+        public boolean apply(T o) {
             return clazz.isInstance(o);
         }
 
@@ -571,7 +570,7 @@ public final class Predicates {
         }
 
         @Override
-        public boolean apply(@ParametricNullness T t) {
+        public boolean apply(T t) {
             try {
                 return target.contains(t);
             } catch (NullPointerException | ClassCastException e) {
@@ -613,7 +612,7 @@ public final class Predicates {
         }
 
         @Override
-        public boolean apply(@ParametricNullness A a) {
+        public boolean apply(A a) {
             return p.apply(f.apply(a));
         }
 

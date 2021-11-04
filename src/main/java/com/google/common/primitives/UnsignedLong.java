@@ -37,7 +37,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 11.0
  */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 public final class UnsignedLong extends Number implements Comparable<UnsignedLong>, Serializable {
 
     private static final long UNSIGNED_MASK = 0x7fffffffffffffffL;

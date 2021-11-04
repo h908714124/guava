@@ -17,7 +17,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -53,8 +52,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Charles Fry
  * @since 11.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class AtomicLongMap<K> implements Serializable {
     private final ConcurrentHashMap<K, Long> map;
 

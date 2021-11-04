@@ -39,7 +39,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings({"serial", "rawtypes"})
-@ElementTypesAreNonnullByDefault
 final class RegularImmutableSortedSet<E> extends ImmutableSortedSet<E> {
     static final RegularImmutableSortedSet<Comparable> NATURAL_EMPTY_SET =
             new RegularImmutableSortedSet<>(ImmutableList.<Comparable>of(), Ordering.natural());

@@ -14,7 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.logging.Logger;
@@ -29,8 +28,6 @@ import static java.util.logging.Level.WARNING;
  * @author Kevin Bourrillion
  * @since 3.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Strings {
     private Strings() {
     }

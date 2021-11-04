@@ -16,9 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.DoNotCall;
-
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collector;
@@ -30,8 +27,6 @@ import java.util.stream.Collector;
  *
  * @author Louis Wasserman
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 abstract class ImmutableBiMapFauxverideShim<K, V> extends ImmutableMap<K, V> {
     /**
      * Not supported. Use {@link ImmutableBiMap#toImmutableBiMap} instead. This method exists only to
@@ -42,7 +37,6 @@ abstract class ImmutableBiMapFauxverideShim<K, V> extends ImmutableMap<K, V> {
      * @deprecated Use {@link ImmutableBiMap#toImmutableBiMap}.
      */
     @Deprecated
-    @DoNotCall("Use toImmutableBiMap")
     public static <T, K, V>
     Collector<T, ?, ImmutableMap<K, V>> toImmutableMap(
             Function<? super T, ? extends K> keyFunction,
@@ -59,7 +53,6 @@ abstract class ImmutableBiMapFauxverideShim<K, V> extends ImmutableMap<K, V> {
      * @deprecated
      */
     @Deprecated
-    @DoNotCall("Use toImmutableBiMap")
     public static <T, K, V>
     Collector<T, ?, ImmutableMap<K, V>> toImmutableMap(
             Function<? super T, ? extends K> keyFunction,

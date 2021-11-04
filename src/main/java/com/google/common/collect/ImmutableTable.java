@@ -16,7 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.MoreObjects;
 
 import java.io.Serializable;
@@ -41,8 +40,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Gregory Kick
  * @since 11.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
         implements Serializable {
 

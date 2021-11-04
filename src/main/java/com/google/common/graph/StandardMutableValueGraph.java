@@ -37,7 +37,6 @@ import static java.util.Objects.requireNonNull;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
-@ElementTypesAreNonnullByDefault
 final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
         implements MutableValueGraph<N, V> {
 

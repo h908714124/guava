@@ -24,7 +24,6 @@ import java.util.SortedSet;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
 public class SortedIterablesTest extends TestCase {
     public void testSameComparator() {
         assertTrue(SortedIterables.hasSameComparator(Ordering.natural(), Sets.newTreeSet()));

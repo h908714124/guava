@@ -29,7 +29,6 @@ import java.util.Spliterators;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
-@ElementTypesAreNonnullByDefault
 final class RegularImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
     private static final Object[] EMPTY_ARRAY = new Object[0];
     static final RegularImmutableSet<Object> EMPTY =

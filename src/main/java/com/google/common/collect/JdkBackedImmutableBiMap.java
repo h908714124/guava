@@ -27,7 +27,6 @@ import static java.util.Objects.requireNonNull;
  * protecting against hash flooding.
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     @VisibleForTesting
     static <K, V> ImmutableBiMap<K, V> create(int n, Entry<K, V>[] entryArray) {

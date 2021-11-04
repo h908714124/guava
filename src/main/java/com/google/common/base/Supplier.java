@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * Legacy version of {@link java.util.function.Supplier java.util.function.Supplier}. Semantically,
  * this could be a factory, generator, builder, closure, or something else entirely. No guarantees
@@ -34,9 +32,7 @@ import com.google.common.annotations.GwtCompatible;
  * @author Harry Heymann
  * @since 2.0
  */
-@GwtCompatible
 @FunctionalInterface
-@ElementTypesAreNonnullByDefault
 public interface Supplier<T> extends java.util.function.Supplier<T> {
     /**
      * Retrieves an instance of the appropriate type. The returned object may or may not be a new
@@ -45,6 +41,5 @@ public interface Supplier<T> extends java.util.function.Supplier<T> {
      * @return an instance of the appropriate type
      */
     @Override
-    @ParametricNullness
     T get();
 }

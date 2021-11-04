@@ -31,7 +31,6 @@ import static java.util.Objects.requireNonNull;
  *
  * @author James Sexton
  */
-@ElementTypesAreNonnullByDefault
 abstract class EndpointPairIterator<N> extends AbstractIterator<EndpointPair<N>> {
     private final BaseGraph<N> graph;
     private final Iterator<N> nodeIterator;

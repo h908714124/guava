@@ -14,7 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Predicate;
 
 import java.util.Collection;
@@ -35,8 +34,6 @@ import static java.util.Collections.emptySet;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 class FilteredKeyMultimap<K, V>
         extends AbstractMultimap<K, V> implements FilteredMultimap<K, V> {
     final Multimap<K, V> unfiltered;
@@ -100,7 +97,7 @@ class FilteredKeyMultimap<K, V>
     }
 
     @Override
-    public Collection<V> get(@ParametricNullness K key) {
+    public Collection<V> get(K key) {
         if (keyPredicate.apply(key)) {
             return unfiltered.get(key);
         } else if (unfiltered instanceof SetMultimap) {
@@ -112,15 +109,14 @@ class FilteredKeyMultimap<K, V>
 
     static class AddRejectingSet<K, V>
             extends ForwardingSet<V> {
-        @ParametricNullness
         final K key;
 
-        AddRejectingSet(@ParametricNullness K key) {
+        AddRejectingSet(K key) {
             this.key = key;
         }
 
         @Override
-        public boolean add(@ParametricNullness V element) {
+        public boolean add(V element) {
             throw new IllegalArgumentException("Key does not satisfy predicate: " + key);
         }
 
@@ -138,21 +134,20 @@ class FilteredKeyMultimap<K, V>
 
     static class AddRejectingList<K, V>
             extends ForwardingList<V> {
-        @ParametricNullness
         final K key;
 
-        AddRejectingList(@ParametricNullness K key) {
+        AddRejectingList(K key) {
             this.key = key;
         }
 
         @Override
-        public boolean add(@ParametricNullness V v) {
+        public boolean add(V v) {
             add(0, v);
             return true;
         }
 
         @Override
-        public void add(int index, @ParametricNullness V element) {
+        public void add(int index, V element) {
             checkPositionIndex(index, 0);
             throw new IllegalArgumentException("Key does not satisfy predicate: " + key);
         }

@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * {@link Error} variant of {@link java.util.concurrent.ExecutionException}. As with {@code
  * ExecutionException}, the error's {@linkplain #getCause() cause} comes from a failed task,
@@ -26,8 +24,6 @@ import com.google.common.annotations.GwtCompatible;
  * @author Chris Povirk
  * @since 10.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public class ExecutionError extends Error {
     /*
      * Ideally, this class would have exposed only constructors that require a non-null cause. We

@@ -14,9 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.Immutable;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,9 +21,6 @@ import java.util.Map.Entry;
 import static java.util.Objects.requireNonNull;
 
 /** A {@code RegularImmutableTable} optimized for sparse data. */
-@GwtCompatible
-@Immutable(containerOf = {"R", "C", "V"})
-@ElementTypesAreNonnullByDefault
 final class SparseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> {
     static final ImmutableTable<Object, Object, Object> EMPTY =
             new SparseImmutableTable<>(

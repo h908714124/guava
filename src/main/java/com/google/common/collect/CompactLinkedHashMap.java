@@ -50,7 +50,6 @@ import static java.util.Objects.requireNonNull;
  * @author Louis Wasserman
  */
 @GwtIncompatible // not worth using in GWT for now
-@ElementTypesAreNonnullByDefault
 class CompactLinkedHashMap<K, V>
         extends CompactHashMap<K, V> {
     // TODO(lowasser): implement removeEldestEntry so this can be used as a drop-in replacement
@@ -177,7 +176,7 @@ class CompactLinkedHashMap<K, V>
 
     @Override
     void insertEntry(
-            int entryIndex, @ParametricNullness K key, @ParametricNullness V value, int hash, int mask) {
+            int entryIndex, K key, V value, int hash, int mask) {
         super.insertEntry(entryIndex, key, value, hash, mask);
         setSucceeds(lastEntry, entryIndex);
         setSucceeds(entryIndex, ENDPOINT);

@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * Unchecked variant of {@link java.util.concurrent.ExecutionException}. As with {@code
  * ExecutionException}, the exception's {@linkplain #getCause() cause} comes from a failed task,
@@ -31,8 +29,6 @@ import com.google.common.annotations.GwtCompatible;
  * @author Charles Fry
  * @since 10.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public class UncheckedExecutionException extends RuntimeException {
     /*
      * Ideally, this class would have exposed only constructors that require a non-null cause. We

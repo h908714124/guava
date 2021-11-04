@@ -31,7 +31,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @author Kurt Alfred Kluever
  * @since 11.0
  */
-@ElementTypesAreNonnullByDefault
 public abstract class HashCode {
     HashCode() {
     }

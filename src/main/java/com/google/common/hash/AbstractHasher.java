@@ -15,7 +15,6 @@
 package com.google.common.hash;
 
 import com.google.common.base.Preconditions;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -26,8 +25,6 @@ import java.nio.charset.Charset;
  *
  * @author Dimitris Andreou
  */
-@CanIgnoreReturnValue
-@ElementTypesAreNonnullByDefault
 abstract class AbstractHasher implements Hasher {
     @Override
     public final Hasher putBoolean(boolean b) {
@@ -117,7 +114,7 @@ abstract class AbstractHasher implements Hasher {
 
     @Override
     public <T> Hasher putObject(
-            @ParametricNullness T instance, Funnel<? super T> funnel) {
+            T instance, Funnel<? super T> funnel) {
         funnel.funnel(instance, this);
         return this;
     }

@@ -31,7 +31,6 @@ import static com.google.common.truth.Truth.assertThat;
  *
  * @author David Beaumont
  */
-@GwtCompatible
 public class PercentEscaperTest extends TestCase {
 
     /** Tests that the simple escaper treats 0-9, a-z and A-Z as safe */

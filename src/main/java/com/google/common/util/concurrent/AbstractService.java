@@ -15,9 +15,7 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.util.concurrent.Monitor.Guard;
-import com.google.errorprone.annotations.concurrent.GuardedBy;
 
 import java.time.Duration;
 import java.util.concurrent.Executor;
@@ -45,8 +43,6 @@ import static java.util.Objects.requireNonNull;
  * @author Luke Sandberg
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class AbstractService implements Service {
     private static final ListenerCallQueue.Event<Listener> STARTING_EVENT =
             new ListenerCallQueue.Event<Listener>() {
@@ -359,7 +355,6 @@ public abstract class AbstractService implements Service {
     }
 
     /** Checks that the current state is equal to the expected state. */
-    @GuardedBy("monitor")
     private void checkCurrentState(State expected) {
         State actual = state();
         if (actual != expected) {

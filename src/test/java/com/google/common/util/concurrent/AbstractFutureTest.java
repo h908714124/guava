@@ -850,8 +850,7 @@ public class AbstractFutureTest extends TestCase {
 
     // Verify that StackOverflowError in a long chain of SetFuture doesn't cause the entire toString
     // call to fail
-    @GwtIncompatible
-    @AndroidIncompatible
+        @AndroidIncompatible
     public void testSetFutureToString_stackOverflow() {
         SettableFuture<String> orig = SettableFuture.create();
         SettableFuture<String> prev = orig;

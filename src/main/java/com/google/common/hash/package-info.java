@@ -19,7 +19,5 @@
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/HashingExplained">hashing</a>.
  */
-@CheckReturnValue
-@ParametersAreNonnullByDefault
 package com.google.common.hash;
 

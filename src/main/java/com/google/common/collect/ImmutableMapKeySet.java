@@ -32,7 +32,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Kevin Bourrillion
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 final class ImmutableMapKeySet<K, V> extends IndexedImmutableSet<K> {
     private final ImmutableMap<K, V> map;
 

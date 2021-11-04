@@ -108,15 +108,13 @@ public class MoreFilesFileTraverserTest extends TestCase {
                 .containsExactly(rootDir, fileA, fileB, dir1, dir2);
     }
 
-    @CanIgnoreReturnValue
-    private Path newDir(String name) throws IOException {
+        private Path newDir(String name) throws IOException {
         Path dir = rootDir.resolve(name);
         Files.createDirectory(dir);
         return dir;
     }
 
-    @CanIgnoreReturnValue
-    private Path newFile(String name) throws IOException {
+        private Path newFile(String name) throws IOException {
         Path file = rootDir.resolve(name);
         MoreFiles.touch(file);
         return file;

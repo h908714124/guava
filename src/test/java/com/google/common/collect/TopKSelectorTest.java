@@ -33,7 +33,6 @@ import static com.google.common.truth.Truth.assertThat;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
 public class TopKSelectorTest extends TestCase {
 
     public void testNegativeK() {

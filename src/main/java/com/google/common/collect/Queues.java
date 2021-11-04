@@ -41,7 +41,6 @@ import java.util.concurrent.TimeUnit;
  * @since 11.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Queues {
     private Queues() {
     }

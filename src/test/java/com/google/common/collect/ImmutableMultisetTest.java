@@ -716,8 +716,7 @@ public class ImmutableMultisetTest extends TestCase {
                 }
             };
 
-            @CanIgnoreReturnValue
-            @Override
+                        @Override
             public abstract ImmutableMultiset<Object> create(List<?> keys);
         }
     }

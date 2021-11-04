@@ -29,7 +29,6 @@ import java.util.Map;
  *
  * @author Jason Lee
  */
-@GwtCompatible
 public class ToStringHelperTest extends TestCase {
 
     @GwtIncompatible // Class names are obfuscated in GWT

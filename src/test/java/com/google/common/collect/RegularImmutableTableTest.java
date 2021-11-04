@@ -22,7 +22,6 @@ import com.google.common.collect.Table.Cell;
 import static com.google.common.truth.Truth.assertThat;
 
 /** @author Gregory Kick */
-@GwtCompatible
 public class RegularImmutableTableTest extends AbstractImmutableTableTest {
     private static final ImmutableSet<Cell<Character, Integer, String>> CELLS =
             ImmutableSet.of(

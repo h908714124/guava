@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * Legacy version of {@link java.util.function.Predicate java.util.function.Predicate}. Determines a
  * true or false value for a given input.
@@ -39,8 +37,6 @@ import com.google.common.annotations.GwtCompatible;
  * @since 2.0
  */
 @FunctionalInterface
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public interface Predicate<T> extends java.util.function.Predicate<T> {
     /**
      * Returns the result of applying this predicate to {@code input} (Java 8 users, see notes in the
@@ -57,7 +53,7 @@ public interface Predicate<T> extends java.util.function.Predicate<T> {
      * @throws NullPointerException if {@code input} is null and this predicate does not accept null
      *     arguments
      */
-    boolean apply(@ParametricNullness T input);
+    boolean apply(T input);
 
     /**
      * Indicates whether another object is equal to this predicate.
@@ -73,7 +69,7 @@ public interface Predicate<T> extends java.util.function.Predicate<T> {
     boolean equals(Object object);
 
     @Override
-    default boolean test(@ParametricNullness T input) {
+    default boolean test(T input) {
         return apply(input);
     }
 }

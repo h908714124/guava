@@ -14,8 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -24,8 +22,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * An Iterator implementation which draws elements from a queue, removing them from the queue as it
  * iterates.
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class ConsumingQueueIterator<T> extends AbstractIterator<T> {
     private final Queue<T> queue;
 

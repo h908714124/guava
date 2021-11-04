@@ -14,8 +14,6 @@
 
 package com.google.common.io;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -29,8 +27,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Chris Nokleberg
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 final class MultiInputStream extends InputStream {
 
     private Iterator<? extends ByteSource> it;

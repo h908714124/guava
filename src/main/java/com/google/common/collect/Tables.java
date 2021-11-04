@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Supplier;
@@ -49,8 +48,6 @@ import static com.google.common.collect.NullnessCasts.uncheckedCastNullableTToT;
  * @author Louis Wasserman
  * @since 7.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Tables {
     private Tables() {
     }
@@ -123,45 +120,39 @@ public final class Tables {
      */
     public static <R, C, V>
     Cell<R, C, V> immutableCell(
-            @ParametricNullness R rowKey,
-            @ParametricNullness C columnKey,
-            @ParametricNullness V value) {
+            R rowKey,
+            C columnKey,
+            V value) {
         return new ImmutableCell<>(rowKey, columnKey, value);
     }
 
     static final class ImmutableCell<
             R, C, V>
             extends AbstractCell<R, C, V> implements Serializable {
-        @ParametricNullness
         private final R rowKey;
-        @ParametricNullness
         private final C columnKey;
-        @ParametricNullness
         private final V value;
 
         ImmutableCell(
-                @ParametricNullness R rowKey,
-                @ParametricNullness C columnKey,
-                @ParametricNullness V value) {
+                R rowKey,
+                C columnKey,
+                V value) {
             this.rowKey = rowKey;
             this.columnKey = columnKey;
             this.value = value;
         }
 
         @Override
-        @ParametricNullness
         public R getRowKey() {
             return rowKey;
         }
 
         @Override
-        @ParametricNullness
         public C getColumnKey() {
             return columnKey;
         }
 
         @Override
-        @ParametricNullness
         public V getValue() {
             return value;
         }
@@ -235,7 +226,7 @@ public final class Tables {
         }
 
         @Override
-        public Map<C, V> column(@ParametricNullness R columnKey) {
+        public Map<C, V> column(R columnKey) {
             return original.row(columnKey);
         }
 
@@ -276,9 +267,9 @@ public final class Tables {
 
         @Override
         public V put(
-                @ParametricNullness C rowKey,
-                @ParametricNullness R columnKey,
-                @ParametricNullness V value) {
+                C rowKey,
+                R columnKey,
+                V value) {
             return original.put(columnKey, rowKey, value);
         }
 
@@ -293,7 +284,7 @@ public final class Tables {
         }
 
         @Override
-        public Map<R, V> row(@ParametricNullness C rowKey) {
+        public Map<R, V> row(C rowKey) {
             return original.column(rowKey);
         }
 
@@ -459,9 +450,9 @@ public final class Tables {
 
         @Override
         public V2 put(
-                @ParametricNullness R rowKey,
-                @ParametricNullness C columnKey,
-                @ParametricNullness V2 value) {
+                R rowKey,
+                C columnKey,
+                V2 value) {
             throw new UnsupportedOperationException();
         }
 
@@ -479,12 +470,12 @@ public final class Tables {
         }
 
         @Override
-        public Map<C, V2> row(@ParametricNullness R rowKey) {
+        public Map<C, V2> row(R rowKey) {
             return Maps.transformValues(fromTable.row(rowKey), function);
         }
 
         @Override
-        public Map<R, V2> column(@ParametricNullness C columnKey) {
+        public Map<R, V2> column(C columnKey) {
             return Maps.transformValues(fromTable.column(columnKey), function);
         }
 
@@ -591,7 +582,7 @@ public final class Tables {
         }
 
         @Override
-        public Map<R, V> column(@ParametricNullness C columnKey) {
+        public Map<R, V> column(C columnKey) {
             return Collections.unmodifiableMap(super.column(columnKey));
         }
 
@@ -608,9 +599,9 @@ public final class Tables {
 
         @Override
         public V put(
-                @ParametricNullness R rowKey,
-                @ParametricNullness C columnKey,
-                @ParametricNullness V value) {
+                R rowKey,
+                C columnKey,
+                V value) {
             throw new UnsupportedOperationException();
         }
 
@@ -625,7 +616,7 @@ public final class Tables {
         }
 
         @Override
-        public Map<C, V> row(@ParametricNullness R rowKey) {
+        public Map<C, V> row(R rowKey) {
             return Collections.unmodifiableMap(super.row(rowKey));
         }
 

@@ -47,7 +47,6 @@ import static java.lang.Float.POSITIVE_INFINITY;
  * @since 1.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Floats extends FloatsMethodsForWeb {
     private Floats() {
     }
@@ -515,8 +514,7 @@ public final class Floats extends FloatsMethodsForWeb {
         return new FloatArrayAsList(backingArray);
     }
 
-    @GwtCompatible
-    private static class FloatArrayAsList extends AbstractList<Float>
+        private static class FloatArrayAsList extends AbstractList<Float>
             implements RandomAccess, Serializable {
         final float[] array;
         final int start;

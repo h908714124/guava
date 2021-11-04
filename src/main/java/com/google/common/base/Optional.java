@@ -80,7 +80,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 10.0
  */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 public abstract class Optional<T> implements Serializable {
     /**
      * Returns an {@code Optional} instance with no contained reference.

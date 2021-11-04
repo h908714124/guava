@@ -14,7 +14,6 @@
 
 package com.google.common.cache;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
@@ -56,8 +55,6 @@ import static com.google.common.math.LongMath.saturatedSubtract;
  * @author Charles Fry
  * @since 10.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class CacheStats {
     private final long hitCount;
     private final long missCount;

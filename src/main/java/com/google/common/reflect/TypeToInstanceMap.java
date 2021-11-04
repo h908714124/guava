@@ -41,7 +41,6 @@ import java.util.Map;
  * @since 13.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public interface TypeToInstanceMap<B> extends Map<TypeToken<? extends B>, B> {
 
     /**

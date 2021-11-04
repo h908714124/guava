@@ -32,7 +32,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Colin Decker
  */
-@ElementTypesAreNonnullByDefault
 abstract class Dispatcher {
 
     /**

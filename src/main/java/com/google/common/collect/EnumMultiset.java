@@ -44,7 +44,6 @@ import static com.google.common.collect.CollectPreconditions.checkRemove;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
         implements Serializable {
     /** Creates an empty {@code EnumMultiset}. */

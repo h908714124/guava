@@ -111,8 +111,7 @@ public class AbstractByteHasherTest extends TestCase {
         }
     }
 
-    @CanIgnoreReturnValue
-    private class TestHasher extends AbstractByteHasher {
+        private class TestHasher extends AbstractByteHasher {
 
         private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 

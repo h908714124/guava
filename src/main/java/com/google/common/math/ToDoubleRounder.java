@@ -14,8 +14,6 @@
 
 package com.google.common.math;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.math.RoundingMode;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -25,8 +23,6 @@ import static com.google.common.math.MathPreconditions.checkRoundingUnnecessary;
  * Helper type to implement rounding {@code X} to a representable {@code double} value according to
  * a {@link RoundingMode}.
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 abstract class ToDoubleRounder<X extends Number & Comparable<X>> {
     /**
      * Returns x rounded to either the greatest double less than or equal to the precise value of x,

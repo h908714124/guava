@@ -14,8 +14,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * Legacy version of {@link java.util.function.Function java.util.function.Function}.
  *
@@ -37,14 +35,11 @@ import com.google.common.annotations.GwtCompatible;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible
 @FunctionalInterface
-@ElementTypesAreNonnullByDefault
 public interface Function<F, T>
         extends java.util.function.Function<F, T> {
     @Override
-    @ParametricNullness
-    T apply(@ParametricNullness F input);
+    T apply(F input);
 
     /**
      * <i>May</i> return {@code true} if {@code object} is a {@code Function} that behaves identically

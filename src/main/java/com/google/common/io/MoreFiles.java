@@ -17,7 +17,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -67,8 +66,6 @@ import static java.util.Objects.requireNonNull;
  * @author Colin Decker
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class MoreFiles {
 
     private MoreFiles() {

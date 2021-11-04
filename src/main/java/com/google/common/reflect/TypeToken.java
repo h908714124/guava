@@ -98,7 +98,6 @@ import static java.util.Objects.requireNonNull;
  */
 @Beta
 @SuppressWarnings("serial") // SimpleTypeToken is the serialized form.
-@ElementTypesAreNonnullByDefault
 public abstract class TypeToken<T> extends TypeCapture<T> implements Serializable {
 
     private final Type runtimeType;

@@ -63,7 +63,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 11.0 (thread-safe since 23.0)
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class BloomFilter<T> implements Predicate<T>, Serializable {
     /**
      * A strategy to translate T instances, to {@code numHashFunctions} bit indexes.
@@ -78,7 +77,7 @@ public final class BloomFilter<T> implements Predicate<T>, Serializable {
          * <p>Returns whether any bits changed as a result of this operation.
          */
         <T> boolean put(
-                @ParametricNullness T object,
+                T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
                 LockFreeBitArray bits);
@@ -88,7 +87,7 @@ public final class BloomFilter<T> implements Predicate<T>, Serializable {
          * returns {@code true} if and only if all selected bits are set.
          */
         <T> boolean mightContain(
-                @ParametricNullness T object,
+                T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
                 LockFreeBitArray bits);
@@ -141,7 +140,7 @@ public final class BloomFilter<T> implements Predicate<T>, Serializable {
      * Returns {@code true} if the element <i>might</i> have been put in this Bloom filter, {@code
      * false} if this is <i>definitely</i> not the case.
      */
-    public boolean mightContain(@ParametricNullness T object) {
+    public boolean mightContain(T object) {
         return strategy.mightContain(object, funnel, numHashFunctions, bits);
     }
 
@@ -151,7 +150,7 @@ public final class BloomFilter<T> implements Predicate<T>, Serializable {
      */
     @Deprecated
     @Override
-    public boolean apply(@ParametricNullness T input) {
+    public boolean apply(T input) {
         return mightContain(input);
     }
 
@@ -166,7 +165,7 @@ public final class BloomFilter<T> implements Predicate<T>, Serializable {
      *     result to what {@code mightContain(t)} would have returned at the time it is called.
      * @since 12.0 (present in 11.0 with {@code void} return type})
      */
-    public boolean put(@ParametricNullness T object) {
+    public boolean put(T object) {
         return strategy.put(object, funnel, numHashFunctions, bits);
     }
 

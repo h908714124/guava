@@ -49,7 +49,6 @@ import java.util.Set;
  * @since 2.0
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class HashMultimap<K, V>
         extends HashMultimapGwtSerializationDependencies<K, V> {
     private static final int DEFAULT_VALUES_PER_KEY = 2;

@@ -15,7 +15,6 @@
 package com.google.common.primitives;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.io.Serializable;
 import java.util.AbstractList;
@@ -41,8 +40,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  * @author Kevin Bourrillion
  * @since 1.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public final class Booleans {
     private Booleans() {
     }
@@ -376,8 +373,7 @@ public final class Booleans {
         return new BooleanArrayAsList(backingArray);
     }
 
-    @GwtCompatible
-    private static class BooleanArrayAsList extends AbstractList<Boolean>
+        private static class BooleanArrayAsList extends AbstractList<Boolean>
             implements RandomAccess, Serializable {
         final boolean[] array;
         final int start;

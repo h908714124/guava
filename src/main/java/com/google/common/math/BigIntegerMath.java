@@ -47,7 +47,6 @@ import static java.math.RoundingMode.HALF_EVEN;
  * @since 11.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class BigIntegerMath {
     /**
      * Returns the smallest power of two greater than or equal to {@code x}. This is equivalent to
@@ -330,13 +329,11 @@ public final class BigIntegerMath {
      *     is not precisely representable as a {@code double}
      * @since 30.0
      */
-    @GwtIncompatible
-    public static double roundToDouble(BigInteger x, RoundingMode mode) {
+        public static double roundToDouble(BigInteger x, RoundingMode mode) {
         return BigIntegerToDoubleRounder.INSTANCE.roundToDouble(x, mode);
     }
 
-    @GwtIncompatible
-    private static class BigIntegerToDoubleRounder extends ToDoubleRounder<BigInteger> {
+        private static class BigIntegerToDoubleRounder extends ToDoubleRounder<BigInteger> {
         static final BigIntegerToDoubleRounder INSTANCE = new BigIntegerToDoubleRounder();
 
         private BigIntegerToDoubleRounder() {

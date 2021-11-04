@@ -33,7 +33,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD})
 @Documented
-@GwtCompatible
 public @interface GwtIncompatible {
     /**
      * Describes why the annotated element is incompatible with GWT. Since this is generally due to a

@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -50,8 +49,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 14.0
  * @author Colin Decker
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class CharSink {
 
     /** Constructor for use by subclasses. */

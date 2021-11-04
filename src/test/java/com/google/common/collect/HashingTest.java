@@ -20,7 +20,6 @@ import junit.framework.TestCase;
 import static com.google.common.collect.Hashing.smear;
 
 /** Tests for {@code Hashing}. */
-@GwtCompatible
 public class HashingTest extends TestCase {
     public void testSmear() {
         assertEquals(1459320713, smear(754102528));

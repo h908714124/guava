@@ -17,7 +17,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.nio.file.FileSystemException;
 import java.nio.file.SecureDirectoryStream;
@@ -35,8 +34,6 @@ import java.nio.file.SecureDirectoryStream;
  * @author Colin Decker
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class InsecureRecursiveDeleteException extends FileSystemException {
 
     public InsecureRecursiveDeleteException(String file) {

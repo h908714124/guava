@@ -43,7 +43,6 @@ import java.util.Set;
  * @since 11.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public interface SortedMultiset<E>
         extends SortedMultisetBridge<E>, SortedIterable<E> {
     /**
@@ -118,7 +117,7 @@ public interface SortedMultiset<E>
      * <p>The returned multiset will throw an {@link IllegalArgumentException} on attempts to add
      * elements outside its range.
      */
-    SortedMultiset<E> headMultiset(@ParametricNullness E upperBound, BoundType boundType);
+    SortedMultiset<E> headMultiset(E upperBound, BoundType boundType);
 
     /**
      * Returns a view of this multiset restricted to the range between {@code lowerBound} and {@code
@@ -133,9 +132,9 @@ public interface SortedMultiset<E>
      * lowerBoundType).headMultiset(upperBound, upperBoundType)}.
      */
     SortedMultiset<E> subMultiset(
-            @ParametricNullness E lowerBound,
+            E lowerBound,
             BoundType lowerBoundType,
-            @ParametricNullness E upperBound,
+            E upperBound,
             BoundType upperBoundType);
 
     /**
@@ -147,5 +146,5 @@ public interface SortedMultiset<E>
      * <p>The returned multiset will throw an {@link IllegalArgumentException} on attempts to add
      * elements outside its range.
      */
-    SortedMultiset<E> tailMultiset(@ParametricNullness E lowerBound, BoundType boundType);
+    SortedMultiset<E> tailMultiset(E lowerBound, BoundType boundType);
 }

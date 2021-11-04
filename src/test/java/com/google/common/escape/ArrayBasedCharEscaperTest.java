@@ -24,7 +24,6 @@ import junit.framework.TestCase;
 import java.io.IOException;
 
 /** @author David Beaumont */
-@GwtCompatible
 public class ArrayBasedCharEscaperTest extends TestCase {
     private static final ImmutableMap<Character, String> NO_REPLACEMENTS = ImmutableMap.of();
     private static final ImmutableMap<Character, String> SIMPLE_REPLACEMENTS =

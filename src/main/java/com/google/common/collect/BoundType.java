@@ -14,8 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * Indicates whether an endpoint of some range is contained in the range itself ("closed") or not
  * ("open"). If a range is unbounded on a side, it is neither open nor closed on that side; the
@@ -23,8 +21,6 @@ import com.google.common.annotations.GwtCompatible;
  *
  * @since 10.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public enum BoundType {
     /** The endpoint value <i>is not</i> considered part of the set ("exclusive"). */
     OPEN(false),

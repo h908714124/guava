@@ -127,15 +127,13 @@ public class FilesFileTraverserTest extends TestCase {
                 .containsExactly(rootDir, fileA, fileB, dir1, dir2);
     }
 
-    @CanIgnoreReturnValue
-    private File newDir(String name) {
+        private File newDir(String name) {
         File file = new File(rootDir, name);
         file.mkdir();
         return file;
     }
 
-    @CanIgnoreReturnValue
-    private File newFile(String name) throws IOException {
+        private File newFile(String name) throws IOException {
         File file = new File(rootDir, name);
         file.createNewFile();
         return file;

@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Serialization.FieldSetter;
 import com.google.common.math.IntMath;
@@ -53,8 +52,6 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * @author mike nonemacher
  * @since 2.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> implements Serializable {
 
     /*

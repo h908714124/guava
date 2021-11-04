@@ -24,7 +24,6 @@ import java.util.Iterator;
 
 /** An ordering which sorts iterables by comparing corresponding elements pairwise. */
 @GwtCompatible(serializable = true)
-@ElementTypesAreNonnullByDefault
 final class LexicographicalOrdering<T> extends Ordering<Iterable<T>>
         implements Serializable {
     final Comparator<? super T> elementOrder;

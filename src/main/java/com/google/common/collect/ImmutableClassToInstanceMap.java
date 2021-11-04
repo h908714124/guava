@@ -16,9 +16,7 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Primitives;
-import com.google.errorprone.annotations.Immutable;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -32,9 +30,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@Immutable(containerOf = "B")
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class ImmutableClassToInstanceMap<B> extends ForwardingMap<Class<? extends B>, B>
         implements ClassToInstanceMap<B>, Serializable {
 

@@ -18,7 +18,6 @@ import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -32,8 +31,6 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
  *
  * @author Colin Decker
  */
-@CanIgnoreReturnValue
-@ElementTypesAreNonnullByDefault
 abstract class AbstractByteHasher extends AbstractHasher {
     private final ByteBuffer scratch = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN);
 

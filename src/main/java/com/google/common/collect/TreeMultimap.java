@@ -72,7 +72,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 2.0
  */
 @GwtCompatible(serializable = true, emulated = true)
-@ElementTypesAreNonnullByDefault
 public class TreeMultimap<K, V>
         extends AbstractSortedKeySortedSetMultimap<K, V> {
     private transient Comparator<? super K> keyComparator;
@@ -140,7 +139,7 @@ public class TreeMultimap<K, V>
     }
 
     @Override
-    Collection<V> createCollection(@ParametricNullness K key) {
+    Collection<V> createCollection(K key) {
         if (key == null) {
             keyComparator().compare(key, key);
         }
@@ -165,7 +164,7 @@ public class TreeMultimap<K, V>
     /** @since 14.0 (present with return type {@code SortedSet} since 2.0) */
     @Override
     @GwtIncompatible // NavigableSet
-    public NavigableSet<V> get(@ParametricNullness K key) {
+    public NavigableSet<V> get(K key) {
         return (NavigableSet<V>) super.get(key);
     }
 

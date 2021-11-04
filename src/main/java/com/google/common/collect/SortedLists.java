@@ -15,7 +15,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 
 import java.util.Collections;
@@ -34,9 +33,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible
 @Beta
-@ElementTypesAreNonnullByDefault
 final class SortedLists {
     private SortedLists() {
     }
@@ -54,7 +51,7 @@ final class SortedLists {
             @Override
             <E> int resultIndex(
                     Comparator<? super E> comparator,
-                    @ParametricNullness E key,
+                    E key,
                     List<? extends E> list,
                     int foundIndex) {
                 return foundIndex;
@@ -65,7 +62,7 @@ final class SortedLists {
             @Override
             <E> int resultIndex(
                     Comparator<? super E> comparator,
-                    @ParametricNullness E key,
+                    E key,
                     List<? extends E> list,
                     int foundIndex) {
                 // Of course, we have to use binary search to find the precise
@@ -90,7 +87,7 @@ final class SortedLists {
             @Override
             <E> int resultIndex(
                     Comparator<? super E> comparator,
-                    @ParametricNullness E key,
+                    E key,
                     List<? extends E> list,
                     int foundIndex) {
                 // Of course, we have to use binary search to find the precise
@@ -119,7 +116,7 @@ final class SortedLists {
             @Override
             public <E> int resultIndex(
                     Comparator<? super E> comparator,
-                    @ParametricNullness E key,
+                    E key,
                     List<? extends E> list,
                     int foundIndex) {
                 return LAST_PRESENT.resultIndex(comparator, key, list, foundIndex) + 1;
@@ -133,7 +130,7 @@ final class SortedLists {
             @Override
             public <E> int resultIndex(
                     Comparator<? super E> comparator,
-                    @ParametricNullness E key,
+                    E key,
                     List<? extends E> list,
                     int foundIndex) {
                 return FIRST_PRESENT.resultIndex(comparator, key, list, foundIndex) - 1;
@@ -142,7 +139,7 @@ final class SortedLists {
 
         abstract <E> int resultIndex(
                 Comparator<? super E> comparator,
-                @ParametricNullness E key,
+                E key,
                 List<? extends E> list,
                 int foundIndex);
     }
@@ -237,7 +234,7 @@ final class SortedLists {
     public static <E, K> int binarySearch(
             List<E> list,
             Function<? super E, K> keyFunction,
-            @ParametricNullness K key,
+            K key,
             Comparator<? super K> keyComparator,
             KeyPresentBehavior presentBehavior,
             KeyAbsentBehavior absentBehavior) {
@@ -270,7 +267,7 @@ final class SortedLists {
      */
     public static <E> int binarySearch(
             List<? extends E> list,
-            @ParametricNullness E key,
+            E key,
             Comparator<? super E> comparator,
             KeyPresentBehavior presentBehavior,
             KeyAbsentBehavior absentBehavior) {

@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.time.Duration;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -53,8 +51,6 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * @author Luke Sandberg
  * @since 9.0 (in 1.0 as {@code com.google.common.base.Service})
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public interface Service {
     /**
      * If the service state is {@link State#NEW}, this initiates service startup and returns

@@ -43,7 +43,6 @@ import static java.util.Objects.requireNonNull;
  * @since 20.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class Graphs {
 
     private Graphs() {

@@ -29,8 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Kevin Bourrillion
  * @since 3.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class Interners {
     private Interners() {
     }

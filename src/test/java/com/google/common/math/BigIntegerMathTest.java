@@ -549,8 +549,7 @@ public class BigIntegerMathTest extends TestCase {
         }
     }
 
-    @GwtIncompatible
-    private static final class RoundToDoubleTester {
+        private static final class RoundToDoubleTester {
         private final BigInteger input;
         private final Map<RoundingMode, Double> expectedValues = new EnumMap<>(RoundingMode.class);
         private boolean unnecessaryShouldThrow = false;
@@ -599,25 +598,21 @@ public class BigIntegerMathTest extends TestCase {
         }
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_Zero() {
+        public void testRoundToDouble_Zero() {
         new RoundToDoubleTester(BigInteger.ZERO).setExpectation(0.0, values()).test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_smallPositive() {
+        public void testRoundToDouble_smallPositive() {
         new RoundToDoubleTester(BigInteger.valueOf(16)).setExpectation(16.0, values()).test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_maxPreciselyRepresentable() {
+        public void testRoundToDouble_maxPreciselyRepresentable() {
         new RoundToDoubleTester(BigInteger.valueOf(1L << 53))
                 .setExpectation(Math.pow(2, 53), values())
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_maxPreciselyRepresentablePlusOne() {
+        public void testRoundToDouble_maxPreciselyRepresentablePlusOne() {
         double twoToThe53 = Math.pow(2, 53);
         // the representable doubles are 2^53 and 2^53 + 2.
         // 2^53+1 is halfway between, so HALF_UP will go up and HALF_DOWN will go down.
@@ -628,8 +623,7 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_twoToThe54PlusOne() {
+        public void testRoundToDouble_twoToThe54PlusOne() {
         double twoToThe54 = Math.pow(2, 54);
         // the representable doubles are 2^54 and 2^54 + 4
         // 2^54+1 is less than halfway between, so HALF_DOWN and HALF_UP will both go down.
@@ -640,8 +634,7 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_twoToThe54PlusThree() {
+        public void testRoundToDouble_twoToThe54PlusThree() {
         double twoToThe54 = Math.pow(2, 54);
         // the representable doubles are 2^54 and 2^54 + 4
         // 2^54+3 is more than halfway between, so HALF_DOWN and HALF_UP will both go up.
@@ -652,21 +645,18 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_twoToThe54PlusFour() {
+        public void testRoundToDouble_twoToThe54PlusFour() {
         new RoundToDoubleTester(BigInteger.valueOf((1L << 54) + 4))
                 .setExpectation(Math.pow(2, 54) + 4, values())
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_maxDouble() {
+        public void testRoundToDouble_maxDouble() {
         BigInteger maxDoubleAsBI = DoubleMath.roundToBigInteger(Double.MAX_VALUE, UNNECESSARY);
         new RoundToDoubleTester(maxDoubleAsBI).setExpectation(Double.MAX_VALUE, values()).test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_maxDoublePlusOne() {
+        public void testRoundToDouble_maxDoublePlusOne() {
         BigInteger maxDoubleAsBI =
                 DoubleMath.roundToBigInteger(Double.MAX_VALUE, UNNECESSARY).add(BigInteger.ONE);
         new RoundToDoubleTester(maxDoubleAsBI)
@@ -676,8 +666,7 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_wayTooBig() {
+        public void testRoundToDouble_wayTooBig() {
         BigInteger bi = BigInteger.ONE.shiftLeft(2 * Double.MAX_EXPONENT);
         new RoundToDoubleTester(bi)
                 .setExpectation(Double.MAX_VALUE, DOWN, FLOOR, HALF_EVEN, HALF_UP, HALF_DOWN)
@@ -686,20 +675,17 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_smallNegative() {
+        public void testRoundToDouble_smallNegative() {
         new RoundToDoubleTester(BigInteger.valueOf(-16)).setExpectation(-16.0, values()).test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_minPreciselyRepresentable() {
+        public void testRoundToDouble_minPreciselyRepresentable() {
         new RoundToDoubleTester(BigInteger.valueOf(-1L << 53))
                 .setExpectation(-Math.pow(2, 53), values())
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_minPreciselyRepresentableMinusOne() {
+        public void testRoundToDouble_minPreciselyRepresentableMinusOne() {
         // the representable doubles are -2^53 and -2^53 - 2.
         // -2^53-1 is halfway between, so HALF_UP will go up and HALF_DOWN will go down.
         new RoundToDoubleTester(BigInteger.valueOf((-1L << 53) - 1))
@@ -709,8 +695,7 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_negativeTwoToThe54MinusOne() {
+        public void testRoundToDouble_negativeTwoToThe54MinusOne() {
         new RoundToDoubleTester(BigInteger.valueOf((-1L << 54) - 1))
                 .setExpectation(-Math.pow(2, 54), DOWN, CEILING, HALF_DOWN, HALF_UP, HALF_EVEN)
                 .setExpectation(DoubleUtils.nextDown(-Math.pow(2, 54)), FLOOR, UP)
@@ -718,8 +703,7 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_negativeTwoToThe54MinusThree() {
+        public void testRoundToDouble_negativeTwoToThe54MinusThree() {
         new RoundToDoubleTester(BigInteger.valueOf((-1L << 54) - 3))
                 .setExpectation(-Math.pow(2, 54), DOWN, CEILING)
                 .setExpectation(
@@ -728,21 +712,18 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_negativeTwoToThe54MinusFour() {
+        public void testRoundToDouble_negativeTwoToThe54MinusFour() {
         new RoundToDoubleTester(BigInteger.valueOf((-1L << 54) - 4))
                 .setExpectation(-Math.pow(2, 54) - 4, values())
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_minDouble() {
+        public void testRoundToDouble_minDouble() {
         BigInteger minDoubleAsBI = DoubleMath.roundToBigInteger(-Double.MAX_VALUE, UNNECESSARY);
         new RoundToDoubleTester(minDoubleAsBI).setExpectation(-Double.MAX_VALUE, values()).test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_minDoubleMinusOne() {
+        public void testRoundToDouble_minDoubleMinusOne() {
         BigInteger minDoubleAsBI =
                 DoubleMath.roundToBigInteger(-Double.MAX_VALUE, UNNECESSARY).subtract(BigInteger.ONE);
         new RoundToDoubleTester(minDoubleAsBI)
@@ -752,8 +733,7 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible
-    public void testRoundToDouble_negativeWayTooBig() {
+        public void testRoundToDouble_negativeWayTooBig() {
         BigInteger bi = BigInteger.ONE.shiftLeft(2 * Double.MAX_EXPONENT).negate();
         new RoundToDoubleTester(bi)
                 .setExpectation(-Double.MAX_VALUE, DOWN, CEILING, HALF_EVEN, HALF_UP, HALF_DOWN)

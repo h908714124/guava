@@ -14,17 +14,13 @@
 
 package com.google.common.cache;
 
-import com.google.common.annotations.GwtCompatible;
-
 /**
  * Calculates the weights of cache entries.
  *
  * @author Charles Fry
  * @since 11.0
  */
-@GwtCompatible
 @FunctionalInterface
-@ElementTypesAreNonnullByDefault
 public interface Weigher<K, V> {
 
     /**

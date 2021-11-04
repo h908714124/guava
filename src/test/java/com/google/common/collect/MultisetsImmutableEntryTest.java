@@ -27,7 +27,6 @@ import java.util.Collections;
  *
  * @author Mike Bostock
  */
-@GwtCompatible
 public class MultisetsImmutableEntryTest extends TestCase {
     private static final String NE = null;
 

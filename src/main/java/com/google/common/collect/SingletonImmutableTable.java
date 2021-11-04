@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -27,8 +25,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Gregory Kick
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 class SingletonImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
     final R singleRowKey;
     final C singleColumnKey;

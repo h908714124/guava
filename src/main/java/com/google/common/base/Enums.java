@@ -34,7 +34,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 9.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Enums {
 
     private Enums() {

@@ -23,7 +23,6 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ForwardingListenableFuture.SimpleForwardingListenableFuture;
-import com.google.errorprone.annotations.concurrent.GuardedBy;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
@@ -62,7 +61,6 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * @since 3.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class MoreExecutors {
     private MoreExecutors() {
     }
@@ -310,10 +308,8 @@ public final class MoreExecutors {
          *   - Shutdown: runningTasks > 0 and shutdown == true
          *   - Terminated: runningTasks == 0 and shutdown == true
          */
-        @GuardedBy("lock")
         private int runningTasks = 0;
 
-        @GuardedBy("lock")
         private boolean shutdown = false;
 
         @Override
@@ -528,8 +524,7 @@ public final class MoreExecutors {
      * @since 23.3 (since 23.1 as {@code sequentialExecutor})
      */
     @Beta
-    @GwtIncompatible
-    public static Executor newSequentialExecutor(Executor delegate) {
+        public static Executor newSequentialExecutor(Executor delegate) {
         return new SequentialExecutor(delegate);
     }
 
@@ -744,8 +739,6 @@ public final class MoreExecutors {
      * An implementation of {@link ExecutorService#invokeAny} for {@link ListeningExecutorService}
      * implementations.
      */
-    @GwtIncompatible
-    @ParametricNullness
     static <T> T invokeAnyImpl(
             ListeningExecutorService executorService,
             Collection<? extends Callable<T>> tasks,
@@ -761,8 +754,6 @@ public final class MoreExecutors {
      * implementations.
      */
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
-    @GwtIncompatible
-    @ParametricNullness
     static <T> T invokeAnyImpl(
             ListeningExecutorService executorService,
             Collection<? extends Callable<T>> tasks,

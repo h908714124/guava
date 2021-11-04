@@ -40,7 +40,6 @@ import static java.util.Objects.requireNonNull;
  * @param <N> Node parameter type
  * @param <E> Edge parameter type
  */
-@ElementTypesAreNonnullByDefault
 abstract class AbstractDirectedNetworkConnections<N, E> implements NetworkConnections<N, E> {
     /** Keys are edges incoming to the origin node, values are the source node. */
     final Map<E, N> inEdgeMap;

@@ -42,7 +42,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @Beta
 @GwtIncompatible // NavigableMap
-@ElementTypesAreNonnullByDefault
 public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K, V>, Serializable {
 
     private static final ImmutableRangeMap<Comparable<?>, Object> EMPTY =

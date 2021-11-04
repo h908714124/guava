@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -49,8 +48,6 @@ import java.util.ListIterator;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ForwardingList<E> extends ForwardingCollection<E>
         implements List<E> {
     // TODO(lowasser): identify places where thread safety is actually lost
@@ -63,7 +60,7 @@ public abstract class ForwardingList<E> extends ForwardingCollection<E>
     protected abstract List<E> delegate();
 
     @Override
-    public void add(int index, @ParametricNullness E element) {
+    public void add(int index, E element) {
         delegate().add(index, element);
     }
 
@@ -73,7 +70,6 @@ public abstract class ForwardingList<E> extends ForwardingCollection<E>
     }
 
     @Override
-    @ParametricNullness
     public E get(int index) {
         return delegate().get(index);
     }
@@ -99,14 +95,12 @@ public abstract class ForwardingList<E> extends ForwardingCollection<E>
     }
 
     @Override
-    @ParametricNullness
     public E remove(int index) {
         return delegate().remove(index);
     }
 
     @Override
-    @ParametricNullness
-    public E set(int index, @ParametricNullness E element) {
+    public E set(int index, E element) {
         return delegate().set(index, element);
     }
 
@@ -132,7 +126,7 @@ public abstract class ForwardingList<E> extends ForwardingCollection<E>
      *
      * @since 7.0
      */
-    protected boolean standardAdd(@ParametricNullness E element) {
+    protected boolean standardAdd(E element) {
         add(size(), element);
         return true;
     }

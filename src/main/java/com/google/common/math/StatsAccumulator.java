@@ -15,7 +15,6 @@
 package com.google.common.math;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.util.Iterator;
 import java.util.stream.DoubleStream;
@@ -37,8 +36,6 @@ import static java.lang.Double.isNaN;
  * @since 20.0
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class StatsAccumulator {
 
     // These fields must satisfy the requirements of Stats' constructor as well as those of the stat

@@ -39,7 +39,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 2.0
  */
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends AbstractBiMap<K, V> {
     private transient Class<K> keyType;
     private transient Class<V> valueType;

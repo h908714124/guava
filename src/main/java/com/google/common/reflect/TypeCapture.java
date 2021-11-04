@@ -24,7 +24,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  *
  * @author Ben Yu
  */
-@ElementTypesAreNonnullByDefault
 abstract class TypeCapture<T> {
 
     /** Returns the captured type. */

@@ -32,7 +32,6 @@ import static com.google.common.collect.CollectPreconditions.checkEntryNotNull;
  * @author Louis Wasserman
  */
 @GwtIncompatible // unnecessary
-@ElementTypesAreNonnullByDefault
 class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
     /**
      * Creates an {@code ImmutableMapEntry} array to hold parameterized entries. The result must never

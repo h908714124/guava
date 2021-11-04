@@ -14,8 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Locale;
 import java.util.concurrent.Executors;
@@ -43,8 +41,6 @@ import static java.util.Objects.requireNonNull;
  * @author Kurt Alfred Kluever
  * @since 4.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class ThreadFactoryBuilder {
     private String nameFormat = null;
     private Boolean daemon = null;

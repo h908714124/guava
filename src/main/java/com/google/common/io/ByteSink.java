@@ -14,8 +14,6 @@
 
 package com.google.common.io;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,8 +43,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 14.0
  * @author Colin Decker
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public abstract class ByteSink {
 
     /** Constructor for use by subclasses. */

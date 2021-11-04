@@ -15,8 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -35,9 +33,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 1.0
  */
 @Beta
-@CanIgnoreReturnValue
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class FakeTimeLimiter implements TimeLimiter {
     @Override
     public <T> T newProxy(
@@ -49,7 +44,6 @@ public final class FakeTimeLimiter implements TimeLimiter {
     }
 
     @Override
-    @ParametricNullness
     public <T> T callWithTimeout(
             Callable<T> callable, long timeoutDuration, TimeUnit timeoutUnit) throws ExecutionException {
         checkNotNull(callable);
@@ -70,7 +64,6 @@ public final class FakeTimeLimiter implements TimeLimiter {
     }
 
     @Override
-    @ParametricNullness
     public <T> T callUninterruptiblyWithTimeout(
             Callable<T> callable, long timeoutDuration, TimeUnit timeoutUnit) throws ExecutionException {
         return callWithTimeout(callable, timeoutDuration, timeoutUnit);

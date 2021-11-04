@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtIncompatible;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -35,8 +34,6 @@ import static com.google.common.util.concurrent.Uninterruptibles.getUninterrupti
  * @since 10.0 (replacing {@code Futures.makeListenable}, which existed in 1.0)
  */
 @Beta
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public final class JdkFutureAdapters {
     /**
      * Assigns a thread to the given {@link Future} to provide {@link ListenableFuture} functionality.

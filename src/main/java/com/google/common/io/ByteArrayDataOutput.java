@@ -14,8 +14,6 @@
 
 package com.google.common.io;
 
-import com.google.common.annotations.GwtIncompatible;
-
 import java.io.DataOutput;
 import java.io.IOException;
 
@@ -26,8 +24,6 @@ import java.io.IOException;
  * @author Jayaprabhakar Kadarkarai
  * @since 1.0
  */
-@GwtIncompatible
-@ElementTypesAreNonnullByDefault
 public interface ByteArrayDataOutput extends DataOutput {
     @Override
     void write(int b);

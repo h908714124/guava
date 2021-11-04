@@ -14,7 +14,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Equivalence;
 import com.google.common.collect.MapMaker.Dummy;
@@ -60,7 +59,6 @@ import static com.google.common.collect.CollectPreconditions.checkRemove;
  * @author Doug Lea ({@code ConcurrentHashMap})
  */
 // TODO(kak): Consider removing @CanIgnoreReturnValue from this class.
-@GwtIncompatible
 @SuppressWarnings({
         "GuardedBy", // TODO(b/35466881): Fix or suppress.
         "nullness", // too much trouble for the payoff

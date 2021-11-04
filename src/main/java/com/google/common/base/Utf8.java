@@ -38,7 +38,6 @@ import static java.lang.Character.MIN_SURROGATE;
  */
 @Beta
 @GwtCompatible(emulated = true)
-@ElementTypesAreNonnullByDefault
 public final class Utf8 {
     /**
      * Returns the number of bytes in the UTF-8-encoded form of {@code sequence}. For a string, this

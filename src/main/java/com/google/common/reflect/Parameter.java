@@ -31,7 +31,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @since 14.0
  */
 @Beta
-@ElementTypesAreNonnullByDefault
 public final class Parameter implements AnnotatedElement {
 
     private final Invokable<?, ?> declaration;

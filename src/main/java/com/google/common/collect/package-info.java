@@ -212,7 +212,5 @@
  *   <li>{@link com.google.common.collect.ForwardingTable}
  * </ul>
  */
-@CheckReturnValue
-@ParametersAreNonnullByDefault
 package com.google.common.collect;
 

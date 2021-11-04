@@ -27,7 +27,6 @@ import com.google.common.base.Preconditions;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
-@ElementTypesAreNonnullByDefault
 final class SingletonImmutableSet<E> extends ImmutableSet<E> {
     // We deliberately avoid caching the asList and hashCode here, to ensure that with
     // compressed oops, a SingletonImmutableSet packs all the way down to the optimal 16 bytes.

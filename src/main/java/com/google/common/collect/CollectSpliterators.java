@@ -16,8 +16,6 @@
 
 package com.google.common.collect;
 
-import com.google.common.annotations.GwtCompatible;
-
 import java.util.Comparator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
@@ -34,8 +32,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.NullnessCasts.uncheckedCastNullableTToT;
 
 /** Spliterator utilities for {@code common.collect} internals. */
-@GwtCompatible
-@ElementTypesAreNonnullByDefault
 final class CollectSpliterators {
     private CollectSpliterators() {
     }
@@ -152,7 +148,7 @@ final class CollectSpliterators {
             T holder = null;
 
             @Override
-            public void accept(@ParametricNullness T t) {
+            public void accept(T t) {
                 this.holder = t;
             }
 

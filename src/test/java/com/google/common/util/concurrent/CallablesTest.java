@@ -46,8 +46,7 @@ public class CallablesTest extends TestCase {
         assertSame(value, callable.call());
     }
 
-    @GwtIncompatible
-    public void testAsAsyncCallable() throws Exception {
+        public void testAsAsyncCallable() throws Exception {
         final String expected = "MyCallableString";
         Callable<String> callable =
                 new Callable<String>() {
@@ -64,8 +63,7 @@ public class CallablesTest extends TestCase {
         assertSame(expected, future.get());
     }
 
-    @GwtIncompatible
-    public void testAsAsyncCallable_exception() throws Exception {
+        public void testAsAsyncCallable_exception() throws Exception {
         final Exception expected = new IllegalArgumentException();
         Callable<String> callable =
                 new Callable<String>() {
