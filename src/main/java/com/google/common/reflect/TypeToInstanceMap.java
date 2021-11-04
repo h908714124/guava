@@ -33,7 +33,7 @@ import java.util.Map;
  * <p>Like any other {@code Map<Class, Object>}, this map may contain entries for primitive types,
  * and a primitive type and its corresponding wrapper type may map to different values.
  *
- * <p>This class's support for {@code null} requires some explanation. For details, see {@link
+ * <p>This class's support for {@code null} requires some explanation. For details, see {@code
  * ClassToInstanceMap}. Its explanation applies equally well to {@code TypeToInstanceMap}.
  *
  * @param <B> the common supertype that all entries must share; often this is simply {@link Object}

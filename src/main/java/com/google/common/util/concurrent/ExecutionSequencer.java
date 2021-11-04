@@ -35,7 +35,7 @@ import static java.util.Objects.requireNonNull;
  * Serializes execution of tasks, somewhat like an "asynchronous {@code synchronized} block." Each
  * {@linkplain #submit enqueued} callable will not be submitted to its associated executor until the
  * previous callable has returned -- and, if the previous callable was an {@link AsyncCallable}, not
- * until the {@code Future} it returned is {@linkplain Future#isDone done} (successful, failed, or
+ * until the {@code Future} it returned is {@code Future#isDone done} (successful, failed, or
  * cancelled).
  *
  * <p>This class has limited support for cancellation and other "early completion":
