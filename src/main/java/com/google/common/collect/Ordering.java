@@ -44,12 +44,12 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * of {@code Comparator} for pre-Java-8 users, in the same sense that {@link FluentIterable} is an
  * enriched {@link Iterable} for pre-Java-8 users.
  *
- * <h3>Three types of methods</h3>
+ * <p><b>Three types of methods</b>
  *
  * Like other fluent types, there are three types of methods present: methods for <i>acquiring</i>,
  * <i>chaining</i>, and <i>using</i>.
  *
- * <h4>Acquiring</h4>
+ * <p><b>Acquiring</b>
  *
  * <p>The common ways to get an instance of {@code Ordering} are:
  *
@@ -60,7 +60,7 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  *   <li>Use the natural ordering, {@link Ordering#natural}
  * </ul>
  *
- * <h4>Chaining</h4>
+ * <p><b>Chaining</b>
  *
  * <p>Then you can use the <i>chaining</i> methods to get an altered version of that {@code
  * Ordering}, including:
@@ -72,7 +72,7 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  *   <li>{@link #nullsFirst} / {@link #nullsLast}
  * </ul>
  *
- * <h4>Using</h4>
+ * <p><b>Using</b>
  *
  * <p>Finally, use the resulting {@code Ordering} anywhere a {@link Comparator} is required, or use
  * any of its special operations, such as:
@@ -83,7 +83,7 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  *   <li>{@link #min} / {@link #max}
  * </ul>
  *
- * <h3>Understanding complex orderings</h3>
+ * <p><b>Understanding complex orderings</b>
  *
  * <p>Complex chained orderings like the following example can be challenging to understand.
  *
@@ -113,14 +113,14 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * encounter a call to {@code reverse}, continue working backwards until a result is determined, and
  * then reverse that result.
  *
- * <h3>Additional notes</h3>
+ * <p><b>Additional notes</b>
  *
  * <p>Except as noted, the orderings returned by the factory methods of this class are serializable
  * if and only if the provided instances that back them are. For example, if {@code ordering} and
  * {@code function} can themselves be serialized, then {@code ordering.onResultOf(function)} can as
  * well.
  *
- * <h3>For Java 8 users</h3>
+ * <p><b>For Java 8 users</b>
  *
  * <p>If you are using Java 8, this class is now obsolete. Most of its functionality is now provided
  * by {@link java.util.stream.Stream Stream} and by {@link Comparator} itself, and the rest can now
@@ -133,7 +133,7 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * code verbose. Whenever following this advice, you should check whether {@code Stream} could be
  * adopted more comprehensively in your code; the end result may be quite a bit simpler.
  *
- * <h3>See also</h3>
+ * <p><b>See also</b>
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/OrderingExplained">{@code Ordering}</a>.

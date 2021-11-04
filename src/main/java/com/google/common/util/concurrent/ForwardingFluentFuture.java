@@ -24,7 +24,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * {@link FluentFuture} that forwards all calls to a delegate.
  *
- * <h3>Extension</h3>
+ * <p><b>Extension</b>
  *
  * If you want a class like {@code FluentFuture} but with extra methods, we recommend declaring your
  * own subclass of {@link ListenableFuture}, complete with a method like {@link #from} to adapt an

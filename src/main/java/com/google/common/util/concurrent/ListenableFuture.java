@@ -30,7 +30,7 @@ import java.util.concurrent.RejectedExecutionException;
  *
  * <p>This class is GWT-compatible.
  *
- * <h3>Purpose</h3>
+ * <p><b>Purpose</b>
  *
  * <p>The main purpose of {@code ListenableFuture} is to help you chain together a graph of
  * asynchronous operations. You can chain them together manually with calls to methods like {@link
@@ -62,7 +62,7 @@ import java.util.concurrent.RejectedExecutionException;
  * }, executor);
  * }</pre>
  *
- * <h3>How to get an instance</h3>
+ * <p><b>How to get an instance</b>
  *
  * <p>We encourage you to return {@code ListenableFuture} from your methods so that your users can
  * take advantage of the {@linkplain Futures utilities built atop the class}. The way that you will

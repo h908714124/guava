@@ -55,8 +55,8 @@ import static java.util.logging.Level.WARNING;
 /**
  * Scans the source of a {@link ClassLoader} and finds all loadable classes and resources.
  *
- * <h2>Prefer <a href="https://github.com/classgraph/classgraph/wiki">ClassGraph</a> over {@code
- * ClassPath}</h2>
+ * <p><b>Prefer <a href="https://github.com/classgraph/classgraph/wiki">ClassGraph</a> over {@code
+ * ClassPath}</b>
  *
  * <p>We recommend using <a href="https://github.com/classgraph/classgraph/wiki">ClassGraph</a>
  * instead of {@code ClassPath}. ClassGraph improves upon {@code ClassPath} in several ways,
@@ -82,7 +82,7 @@ import static java.util.logging.Level.WARNING;
  *       {@code $} in its name is a nested class</a>.
  * </ul>
  *
- * <h2>{@code ClassPath} and symlinks</h2>
+ * <p><b>{@code ClassPath} and symlinks</b>
  *
  * <p>In the case of directory classloaders, symlinks are supported but cycles are not traversed.
  * This guarantees discovery of each <em>unique</em> loadable resource. However, not all possible

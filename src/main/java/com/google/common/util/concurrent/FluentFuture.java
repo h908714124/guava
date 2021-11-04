@@ -40,9 +40,9 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  *         .catching(RpcException.class, e -> false, directExecutor());
  * }</pre>
  *
- * <h3>Alternatives</h3>
+ * <p><b>Alternatives</b>
  *
- * <h4>Frameworks</h4>
+ * <p><b>Frameworks</b>
  *
  * <p>When chaining together a graph of asynchronous operations, you will often find it easier to
  * use a framework. Frameworks automate the process, often adding features like monitoring,
@@ -52,8 +52,8 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  *   <li><a href="https://dagger.dev/producers.html">Dagger Producers</a>
  * </ul>
  *
- * <h4>{@link java.util.concurrent.CompletableFuture} / {@link java.util.concurrent.CompletionStage}
- * </h4>
+ * <p><b>{@link java.util.concurrent.CompletableFuture} / {@link java.util.concurrent.CompletionStage}
+ * </b>
  *
  * <p>Users of {@code CompletableFuture} will likely want to continue using {@code
  * CompletableFuture}. {@code FluentFuture} is targeted at people who use {@code ListenableFuture},
@@ -61,7 +61,7 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * need to adapt between {@code CompletableFuture} and {@code ListenableFuture}, consider <a
  * href="https://github.com/lukas-krecan/future-converter">Future Converter</a>.)
  *
- * <h3>Extension</h3>
+ * <p><b>Extension</b>
  *
  * If you want a class like {@code FluentFuture} but with extra methods, we recommend declaring your
  * own subclass of {@link ListenableFuture}, complete with a method like {@link #from} to adapt an

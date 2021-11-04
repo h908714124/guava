@@ -230,7 +230,7 @@ public final class StatsAccumulator {
      * <p>If these values are a sample drawn from a population, this is also an unbiased estimator of
      * the arithmetic mean of the population.
      *
-     * <h3>Non-finite values</h3>
+     * <p><b>Non-finite values</b>
      *
      * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
      * contains both {@link Double#POSITIVE_INFINITY} and {@link Double#NEGATIVE_INFINITY} then the
@@ -249,7 +249,7 @@ public final class StatsAccumulator {
     /**
      * Returns the sum of the values.
      *
-     * <h3>Non-finite values</h3>
+     * <p><b>Non-finite values</b>
      *
      * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
      * contains both {@link Double#POSITIVE_INFINITY} and {@link Double#NEGATIVE_INFINITY} then the
@@ -270,7 +270,7 @@ public final class StatsAccumulator {
      * is not guaranteed to return zero when the dataset consists of the same value multiple times,
      * due to numerical errors. However, it is guaranteed never to return a negative result.
      *
-     * <h3>Non-finite values</h3>
+     * <p><b>Non-finite values</b>
      *
      * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
      * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
@@ -297,7 +297,7 @@ public final class StatsAccumulator {
      * is not guaranteed to return zero when the dataset consists of the same value multiple times,
      * due to numerical errors. However, it is guaranteed never to return a negative result.
      *
-     * <h3>Non-finite values</h3>
+     * <p><b>Non-finite values</b>
      *
      * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
      * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
@@ -317,7 +317,7 @@ public final class StatsAccumulator {
      * <p>This is not guaranteed to return zero when the dataset consists of the same value multiple
      * times, due to numerical errors. However, it is guaranteed never to return a negative result.
      *
-     * <h3>Non-finite values</h3>
+     * <p><b>Non-finite values</b>
      *
      * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
      * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
@@ -343,7 +343,7 @@ public final class StatsAccumulator {
      * <p>This is not guaranteed to return zero when the dataset consists of the same value multiple
      * times, due to numerical errors. However, it is guaranteed never to return a negative result.
      *
-     * <h3>Non-finite values</h3>
+     * <p><b>Non-finite values</b>
      *
      * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
      * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
@@ -357,7 +357,7 @@ public final class StatsAccumulator {
     /**
      * Returns the lowest value in the dataset. The count must be non-zero.
      *
-     * <h3>Non-finite values</h3>
+     * <p><b>Non-finite values</b>
      *
      * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
      * contains {@link Double#NEGATIVE_INFINITY} and not {@link Double#NaN} then the result is {@link
@@ -375,7 +375,7 @@ public final class StatsAccumulator {
     /**
      * Returns the highest value in the dataset. The count must be non-zero.
      *
-     * <h3>Non-finite values</h3>
+     * <p><b>Non-finite values</b>
      *
      * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
      * contains {@link Double#POSITIVE_INFINITY} and not {@link Double#NaN} then the result is {@link

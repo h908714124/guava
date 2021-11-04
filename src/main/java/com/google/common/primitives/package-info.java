@@ -22,15 +22,15 @@
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/PrimitivesExplained">primitive utilities</a>.
  *
- * <h2>Contents</h2>
+ * <p><b>Contents</b>
  *
- * <h3>General static utilities</h3>
+ * <p><b>General static utilities</b>
  *
  * <ul>
  *   <li>{@link com.google.common.primitives.Primitives}
  * </ul>
  *
- * <h3>Per-type static utilities</h3>
+ * <p><b>Per-type static utilities</b>
  *
  * <ul>
  *   <li>{@link com.google.common.primitives.Booleans}
@@ -53,7 +53,7 @@
  *   <li>{@link com.google.common.primitives.Shorts}
  * </ul>
  *
- * <h3>Value types</h3>
+ * <p><b>Value types</b>
  *
  * <ul>
  *   <li>{@link com.google.common.primitives.UnsignedInteger}

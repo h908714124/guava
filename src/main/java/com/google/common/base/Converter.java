@@ -25,7 +25,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * to {@code A}; used for converting back and forth between <i>different representations of the same
  * information</i>.
  *
- * <h3>Invertibility</h3>
+ * <p><b>Invertibility</b>
  *
  * <p>The reverse operation <b>may</b> be a strict <i>inverse</i> (meaning that {@code
  * converter.reverse().convert(converter.convert(a)).equals(a)} is always true). However, it is very
@@ -41,7 +41,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * <p>Note that it should still be the case that the round-tripped and original objects are
  * <i>similar</i>.
  *
- * <h3>Nullability</h3>
+ * <p><b>Nullability</b>
  *
  * <p>A converter always converts {@code null} to {@code null} and non-null references to non-null
  * references. It would not make sense to consider {@code null} and a non-null reference to be
@@ -50,7 +50,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * behavior for all converters; implementations of {@link #doForward} and {@link #doBackward} are
  * guaranteed to never be passed {@code null}, and must never return {@code null}.
  *
- * <h3>Common ways to use</h3>
+ * <p><b>Common ways to use</b>
  *
  * <p>Getting a converter:
  *
@@ -81,7 +81,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *       be overridden.
  * </ul>
  *
- * <h3>Example</h3>
+ * <p><b>Example</b>
  *
  * <pre>
  *   return new Converter&lt;Integer, String&gt;() {

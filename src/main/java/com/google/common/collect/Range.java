@@ -35,7 +35,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * possible to <i>iterate</i> over these contained values. To do so, pass this range instance and an
  * appropriate {@link DiscreteDomain} to {@link ContiguousSet#create}.
  *
- * <h3>Types of ranges</h3>
+ * <p><b>Types of ranges</b>
  *
  * <p>Each end of the range may be bounded or unbounded. If bounded, there is an associated
  * <i>endpoint</i> value, and the range is considered to be either <i>open</i> (does not include the
@@ -72,7 +72,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *   <li>{@code (a..a)} : <b>invalid</b>; an exception will be thrown
  * </ul>
  *
- * <h3>Warnings</h3>
+ * <p><b>Warnings</b>
  *
  * <ul>
  *   <li>Use immutable value types only, if at all possible. If you must use a mutable type, <b>do
@@ -88,7 +88,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *       <b>This may change in the future.</b>
  * </ul>
  *
- * <h3>Other notes</h3>
+ * <p><b>Other notes</b>
  *
  * <ul>
  *   <li>All ranges are shallow-immutable.
@@ -106,7 +106,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *       property <i>P</i>. See, for example, the definition of {@link #intersection intersection}.
  * </ul>
  *
- * <h3>Further reading</h3>
+ * <p><b>Further reading</b>
  *
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/RangesExplained">{@code Range}</a>.

@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Dispatches events to listeners, and provides ways for listeners to register themselves.
  *
- * <h2>Avoid EventBus</h2>
+ * <p><b>Avoid EventBus</b>
  *
  * <p><b>We recommend against using EventBus.</b> It was designed many years ago, and newer
  * libraries offer better ways to decouple components and react to events.
@@ -83,7 +83,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *       to <a href="https://github.com/google/guava/issues/3311">more verbose</a>.
  * </ul>
  *
- * <h2>EventBus Summary</h2>
+ * <p><b>EventBus Summary</b>
  *
  * <p>The EventBus allows publish-subscribe-style communication between components without requiring
  * the components to explicitly register with one another (and thus be aware of each other). It is
@@ -91,7 +91,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * registration. It is <em>not</em> a general-purpose publish-subscribe system, nor is it intended
  * for interprocess communication.
  *
- * <h2>Receiving Events</h2>
+ * <p><b>Receiving Events</b>
  *
  * <p>To receive events, an object should:
  *
@@ -102,7 +102,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *   <li>Pass itself to an EventBus instance's {@link #register(Object)} method.
  * </ol>
  *
- * <h2>Posting Events</h2>
+ * <p><b>Posting Events</b>
  *
  * <p>To post an event, simply provide the event object to the {@link #post(Object)} method. The
  * EventBus instance will determine the type of event and route it to all registered listeners.
@@ -116,7 +116,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * database load), spawn a thread or queue it for later. (For a convenient way to do this, use an
  * {@link AsyncEventBus}.)
  *
- * <h2>Subscriber Methods</h2>
+ * <p><b>Subscriber Methods</b>
  *
  * <p>Event subscriber methods must accept only one argument: the event.
  *
@@ -129,7 +129,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * AllowConcurrentEvents} annotation. If this annotation is not present, subscriber methods need not
  * worry about being reentrant, unless also called from outside the EventBus.
  *
- * <h2>Dead Events</h2>
+ * <p><b>Dead Events</b>
  *
  * <p>If an event is posted, but no registered subscribers can accept it, it is considered "dead."
  * To give the system a second chance to handle dead events, they are wrapped in an instance of

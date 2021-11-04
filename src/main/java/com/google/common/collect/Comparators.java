@@ -32,7 +32,7 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  * comparator utilities, see either {@code Comparator} itself (for Java 8 or later), or {@code
  * com.google.common.collect.Ordering} (otherwise).
  *
- * <h3>Relationship to {@code Ordering}</h3>
+ * <p><b>Relationship to {@code Ordering}</b>
  *
  * <p>In light of the significant enhancements to {@code Comparator} in Java 8, the overwhelming
  * majority of usages of {@code Ordering} can be written using only built-in JDK APIs. This class is

@@ -25,7 +25,7 @@ import com.google.common.annotations.Beta;
  * <p>This interface is meant to be used as the type of a parameter to graph algorithms (such as
  * breadth first traversal) that only need a way of accessing the successors of a node in a graph.
  *
- * <h3>Usage</h3>
+ * <p><b>Usage</b>
  *
  * Given an algorithm, for example:
  *
@@ -64,7 +64,7 @@ import com.google.common.annotations.Beta;
  * successors, iterating over the edges, etc.) should declare their input to be of a type that
  * provides those capabilities, such as {@link Graph}, {@link ValueGraph}, or {@link Network}.
  *
- * <h3>Additional documentation</h3>
+ * <p><b>Additional documentation</b>
  *
  * <p>See the Guava User Guide for the {@code common.graph} package (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained">"Graphs Explained"</a>) for

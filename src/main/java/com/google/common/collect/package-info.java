@@ -19,7 +19,7 @@
  * working with collections. It is a part of the open-source <a
  * href="http://github.com/google/guava">Guava</a> library.
  *
- * <h2>Collection Types</h2>
+ * <p><b>Collection Types</b>
  *
  * <dl>
  *   <dt>{@link com.google.common.collect.BiMap}
@@ -60,15 +60,15 @@
  *       type.
  * </dl>
  *
- * <h2>Collection Implementations</h2>
+ * <p><b>Collection Implementations</b>
  *
- * <h3>of {@link java.util.List}</h3>
+ * <p><b>of {@link java.util.List}</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ImmutableList}
  * </ul>
  *
- * <h3>of {@link java.util.Set}</h3>
+ * <p><b>of {@link java.util.Set}</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ImmutableSet}
@@ -76,7 +76,7 @@
  *   <li>{@link com.google.common.collect.ContiguousSet} (see {@code Range})
  * </ul>
  *
- * <h3>of {@link java.util.Map}</h3>
+ * <p><b>of {@link java.util.Map}</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ImmutableMap}
@@ -84,7 +84,7 @@
  *   <li>{@link com.google.common.collect.MapMaker}
  * </ul>
  *
- * <h3>of {@link com.google.common.collect.BiMap}</h3>
+ * <p><b>of {@link com.google.common.collect.BiMap}</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ImmutableBiMap}
@@ -93,7 +93,7 @@
  *   <li>{@link com.google.common.collect.EnumHashBiMap}
  * </ul>
  *
- * <h3>of {@link com.google.common.collect.Multiset}</h3>
+ * <p><b>of {@link com.google.common.collect.Multiset}</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ImmutableMultiset}
@@ -105,7 +105,7 @@
  *   <li>{@link com.google.common.collect.ConcurrentHashMultiset}
  * </ul>
  *
- * <h3>of {@link com.google.common.collect.Multimap}</h3>
+ * <p><b>of {@link com.google.common.collect.Multimap}</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ImmutableMultimap}
@@ -118,7 +118,7 @@
  *   <li>{@link com.google.common.collect.LinkedListMultimap}
  * </ul>
  *
- * <h3>of {@link com.google.common.collect.Table}</h3>
+ * <p><b>of {@link com.google.common.collect.Table}</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ImmutableTable}
@@ -127,14 +127,14 @@
  *   <li>{@link com.google.common.collect.TreeBasedTable}
  * </ul>
  *
- * <h3>of {@link com.google.common.collect.ClassToInstanceMap}</h3>
+ * <p><b>of {@link com.google.common.collect.ClassToInstanceMap}</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ImmutableClassToInstanceMap}
  *   <li>{@link com.google.common.collect.MutableClassToInstanceMap}
  * </ul>
  *
- * <h2>Classes of static utility methods</h2>
+ * <p><b>Classes of static utility methods</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.Collections2}
@@ -150,14 +150,14 @@
  *   <li>{@link com.google.common.collect.ObjectArrays}
  * </ul>
  *
- * <h2>Comparison</h2>
+ * <p><b>Comparison</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.Ordering}
  *   <li>{@link com.google.common.collect.ComparisonChain}
  * </ul>
  *
- * <h2>Abstract implementations</h2>
+ * <p><b>Abstract implementations</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.AbstractIterator}
@@ -167,7 +167,7 @@
  *   <li>{@link com.google.common.collect.UnmodifiableListIterator}
  * </ul>
  *
- * <h2>Ranges</h2>
+ * <p><b>Ranges</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.Range}
@@ -176,7 +176,7 @@
  *   <li>{@link com.google.common.collect.ContiguousSet}
  * </ul>
  *
- * <h2>Other</h2>
+ * <p><b>Other</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.Interner}, {@link com.google.common.collect.Interners}
@@ -186,7 +186,7 @@
  *   <li>{@link com.google.common.collect.PeekingIterator}
  * </ul>
  *
- * <h2>Forwarding collections</h2>
+ * <p><b>Forwarding collections</b>
  *
  * <ul>
  *   <li>{@link com.google.common.collect.ForwardingCollection}

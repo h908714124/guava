@@ -34,7 +34,7 @@ import java.util.Set;
  * href="https://github.com/google/guava/wiki/GraphsExplained#choosing-the-right-graph-type">
  * "Choosing the right graph type"</a> section of the Guava User Guide for more details.
  *
- * <h3>Capabilities</h3>
+ * <p><b>Capabilities</b>
  *
  * <p>{@code Network} supports the following use cases (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained#definitions">definitions of
@@ -49,7 +49,7 @@ import java.util.Set;
  *   <li>graphs whose edges are unique objects
  * </ul>
  *
- * <h3>Building a {@code Network}</h3>
+ * <p><b>Building a {@code Network}</b>
  *
  * <p>The implementation classes that {@code common.graph} provides are not public, by design. To
  * create an instance of one of the built-in implementations of {@code Network}, use the {@link
@@ -79,7 +79,7 @@ import java.util.Set;
  * href="https://github.com/google/guava/wiki/GraphsExplained#building-graph-instances">more
  * information on (and examples of) building graphs</a>.
  *
- * <h3>Additional documentation</h3>
+ * <p><b>Additional documentation</b>
  *
  * <p>See the Guava User Guide for the {@code common.graph} package (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained">"Graphs Explained"</a>) for

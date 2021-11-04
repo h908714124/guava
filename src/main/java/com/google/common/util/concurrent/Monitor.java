@@ -75,12 +75,12 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * }
  * }</pre>
  *
- * <h2>Comparison with {@code synchronized} and {@code ReentrantLock}</h2>
+ * <p><b>Comparison with {@code synchronized} and {@code ReentrantLock}</b>
  *
  * <p>The following examples show a simple threadsafe holder expressed using {@code synchronized},
  * {@link ReentrantLock}, and {@code Monitor}.
  *
- * <h3>{@code synchronized}</h3>
+ * <p><b>{@code synchronized}</b>
  *
  * <p>This version is the fewest lines of code, largely because the synchronization mechanism used
  * is built into the language and runtime. But the programmer has to remember to avoid a couple of
@@ -112,7 +112,7 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * }
  * }</pre>
  *
- * <h3>{@code ReentrantLock}</h3>
+ * <p><b>{@code ReentrantLock}</b>
  *
  * <p>This version is much more verbose than the {@code synchronized} version, and still suffers
  * from the need for the programmer to remember to use {@code while} instead of {@code if}. However,
@@ -156,7 +156,7 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * }
  * }</pre>
  *
- * <h3>{@code Monitor}</h3>
+ * <p><b>{@code Monitor}</b>
  *
  * <p>This version adds some verbosity around the {@code Guard} objects, but removes that same
  * verbosity, and more, from the {@code get} and {@code set} methods. {@code Monitor} implements the

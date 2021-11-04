@@ -18,9 +18,9 @@
  * <p>This package is a part of the open-source <a href="http://github.com/google/guava">Guava</a>
  * library.
  *
- * <h2>Contents</h2>
+ * <p><b>Contents</b>
  *
- * <h3>String-related utilities</h3>
+ * <p><b>String-related utilities</b>
  *
  * <ul>
  *   <li>{@link com.google.common.base.Ascii}
@@ -32,7 +32,7 @@
  *   <li>{@link com.google.common.base.Strings}
  * </ul>
  *
- * <h3>Function types</h3>
+ * <p><b>Function types</b>
  *
  * <ul>
  *   <li>{@link com.google.common.base.Function}, {@link com.google.common.base.Functions}
@@ -42,7 +42,7 @@
  *   <li>{@link com.google.common.base.Supplier}, {@link com.google.common.base.Suppliers}
  * </ul>
  *
- * <h3>Other</h3>
+ * <p><b>Other</b>
  *
  * <ul>
  *   <li>{@link com.google.common.base.Defaults}

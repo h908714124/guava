@@ -498,7 +498,7 @@ public final class MoreFiles {
      * after attempting to delete all files, an {@code IOException} is thrown containing those
      * exceptions as {@linkplain Throwable#getSuppressed() suppressed exceptions}.
      *
-     * <h2>Warning: Security of recursive deletes</h2>
+     * <p><b>Warning: Security of recursive deletes</b>
      *
      * <p>On a file system that supports symbolic links and does <i>not</i> support {@link
      * SecureDirectoryStream}, it is possible for a recursive delete to delete files and directories
@@ -569,7 +569,7 @@ public final class MoreFiles {
      * after attempting to delete all files, an {@code IOException} is thrown containing those
      * exceptions as {@linkplain Throwable#getSuppressed() suppressed exceptions}.
      *
-     * <h2>Warning: Security of recursive deletes</h2>
+     * <p><b>Warning: Security of recursive deletes</b>
      *
      * <p>On a file system that supports symbolic links and does <i>not</i> support {@link
      * SecureDirectoryStream}, it is possible for a recursive delete to delete files and directories

@@ -41,8 +41,8 @@ import static com.google.common.base.Preconditions.checkState;
 /**
  * A builder of {@link LoadingCache} and {@link Cache} instances.
  *
- * <h2>Prefer <a href="https://github.com/ben-manes/caffeine/wiki">Caffeine</a> over Guava's caching
- * API</h2>
+ * <p><b>Prefer <a href="https://github.com/ben-manes/caffeine/wiki">Caffeine</a> over Guava's caching
+ * API</b>
  *
  * <p>The successor to Guava's caching API is <a
  * href="https://github.com/ben-manes/caffeine/wiki">Caffeine</a>. Its API is designed to make it a
@@ -77,7 +77,7 @@ import static com.google.common.base.Preconditions.checkState;
  * types by using <a href="https://github.com/lukas-krecan/future-converter#java8-guava">{@code
  * net.javacrumbs.futureconverter.java8guava.FutureConverter}</a>.
  *
- * <h2>More on {@code CacheBuilder}</h2>
+ * <p><b>More on {@code CacheBuilder}</b>
  *
  * {@code CacheBuilder} builds caches with any combination of the following features:
  *

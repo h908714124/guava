@@ -55,7 +55,7 @@ import static java.util.Objects.requireNonNull;
  * shared state without additional synchronization necessary for visibility to later executions of
  * the life cycle methods.
  *
- * <h3>Usage Example</h3>
+ * <p><b>Usage Example</b>
  *
  * <p>Here is a sketch of a service which crawls a website and uses the scheduling capabilities to
  * rate limit itself.

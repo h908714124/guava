@@ -54,7 +54,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * <p><a id="streams"></a>
  *
- * <h3>Comparison to streams</h3>
+ * <p><b>Comparison to streams</b>
  *
  * <p>{@link Stream} is similar to this class, but generally more powerful, and certainly more
  * standard. Key differences include:
@@ -75,7 +75,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *   <li>Streams are standard Java, not requiring a third-party dependency.
  * </ul>
  *
- * <h3>Example</h3>
+ * <p><b>Example</b>
  *
  * <p>Here is an example that accepts a list from a database call, filters it based on a predicate,
  * transforms it by invoking {@code toString()} on each element, and returns the first 10 elements

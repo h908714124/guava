@@ -35,7 +35,7 @@ import java.util.Set;
  * href="https://github.com/google/guava/wiki/GraphsExplained#choosing-the-right-graph-type">
  * "Choosing the right graph type"</a> section of the Guava User Guide for more details.
  *
- * <h3>Capabilities</h3>
+ * <p><b>Capabilities</b>
  *
  * <p>{@code ValueGraph} supports the following use cases (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained#definitions">definitions of
@@ -55,7 +55,7 @@ import java.util.Set;
  * edge multiplicity, but the {@code *degree()} and mutation methods will not reflect your
  * interpretation of the edge value as its multiplicity.)
  *
- * <h3>Building a {@code ValueGraph}</h3>
+ * <p><b>Building a {@code ValueGraph}</b>
  *
  * <p>The implementation classes that {@code common.graph} provides are not public, by design. To
  * create an instance of one of the built-in implementations of {@code ValueGraph}, use the {@link
@@ -85,7 +85,7 @@ import java.util.Set;
  * href="https://github.com/google/guava/wiki/GraphsExplained#building-graph-instances">more
  * information on (and examples of) building graphs</a>.
  *
- * <h3>Additional documentation</h3>
+ * <p><b>Additional documentation</b>
  *
  * <p>See the Guava User Guide for the {@code common.graph} package (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained">"Graphs Explained"</a>) for

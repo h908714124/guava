@@ -22,11 +22,11 @@
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/EventBusExplained">{@code EventBus}</a>.
  *
- * <h2>One-Minute Guide</h2>
+ * <p><b>One-Minute Guide</b>
  *
  * <p>Converting an existing EventListener-based system to use the EventBus is easy.
  *
- * <h3>For Listeners</h3>
+ * <p><b>For Listeners</b>
  *
  * <p>To listen for a specific flavor of event (say, a CustomerChangeEvent)...
  *
@@ -67,7 +67,7 @@
  *       posted but not delivered. (Handy for debugging.)
  * </ul>
  *
- * <h3>For Producers</h3>
+ * <p><b>For Producers</b>
  *
  * <p>To keep track of listeners to your events...
  *
@@ -86,7 +86,7 @@
  *       com.google.common.eventbus.EventBus#post(Object)} method.
  * </ul>
  *
- * <h2>Glossary</h2>
+ * <p><b>Glossary</b>
  *
  * <p>The EventBus system and code use the following terms to discuss event distribution:
  *
@@ -105,9 +105,9 @@
  *   <dd>Making the event available to any <em>listeners</em> through the EventBus.
  * </dl>
  *
- * <h2>FAQ</h2>
+ * <p><b>FAQ</b>
  *
- * <h3>Why must I create my own Event Bus, rather than using a singleton?</h3>
+ * <p><b>Why must I create my own Event Bus, rather than using a singleton?</b>
  *
  * <p>The Event Bus doesn't specify how you use it; there's nothing stopping your application from
  * having separate EventBus instances for each component, or using separate instances to separate
@@ -121,8 +121,8 @@
  * <p>In short, the EventBus is not a singleton because we'd rather not make that decision for you.
  * Use it how you like.
  *
- * <h3>Why use an annotation to mark subscriber methods, rather than requiring the listener to
- * implement an interface?</h3>
+ * <p><b>Why use an annotation to mark subscriber methods, rather than requiring the listener to
+ * implement an interface?</b>
  *
  * <p>We feel that the Event Bus's {@code @Subscribe} annotation conveys your intentions just as
  * explicitly as implementing an interface (or perhaps more so), while leaving you free to place
@@ -167,7 +167,7 @@
  * <p>The intent is actually clearer in the second case: there's less noise code, and the event
  * subscriber has a clear and meaningful name.
  *
- * <h3>What about a generic {@code Subscriber<T>} interface?</h3>
+ * <p><b>What about a generic {@code Subscriber<T>} interface?</b>
  *
  * <p>Some have proposed a generic {@code Subscriber<T>} interface for EventBus listeners. This runs
  * into issues with Java's use of type erasure, not to mention problems in usability.
@@ -185,7 +185,7 @@
  * even if {@code actionPerformed} and {@code keyPressed} aren't very meaningful names, at least you
  * can implement both methods!
  *
- * <h3>Doesn't EventBus destroy static typing and eliminate automated refactoring support?</h3>
+ * <p><b>Doesn't EventBus destroy static typing and eliminate automated refactoring support?</b>
  *
  * <p>Some have freaked out about EventBus's {@code register(Object)} and {@code post(Object)}
  * methods' use of the {@code Object} type.
@@ -204,7 +204,7 @@
  * your subscriber methods are irrelevant. Test code that calls the methods directly, of course,
  * will be affected by your renaming -- but that's what your refactoring tools are for.
  *
- * <h3>What happens if I {@code register} a listener without any subscriber methods?</h3>
+ * <p><b>What happens if I {@code register} a listener without any subscriber methods?</b>
  *
  * <p>Nothing at all.
  *
@@ -215,12 +215,12 @@
  * <p>This way, any object created by the container/factory/environment can hook into the system's
  * event model simply by exposing subscriber methods.
  *
- * <h3>What Event Bus problems can be detected at compile time?</h3>
+ * <p><b>What Event Bus problems can be detected at compile time?</b>
  *
  * <p>Any problem that can be unambiguously detected by Java's type system. For example, defining a
  * subscriber method for a nonexistent event type.
  *
- * <h3>What Event Bus problems can be detected immediately at registration?</h3>
+ * <p><b>What Event Bus problems can be detected immediately at registration?</b>
  *
  * <p>Immediately upon invoking {@code register(Object)}, the listener being registered is checked
  * for the <i>well-formedness</i> of its subscriber methods. Specifically, any methods marked with
@@ -230,7 +230,7 @@
  *
  * <p>(This check could be moved to compile-time using APT, a solution we're researching.)
  *
- * <h3>What Event Bus problems may only be detected later, at runtime?</h3>
+ * <p><b>What Event Bus problems may only be detected later, at runtime?</b>
  *
  * <p>If a component posts events with no registered listeners, it <i>may</i> indicate an error
  * (typically an indication that you missed a {@code @Subscribe} annotation, or that the listening
@@ -244,7 +244,7 @@
  * EventBus receives an event with no registered subscribers, it will turn it into a {@code
  * DeadEvent} and pass it your way -- allowing you to log it or otherwise recover.
  *
- * <h3>How do I test event listeners and their subscriber methods?</h3>
+ * <p><b>How do I test event listeners and their subscriber methods?</b>
  *
  * <p>Because subscriber methods on your listener classes are normal methods, you can simply call
  * them from your test code to simulate the EventBus.
