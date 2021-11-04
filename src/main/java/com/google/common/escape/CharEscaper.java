@@ -17,8 +17,6 @@ package com.google.common.escape;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -84,7 +82,6 @@ public abstract class CharEscaper extends Escaper {
      * @param c the character to escape if necessary
      * @return the replacement characters, or {@code null} if no escaping was needed
      */
-    @CheckForNull
     protected abstract char[] escape(char c);
 
     /**

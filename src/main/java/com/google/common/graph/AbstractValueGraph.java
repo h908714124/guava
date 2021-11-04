@@ -20,7 +20,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -120,7 +119,7 @@ public abstract class AbstractValueGraph<N, V> extends AbstractBaseGraph<N>
     }
 
     @Override
-    public final boolean equals(@CheckForNull Object obj) {
+    public final boolean equals(Object obj) {
         if (obj == this) {
             return true;
         }

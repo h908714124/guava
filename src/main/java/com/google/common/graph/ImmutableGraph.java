@@ -22,7 +22,6 @@ import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.graph.GraphConstants.Presence;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -143,7 +142,6 @@ public class ImmutableGraph<N> extends ForwardingGraph<N> {
          *
          * @return this {@code Builder} object
          */
-        @CanIgnoreReturnValue
         public Builder<N> addNode(N node) {
             mutableGraph.addNode(node);
             return this;
@@ -162,7 +160,6 @@ public class ImmutableGraph<N> extends ForwardingGraph<N> {
          * @throws IllegalArgumentException if the introduction of the edge would violate {@link
          *     #allowsSelfLoops()}
          */
-        @CanIgnoreReturnValue
         public Builder<N> putEdge(N nodeU, N nodeV) {
             mutableGraph.putEdge(nodeU, nodeV);
             return this;
@@ -185,7 +182,6 @@ public class ImmutableGraph<N> extends ForwardingGraph<N> {
          *     #allowsSelfLoops()}
          * @throws IllegalArgumentException if the endpoints are unordered and the graph is directed
          */
-        @CanIgnoreReturnValue
         public Builder<N> putEdge(EndpointPair<N> endpoints) {
             mutableGraph.putEdge(endpoints);
             return this;

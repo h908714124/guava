@@ -16,7 +16,6 @@
 
 package com.google.common.graph;
 
-import javax.annotation.CheckForNull;
 import java.util.Optional;
 import java.util.Set;
 
@@ -143,13 +142,11 @@ abstract class ForwardingNetwork<N, E> extends AbstractNetwork<N, E> {
     }
 
     @Override
-    @CheckForNull
     public E edgeConnectingOrNull(N nodeU, N nodeV) {
         return delegate().edgeConnectingOrNull(nodeU, nodeV);
     }
 
     @Override
-    @CheckForNull
     public E edgeConnectingOrNull(EndpointPair<N> endpoints) {
         return delegate().edgeConnectingOrNull(endpoints);
     }

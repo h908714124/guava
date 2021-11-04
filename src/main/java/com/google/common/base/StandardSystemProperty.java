@@ -16,8 +16,6 @@ package com.google.common.base;
 
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
-
 /**
  * Represents a {@linkplain System#getProperties() standard system property}.
  *
@@ -154,7 +152,6 @@ public enum StandardSystemProperty {
      *   <li>{@code jdk.module.*} (added in Java 9, optional)
      * </ul>
      */
-    @CheckForNull
     public String value() {
         return System.getProperty(key);
     }

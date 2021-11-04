@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotMock;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 
 /**
@@ -53,12 +50,11 @@ import java.util.Map;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@DoNotMock("Use ImmutableClassToInstanceMap or MutableClassToInstanceMap")
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 // If we ever support non-null projections (https://github.com/jspecify/jspecify/issues/86), we
 // we might annotate this as...
-// ClassToInstanceMap<B extends @Nullable Object> extends Map<Class<? extends @Nonnull B>, B>
+// ClassToInstanceMap<B> extends Map<Class<? extends @Nonnull B>, B>
 // ...and change its methods similarly (<T extends @Nonnull B> or Class<@Nonnull T>).
 public interface ClassToInstanceMap<B> extends Map<Class<? extends B>, B> {
     /**
@@ -66,7 +62,6 @@ public interface ClassToInstanceMap<B> extends Map<Class<? extends B>, B> {
      * is present. This will only return a value that was bound to this specific class, not a value
      * that may have been bound to a subtype.
      */
-    @CheckForNull
     <T extends B> T getInstance(Class<T> type);
 
     /**
@@ -76,7 +71,5 @@ public interface ClassToInstanceMap<B> extends Map<Class<? extends B>, B> {
      * @return the value previously associated with this class (possibly {@code null}), or {@code
      *     null} if there was no previous entry.
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     <T extends B> T putInstance(Class<T> type, T value);
 }

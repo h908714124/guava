@@ -20,7 +20,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.UnmodifiableIterator;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractSet;
 import java.util.Map;
 
@@ -60,12 +59,11 @@ final class EdgesConnecting<E> extends AbstractSet<E> {
     }
 
     @Override
-    public boolean contains(@CheckForNull Object edge) {
+    public boolean contains(Object edge) {
         E connectingEdge = getConnectingEdge();
         return (connectingEdge != null && connectingEdge.equals(edge));
     }
 
-    @CheckForNull
     private E getConnectingEdge() {
         return nodeToOutEdge.get(targetNode);
     }

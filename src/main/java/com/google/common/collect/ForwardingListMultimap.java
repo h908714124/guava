@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.List;
 
 /**
@@ -37,7 +34,7 @@ import java.util.List;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingListMultimap<K extends @Nullable Object, V extends @Nullable Object>
+public abstract class ForwardingListMultimap<K, V>
         extends ForwardingMultimap<K, V> implements ListMultimap<K, V> {
 
     /** Constructor for use by subclasses. */
@@ -52,13 +49,11 @@ public abstract class ForwardingListMultimap<K extends @Nullable Object, V exten
         return delegate().get(key);
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public List<V> removeAll(@CheckForNull Object key) {
+    public List<V> removeAll(Object key) {
         return delegate().removeAll(key);
     }
 
-    @CanIgnoreReturnValue
     @Override
     public List<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
         return delegate().replaceValues(key, values);

@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.SortedMap;
@@ -54,7 +52,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingSortedMap<K extends @Nullable Object, V extends @Nullable Object>
+public abstract class ForwardingSortedMap<K, V>
         extends ForwardingMap<K, V> implements SortedMap<K, V> {
     // TODO(lowasser): identify places where thread safety is actually lost
 
@@ -66,7 +64,6 @@ public abstract class ForwardingSortedMap<K extends @Nullable Object, V extends 
     protected abstract SortedMap<K, V> delegate();
 
     @Override
-    @CheckForNull
     public Comparator<? super K> comparator() {
         return delegate().comparator();
     }
@@ -116,11 +113,11 @@ public abstract class ForwardingSortedMap<K extends @Nullable Object, V extends 
     // unsafe, but worst case is a CCE or NPE is thrown, which callers will be expecting
     @SuppressWarnings({"unchecked", "nullness"})
     static int unsafeCompare(
-            @CheckForNull Comparator<?> comparator, @CheckForNull Object o1, @CheckForNull Object o2) {
+            Comparator<?> comparator, Object o1, Object o2) {
         if (comparator == null) {
-            return ((Comparable<@Nullable Object>) o1).compareTo(o2);
+            return ((Comparable<Object>) o1).compareTo(o2);
         } else {
-            return ((Comparator<@Nullable Object>) comparator).compare(o1, o2);
+            return ((Comparator<Object>) comparator).compare(o1, o2);
         }
     }
 
@@ -133,11 +130,11 @@ public abstract class ForwardingSortedMap<K extends @Nullable Object, V extends 
      */
     @Override
     @Beta
-    protected boolean standardContainsKey(@CheckForNull Object key) {
+    protected boolean standardContainsKey(Object key) {
         try {
             // any CCE or NPE will be caught
             @SuppressWarnings({"unchecked", "nullness"})
-            SortedMap<@Nullable Object, V> self = (SortedMap<@Nullable Object, V>) this;
+            SortedMap<Object, V> self = (SortedMap<Object, V>) this;
             Object ceilingKey = self.tailMap(key).firstKey();
             return unsafeCompare(comparator(), ceilingKey, key) == 0;
         } catch (ClassCastException | NoSuchElementException | NullPointerException e) {

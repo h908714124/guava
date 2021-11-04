@@ -29,10 +29,8 @@ import com.google.common.base.Charsets;
 import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -51,7 +49,6 @@ import static com.google.common.primitives.UnsignedBytes.toInt;
  * @author Dimitris Andreou
  * @author Kurt Alfred Kluever
  */
-@Immutable
 @ElementTypesAreNonnullByDefault
 final class Murmur3_32HashFunction extends AbstractHashFunction implements Serializable {
     static final HashFunction MURMUR3_32 =
@@ -93,7 +90,7 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object instanceof Murmur3_32HashFunction) {
             Murmur3_32HashFunction other = (Murmur3_32HashFunction) object;
             return seed == other.seed && supplementaryPlaneFix == other.supplementaryPlaneFix;
@@ -268,7 +265,6 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
         return HashCode.fromInt(h1);
     }
 
-    @CanIgnoreReturnValue
     private static final class Murmur3_32Hasher extends AbstractHasher {
         private int h1;
         private long buffer;

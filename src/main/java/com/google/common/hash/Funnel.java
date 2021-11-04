@@ -15,8 +15,6 @@
 package com.google.common.hash;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.DoNotMock;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.Serializable;
 
@@ -44,9 +42,8 @@ import java.io.Serializable;
  * @since 11.0
  */
 @Beta
-@DoNotMock("Implement with a lambda")
 @ElementTypesAreNonnullByDefault
-public interface Funnel<T extends @Nullable Object> extends Serializable {
+public interface Funnel<T> extends Serializable {
 
     /**
      * Sends a stream of data from the {@code from} object into the sink {@code into}. There is no

@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Map.Entry;
 
 /**
@@ -31,7 +29,7 @@ import java.util.Map.Entry;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-abstract class AbstractMapEntry<K extends @Nullable Object, V extends @Nullable Object>
+abstract class AbstractMapEntry<K, V>
         implements Entry<K, V> {
 
     @Override
@@ -49,7 +47,7 @@ abstract class AbstractMapEntry<K extends @Nullable Object, V extends @Nullable 
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object instanceof Entry) {
             Entry<?, ?> that = (Entry<?, ?>) object;
             return Objects.equal(this.getKey(), that.getKey())

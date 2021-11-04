@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
 
-import javax.annotation.CheckForNull;
 import java.util.function.BiConsumer;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -54,8 +51,7 @@ final class SingletonImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object key) {
+    public V get(Object key) {
         return singleKey.equals(key) ? singleValue : null;
     }
 
@@ -70,12 +66,12 @@ final class SingletonImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     @Override
-    public boolean containsKey(@CheckForNull Object key) {
+    public boolean containsKey(Object key) {
         return singleKey.equals(key);
     }
 
     @Override
-    public boolean containsValue(@CheckForNull Object value) {
+    public boolean containsValue(Object value) {
         return singleValue.equals(value);
     }
 
@@ -94,11 +90,7 @@ final class SingletonImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
         return ImmutableSet.of(singleKey);
     }
 
-    @CheckForNull
     private final transient ImmutableBiMap<V, K> inverse;
-    @LazyInit
-    @RetainedWith
-    @CheckForNull
     private transient ImmutableBiMap<V, K> lazyInverse;
 
     @Override

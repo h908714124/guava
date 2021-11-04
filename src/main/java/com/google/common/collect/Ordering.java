@@ -19,10 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -147,7 +144,7 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class Ordering<T extends @Nullable Object> implements Comparator<T> {
+public abstract class Ordering<T> implements Comparator<T> {
     // Natural order
 
     /**
@@ -181,7 +178,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
      *     wraps that comparator
      */
     @GwtCompatible(serializable = true)
-    public static <T extends @Nullable Object> Ordering<T> from(Comparator<T> comparator) {
+    public static <T> Ordering<T> from(Comparator<T> comparator) {
         return (comparator instanceof Ordering)
                 ? (Ordering<T>) comparator
                 : new ComparatorOrdering<T>(comparator);
@@ -194,7 +191,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
      */
     @GwtCompatible(serializable = true)
     @Deprecated
-    public static <T extends @Nullable Object> Ordering<T> from(Ordering<T> ordering) {
+    public static <T> Ordering<T> from(Ordering<T> ordering) {
         return checkNotNull(ordering);
     }
 
@@ -281,7 +278,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
      */
     @GwtCompatible(serializable = true)
     @SuppressWarnings("unchecked")
-    public static Ordering<@Nullable Object> allEqual() {
+    public static Ordering<Object> allEqual() {
         return AllEqualOrdering.INSTANCE;
     }
 
@@ -314,16 +311,16 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
      * @since 2.0
      */
     // TODO(kevinb): copy to Comparators, etc.
-    public static Ordering<@Nullable Object> arbitrary() {
+    public static Ordering<Object> arbitrary() {
         return ArbitraryOrderingHolder.ARBITRARY_ORDERING;
     }
 
     private static class ArbitraryOrderingHolder {
-        static final Ordering<@Nullable Object> ARBITRARY_ORDERING = new ArbitraryOrdering();
+        static final Ordering<Object> ARBITRARY_ORDERING = new ArbitraryOrdering();
     }
 
     @VisibleForTesting
-    static class ArbitraryOrdering extends Ordering<@Nullable Object> {
+    static class ArbitraryOrdering extends Ordering<Object> {
 
         private final AtomicInteger counter = new AtomicInteger(0);
         private final ConcurrentMap<Object, Integer> uids =
@@ -345,7 +342,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
         }
 
         @Override
-        public int compare(@CheckForNull Object left, @CheckForNull Object right) {
+        public int compare(Object left, Object right) {
             if (left == right) {
                 return 0;
             } else if (left == null) {
@@ -418,7 +415,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
     // type parameter <S> lets us avoid the extra <String> in statements like:
     // Ordering<String> o = Ordering.<String>natural().nullsFirst();
     @GwtCompatible(serializable = true)
-    public <S extends T> Ordering<@Nullable S> nullsFirst() {
+    public <S extends T> Ordering<S> nullsFirst() {
         return new NullsFirstOrdering<S>(this);
     }
 
@@ -431,7 +428,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
     // type parameter <S> lets us avoid the extra <String> in statements like:
     // Ordering<String> o = Ordering.<String>natural().nullsLast();
     @GwtCompatible(serializable = true)
-    public <S extends T> Ordering<@Nullable S> nullsLast() {
+    public <S extends T> Ordering<S> nullsLast() {
         return new NullsLastOrdering<S>(this);
     }
 
@@ -449,7 +446,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
      * can omit the comparator if it is the natural order).
      */
     @GwtCompatible(serializable = true)
-    public <F extends @Nullable Object> Ordering<F> onResultOf(Function<F, ? extends T> function) {
+    public <F> Ordering<F> onResultOf(Function<F, ? extends T> function) {
         return new ByFunctionOrdering<>(function, this);
     }
 
@@ -495,7 +492,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
      * @param comparators the comparators to try in order
      */
     @GwtCompatible(serializable = true)
-    public static <T extends @Nullable Object> Ordering<T> compound(
+    public static <T> Ordering<T> compound(
             Iterable<? extends Comparator<? super T>> comparators) {
         return new CompoundOrdering<T>(comparators);
     }
@@ -532,7 +529,6 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
 
     // Regular instance methods
 
-    @CanIgnoreReturnValue // TODO(kak): Consider removing this
     @Override
     public abstract int compare(@ParametricNullness T left, @ParametricNullness T right);
 

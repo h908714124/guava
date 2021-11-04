@@ -17,9 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -31,10 +29,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 final class NaturalOrdering extends Ordering<Comparable<?>> implements Serializable {
     static final NaturalOrdering INSTANCE = new NaturalOrdering();
 
-    @CheckForNull
-    private transient Ordering<@Nullable Comparable<?>> nullsFirst;
-    @CheckForNull
-    private transient Ordering<@Nullable Comparable<?>> nullsLast;
+    private transient Ordering<Comparable<?>> nullsFirst;
+    private transient Ordering<Comparable<?>> nullsLast;
 
     @Override
     public int compare(Comparable<?> left, Comparable<?> right) {
@@ -44,21 +40,21 @@ final class NaturalOrdering extends Ordering<Comparable<?>> implements Serializa
     }
 
     @Override
-    public <S extends Comparable<?>> Ordering<@Nullable S> nullsFirst() {
-        Ordering<@Nullable Comparable<?>> result = nullsFirst;
+    public <S extends Comparable<?>> Ordering<S> nullsFirst() {
+        Ordering<Comparable<?>> result = nullsFirst;
         if (result == null) {
             result = nullsFirst = super.<Comparable<?>>nullsFirst();
         }
-        return (Ordering<@Nullable S>) result;
+        return (Ordering<S>) result;
     }
 
     @Override
-    public <S extends Comparable<?>> Ordering<@Nullable S> nullsLast() {
-        Ordering<@Nullable Comparable<?>> result = nullsLast;
+    public <S extends Comparable<?>> Ordering<S> nullsLast() {
+        Ordering<Comparable<?>> result = nullsLast;
         if (result == null) {
             result = nullsLast = super.<Comparable<?>>nullsLast();
         }
-        return (Ordering<@Nullable S>) result;
+        return (Ordering<S>) result;
     }
 
     @Override

@@ -15,8 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.DoNotMock;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,9 +32,6 @@ import java.util.concurrent.TimeUnit;
  * @author Chris Povirk
  * @since 10.0
  */
-@DoNotMock(
-        "Use TestingExecutors.sameThreadScheduledExecutor, or wrap a real Executor from "
-                + "java.util.concurrent.Executors with MoreExecutors.listeningDecorator")
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
 public interface ListeningExecutorService extends ExecutorService {
@@ -45,7 +40,7 @@ public interface ListeningExecutorService extends ExecutorService {
      * @throws RejectedExecutionException {@inheritDoc}
      */
     @Override
-    <T extends @Nullable Object> ListenableFuture<T> submit(Callable<T> task);
+    <T> ListenableFuture<T> submit(Callable<T> task);
 
     /**
      * @return a {@code ListenableFuture} representing pending completion of the task
@@ -59,7 +54,7 @@ public interface ListeningExecutorService extends ExecutorService {
      * @throws RejectedExecutionException {@inheritDoc}
      */
     @Override
-    <T extends @Nullable Object> ListenableFuture<T> submit(
+    <T> ListenableFuture<T> submit(
             Runnable task, @ParametricNullness T result);
 
     /**
@@ -81,7 +76,7 @@ public interface ListeningExecutorService extends ExecutorService {
      * @throws NullPointerException if any task is null
      */
     @Override
-    <T extends @Nullable Object> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks)
+    <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks)
             throws InterruptedException;
 
     /**
@@ -104,7 +99,7 @@ public interface ListeningExecutorService extends ExecutorService {
      * @throws NullPointerException if any task is null
      */
     @Override
-    <T extends @Nullable Object> List<Future<T>> invokeAll(
+    <T> List<Future<T>> invokeAll(
             Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
             throws InterruptedException;
 }

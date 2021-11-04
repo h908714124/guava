@@ -14,7 +14,6 @@
 
 package com.google.common.base.internal;
 
-import javax.annotation.CheckForNull;
 import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
@@ -117,10 +116,8 @@ public class Finalizer implements Runnable {
     // By preference, we will use the Thread constructor that has an `inheritThreadLocals` parameter.
     // But before Java 9, our only way not to inherit ThreadLocals is to zap them after the thread
     // is created, by accessing a private field.
-    @CheckForNull
     private static final Constructor<Thread> bigThreadConstructor = getBigThreadConstructor();
 
-    @CheckForNull
     private static final Field inheritableThreadLocals =
             (bigThreadConstructor == null) ? getInheritableThreadLocalsField() : null;
 
@@ -192,7 +189,6 @@ public class Finalizer implements Runnable {
     }
 
     /** Looks up FinalizableReference.finalizeReferent() method. */
-    @CheckForNull
     private Method getFinalizeReferentMethod() {
         Class<?> finalizableReferenceClass = finalizableReferenceClassReference.get();
         if (finalizableReferenceClass == null) {
@@ -211,7 +207,6 @@ public class Finalizer implements Runnable {
         }
     }
 
-    @CheckForNull
     private static Field getInheritableThreadLocalsField() {
         try {
             Field inheritableThreadLocals = Thread.class.getDeclaredField("inheritableThreadLocals");
@@ -226,7 +221,6 @@ public class Finalizer implements Runnable {
         }
     }
 
-    @CheckForNull
     private static Constructor<Thread> getBigThreadConstructor() {
         try {
             return Thread.class.getConstructor(

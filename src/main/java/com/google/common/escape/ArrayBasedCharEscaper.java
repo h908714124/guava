@@ -17,7 +17,6 @@ package com.google.common.escape;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -124,7 +123,6 @@ public abstract class ArrayBasedCharEscaper extends CharEscaper {
      * @return the replacement characters, or {@code null} if no escaping was required
      */
     @Override
-    @CheckForNull
     protected final char[] escape(char c) {
         if (c < replacementsLength) {
             char[] chars = replacements[c];
@@ -151,6 +149,5 @@ public abstract class ArrayBasedCharEscaper extends CharEscaper {
      * @return the replacement characters, or {@code null} if no escaping was required
      */
     // TODO(dbeaumont,cpovirk): Rename this something better once refactoring done
-    @CheckForNull
     protected abstract char[] escapeUnsafe(char c);
 }

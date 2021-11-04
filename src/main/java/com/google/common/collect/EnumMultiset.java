@@ -17,9 +17,7 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -96,7 +94,7 @@ public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
         this.counts = new int[enumConstants.length];
     }
 
-    private boolean isActuallyE(@CheckForNull Object o) {
+    private boolean isActuallyE(Object o) {
         if (o instanceof Enum) {
             Enum<?> e = (Enum<?>) o;
             int index = e.ordinal();
@@ -127,7 +125,7 @@ public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
     }
 
     @Override
-    public int count(@CheckForNull Object element) {
+    public int count(Object element) {
         // isActuallyE checks for null, but we check explicitly to help nullness checkers.
         if (element == null || !isActuallyE(element)) {
             return 0;
@@ -137,7 +135,6 @@ public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
     }
 
     // Modification Operations
-    @CanIgnoreReturnValue
     @Override
     public int add(E element, int occurrences) {
         checkIsE(element);
@@ -158,9 +155,8 @@ public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
     }
 
     // Modification Operations
-    @CanIgnoreReturnValue
     @Override
-    public int remove(@CheckForNull Object element, int occurrences) {
+    public int remove(Object element, int occurrences) {
         // isActuallyE checks for null, but we check explicitly to help nullness checkers.
         if (element == null || !isActuallyE(element)) {
             return 0;
@@ -186,7 +182,6 @@ public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
     }
 
     // Modification Operations
-    @CanIgnoreReturnValue
     @Override
     public int setCount(E element, int count) {
         checkIsE(element);

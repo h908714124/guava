@@ -19,11 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.math.LongMath;
-import com.google.errorprone.annotations.InlineMe;
-import com.google.errorprone.annotations.InlineMeValidationDisabled;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
@@ -64,7 +60,7 @@ public final class Streams {
      * Returns a sequential {@link Stream} of the contents of {@code iterable}, delegating to {@link
      * Collection#stream} if possible.
      */
-    public static <T extends @Nullable Object> Stream<T> stream(Iterable<T> iterable) {
+    public static <T> Stream<T> stream(Iterable<T> iterable) {
         return (iterable instanceof Collection)
                 ? ((Collection<T>) iterable).stream()
                 : StreamSupport.stream(iterable.spliterator(), false);
@@ -77,8 +73,7 @@ public final class Streams {
      */
     @Beta
     @Deprecated
-    @InlineMe(replacement = "collection.stream()")
-    public static <T extends @Nullable Object> Stream<T> stream(Collection<T> collection) {
+    public static <T> Stream<T> stream(Collection<T> collection) {
         return collection.stream();
     }
 
@@ -87,7 +82,7 @@ public final class Streams {
      * {@code iterator} directly after passing it to this method.
      */
     @Beta
-    public static <T extends @Nullable Object> Stream<T> stream(Iterator<T> iterator) {
+    public static <T> Stream<T> stream(Iterator<T> iterator) {
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, 0), false);
     }
 
@@ -107,8 +102,6 @@ public final class Streams {
      * <p><b>Java 9 users:</b> use {@code optional.stream()} instead.
      */
     @Beta
-    @InlineMe(replacement = "optional.stream()")
-    @InlineMeValidationDisabled("Java 9+ API only")
     public static <T> Stream<T> stream(java.util.Optional<T> optional) {
         return optional.isPresent() ? Stream.of(optional.get()) : Stream.empty();
     }
@@ -120,8 +113,6 @@ public final class Streams {
      * <p><b>Java 9 users:</b> use {@code optional.stream()} instead.
      */
     @Beta
-    @InlineMe(replacement = "optional.stream()")
-    @InlineMeValidationDisabled("Java 9+ API only")
     public static IntStream stream(OptionalInt optional) {
         return optional.isPresent() ? IntStream.of(optional.getAsInt()) : IntStream.empty();
     }
@@ -133,8 +124,6 @@ public final class Streams {
      * <p><b>Java 9 users:</b> use {@code optional.stream()} instead.
      */
     @Beta
-    @InlineMe(replacement = "optional.stream()")
-    @InlineMeValidationDisabled("Java 9+ API only")
     public static LongStream stream(OptionalLong optional) {
         return optional.isPresent() ? LongStream.of(optional.getAsLong()) : LongStream.empty();
     }
@@ -146,8 +135,6 @@ public final class Streams {
      * <p><b>Java 9 users:</b> use {@code optional.stream()} instead.
      */
     @Beta
-    @InlineMe(replacement = "optional.stream()")
-    @InlineMeValidationDisabled("Java 9+ API only")
     public static DoubleStream stream(OptionalDouble optional) {
         return optional.isPresent() ? DoubleStream.of(optional.getAsDouble()) : DoubleStream.empty();
     }
@@ -169,7 +156,7 @@ public final class Streams {
      * @see Stream#concat(Stream, Stream)
      */
     @SafeVarargs
-    public static <T extends @Nullable Object> Stream<T> concat(Stream<? extends T>... streams) {
+    public static <T> Stream<T> concat(Stream<? extends T>... streams) {
         // TODO(lowasser): consider an implementation that can support SUBSIZED
         boolean isParallel = false;
         int characteristics = Spliterator.ORDERED | Spliterator.SIZED | Spliterator.NONNULL;
@@ -315,7 +302,7 @@ public final class Streams {
      * This may harm parallel performance.
      */
     @Beta
-    public static <A extends @Nullable Object, B extends @Nullable Object, R extends @Nullable Object>
+    public static <A, B, R>
     Stream<R> zip(
             Stream<A> streamA, Stream<B> streamB, BiFunction<? super A, ? super B, R> function) {
         checkNotNull(streamA);
@@ -378,7 +365,7 @@ public final class Streams {
      * @since 22.0
      */
     @Beta
-    public static <A extends @Nullable Object, B extends @Nullable Object> void forEachPair(
+    public static <A, B> void forEachPair(
             Stream<A> streamA, Stream<B> streamB, BiConsumer<? super A, ? super B> consumer) {
         checkNotNull(consumer);
 
@@ -394,7 +381,7 @@ public final class Streams {
     }
 
     // Use this carefully - it doesn't implement value semantics
-    private static class TemporaryPair<A extends @Nullable Object, B extends @Nullable Object> {
+    private static class TemporaryPair<A, B> {
         @ParametricNullness
         final A a;
         @ParametricNullness
@@ -429,7 +416,7 @@ public final class Streams {
      * was defined.
      */
     @Beta
-    public static <T extends @Nullable Object, R extends @Nullable Object> Stream<R> mapWithIndex(
+    public static <T, R> Stream<R> mapWithIndex(
             Stream<T> stream, FunctionWithIndex<? super T, ? extends R> function) {
         checkNotNull(stream);
         checkNotNull(function);
@@ -457,7 +444,6 @@ public final class Streams {
                     .onClose(stream::close);
         }
         class Splitr extends MapWithIndexSpliterator<Spliterator<T>, R, Splitr> implements Consumer<T> {
-            @CheckForNull
             T holder;
 
             Splitr(Spliterator<T> splitr, long index) {
@@ -514,7 +500,7 @@ public final class Streams {
      * was defined.
      */
     @Beta
-    public static <R extends @Nullable Object> Stream<R> mapWithIndex(
+    public static <R> Stream<R> mapWithIndex(
             IntStream stream, IntFunctionWithIndex<R> function) {
         checkNotNull(stream);
         checkNotNull(function);
@@ -594,7 +580,7 @@ public final class Streams {
      * was defined.
      */
     @Beta
-    public static <R extends @Nullable Object> Stream<R> mapWithIndex(
+    public static <R> Stream<R> mapWithIndex(
             LongStream stream, LongFunctionWithIndex<R> function) {
         checkNotNull(stream);
         checkNotNull(function);
@@ -674,7 +660,7 @@ public final class Streams {
      * was defined.
      */
     @Beta
-    public static <R extends @Nullable Object> Stream<R> mapWithIndex(
+    public static <R> Stream<R> mapWithIndex(
             DoubleStream stream, DoubleFunctionWithIndex<R> function) {
         checkNotNull(stream);
         checkNotNull(function);
@@ -740,7 +726,7 @@ public final class Streams {
      * @since 21.0
      */
     @Beta
-    public interface FunctionWithIndex<T extends @Nullable Object, R extends @Nullable Object> {
+    public interface FunctionWithIndex<T, R> {
         /** Applies this function to the given argument and its index within a stream. */
         @ParametricNullness
         R apply(@ParametricNullness T from, long index);
@@ -748,7 +734,7 @@ public final class Streams {
 
     private abstract static class MapWithIndexSpliterator<
             F extends Spliterator<?>,
-            R extends @Nullable Object,
+            R,
             S extends MapWithIndexSpliterator<F, R, S>>
             implements Spliterator<R> {
         final F fromSpliterator;
@@ -762,7 +748,6 @@ public final class Streams {
         abstract S createSplit(F from, long i);
 
         @Override
-        @CheckForNull
         public S trySplit() {
             Spliterator<?> splitOrNull = fromSpliterator.trySplit();
             if (splitOrNull == null) {
@@ -796,7 +781,7 @@ public final class Streams {
      * @since 21.0
      */
     @Beta
-    public interface IntFunctionWithIndex<R extends @Nullable Object> {
+    public interface IntFunctionWithIndex<R> {
         /** Applies this function to the given argument and its index within a stream. */
         @ParametricNullness
         R apply(int from, long index);
@@ -811,7 +796,7 @@ public final class Streams {
      * @since 21.0
      */
     @Beta
-    public interface LongFunctionWithIndex<R extends @Nullable Object> {
+    public interface LongFunctionWithIndex<R> {
         /** Applies this function to the given argument and its index within a stream. */
         @ParametricNullness
         R apply(long from, long index);
@@ -826,7 +811,7 @@ public final class Streams {
      * @since 21.0
      */
     @Beta
-    public interface DoubleFunctionWithIndex<R extends @Nullable Object> {
+    public interface DoubleFunctionWithIndex<R> {
         /** Applies this function to the given argument and its index within a stream. */
         @ParametricNullness
         R apply(double from, long index);
@@ -848,7 +833,7 @@ public final class Streams {
      * @throws NullPointerException if the last element of the stream is null
      */
     /*
-     * By declaring <T> instead of <T extends @Nullable Object>, we declare this method as requiring a
+     * By declaring <T> instead of <T>, we declare this method as requiring a
      * stream whose elements are non-null. However, the method goes out of its way to still handle
      * nulls in the stream. This means that the method can safely be used with a stream that contains
      * nulls as long as the *last* element is *not* null.
@@ -861,7 +846,6 @@ public final class Streams {
     public static <T> java.util.Optional<T> findLast(Stream<T> stream) {
         class OptionalState {
             boolean set = false;
-            @CheckForNull
             T value = null;
 
             void set(T value) {

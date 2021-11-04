@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -36,7 +35,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-final class ForwardingFluentFuture<V extends @Nullable Object> extends FluentFuture<V> {
+final class ForwardingFluentFuture<V> extends FluentFuture<V> {
     private final ListenableFuture<V> delegate;
 
     ForwardingFluentFuture(ListenableFuture<V> delegate) {

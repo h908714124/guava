@@ -20,7 +20,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
 
 import java.util.Map;
@@ -166,7 +165,6 @@ public final class ImmutableNetwork<N, E> extends StandardNetwork<N, E> {
          *
          * @return this {@code Builder} object
          */
-        @CanIgnoreReturnValue
         public ImmutableNetwork.Builder<N, E> addNode(N node) {
             mutableNetwork.addNode(node);
             return this;
@@ -193,7 +191,6 @@ public final class ImmutableNetwork<N, E> extends StandardNetwork<N, E> {
          * @throws IllegalArgumentException if the introduction of the edge would violate {@link
          *     #allowsParallelEdges()} or {@link #allowsSelfLoops()}
          */
-        @CanIgnoreReturnValue
         public ImmutableNetwork.Builder<N, E> addEdge(N nodeU, N nodeV, E edge) {
             mutableNetwork.addEdge(nodeU, nodeV, edge);
             return this;
@@ -224,7 +221,6 @@ public final class ImmutableNetwork<N, E> extends StandardNetwork<N, E> {
          *     #allowsParallelEdges()} or {@link #allowsSelfLoops()}
          * @throws IllegalArgumentException if the endpoints are unordered and the network is directed
          */
-        @CanIgnoreReturnValue
         public ImmutableNetwork.Builder<N, E> addEdge(EndpointPair<N> endpoints, E edge) {
             mutableNetwork.addEdge(endpoints, edge);
             return this;

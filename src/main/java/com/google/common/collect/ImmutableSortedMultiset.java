@@ -15,12 +15,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
@@ -82,7 +77,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
      *
      * @since 22.0
      */
-    public static <T extends @Nullable Object, E>
+    public static <T, E>
     Collector<T, ?, ImmutableSortedMultiset<E>> toImmutableSortedMultiset(
             Comparator<? super E> comparator,
             Function<? super T, ? extends E> elementFunction,
@@ -333,8 +328,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
     @Override
     public abstract ImmutableSortedSet<E> elementSet();
 
-    @LazyInit
-    @CheckForNull
     transient ImmutableSortedMultiset<E> descendingMultiset;
 
     @Override
@@ -357,11 +350,8 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public final Entry<E> pollFirstEntry() {
         throw new UnsupportedOperationException();
     }
@@ -374,11 +364,8 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public final Entry<E> pollLastEntry() {
         throw new UnsupportedOperationException();
     }
@@ -473,7 +460,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
          * @return this {@code Builder} object
          * @throws NullPointerException if {@code element} is null
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> add(E element) {
             super.add(element);
@@ -487,7 +473,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
          * @return this {@code Builder} object
          * @throws NullPointerException if {@code elements} is null or contains a null element
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> add(E... elements) {
             super.add(elements);
@@ -505,7 +490,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
          * @throws IllegalArgumentException if {@code occurrences} is negative, or if this operation
          *     would result in more than {@link Integer#MAX_VALUE} occurrences of the element
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> addCopies(E element, int occurrences) {
             super.addCopies(element, occurrences);
@@ -522,7 +506,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
          * @throws NullPointerException if {@code element} is null
          * @throws IllegalArgumentException if {@code count} is negative
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> setCount(E element, int count) {
             super.setCount(element, count);
@@ -536,7 +519,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
          * @return this {@code Builder} object
          * @throws NullPointerException if {@code elements} is null or contains a null element
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> addAll(Iterable<? extends E> elements) {
             super.addAll(elements);
@@ -550,7 +532,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
          * @return this {@code Builder} object
          * @throws NullPointerException if {@code elements} is null or contains a null element
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> addAll(Iterator<? extends E> elements) {
             super.addAll(elements);

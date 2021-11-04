@@ -17,9 +17,7 @@ package com.google.common.io;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.errorprone.annotations.concurrent.GuardedBy;
 
-import javax.annotation.CheckForNull;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -58,18 +56,12 @@ public final class FileBackedOutputStream extends OutputStream {
     private final int fileThreshold;
     private final boolean resetOnFinalize;
     private final ByteSource source;
-    @CheckForNull
     private final File parentDirectory;
 
-    @GuardedBy("this")
     private OutputStream out;
 
-    @GuardedBy("this")
-    @CheckForNull
     private MemoryOutput memory;
 
-    @GuardedBy("this")
-    @CheckForNull
     private File file;
 
     /** ByteArrayOutputStream that exposes its internals. */
@@ -85,7 +77,6 @@ public final class FileBackedOutputStream extends OutputStream {
 
     /** Returns the file holding the data (possibly null). */
     @VisibleForTesting
-    @CheckForNull
     synchronized File getFile() {
         return file;
     }
@@ -113,7 +104,7 @@ public final class FileBackedOutputStream extends OutputStream {
     }
 
     private FileBackedOutputStream(
-            int fileThreshold, boolean resetOnFinalize, @CheckForNull File parentDirectory) {
+            int fileThreshold, boolean resetOnFinalize, File parentDirectory) {
         this.fileThreshold = fileThreshold;
         this.resetOnFinalize = resetOnFinalize;
         this.parentDirectory = parentDirectory;
@@ -224,7 +215,6 @@ public final class FileBackedOutputStream extends OutputStream {
      * Checks if writing {@code len} bytes would go over threshold, and switches to file buffering if
      * so.
      */
-    @GuardedBy("this")
     private void update(int len) throws IOException {
         if (memory != null && (memory.getCount() + len > fileThreshold)) {
             File temp = File.createTempFile("FileBackedOutputStream", null, parentDirectory);

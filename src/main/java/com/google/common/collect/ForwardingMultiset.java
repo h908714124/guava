@@ -19,10 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -51,7 +48,7 @@ import java.util.Set;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingMultiset<E extends @Nullable Object> extends ForwardingCollection<E>
+public abstract class ForwardingMultiset<E> extends ForwardingCollection<E>
         implements Multiset<E> {
 
     /** Constructor for use by subclasses. */
@@ -62,19 +59,17 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
     protected abstract Multiset<E> delegate();
 
     @Override
-    public int count(@CheckForNull Object element) {
+    public int count(Object element) {
         return delegate().count(element);
     }
 
-    @CanIgnoreReturnValue
     @Override
     public int add(@ParametricNullness E element, int occurrences) {
         return delegate().add(element, occurrences);
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public int remove(@CheckForNull Object element, int occurrences) {
+    public int remove(Object element, int occurrences) {
         return delegate().remove(element, occurrences);
     }
 
@@ -89,7 +84,7 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         return object == this || delegate().equals(object);
     }
 
@@ -98,13 +93,11 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
         return delegate().hashCode();
     }
 
-    @CanIgnoreReturnValue
     @Override
     public int setCount(@ParametricNullness E element, int count) {
         return delegate().setCount(element, count);
     }
 
-    @CanIgnoreReturnValue
     @Override
     public boolean setCount(@ParametricNullness E element, int oldCount, int newCount) {
         return delegate().setCount(element, oldCount, newCount);
@@ -117,7 +110,7 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
      * @since 7.0
      */
     @Override
-    protected boolean standardContains(@CheckForNull Object object) {
+    protected boolean standardContains(Object object) {
         return count(object) > 0;
     }
 
@@ -141,7 +134,7 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
      * @since 7.0
      */
     @Beta
-    protected int standardCount(@CheckForNull Object object) {
+    protected int standardCount(Object object) {
         for (Entry<?> entry : this.entrySet()) {
             if (Objects.equal(entry.getElement(), object)) {
                 return entry.getCount();
@@ -183,7 +176,7 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
      * @since 7.0
      */
     @Override
-    protected boolean standardRemove(@CheckForNull Object element) {
+    protected boolean standardRemove(Object element) {
         return remove(element, 1) > 0;
     }
 
@@ -291,7 +284,7 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
      *
      * @since 7.0
      */
-    protected boolean standardEquals(@CheckForNull Object object) {
+    protected boolean standardEquals(Object object) {
         return Multisets.equalsImpl(this, object);
     }
 

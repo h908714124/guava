@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -50,7 +49,7 @@ final class ExplicitOrdering<T> extends Ordering<T> implements Serializable {
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object instanceof ExplicitOrdering) {
             ExplicitOrdering<?> that = (ExplicitOrdering<?>) object;
             return this.rankMap.equals(that.rankMap);

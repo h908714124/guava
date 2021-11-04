@@ -18,11 +18,8 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Primitives;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -98,7 +95,6 @@ public final class ImmutableClassToInstanceMap<B> extends ForwardingMap<Class<? 
          * Associates {@code key} with {@code value} in the built map. Duplicate keys are not allowed,
          * and will cause {@link #build} to fail.
          */
-        @CanIgnoreReturnValue
         public <T extends B> Builder<B> put(Class<T> key, T value) {
             mapBuilder.put(key, value);
             return this;
@@ -111,7 +107,6 @@ public final class ImmutableClassToInstanceMap<B> extends ForwardingMap<Class<? 
          * @throws NullPointerException if any key or value in {@code map} is null
          * @throws ClassCastException if any value is not an instance of the type specified by its key
          */
-        @CanIgnoreReturnValue
         public <T extends B> Builder<B> putAll(Map<? extends Class<? extends T>, ? extends T> map) {
             for (Entry<? extends Class<? extends T>, ? extends T> entry : map.entrySet()) {
                 Class<? extends T> type = entry.getKey();
@@ -175,7 +170,6 @@ public final class ImmutableClassToInstanceMap<B> extends ForwardingMap<Class<? 
 
     @Override
     @SuppressWarnings("unchecked") // value could not get in if not a T
-    @CheckForNull
     public <T extends B> T getInstance(Class<T> type) {
         return (T) delegate.get(checkNotNull(type));
     }
@@ -186,11 +180,8 @@ public final class ImmutableClassToInstanceMap<B> extends ForwardingMap<Class<? 
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public <T extends B> T putInstance(Class<T> type, T value) {
         throw new UnsupportedOperationException();
     }

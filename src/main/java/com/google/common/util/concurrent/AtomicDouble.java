@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2objc.annotations.ReflectionSupport;
 
 import java.util.concurrent.atomic.AtomicLongFieldUpdater;
@@ -154,7 +153,6 @@ public class AtomicDouble extends Number implements java.io.Serializable {
      * @param delta the value to add
      * @return the previous value
      */
-    @CanIgnoreReturnValue
     public final double getAndAdd(double delta) {
         while (true) {
             long current = value;
@@ -173,7 +171,6 @@ public class AtomicDouble extends Number implements java.io.Serializable {
      * @param delta the value to add
      * @return the updated value
      */
-    @CanIgnoreReturnValue
     public final double addAndGet(double delta) {
         while (true) {
             long current = value;

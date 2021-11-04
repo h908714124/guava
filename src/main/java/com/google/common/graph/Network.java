@@ -17,9 +17,7 @@
 package com.google.common.graph;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.DoNotMock;
 
-import javax.annotation.CheckForNull;
 import java.util.Optional;
 import java.util.Set;
 
@@ -104,7 +102,6 @@ import java.util.Set;
  * @since 20.0
  */
 @Beta
-@DoNotMock("Use NetworkBuilder to create a real instance")
 @ElementTypesAreNonnullByDefault
 public interface Network<N, E> extends SuccessorsFunction<N>, PredecessorsFunction<N> {
     //
@@ -350,7 +347,6 @@ public interface Network<N, E> extends SuccessorsFunction<N>, PredecessorsFuncti
      *     network
      * @since 23.0
      */
-    @CheckForNull
     E edgeConnectingOrNull(N nodeU, N nodeV);
 
     /**
@@ -365,7 +361,6 @@ public interface Network<N, E> extends SuccessorsFunction<N>, PredecessorsFuncti
      * @throws IllegalArgumentException if the endpoints are unordered and the graph is directed
      * @since 27.1
      */
-    @CheckForNull
     E edgeConnectingOrNull(EndpointPair<N> endpoints);
 
     /**
@@ -417,7 +412,7 @@ public interface Network<N, E> extends SuccessorsFunction<N>, PredecessorsFuncti
      * <p>A reference implementation of this is provided by {@link AbstractNetwork#equals(Object)}.
      */
     @Override
-    boolean equals(@CheckForNull Object object);
+    boolean equals(Object object);
 
     /**
      * Returns the hash code for this network. The hash code of a network is defined as the hash code

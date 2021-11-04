@@ -16,12 +16,8 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Supplier;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.time.Duration;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -203,14 +199,11 @@ public abstract class AbstractScheduledService implements Service {
     /* use AbstractService for state management */
     private final AbstractService delegate = new ServiceDelegate();
 
-    @WeakOuter
     private final class ServiceDelegate extends AbstractService {
 
         // A handle to the running task so that we can stop it when a shutdown has been requested.
         // These two fields are volatile because their values will be accessed from multiple threads.
-        @CheckForNull
         private volatile Cancellable runningTask;
-        @CheckForNull
         private volatile ScheduledExecutorService executorService;
 
         // This lock protects the task so we can ensure that none of the template methods (startUp,
@@ -219,7 +212,6 @@ public abstract class AbstractScheduledService implements Service {
         // lock.
         private final ReentrantLock lock = new ReentrantLock();
 
-        @WeakOuter
         class Task implements Runnable {
             @Override
             public void run() {
@@ -374,7 +366,6 @@ public abstract class AbstractScheduledService implements Service {
      * fails}.
      */
     protected ScheduledExecutorService executor() {
-        @WeakOuter
         class ThreadFactoryImpl implements ThreadFactory {
             @Override
             public Thread newThread(Runnable runnable) {
@@ -442,7 +433,6 @@ public abstract class AbstractScheduledService implements Service {
     }
 
     /** @since 15.0 */
-    @CanIgnoreReturnValue
     @Override
     public final Service startAsync() {
         delegate.startAsync();
@@ -450,7 +440,6 @@ public abstract class AbstractScheduledService implements Service {
     }
 
     /** @since 15.0 */
-    @CanIgnoreReturnValue
     @Override
     public final Service stopAsync() {
         delegate.stopAsync();
@@ -528,7 +517,7 @@ public abstract class AbstractScheduledService implements Service {
     public abstract static class CustomScheduler extends Scheduler {
 
         /** A callable class that can reschedule itself using a {@link CustomScheduler}. */
-        private final class ReschedulableCallable implements Callable<@Nullable Void> {
+        private final class ReschedulableCallable implements Callable<Void> {
 
             /** The underlying task. */
             private final Runnable wrappedRunnable;
@@ -572,7 +561,6 @@ public abstract class AbstractScheduledService implements Service {
 
             /** The future that represents the next execution of this task. */
             @GuardedBy("lock")
-            @CheckForNull
             private SupplantableFuture cancellationDelegate;
 
             ReschedulableCallable(
@@ -583,7 +571,6 @@ public abstract class AbstractScheduledService implements Service {
             }
 
             @Override
-            @CheckForNull
             public Void call() throws Exception {
                 wrappedRunnable.run();
                 reschedule();
@@ -594,7 +581,6 @@ public abstract class AbstractScheduledService implements Service {
              * Atomically reschedules this task and assigns the new future to {@link
              * #cancellationDelegate}.
              */
-            @CanIgnoreReturnValue
             public Cancellable reschedule() {
                 // invoke the callback outside the lock, prevents some shenanigans.
                 Schedule schedule;
@@ -652,7 +638,7 @@ public abstract class AbstractScheduledService implements Service {
                 return cancellationDelegate;
             }
 
-            private ScheduledFuture<@Nullable Void> submitToExecutor(Schedule schedule) {
+            private ScheduledFuture<Void> submitToExecutor(Schedule schedule) {
                 return executor.schedule(this, schedule.delay, schedule.unit);
             }
         }
@@ -665,9 +651,9 @@ public abstract class AbstractScheduledService implements Service {
             private final ReentrantLock lock;
 
             @GuardedBy("lock")
-            private Future<@Nullable Void> currentFuture;
+            private Future<Void> currentFuture;
 
-            SupplantableFuture(ReentrantLock lock, Future<@Nullable Void> currentFuture) {
+            SupplantableFuture(ReentrantLock lock, Future<Void> currentFuture) {
                 this.lock = lock;
                 this.currentFuture = currentFuture;
             }

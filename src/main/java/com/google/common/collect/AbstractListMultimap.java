@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +33,7 @@ import java.util.Map;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nullable Object>
+abstract class AbstractListMultimap<K, V>
         extends AbstractMapBasedMultimap<K, V> implements ListMultimap<K, V> {
     /**
      * Creates a new multimap that uses the provided map.
@@ -56,7 +53,7 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
     }
 
     @Override
-    <E extends @Nullable Object> Collection<E> unmodifiableCollectionSubclass(
+    <E> Collection<E> unmodifiableCollectionSubclass(
             Collection<E> collection) {
         return Collections.unmodifiableList((List<E>) collection);
     }
@@ -87,9 +84,8 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
      * this method returns a {@link List}, instead of the {@link Collection} specified in the {@link
      * Multimap} interface.
      */
-    @CanIgnoreReturnValue
     @Override
-    public List<V> removeAll(@CheckForNull Object key) {
+    public List<V> removeAll(Object key) {
         return (List<V>) super.removeAll(key);
     }
 
@@ -100,7 +96,6 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
      * this method returns a {@link List}, instead of the {@link Collection} specified in the {@link
      * Multimap} interface.
      */
-    @CanIgnoreReturnValue
     @Override
     public List<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
         return (List<V>) super.replaceValues(key, values);
@@ -113,7 +108,6 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
      * @param value value to store in the multimap
      * @return {@code true} always
      */
-    @CanIgnoreReturnValue
     @Override
     public boolean put(@ParametricNullness K key, @ParametricNullness V value) {
         return super.put(key, value);
@@ -137,7 +131,7 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
      * in the same order. If the value orderings disagree, the multimaps will not be considered equal.
      */
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         return super.equals(object);
     }
 

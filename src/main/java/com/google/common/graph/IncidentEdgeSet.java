@@ -16,7 +16,6 @@
 
 package com.google.common.graph;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractSet;
 import java.util.Set;
 
@@ -35,7 +34,7 @@ abstract class IncidentEdgeSet<N> extends AbstractSet<EndpointPair<N>> {
     }
 
     @Override
-    public boolean remove(@CheckForNull Object o) {
+    public boolean remove(Object o) {
         throw new UnsupportedOperationException();
     }
 
@@ -51,7 +50,7 @@ abstract class IncidentEdgeSet<N> extends AbstractSet<EndpointPair<N>> {
     }
 
     @Override
-    public boolean contains(@CheckForNull Object obj) {
+    public boolean contains(Object obj) {
         if (!(obj instanceof EndpointPair)) {
             return false;
         }

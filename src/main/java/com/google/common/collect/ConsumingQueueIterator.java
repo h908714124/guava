@@ -15,9 +15,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -28,7 +26,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-final class ConsumingQueueIterator<T extends @Nullable Object> extends AbstractIterator<T> {
+final class ConsumingQueueIterator<T> extends AbstractIterator<T> {
     private final Queue<T> queue;
 
     ConsumingQueueIterator(Queue<T> queue) {
@@ -36,7 +34,6 @@ final class ConsumingQueueIterator<T extends @Nullable Object> extends AbstractI
     }
 
     @Override
-    @CheckForNull
     public T computeNext() {
         // TODO(b/192579700): Use a ternary once it no longer confuses our nullness checker.
         if (queue.isEmpty()) {

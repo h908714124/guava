@@ -17,7 +17,6 @@ package com.google.common.primitives;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Arrays;
@@ -411,14 +410,14 @@ public final class Booleans {
         }
 
         @Override
-        public boolean contains(@CheckForNull Object target) {
+        public boolean contains(Object target) {
             // Overridden to prevent a ton of boxing
             return (target instanceof Boolean)
                     && Booleans.indexOf(array, (Boolean) target, start, end) != -1;
         }
 
         @Override
-        public int indexOf(@CheckForNull Object target) {
+        public int indexOf(Object target) {
             // Overridden to prevent a ton of boxing
             if (target instanceof Boolean) {
                 int i = Booleans.indexOf(array, (Boolean) target, start, end);
@@ -430,7 +429,7 @@ public final class Booleans {
         }
 
         @Override
-        public int lastIndexOf(@CheckForNull Object target) {
+        public int lastIndexOf(Object target) {
             // Overridden to prevent a ton of boxing
             if (target instanceof Boolean) {
                 int i = Booleans.lastIndexOf(array, (Boolean) target, start, end);
@@ -461,7 +460,7 @@ public final class Booleans {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object object) {
+        public boolean equals(Object object) {
             if (object == this) {
                 return true;
             }

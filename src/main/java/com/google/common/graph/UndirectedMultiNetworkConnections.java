@@ -19,9 +19,7 @@ package com.google.common.graph;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multiset;
-import com.google.errorprone.annotations.concurrent.LazyInit;
 
-import javax.annotation.CheckForNull;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.Collections;
@@ -57,8 +55,6 @@ final class UndirectedMultiNetworkConnections<N, E>
         return new UndirectedMultiNetworkConnections<>(ImmutableMap.copyOf(incidentEdges));
     }
 
-    @CheckForNull
-    @LazyInit
     private transient Reference<Multiset<N>> adjacentNodesReference;
 
     @Override
@@ -86,7 +82,6 @@ final class UndirectedMultiNetworkConnections<N, E>
     }
 
     @Override
-    @CheckForNull
     public N removeInEdge(E edge, boolean isSelfLoop) {
         if (!isSelfLoop) {
             return removeOutEdge(edge);
@@ -120,8 +115,7 @@ final class UndirectedMultiNetworkConnections<N, E>
         }
     }
 
-    @CheckForNull
-    private static <T> T getReference(@CheckForNull Reference<T> reference) {
+    private static <T> T getReference(Reference<T> reference) {
         return (reference == null) ? null : reference.get();
     }
 }

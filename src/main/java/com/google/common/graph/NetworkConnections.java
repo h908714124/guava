@@ -16,9 +16,6 @@
 
 package com.google.common.graph;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
-import javax.annotation.CheckForNull;
 import java.util.Set;
 
 /**
@@ -62,12 +59,9 @@ interface NetworkConnections<N, E> {
      *
      * <p>In the undirected case, returns {@code null} if {@code isSelfLoop} is true.
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     N removeInEdge(E edge, boolean isSelfLoop);
 
     /** Remove {@code edge} from the set of outgoing edges. Returns the former successor node. */
-    @CanIgnoreReturnValue
     N removeOutEdge(E edge);
 
     /**

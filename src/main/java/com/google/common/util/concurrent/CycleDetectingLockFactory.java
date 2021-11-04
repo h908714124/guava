@@ -24,10 +24,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2objc.annotations.Weak;
 
-import javax.annotation.CheckForNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -162,7 +159,6 @@ import static java.util.Objects.requireNonNull;
  * @since 13.0
  */
 @Beta
-@CanIgnoreReturnValue // TODO(cpovirk): Consider being more strict.
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
 public class CycleDetectingLockFactory {
@@ -687,7 +683,6 @@ public class CycleDetectingLockFactory {
          * @return If a path was found, a chained {@link ExampleStackTrace} illustrating the path to the
          *     {@code lock}, or {@code null} if no path was found.
          */
-        @CheckForNull
         private ExampleStackTrace findPathTo(LockGraphNode node, Set<LockGraphNode> seen) {
             if (!seen.add(this)) {
                 return null; // Already traversed this node.
@@ -865,7 +860,6 @@ public class CycleDetectingLockFactory {
 
     private class CycleDetectingReentrantReadLock extends ReentrantReadWriteLock.ReadLock {
 
-        @Weak
         final CycleDetectingReentrantReadWriteLock readWriteLock;
 
         CycleDetectingReentrantReadLock(CycleDetectingReentrantReadWriteLock readWriteLock) {
@@ -925,7 +919,6 @@ public class CycleDetectingLockFactory {
 
     private class CycleDetectingReentrantWriteLock extends ReentrantReadWriteLock.WriteLock {
 
-        @Weak
         final CycleDetectingReentrantReadWriteLock readWriteLock;
 
         CycleDetectingReentrantWriteLock(CycleDetectingReentrantReadWriteLock readWriteLock) {

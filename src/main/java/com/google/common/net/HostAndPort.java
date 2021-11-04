@@ -21,7 +21,6 @@ import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -62,7 +61,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @since 10.0
  */
 @Beta
-@Immutable
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 public final class HostAndPort implements Serializable {
@@ -281,7 +279,7 @@ public final class HostAndPort implements Serializable {
     }
 
     @Override
-    public boolean equals(@CheckForNull Object other) {
+    public boolean equals(Object other) {
         if (this == other) {
             return true;
         }

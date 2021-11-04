@@ -20,7 +20,6 @@ import com.google.common.base.Charsets;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -126,7 +125,7 @@ public final class Resources {
      */
     @CanIgnoreReturnValue // some processors won't return a useful result
     @ParametricNullness
-    public static <T extends @Nullable Object> T readLines(
+    public static <T> T readLines(
             URL url, Charset charset, LineProcessor<T> callback) throws IOException {
         return asCharSource(url, charset).readLines(callback);
     }

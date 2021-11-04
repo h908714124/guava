@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -34,11 +31,10 @@ import java.util.Set;
  */
 @GwtCompatible(emulated = true)
 @ElementTypesAreNonnullByDefault
-abstract class DescendingMultiset<E extends @Nullable Object> extends ForwardingMultiset<E>
+abstract class DescendingMultiset<E> extends ForwardingMultiset<E>
         implements SortedMultiset<E> {
     abstract SortedMultiset<E> forwardMultiset();
 
-    @CheckForNull
     private transient Comparator<? super E> comparator;
 
     @Override
@@ -50,7 +46,6 @@ abstract class DescendingMultiset<E extends @Nullable Object> extends Forwarding
         return result;
     }
 
-    @CheckForNull
     private transient NavigableSet<E> elementSet;
 
     @Override
@@ -63,13 +58,11 @@ abstract class DescendingMultiset<E extends @Nullable Object> extends Forwarding
     }
 
     @Override
-    @CheckForNull
     public Entry<E> pollFirstEntry() {
         return forwardMultiset().pollLastEntry();
     }
 
     @Override
-    @CheckForNull
     public Entry<E> pollLastEntry() {
         return forwardMultiset().pollFirstEntry();
     }
@@ -106,20 +99,17 @@ abstract class DescendingMultiset<E extends @Nullable Object> extends Forwarding
     }
 
     @Override
-    @CheckForNull
     public Entry<E> firstEntry() {
         return forwardMultiset().lastEntry();
     }
 
     @Override
-    @CheckForNull
     public Entry<E> lastEntry() {
         return forwardMultiset().firstEntry();
     }
 
     abstract Iterator<Entry<E>> entryIterator();
 
-    @CheckForNull
     private transient Set<Entry<E>> entrySet;
 
     @Override
@@ -129,7 +119,6 @@ abstract class DescendingMultiset<E extends @Nullable Object> extends Forwarding
     }
 
     Set<Entry<E>> createEntrySet() {
-        @WeakOuter
         class EntrySetImpl extends Multisets.EntrySet<E> {
             @Override
             Multiset<E> multiset() {
@@ -155,14 +144,13 @@ abstract class DescendingMultiset<E extends @Nullable Object> extends Forwarding
     }
 
     @Override
-    public @Nullable
-    Object[] toArray() {
+    public Object[] toArray() {
         return standardToArray();
     }
 
     @Override
     @SuppressWarnings("nullness") // b/192354773 in our checker affects toArray declarations
-    public <T extends @Nullable Object> T[] toArray(T[] array) {
+    public <T> T[] toArray(T[] array) {
         return standardToArray(array);
     }
 

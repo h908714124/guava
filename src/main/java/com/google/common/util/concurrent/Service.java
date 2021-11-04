@@ -15,8 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotMock;
 
 import java.time.Duration;
 import java.util.concurrent.Executor;
@@ -55,7 +53,6 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * @author Luke Sandberg
  * @since 9.0 (in 1.0 as {@code com.google.common.base.Service})
  */
-@DoNotMock("Create an AbstractIdleService")
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
 public interface Service {
@@ -67,7 +64,6 @@ public interface Service {
      * @throws IllegalStateException if the service is not {@link State#NEW}
      * @since 15.0
      */
-    @CanIgnoreReturnValue
     Service startAsync();
 
     /** Returns {@code true} if this service is {@linkplain State#RUNNING running}. */
@@ -86,7 +82,6 @@ public interface Service {
      * @return this
      * @since 15.0
      */
-    @CanIgnoreReturnValue
     Service stopAsync();
 
     /**

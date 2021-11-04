@@ -17,9 +17,7 @@ package com.google.common.io;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Closeable;
 import java.io.EOFException;
 import java.io.IOException;
@@ -70,7 +68,6 @@ public final class CharStreams {
      * @return the number of characters copied
      * @throws IOException if an I/O error occurs
      */
-    @CanIgnoreReturnValue
     public static long copy(Readable from, Appendable to) throws IOException {
         // The most common case is that from is a Reader (like InputStreamReader or StringReader) so
         // take advantage of that.
@@ -114,7 +111,6 @@ public final class CharStreams {
      * @return the number of characters copied
      * @throws IOException if an I/O error occurs
      */
-    @CanIgnoreReturnValue
     static long copyReaderToBuilder(Reader from, StringBuilder to) throws IOException {
         checkNotNull(from);
         checkNotNull(to);
@@ -142,7 +138,6 @@ public final class CharStreams {
      * @return the number of characters copied
      * @throws IOException if an I/O error occurs
      */
-    @CanIgnoreReturnValue
     static long copyReaderToWriter(Reader from, Writer to) throws IOException {
         checkNotNull(from);
         checkNotNull(to);
@@ -220,7 +215,7 @@ public final class CharStreams {
     @Beta
     @CanIgnoreReturnValue // some processors won't return a useful result
     @ParametricNullness
-    public static <T extends @Nullable Object> T readLines(
+    public static <T> T readLines(
             Readable readable, LineProcessor<T> processor) throws IOException {
         checkNotNull(readable);
         checkNotNull(processor);
@@ -242,7 +237,6 @@ public final class CharStreams {
      * @since 20.0
      */
     @Beta
-    @CanIgnoreReturnValue
     public static long exhaust(Readable readable) throws IOException {
         long total = 0;
         long read;
@@ -314,12 +308,12 @@ public final class CharStreams {
         }
 
         @Override
-        public Writer append(@CheckForNull CharSequence csq) {
+        public Writer append(CharSequence csq) {
             return this;
         }
 
         @Override
-        public Writer append(@CheckForNull CharSequence csq, int start, int end) {
+        public Writer append(CharSequence csq, int start, int end) {
             checkPositionIndexes(start, end, csq == null ? "null".length() : csq.length());
             return this;
         }

@@ -17,9 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -39,7 +37,7 @@ final class JdkBackedImmutableMap<K, V> extends ImmutableMap<K, V> {
      * detected. This implementation may replace the entries in entryArray with its own entry objects
      * (though they will have the same key/value contents), and will take ownership of entryArray.
      */
-    static <K, V> ImmutableMap<K, V> create(int n, @Nullable Entry<K, V>[] entryArray) {
+    static <K, V> ImmutableMap<K, V> create(int n, Entry<K, V>[] entryArray) {
         Map<K, V> delegateMap = Maps.newHashMapWithExpectedSize(n);
         for (int i = 0; i < n; i++) {
             // requireNonNull is safe because the first `n` elements have been filled in.
@@ -66,8 +64,7 @@ final class JdkBackedImmutableMap<K, V> extends ImmutableMap<K, V> {
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object key) {
+    public V get(Object key) {
         return delegateMap.get(key);
     }
 

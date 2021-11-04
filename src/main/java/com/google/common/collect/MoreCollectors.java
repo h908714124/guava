@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +65,8 @@ public final class MoreCollectors {
 
     private static final Object NULL_PLACEHOLDER = new Object();
 
-    private static final Collector<@Nullable Object, ?, @Nullable Object> ONLY_ELEMENT =
-            Collector.<@Nullable Object, ToOptionalState, @Nullable Object>of(
+    private static final Collector<Object, ?, Object> ONLY_ELEMENT =
+            Collector.<Object, ToOptionalState, Object>of(
                     ToOptionalState::new,
                     (state, o) -> state.add((o == null) ? NULL_PLACEHOLDER : o),
                     ToOptionalState::combine,
@@ -83,7 +82,7 @@ public final class MoreCollectors {
      * more elements, and a {@code NoSuchElementException} if the stream is empty.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends @Nullable Object> Collector<T, ?, T> onlyElement() {
+    public static <T> Collector<T, ?, T> onlyElement() {
         return (Collector) ONLY_ELEMENT;
     }
 
@@ -94,7 +93,6 @@ public final class MoreCollectors {
     private static final class ToOptionalState {
         static final int MAX_EXTRAS = 4;
 
-        @Nullable
         Object element;
         List<Object> extras;
 

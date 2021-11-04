@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -42,11 +41,11 @@ import java.util.LinkedHashMap;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @ElementTypesAreNonnullByDefault
-public final class LinkedHashMultiset<E extends @Nullable Object>
+public final class LinkedHashMultiset<E>
         extends AbstractMapBasedMultiset<E> {
 
     /** Creates a new, empty {@code LinkedHashMultiset} using the default initial capacity. */
-    public static <E extends @Nullable Object> LinkedHashMultiset<E> create() {
+    public static <E> LinkedHashMultiset<E> create() {
         return new LinkedHashMultiset<E>();
     }
 
@@ -57,7 +56,7 @@ public final class LinkedHashMultiset<E extends @Nullable Object>
      * @param distinctElements the expected number of distinct elements
      * @throws IllegalArgumentException if {@code distinctElements} is negative
      */
-    public static <E extends @Nullable Object> LinkedHashMultiset<E> create(int distinctElements) {
+    public static <E> LinkedHashMultiset<E> create(int distinctElements) {
         return new LinkedHashMultiset<E>(distinctElements);
     }
 
@@ -68,7 +67,7 @@ public final class LinkedHashMultiset<E extends @Nullable Object>
      *
      * @param elements the elements that the multiset should contain
      */
-    public static <E extends @Nullable Object> LinkedHashMultiset<E> create(
+    public static <E> LinkedHashMultiset<E> create(
             Iterable<? extends E> elements) {
         LinkedHashMultiset<E> multiset = create(Multisets.inferDistinctElements(elements));
         Iterables.addAll(multiset, elements);

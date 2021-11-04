@@ -17,9 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -46,7 +44,7 @@ import java.util.Set;
  */
 @GwtCompatible(emulated = true)
 @ElementTypesAreNonnullByDefault
-public interface SortedMultiset<E extends @Nullable Object>
+public interface SortedMultiset<E>
         extends SortedMultisetBridge<E>, SortedIterable<E> {
     /**
      * Returns the comparator that orders this multiset, or {@link Ordering#natural()} if the natural
@@ -59,28 +57,24 @@ public interface SortedMultiset<E extends @Nullable Object>
      * Returns the entry of the first element in this multiset, or {@code null} if this multiset is
      * empty.
      */
-    @CheckForNull
     Entry<E> firstEntry();
 
     /**
      * Returns the entry of the last element in this multiset, or {@code null} if this multiset is
      * empty.
      */
-    @CheckForNull
     Entry<E> lastEntry();
 
     /**
      * Returns and removes the entry associated with the lowest element in this multiset, or returns
      * {@code null} if this multiset is empty.
      */
-    @CheckForNull
     Entry<E> pollFirstEntry();
 
     /**
      * Returns and removes the entry associated with the greatest element in this multiset, or returns
      * {@code null} if this multiset is empty.
      */
-    @CheckForNull
     Entry<E> pollLastEntry();
 
     /**

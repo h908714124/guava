@@ -16,7 +16,6 @@
 
 package com.google.common.graph;
 
-import javax.annotation.CheckForNull;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -141,14 +140,12 @@ class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
     }
 
     @Override
-    @CheckForNull
-    public V edgeValueOrDefault(N nodeU, N nodeV, @CheckForNull V defaultValue) {
+    public V edgeValueOrDefault(N nodeU, N nodeV, V defaultValue) {
         return edgeValueOrDefaultInternal(checkNotNull(nodeU), checkNotNull(nodeV), defaultValue);
     }
 
     @Override
-    @CheckForNull
-    public V edgeValueOrDefault(EndpointPair<N> endpoints, @CheckForNull V defaultValue) {
+    public V edgeValueOrDefault(EndpointPair<N> endpoints, V defaultValue) {
         validateEndpoints(endpoints);
         return edgeValueOrDefaultInternal(endpoints.nodeU(), endpoints.nodeV(), defaultValue);
     }
@@ -167,7 +164,7 @@ class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
         return connections;
     }
 
-    final boolean containsNode(@CheckForNull N node) {
+    final boolean containsNode(N node) {
         return nodeConnections.containsKey(node);
     }
 
@@ -176,8 +173,7 @@ class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
         return (connectionsU != null) && connectionsU.successors().contains(nodeV);
     }
 
-    @CheckForNull
-    private final V edgeValueOrDefaultInternal(N nodeU, N nodeV, @CheckForNull V defaultValue) {
+    private final V edgeValueOrDefaultInternal(N nodeU, N nodeV, V defaultValue) {
         GraphConnections<N, V> connectionsU = nodeConnections.get(nodeU);
         V value = (connectionsU == null) ? null : connectionsU.value(nodeV);
         // TODO(b/192579700): Use a ternary once it no longer confuses our nullness checker.

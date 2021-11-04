@@ -18,7 +18,6 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-import javax.annotation.CheckForNull;
 import java.util.concurrent.Callable;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -278,7 +277,7 @@ public final class CacheStats {
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object instanceof CacheStats) {
             CacheStats other = (CacheStats) object;
             return hitCount == other.hitCount

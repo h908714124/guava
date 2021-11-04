@@ -20,10 +20,7 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps.ViewCachingAbstractMap;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -45,7 +42,7 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Object>
+class FilteredEntryMultimap<K, V>
         extends AbstractMultimap<K, V> implements FilteredMultimap<K, V> {
     final Multimap<K, V> unfiltered;
     final Predicate<? super Entry<K, V>> predicate;
@@ -88,7 +85,7 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
         }
     }
 
-    static <E extends @Nullable Object> Collection<E> filterCollection(
+    static <E> Collection<E> filterCollection(
             Collection<E> collection, Predicate<? super E> predicate) {
         if (collection instanceof Set) {
             return Sets.filter((Set<E>) collection, predicate);
@@ -98,12 +95,12 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
     }
 
     @Override
-    public boolean containsKey(@CheckForNull Object key) {
+    public boolean containsKey(Object key) {
         return asMap().get(key) != null;
     }
 
     @Override
-    public Collection<V> removeAll(@CheckForNull Object key) {
+    public Collection<V> removeAll(Object key) {
         return MoreObjects.firstNonNull(asMap().remove(key), unmodifiableEmptyCollection());
     }
 
@@ -168,10 +165,9 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
         return changed;
     }
 
-    @WeakOuter
     class AsMap extends ViewCachingAbstractMap<K, Collection<V>> {
         @Override
-        public boolean containsKey(@CheckForNull Object key) {
+        public boolean containsKey(Object key) {
             return get(key) != null;
         }
 
@@ -181,8 +177,7 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
         }
 
         @Override
-        @CheckForNull
-        public Collection<V> get(@CheckForNull Object key) {
+        public Collection<V> get(Object key) {
             Collection<V> result = unfiltered.asMap().get(key);
             if (result == null) {
                 return null;
@@ -194,8 +189,7 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
         }
 
         @Override
-        @CheckForNull
-        public Collection<V> remove(@CheckForNull Object key) {
+        public Collection<V> remove(Object key) {
             Collection<V> collection = unfiltered.asMap().get(key);
             if (collection == null) {
                 return null;
@@ -222,7 +216,6 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
 
         @Override
         Set<K> createKeySet() {
-            @WeakOuter
             class KeySetImpl extends Maps.KeySet<K, Collection<V>> {
                 KeySetImpl() {
                     super(AsMap.this);
@@ -239,7 +232,7 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
                 }
 
                 @Override
-                public boolean remove(@CheckForNull Object o) {
+                public boolean remove(Object o) {
                     return AsMap.this.remove(o) != null;
                 }
             }
@@ -248,7 +241,6 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
 
         @Override
         Set<Entry<K, Collection<V>>> createEntrySet() {
-            @WeakOuter
             class EntrySetImpl extends Maps.EntrySet<K, Collection<V>> {
                 @Override
                 Map<K, Collection<V>> map() {
@@ -262,7 +254,6 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
                                 unfiltered.asMap().entrySet().iterator();
 
                         @Override
-                        @CheckForNull
                         protected Entry<K, Collection<V>> computeNext() {
                             while (backingIterator.hasNext()) {
                                 Entry<K, Collection<V>> entry = backingIterator.next();
@@ -298,14 +289,13 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
 
         @Override
         Collection<Collection<V>> createValues() {
-            @WeakOuter
             class ValuesImpl extends Maps.Values<K, Collection<V>> {
                 ValuesImpl() {
                     super(AsMap.this);
                 }
 
                 @Override
-                public boolean remove(@CheckForNull Object o) {
+                public boolean remove(Object o) {
                     if (o instanceof Collection) {
                         Collection<?> c = (Collection<?>) o;
                         Iterator<Entry<K, Collection<V>>> entryIterator =
@@ -347,14 +337,13 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
         return new Keys();
     }
 
-    @WeakOuter
     class Keys extends Multimaps.Keys<K, V> {
         Keys() {
             super(FilteredEntryMultimap.this);
         }
 
         @Override
-        public int remove(@CheckForNull Object key, int occurrences) {
+        public int remove(Object key, int occurrences) {
             checkNonnegative(occurrences, "occurrences");
             if (occurrences == 0) {
                 return count(key);

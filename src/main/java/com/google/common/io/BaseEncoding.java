@@ -18,9 +18,7 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Ascii;
 import com.google.common.base.Objects;
-import com.google.errorprone.annotations.concurrent.LazyInit;
 
-import javax.annotation.CheckForNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -550,7 +548,7 @@ public abstract class BaseEncoding {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object other) {
+        public boolean equals(Object other) {
             if (other instanceof Alphabet) {
                 Alphabet that = (Alphabet) other;
                 return Arrays.equals(this.chars, that.chars);
@@ -568,14 +566,13 @@ public abstract class BaseEncoding {
         // TODO(lowasser): provide a useful toString
         final Alphabet alphabet;
 
-        @CheckForNull
         final Character paddingChar;
 
-        StandardBaseEncoding(String name, String alphabetChars, @CheckForNull Character paddingChar) {
+        StandardBaseEncoding(String name, String alphabetChars, Character paddingChar) {
             this(new Alphabet(name, alphabetChars.toCharArray()), paddingChar);
         }
 
-        StandardBaseEncoding(Alphabet alphabet, @CheckForNull Character paddingChar) {
+        StandardBaseEncoding(Alphabet alphabet, Character paddingChar) {
             this.alphabet = checkNotNull(alphabet);
             checkArgument(
                     paddingChar == null || !alphabet.matches(paddingChar),
@@ -833,11 +830,7 @@ public abstract class BaseEncoding {
             return new SeparatedBaseEncoding(this, separator, afterEveryChars);
         }
 
-        @LazyInit
-        @CheckForNull
         private transient BaseEncoding upperCase;
-        @LazyInit
-        @CheckForNull
         private transient BaseEncoding lowerCase;
 
         @Override
@@ -860,7 +853,7 @@ public abstract class BaseEncoding {
             return result;
         }
 
-        BaseEncoding newInstance(Alphabet alphabet, @CheckForNull Character paddingChar) {
+        BaseEncoding newInstance(Alphabet alphabet, Character paddingChar) {
             return new StandardBaseEncoding(alphabet, paddingChar);
         }
 
@@ -879,7 +872,7 @@ public abstract class BaseEncoding {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object other) {
+        public boolean equals(Object other) {
             if (other instanceof StandardBaseEncoding) {
                 StandardBaseEncoding that = (StandardBaseEncoding) other;
                 return this.alphabet.equals(that.alphabet)
@@ -936,17 +929,17 @@ public abstract class BaseEncoding {
         }
 
         @Override
-        BaseEncoding newInstance(Alphabet alphabet, @CheckForNull Character paddingChar) {
+        BaseEncoding newInstance(Alphabet alphabet, Character paddingChar) {
             return new Base16Encoding(alphabet);
         }
     }
 
     static final class Base64Encoding extends StandardBaseEncoding {
-        Base64Encoding(String name, String alphabetChars, @CheckForNull Character paddingChar) {
+        Base64Encoding(String name, String alphabetChars, Character paddingChar) {
             this(new Alphabet(name, alphabetChars.toCharArray()), paddingChar);
         }
 
-        private Base64Encoding(Alphabet alphabet, @CheckForNull Character paddingChar) {
+        private Base64Encoding(Alphabet alphabet, Character paddingChar) {
             super(alphabet, paddingChar);
             checkArgument(alphabet.chars.length == 64);
         }
@@ -993,7 +986,7 @@ public abstract class BaseEncoding {
         }
 
         @Override
-        BaseEncoding newInstance(Alphabet alphabet, @CheckForNull Character paddingChar) {
+        BaseEncoding newInstance(Alphabet alphabet, Character paddingChar) {
             return new Base64Encoding(alphabet, paddingChar);
         }
     }
@@ -1044,12 +1037,12 @@ public abstract class BaseEncoding {
             }
 
             @Override
-            public Appendable append(@CheckForNull CharSequence chars, int off, int len) {
+            public Appendable append(CharSequence chars, int off, int len) {
                 throw new UnsupportedOperationException();
             }
 
             @Override
-            public Appendable append(@CheckForNull CharSequence chars) {
+            public Appendable append(CharSequence chars) {
                 throw new UnsupportedOperationException();
             }
         };

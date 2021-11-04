@@ -19,9 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -32,7 +30,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @GwtCompatible(serializable = true)
 @ElementTypesAreNonnullByDefault
-final class ByFunctionOrdering<F extends @Nullable Object, T extends @Nullable Object>
+final class ByFunctionOrdering<F, T>
         extends Ordering<F> implements Serializable {
     final Function<F, ? extends T> function;
     final Ordering<T> ordering;
@@ -48,7 +46,7 @@ final class ByFunctionOrdering<F extends @Nullable Object, T extends @Nullable O
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }

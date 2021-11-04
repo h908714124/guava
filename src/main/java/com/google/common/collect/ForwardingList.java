@@ -18,10 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +51,7 @@ import java.util.ListIterator;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingList<E extends @Nullable Object> extends ForwardingCollection<E>
+public abstract class ForwardingList<E> extends ForwardingCollection<E>
         implements List<E> {
     // TODO(lowasser): identify places where thread safety is actually lost
 
@@ -70,7 +67,6 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
         delegate().add(index, element);
     }
 
-    @CanIgnoreReturnValue
     @Override
     public boolean addAll(int index, Collection<? extends E> elements) {
         return delegate().addAll(index, elements);
@@ -83,12 +79,12 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
     }
 
     @Override
-    public int indexOf(@CheckForNull Object element) {
+    public int indexOf(Object element) {
         return delegate().indexOf(element);
     }
 
     @Override
-    public int lastIndexOf(@CheckForNull Object element) {
+    public int lastIndexOf(Object element) {
         return delegate().lastIndexOf(element);
     }
 
@@ -102,14 +98,12 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
         return delegate().listIterator(index);
     }
 
-    @CanIgnoreReturnValue
     @Override
     @ParametricNullness
     public E remove(int index) {
         return delegate().remove(index);
     }
 
-    @CanIgnoreReturnValue
     @Override
     @ParametricNullness
     public E set(int index, @ParametricNullness E element) {
@@ -122,7 +116,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         return object == this || delegate().equals(object);
     }
 
@@ -161,7 +155,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
      *
      * @since 7.0
      */
-    protected int standardIndexOf(@CheckForNull Object element) {
+    protected int standardIndexOf(Object element) {
         return Lists.indexOfImpl(this, element);
     }
 
@@ -172,7 +166,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
      *
      * @since 7.0
      */
-    protected int standardLastIndexOf(@CheckForNull Object element) {
+    protected int standardLastIndexOf(Object element) {
         return Lists.lastIndexOfImpl(this, element);
     }
 
@@ -230,7 +224,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
      * @since 7.0
      */
     @Beta
-    protected boolean standardEquals(@CheckForNull Object object) {
+    protected boolean standardEquals(Object object) {
         return Lists.equalsImpl(this, object);
     }
 

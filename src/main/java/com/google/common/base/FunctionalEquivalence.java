@@ -17,7 +17,6 @@ package com.google.common.base;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -55,7 +54,7 @@ final class FunctionalEquivalence<F, T> extends Equivalence<F> implements Serial
     }
 
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         if (obj == this) {
             return true;
         }

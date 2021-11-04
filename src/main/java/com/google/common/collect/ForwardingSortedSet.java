@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -57,7 +55,7 @@ import static com.google.common.collect.ForwardingSortedMap.unsafeCompare;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingSortedSet<E extends @Nullable Object> extends ForwardingSet<E>
+public abstract class ForwardingSortedSet<E> extends ForwardingSet<E>
         implements SortedSet<E> {
 
     /** Constructor for use by subclasses. */
@@ -68,7 +66,6 @@ public abstract class ForwardingSortedSet<E extends @Nullable Object> extends Fo
     protected abstract SortedSet<E> delegate();
 
     @Override
-    @CheckForNull
     public Comparator<? super E> comparator() {
         return delegate().comparator();
     }
@@ -109,11 +106,11 @@ public abstract class ForwardingSortedSet<E extends @Nullable Object> extends Fo
      */
     @Override
     @Beta
-    protected boolean standardContains(@CheckForNull Object object) {
+    protected boolean standardContains(Object object) {
         try {
             // any ClassCastExceptions and NullPointerExceptions are caught
             @SuppressWarnings({"unchecked", "nullness"})
-            SortedSet<@Nullable Object> self = (SortedSet<@Nullable Object>) this;
+            SortedSet<Object> self = (SortedSet<Object>) this;
             Object ceiling = self.tailSet(object).first();
             return unsafeCompare(comparator(), ceiling, object) == 0;
         } catch (ClassCastException | NoSuchElementException | NullPointerException e) {
@@ -130,11 +127,11 @@ public abstract class ForwardingSortedSet<E extends @Nullable Object> extends Fo
      */
     @Override
     @Beta
-    protected boolean standardRemove(@CheckForNull Object object) {
+    protected boolean standardRemove(Object object) {
         try {
             // any ClassCastExceptions and NullPointerExceptions are caught
             @SuppressWarnings({"unchecked", "nullness"})
-            SortedSet<@Nullable Object> self = (SortedSet<@Nullable Object>) this;
+            SortedSet<Object> self = (SortedSet<Object>) this;
             Iterator<?> iterator = self.tailSet(object).iterator();
             if (iterator.hasNext()) {
                 Object ceiling = iterator.next();

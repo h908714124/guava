@@ -15,9 +15,7 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.concurrent.GuardedBy;
 
-import javax.annotation.CheckForNull;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,11 +48,8 @@ public final class ExecutionList {
      * The runnable, executor pairs to execute. This acts as a stack threaded through the {@link
      * RunnableExecutorPair#next} field.
      */
-    @GuardedBy("this")
-    @CheckForNull
     private RunnableExecutorPair runnables;
 
-    @GuardedBy("this")
     private boolean executed;
 
     /** Creates a new, empty {@link ExecutionList}. */
@@ -157,11 +152,10 @@ public final class ExecutionList {
     private static final class RunnableExecutorPair {
         final Runnable runnable;
         final Executor executor;
-        @CheckForNull
         RunnableExecutorPair next;
 
         RunnableExecutorPair(
-                Runnable runnable, Executor executor, @CheckForNull RunnableExecutorPair next) {
+                Runnable runnable, Executor executor, RunnableExecutorPair next) {
             this.runnable = runnable;
             this.executor = executor;
             this.next = next;

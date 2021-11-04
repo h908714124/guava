@@ -19,7 +19,6 @@ import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -215,7 +214,7 @@ public final class PairedStats implements Serializable {
      * guarantees {@code strictfp}-like semantics.)
      */
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }

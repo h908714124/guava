@@ -17,9 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.concurrent.LazyInit;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.EnumSet;
@@ -87,7 +85,7 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
     }
 
     @Override
-    public boolean contains(@CheckForNull Object object) {
+    public boolean contains(Object object) {
         return delegate.contains(object);
     }
 
@@ -105,7 +103,7 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }
@@ -120,7 +118,6 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
         return true;
     }
 
-    @LazyInit
     private transient int hashCode;
 
     @Override

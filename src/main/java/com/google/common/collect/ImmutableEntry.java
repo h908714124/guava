@@ -17,14 +17,13 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.Serializable;
 
 /** @see com.google.common.collect.Maps#immutableEntry(Object, Object) */
 @GwtCompatible(serializable = true)
 @ElementTypesAreNonnullByDefault
-class ImmutableEntry<K extends @Nullable Object, V extends @Nullable Object>
+class ImmutableEntry<K, V>
         extends AbstractMapEntry<K, V> implements Serializable {
     @ParametricNullness
     final K key;

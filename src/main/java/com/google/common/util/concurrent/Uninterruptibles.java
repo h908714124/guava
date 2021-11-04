@@ -18,8 +18,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.time.Duration;
 import java.util.concurrent.BlockingQueue;
@@ -79,7 +77,6 @@ public final class Uninterruptibles {
      *
      * @since 28.0
      */
-    @CanIgnoreReturnValue // TODO(cpovirk): Consider being more strict.
     @GwtIncompatible // concurrency
     @Beta
     public static boolean awaitUninterruptibly(CountDownLatch latch, Duration timeout) {
@@ -90,7 +87,6 @@ public final class Uninterruptibles {
      * Invokes {@code latch.}{@link CountDownLatch#await(long, TimeUnit) await(timeout, unit)}
      * uninterruptibly.
      */
-    @CanIgnoreReturnValue // TODO(cpovirk): Consider being more strict.
     @GwtIncompatible // concurrency
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
     public static boolean awaitUninterruptibly(CountDownLatch latch, long timeout, TimeUnit unit) {
@@ -234,9 +230,8 @@ public final class Uninterruptibles {
      * @throws ExecutionException if the computation threw an exception
      * @throws CancellationException if the computation was cancelled
      */
-    @CanIgnoreReturnValue
     @ParametricNullness
-    public static <V extends @Nullable Object> V getUninterruptibly(Future<V> future)
+    public static <V> V getUninterruptibly(Future<V> future)
             throws ExecutionException {
         boolean interrupted = false;
         try {
@@ -273,11 +268,10 @@ public final class Uninterruptibles {
      * @throws TimeoutException if the wait timed out
      * @since 28.0
      */
-    @CanIgnoreReturnValue
     @GwtIncompatible // java.time.Duration
     @Beta
     @ParametricNullness
-    public static <V extends @Nullable Object> V getUninterruptibly(
+    public static <V> V getUninterruptibly(
             Future<V> future, Duration timeout) throws ExecutionException, TimeoutException {
         return getUninterruptibly(future, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
     }
@@ -300,11 +294,10 @@ public final class Uninterruptibles {
      * @throws CancellationException if the computation was cancelled
      * @throws TimeoutException if the wait timed out
      */
-    @CanIgnoreReturnValue
     @GwtIncompatible // TODO
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
     @ParametricNullness
-    public static <V extends @Nullable Object> V getUninterruptibly(
+    public static <V> V getUninterruptibly(
             Future<V> future, long timeout, TimeUnit unit) throws ExecutionException, TimeoutException {
         boolean interrupted = false;
         try {

@@ -15,7 +15,6 @@
 package com.google.common.hash;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -50,7 +49,6 @@ public final class HashingInputStream extends FilterInputStream {
      * byte read.
      */
     @Override
-    @CanIgnoreReturnValue
     public int read() throws IOException {
         int b = in.read();
         if (b != -1) {
@@ -64,7 +62,6 @@ public final class HashingInputStream extends FilterInputStream {
      * the bytes read.
      */
     @Override
-    @CanIgnoreReturnValue
     public int read(byte[] bytes, int off, int len) throws IOException {
         int numOfBytesRead = in.read(bytes, off, len);
         if (numOfBytesRead != -1) {

@@ -17,9 +17,6 @@
 package com.google.common.graph;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
-import javax.annotation.CheckForNull;
 
 /**
  * A subinterface of {@link ValueGraph} which adds mutation methods. When mutation is not required,
@@ -41,7 +38,6 @@ public interface MutableValueGraph<N, V> extends ValueGraph<N, V> {
      *
      * @return {@code true} if the graph was modified as a result of this call
      */
-    @CanIgnoreReturnValue
     boolean addNode(N node);
 
     /**
@@ -61,8 +57,6 @@ public interface MutableValueGraph<N, V> extends ValueGraph<N, V> {
      * @throws IllegalArgumentException if the introduction of the edge would violate {@link
      *     #allowsSelfLoops()}
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     V putEdgeValue(N nodeU, N nodeV, V value);
 
     /**
@@ -86,8 +80,6 @@ public interface MutableValueGraph<N, V> extends ValueGraph<N, V> {
      * @throws IllegalArgumentException if the endpoints are unordered and the graph is directed
      * @since 27.1
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     V putEdgeValue(EndpointPair<N> endpoints, V value);
 
     /**
@@ -95,7 +87,6 @@ public interface MutableValueGraph<N, V> extends ValueGraph<N, V> {
      *
      * @return {@code true} if the graph was modified as a result of this call
      */
-    @CanIgnoreReturnValue
     boolean removeNode(N node);
 
     /**
@@ -104,8 +95,6 @@ public interface MutableValueGraph<N, V> extends ValueGraph<N, V> {
      * @return the value previously associated with the edge connecting {@code nodeU} to {@code
      *     nodeV}, or null if there was no such edge.
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     V removeEdge(N nodeU, N nodeV);
 
     /**
@@ -117,7 +106,5 @@ public interface MutableValueGraph<N, V> extends ValueGraph<N, V> {
      *     there was no such edge.
      * @since 27.1
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     V removeEdge(EndpointPair<N> endpoints);
 }

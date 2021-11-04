@@ -16,9 +16,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotMock;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.time.Duration;
 import java.util.concurrent.Callable;
@@ -36,7 +33,6 @@ import static com.google.common.util.concurrent.Internal.toNanosSaturated;
  * @since 1.0
  */
 @Beta
-@DoNotMock("Use FakeTimeLimiter")
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
 public interface TimeLimiter {
@@ -146,9 +142,9 @@ public interface TimeLimiter {
      * @throws ExecutionError if {@code callable} throws an {@code Error}
      * @since 22.0
      */
-    @SuppressWarnings("GoodTime") // should accept a java.time.Duration
-    @CanIgnoreReturnValue
-    <T extends @Nullable Object> T callWithTimeout(
+    @SuppressWarnings("GoodTime")
+    // should accept a java.time.Duration
+    <T> T callWithTimeout(
             Callable<T> callable, long timeoutDuration, TimeUnit timeoutUnit)
             throws TimeoutException, InterruptedException, ExecutionException;
 
@@ -168,8 +164,7 @@ public interface TimeLimiter {
      * @throws ExecutionError if {@code callable} throws an {@code Error}
      * @since 28.0
      */
-    @CanIgnoreReturnValue
-    default <T extends @Nullable Object> T callWithTimeout(Callable<T> callable, Duration timeout)
+    default <T> T callWithTimeout(Callable<T> callable, Duration timeout)
             throws TimeoutException, InterruptedException, ExecutionException {
         return callWithTimeout(callable, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
     }
@@ -193,9 +188,9 @@ public interface TimeLimiter {
      * @throws ExecutionError if {@code callable} throws an {@code Error}
      * @since 22.0
      */
-    @SuppressWarnings("GoodTime") // should accept a java.time.Duration
-    @CanIgnoreReturnValue
-    <T extends @Nullable Object> T callUninterruptiblyWithTimeout(
+    @SuppressWarnings("GoodTime")
+    // should accept a java.time.Duration
+    <T> T callUninterruptiblyWithTimeout(
             Callable<T> callable, long timeoutDuration, TimeUnit timeoutUnit)
             throws TimeoutException, ExecutionException;
 
@@ -217,8 +212,7 @@ public interface TimeLimiter {
      * @throws ExecutionError if {@code callable} throws an {@code Error}
      * @since 28.0
      */
-    @CanIgnoreReturnValue
-    default <T extends @Nullable Object> T callUninterruptiblyWithTimeout(
+    default <T> T callUninterruptiblyWithTimeout(
             Callable<T> callable, Duration timeout) throws TimeoutException, ExecutionException {
         return callUninterruptiblyWithTimeout(
                 callable, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);

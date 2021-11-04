@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
@@ -48,7 +46,7 @@ import java.util.Queue;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingQueue<E extends @Nullable Object> extends ForwardingCollection<E>
+public abstract class ForwardingQueue<E> extends ForwardingCollection<E>
         implements Queue<E> {
 
     /** Constructor for use by subclasses. */
@@ -66,12 +64,10 @@ public abstract class ForwardingQueue<E extends @Nullable Object> extends Forwar
 
     @CanIgnoreReturnValue // TODO(cpovirk): Consider removing this?
     @Override
-    @CheckForNull
     public E poll() {
         return delegate().poll();
     }
 
-    @CanIgnoreReturnValue
     @Override
     @ParametricNullness
     public E remove() {
@@ -79,7 +75,6 @@ public abstract class ForwardingQueue<E extends @Nullable Object> extends Forwar
     }
 
     @Override
-    @CheckForNull
     public E peek() {
         return delegate().peek();
     }
@@ -110,7 +105,6 @@ public abstract class ForwardingQueue<E extends @Nullable Object> extends Forwar
      *
      * @since 7.0
      */
-    @CheckForNull
     protected E standardPeek() {
         try {
             return element();
@@ -125,7 +119,6 @@ public abstract class ForwardingQueue<E extends @Nullable Object> extends Forwar
      *
      * @since 7.0
      */
-    @CheckForNull
     protected E standardPoll() {
         try {
             return remove();

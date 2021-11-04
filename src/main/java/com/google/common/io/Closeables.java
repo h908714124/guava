@@ -18,7 +18,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 
-import javax.annotation.CheckForNull;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,7 +72,7 @@ public final class Closeables {
      * @throws IOException if {@code swallowIOException} is false and {@code close} throws an {@code
      *     IOException}.
      */
-    public static void close(@CheckForNull Closeable closeable, boolean swallowIOException)
+    public static void close(Closeable closeable, boolean swallowIOException)
             throws IOException {
         if (closeable == null) {
             return;
@@ -103,7 +102,7 @@ public final class Closeables {
      *     does nothing
      * @since 17.0
      */
-    public static void closeQuietly(@CheckForNull InputStream inputStream) {
+    public static void closeQuietly(InputStream inputStream) {
         try {
             close(inputStream, true);
         } catch (IOException impossible) {
@@ -124,7 +123,7 @@ public final class Closeables {
      * @param reader the reader to be closed, or {@code null} in which case this method does nothing
      * @since 17.0
      */
-    public static void closeQuietly(@CheckForNull Reader reader) {
+    public static void closeQuietly(Reader reader) {
         try {
             close(reader, true);
         } catch (IOException impossible) {

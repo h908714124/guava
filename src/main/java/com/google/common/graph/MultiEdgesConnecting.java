@@ -19,7 +19,6 @@ package com.google.common.graph;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.UnmodifiableIterator;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,7 +51,6 @@ abstract class MultiEdgesConnecting<E> extends AbstractSet<E> {
         Iterator<? extends Entry<E, ?>> entries = outEdgeToNode.entrySet().iterator();
         return new AbstractIterator<E>() {
             @Override
-            @CheckForNull
             protected E computeNext() {
                 while (entries.hasNext()) {
                     Entry<E, ?> entry = entries.next();
@@ -66,7 +64,7 @@ abstract class MultiEdgesConnecting<E> extends AbstractSet<E> {
     }
 
     @Override
-    public boolean contains(@CheckForNull Object edge) {
+    public boolean contains(Object edge) {
         return targetNode.equals(outEdgeToNode.get(edge));
     }
 }

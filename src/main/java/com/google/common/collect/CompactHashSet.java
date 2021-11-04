@@ -21,10 +21,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -78,11 +75,11 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtIncompatible // not worth using in GWT for now
 @ElementTypesAreNonnullByDefault
-class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implements Serializable {
+class CompactHashSet<E> extends AbstractSet<E> implements Serializable {
     // TODO(user): cache all field accesses in local vars
 
     /** Creates an empty {@code CompactHashSet} instance. */
-    public static <E extends @Nullable Object> CompactHashSet<E> create() {
+    public static <E> CompactHashSet<E> create() {
         return new CompactHashSet<>();
     }
 
@@ -93,7 +90,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
      * @param collection the elements that the set should contain
      * @return a new {@code CompactHashSet} containing those elements (minus duplicates)
      */
-    public static <E extends @Nullable Object> CompactHashSet<E> create(
+    public static <E> CompactHashSet<E> create(
             Collection<? extends E> collection) {
         CompactHashSet<E> set = createWithExpectedSize(collection.size());
         set.addAll(collection);
@@ -108,7 +105,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
      * @return a new {@code CompactHashSet} containing those elements (minus duplicates)
      */
     @SafeVarargs
-    public static <E extends @Nullable Object> CompactHashSet<E> create(E... elements) {
+    public static <E> CompactHashSet<E> create(E... elements) {
         CompactHashSet<E> set = createWithExpectedSize(elements.length);
         Collections.addAll(set, elements);
         return set;
@@ -123,7 +120,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
      *     elements without resizing
      * @throws IllegalArgumentException if {@code expectedSize} is negative
      */
-    public static <E extends @Nullable Object> CompactHashSet<E> createWithExpectedSize(
+    public static <E> CompactHashSet<E> createWithExpectedSize(
             int expectedSize) {
         return new CompactHashSet<>(expectedSize);
     }
@@ -165,7 +162,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
      *   <li>null, if no entries have yet been added to the map
      * </ul>
      */
-    @CheckForNull
     private transient Object table;
 
     /**
@@ -183,7 +179,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
      *
      * <p>The pointers in [size(), entries.length) are all "null" (UNSET).
      */
-    @CheckForNull
     private transient int[] entries;
 
     /**
@@ -191,9 +186,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
      * elements.length) are all {@code null}.
      */
     @VisibleForTesting
-    @CheckForNull
-    transient @Nullable
-    Object[] elements;
+    transient Object[] elements;
 
     /**
      * Keeps track of metadata like the number of hash table bits and modifications of this data
@@ -235,7 +228,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     }
 
     /** Handle lazy allocation of arrays. */
-    @CanIgnoreReturnValue
     int allocArrays() {
         Preconditions.checkState(needsAllocArrays(), "Arrays already allocated");
 
@@ -252,7 +244,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
 
     @SuppressWarnings("unchecked")
     @VisibleForTesting
-    @CheckForNull
     Set<E> delegateOrNull() {
         if (table instanceof Set) {
             return (Set<E>) table;
@@ -265,7 +256,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     }
 
     @VisibleForTesting
-    @CanIgnoreReturnValue
     Set<E> convertToHashFloodingResistantImplementation() {
         Set<E> newDelegate = createHashFloodingResistantDelegate(hashTableMask() + 1);
         for (int i = firstEntryIndex(); i >= 0; i = getSuccessor(i)) {
@@ -299,7 +289,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
         metadata += CompactHashing.MODIFICATION_COUNT_INCREMENT;
     }
 
-    @CanIgnoreReturnValue
     @Override
     public boolean add(@ParametricNullness E object) {
         if (needsAllocArrays()) {
@@ -310,7 +299,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
             return delegate.add(object);
         }
         int[] entries = requireEntries();
-        @Nullable Object[] elements = requireElements();
+        Object[] elements = requireElements();
 
         int newEntryIndex = this.size; // current size, and pointer to the entry to be appended
         int newSize = newEntryIndex + 1;
@@ -389,7 +378,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
         this.elements = Arrays.copyOf(requireElements(), newCapacity);
     }
 
-    @CanIgnoreReturnValue
     private int resizeTable(int oldMask, int newCapacity, int targetHash, int targetEntryIndex) {
         Object newTable = CompactHashing.createTable(newCapacity);
         int newMask = newCapacity - 1;
@@ -427,7 +415,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     }
 
     @Override
-    public boolean contains(@CheckForNull Object object) {
+    public boolean contains(Object object) {
         if (needsAllocArrays()) {
             return false;
         }
@@ -454,9 +442,8 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
         return false;
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public boolean remove(@CheckForNull Object object) {
+    public boolean remove(Object object) {
         if (needsAllocArrays()) {
             return false;
         }
@@ -491,7 +478,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     void moveLastEntry(int dstIndex, int mask) {
         Object table = requireTable();
         int[] entries = requireEntries();
-        @Nullable Object[] elements = requireElements();
+        Object[] elements = requireElements();
         int srcIndex = size() - 1;
         if (dstIndex < srcIndex) {
             // move last entry to deleted spot
@@ -633,8 +620,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     }
 
     @Override
-    public @Nullable
-    Object[] toArray() {
+    public Object[] toArray() {
         if (needsAllocArrays()) {
             return new Object[0];
         }
@@ -642,10 +628,9 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
         return (delegate != null) ? delegate.toArray() : Arrays.copyOf(requireElements(), size);
     }
 
-    @CanIgnoreReturnValue
     @Override
     @SuppressWarnings("nullness") // b/192354773 in our checker affects toArray declarations
-    public <T extends @Nullable Object> T[] toArray(T[] a) {
+    public <T> T[] toArray(T[] a) {
         if (needsAllocArrays()) {
             if (a.length > 0) {
                 a[0] = null;
@@ -740,8 +725,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
         return requireNonNull(entries);
     }
 
-    private @Nullable
-    Object[] requireElements() {
+    private Object[] requireElements() {
         return requireNonNull(elements);
     }
 

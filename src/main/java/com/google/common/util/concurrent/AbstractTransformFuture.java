@@ -16,10 +16,7 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
-import com.google.errorprone.annotations.ForOverride;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -33,9 +30,9 @@ import static com.google.common.util.concurrent.MoreExecutors.rejectionPropagati
 @ElementTypesAreNonnullByDefault
 @SuppressWarnings("nullness") // TODO(b/147136275): Remove once our checker understands & and |.
 abstract class AbstractTransformFuture<
-        I extends @Nullable Object, O extends @Nullable Object, F, T extends @Nullable Object>
+        I, O, F, T>
         extends FluentFuture.TrustedFuture<O> implements Runnable {
-    static <I extends @Nullable Object, O extends @Nullable Object> ListenableFuture<O> create(
+    static <I, O> ListenableFuture<O> create(
             ListenableFuture<I> input,
             AsyncFunction<? super I, ? extends O> function,
             Executor executor) {
@@ -45,7 +42,7 @@ abstract class AbstractTransformFuture<
         return output;
     }
 
-    static <I extends @Nullable Object, O extends @Nullable Object> ListenableFuture<O> create(
+    static <I, O> ListenableFuture<O> create(
             ListenableFuture<I> input, Function<? super I, ? extends O> function, Executor executor) {
         checkNotNull(function);
         TransformFuture<I, O> output = new TransformFuture<>(input, function);
@@ -57,9 +54,7 @@ abstract class AbstractTransformFuture<
      * In certain circumstances, this field might theoretically not be visible to an afterDone() call
      * triggered by cancel(). For details, see the comments on the fields of TimeoutFuture.
      */
-    @CheckForNull
     ListenableFuture<? extends I> inputFuture;
-    @CheckForNull
     F function;
 
     AbstractTransformFuture(ListenableFuture<? extends I> inputFuture, F function) {
@@ -171,12 +166,10 @@ abstract class AbstractTransformFuture<
     }
 
     /** Template method for subtypes to actually run the transform. */
-    @ForOverride
     @ParametricNullness
     abstract T doTransform(F function, @ParametricNullness I result) throws Exception;
 
     /** Template method for subtypes to actually set the result. */
-    @ForOverride
     abstract void setResult(@ParametricNullness T result);
 
     @Override
@@ -187,7 +180,6 @@ abstract class AbstractTransformFuture<
     }
 
     @Override
-    @CheckForNull
     protected String pendingToString() {
         ListenableFuture<? extends I> localInputFuture = inputFuture;
         F localFunction = function;
@@ -209,7 +201,7 @@ abstract class AbstractTransformFuture<
      * #setFuture(ListenableFuture)}.
      */
     private static final class AsyncTransformFuture<
-            I extends @Nullable Object, O extends @Nullable Object>
+            I, O>
             extends AbstractTransformFuture<
             I, O, AsyncFunction<? super I, ? extends O>, ListenableFuture<? extends O>> {
         AsyncTransformFuture(
@@ -240,7 +232,7 @@ abstract class AbstractTransformFuture<
      * An {@link AbstractTransformFuture} that delegates to a {@link Function} and {@link
      * #set(Object)}.
      */
-    private static final class TransformFuture<I extends @Nullable Object, O extends @Nullable Object>
+    private static final class TransformFuture<I, O>
             extends AbstractTransformFuture<I, O, Function<? super I, ? extends O>, O> {
         TransformFuture(
                 ListenableFuture<? extends I> inputFuture, Function<? super I, ? extends O> function) {

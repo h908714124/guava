@@ -15,16 +15,13 @@
 package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
-import javax.annotation.CheckForNull;
 
 /** A utility method to perform unchecked casts to suppress errors produced by nullness analyses. */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 final class NullnessCasts {
     /**
-     * Accepts a {@code @Nullable T} and returns a plain {@code T}, without performing any check that
+     * Accepts a {@code T} and returns a plain {@code T}, without performing any check that
      * that conversion is safe.
      *
      * <p>This method is intended to help with usages of type parameters that have {@linkplain
@@ -34,7 +31,7 @@ final class NullnessCasts {
      * its runtime check.
      *
      * <p>An example use case for this method is in implementing an {@code Iterator<T>} whose {@code
-     * next} field is lazily initialized. The type of that field would be {@code @Nullable T}, and the
+     * next} field is lazily initialized. The type of that field would be {@code T}, and the
      * code would be responsible for populating a "real" {@code T} (which might still be the value
      * {@code null}!) before returning it to callers. Depending on how the code is structured, a
      * nullness analysis might not understand that the field has been populated. To avoid that problem
@@ -45,15 +42,15 @@ final class NullnessCasts {
      * add the suppression to the whole method (which turns off checking for a large section of code),
      * or extract a variable, and put the suppression on that. However, a local variable typically
      * doesn't work: Because nullness analyses typically infer the nullness of local variables,
-     * there's no way to assign a {@code @Nullable T} to a field {@code T foo;} and instruct the
-     * analysis that that means "plain {@code T}" rather than the inferred type {@code @Nullable T}.
+     * there's no way to assign a {@code T} to a field {@code T foo;} and instruct the
+     * analysis that that means "plain {@code T}" rather than the inferred type {@code T}.
      * (Even if supported added {@code @NonNull}, that would not help, since the problem case
      * addressed by this method is the case in which {@code T} has parametric nullness -- and thus its
      * value may be legitimately {@code null}.)
      */
     @ParametricNullness
     @SuppressWarnings("nullness")
-    static <T extends @Nullable Object> T uncheckedCastNullableTToT(@CheckForNull T t) {
+    static <T> T uncheckedCastNullableTToT(T t) {
         return t;
     }
 

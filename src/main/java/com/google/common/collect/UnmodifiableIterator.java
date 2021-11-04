@@ -17,8 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.DoNotCall;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Iterator;
 
@@ -34,7 +32,7 @@ import java.util.Iterator;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class UnmodifiableIterator<E extends @Nullable Object> implements Iterator<E> {
+public abstract class UnmodifiableIterator<E> implements Iterator<E> {
     /** Constructor for use by subclasses. */
     protected UnmodifiableIterator() {
     }
@@ -47,7 +45,6 @@ public abstract class UnmodifiableIterator<E extends @Nullable Object> implement
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void remove() {
         throw new UnsupportedOperationException();
     }

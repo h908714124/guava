@@ -21,8 +21,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.MapMaker.Dummy;
 import com.google.common.collect.MapMakerInternalMap.InternalEntry;
 
-import javax.annotation.CheckForNull;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -184,7 +182,7 @@ public final class Interners {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object other) {
+        public boolean equals(Object other) {
             if (other instanceof InternerFunction) {
                 InternerFunction<?> that = (InternerFunction<?>) other;
                 return interner.equals(that.interner);

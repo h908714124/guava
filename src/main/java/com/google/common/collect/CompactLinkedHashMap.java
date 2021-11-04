@@ -18,11 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -55,12 +51,12 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtIncompatible // not worth using in GWT for now
 @ElementTypesAreNonnullByDefault
-class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Object>
+class CompactLinkedHashMap<K, V>
         extends CompactHashMap<K, V> {
     // TODO(lowasser): implement removeEldestEntry so this can be used as a drop-in replacement
 
     /** Creates an empty {@code CompactLinkedHashMap} instance. */
-    public static <K extends @Nullable Object, V extends @Nullable Object>
+    public static <K, V>
     CompactLinkedHashMap<K, V> create() {
         return new CompactLinkedHashMap<>();
     }
@@ -74,7 +70,7 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
      *     expectedSize} elements without resizing
      * @throws IllegalArgumentException if {@code expectedSize} is negative
      */
-    public static <K extends @Nullable Object, V extends @Nullable Object>
+    public static <K, V>
     CompactLinkedHashMap<K, V> createWithExpectedSize(int expectedSize) {
         return new CompactLinkedHashMap<>(expectedSize);
     }
@@ -90,7 +86,6 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
      * <p>A node with "prev" pointer equal to {@code ENDPOINT} is the first node in the linked list,
      * and a node with "next" pointer equal to {@code ENDPOINT} is the last node.
      */
-    @CheckForNull
     @VisibleForTesting
     transient long[] links;
 
@@ -135,7 +130,6 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
     }
 
     @Override
-    @CanIgnoreReturnValue
     Map<K, V> convertToHashFloodingResistantImplementation() {
         Map<K, V> result = super.convertToHashFloodingResistantImplementation();
         links = null;
@@ -232,7 +226,6 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
 
     @Override
     Set<Entry<K, V>> createEntrySet() {
-        @WeakOuter
         class EntrySetImpl extends EntrySetView {
             @Override
             public Spliterator<Entry<K, V>> spliterator() {
@@ -244,17 +237,15 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
 
     @Override
     Set<K> createKeySet() {
-        @WeakOuter
         class KeySetImpl extends KeySetView {
             @Override
-            public @Nullable
-            Object[] toArray() {
+            public Object[] toArray() {
                 return ObjectArrays.toArrayImpl(this);
             }
 
             @Override
             @SuppressWarnings("nullness") // b/192354773 in our checker affects toArray declarations
-            public <T extends @Nullable Object> T[] toArray(T[] a) {
+            public <T> T[] toArray(T[] a) {
                 return ObjectArrays.toArrayImpl(this, a);
             }
 
@@ -268,17 +259,15 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
 
     @Override
     Collection<V> createValues() {
-        @WeakOuter
         class ValuesImpl extends ValuesView {
             @Override
-            public @Nullable
-            Object[] toArray() {
+            public Object[] toArray() {
                 return ObjectArrays.toArrayImpl(this);
             }
 
             @Override
             @SuppressWarnings("nullness") // b/192354773 in our checker affects toArray declarations
-            public <T extends @Nullable Object> T[] toArray(T[] a) {
+            public <T> T[] toArray(T[] a) {
                 return ObjectArrays.toArrayImpl(this, a);
             }
 

@@ -16,7 +16,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.util.Set;
 
 /**
@@ -43,7 +42,7 @@ final class JdkBackedImmutableSet<E> extends IndexedImmutableSet<E> {
     }
 
     @Override
-    public boolean contains(@CheckForNull Object object) {
+    public boolean contains(Object object) {
         return delegate.contains(object);
     }
 

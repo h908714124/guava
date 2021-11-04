@@ -19,7 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Spliterator;
 import java.util.function.Consumer;
@@ -57,7 +56,7 @@ final class ImmutableMapKeySet<K, V> extends IndexedImmutableSet<K> {
     }
 
     @Override
-    public boolean contains(@CheckForNull Object object) {
+    public boolean contains(Object object) {
         return map.containsKey(object);
     }
 

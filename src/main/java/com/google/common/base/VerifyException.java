@@ -16,8 +16,6 @@ package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
-
 /**
  * Exception thrown upon the failure of a <a
  * href="https://github.com/google/guava/wiki/ConditionalFailuresExplained">verification check</a>,
@@ -33,7 +31,7 @@ public class VerifyException extends RuntimeException {
     }
 
     /** Constructs a {@code VerifyException} with the message {@code message}. */
-    public VerifyException(@CheckForNull String message) {
+    public VerifyException(String message) {
         super(message);
     }
 
@@ -43,7 +41,7 @@ public class VerifyException extends RuntimeException {
      *
      * @since 19.0
      */
-    public VerifyException(@CheckForNull Throwable cause) {
+    public VerifyException(Throwable cause) {
         super(cause);
     }
 
@@ -53,7 +51,7 @@ public class VerifyException extends RuntimeException {
      *
      * @since 19.0
      */
-    public VerifyException(@CheckForNull String message, @CheckForNull Throwable cause) {
+    public VerifyException(String message, Throwable cause) {
         super(message, cause);
     }
 }

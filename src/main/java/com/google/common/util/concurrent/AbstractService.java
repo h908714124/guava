@@ -17,12 +17,8 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.util.concurrent.Monitor.Guard;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.ForOverride;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.WeakOuter;
 
-import javax.annotation.CheckForNull;
 import java.time.Duration;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -122,7 +118,6 @@ public abstract class AbstractService implements Service {
 
     private final Guard isStartable = new IsStartableGuard();
 
-    @WeakOuter
     private final class IsStartableGuard extends Guard {
         IsStartableGuard() {
             super(AbstractService.this.monitor);
@@ -136,7 +131,6 @@ public abstract class AbstractService implements Service {
 
     private final Guard isStoppable = new IsStoppableGuard();
 
-    @WeakOuter
     private final class IsStoppableGuard extends Guard {
         IsStoppableGuard() {
             super(AbstractService.this.monitor);
@@ -150,7 +144,6 @@ public abstract class AbstractService implements Service {
 
     private final Guard hasReachedRunning = new HasReachedRunningGuard();
 
-    @WeakOuter
     private final class HasReachedRunningGuard extends Guard {
         HasReachedRunningGuard() {
             super(AbstractService.this.monitor);
@@ -164,7 +157,6 @@ public abstract class AbstractService implements Service {
 
     private final Guard isStopped = new IsStoppedGuard();
 
-    @WeakOuter
     private final class IsStoppedGuard extends Guard {
         IsStoppedGuard() {
             super(AbstractService.this.monitor);
@@ -204,7 +196,6 @@ public abstract class AbstractService implements Service {
      * convenient. It is invoked exactly once on service startup, even when {@link #startAsync} is
      * called multiple times.
      */
-    @ForOverride
     protected abstract void doStart();
 
     /**
@@ -221,7 +212,6 @@ public abstract class AbstractService implements Service {
      * invoked immediately. Instead, it will be deferred until after the service is {@link
      * State#RUNNING}. Services that need to cancel startup work can override {@link #doCancelStart}.
      */
-    @ForOverride
     protected abstract void doStop();
 
     /**
@@ -239,11 +229,9 @@ public abstract class AbstractService implements Service {
      * @since 27.0
      */
     @Beta
-    @ForOverride
     protected void doCancelStart() {
     }
 
-    @CanIgnoreReturnValue
     @Override
     public final Service startAsync() {
         if (monitor.enterIf(isStartable)) {
@@ -263,7 +251,6 @@ public abstract class AbstractService implements Service {
         return this;
     }
 
-    @CanIgnoreReturnValue
     @Override
     public final Service stopAsync() {
         if (monitor.enterIf(isStoppable)) {
@@ -592,7 +579,6 @@ public abstract class AbstractService implements Service {
          * The exception that caused this service to fail. This will be {@code null} unless the service
          * has failed.
          */
-        @CheckForNull
         final Throwable failure;
 
         StateSnapshot(State internalState) {
@@ -600,7 +586,7 @@ public abstract class AbstractService implements Service {
         }
 
         StateSnapshot(
-                State internalState, boolean shutdownWhenStartupFinishes, @CheckForNull Throwable failure) {
+                State internalState, boolean shutdownWhenStartupFinishes, Throwable failure) {
             checkArgument(
                     !shutdownWhenStartupFinishes || internalState == STARTING,
                     "shutdownWhenStartupFinishes can only be set if state is STARTING. Got %s instead.",

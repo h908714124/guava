@@ -19,11 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
@@ -59,7 +55,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
      *
      * @since 21.0
      */
-    public static <T extends @Nullable Object, K, V>
+    public static <T, K, V>
     Collector<T, ?, ImmutableBiMap<K, V>> toImmutableBiMap(
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction) {
@@ -353,7 +349,6 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
          * Associates {@code key} with {@code value} in the built bimap. Duplicate keys or values are
          * not allowed, and will cause {@link #build} to fail.
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<K, V> put(K key, V value) {
             super.put(key, value);
@@ -366,7 +361,6 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
          *
          * @since 19.0
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<K, V> put(Entry<? extends K, ? extends V> entry) {
             super.put(entry);
@@ -379,7 +373,6 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
          *
          * @throws NullPointerException if any key or value in {@code map} is null
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<K, V> putAll(Map<? extends K, ? extends V> map) {
             super.putAll(map);
@@ -393,7 +386,6 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
          * @throws NullPointerException if any key, value, or entry is null
          * @since 19.0
          */
-        @CanIgnoreReturnValue
         @Beta
         @Override
         public Builder<K, V> putAll(Iterable<? extends Entry<? extends K, ? extends V>> entries) {
@@ -411,7 +403,6 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
          * @throws IllegalStateException if this method was already called
          * @since 19.0
          */
-        @CanIgnoreReturnValue
         @Beta
         @Override
         public Builder<K, V> orderEntriesByValue(Comparator<? super V> valueComparator) {
@@ -420,7 +411,6 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
         }
 
         @Override
-        @CanIgnoreReturnValue
         Builder<K, V> combine(ImmutableMap.Builder<K, V> builder) {
             super.combine(builder);
             return this;
@@ -592,11 +582,8 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public final V forcePut(K key, V value) {
         throw new UnsupportedOperationException();
     }

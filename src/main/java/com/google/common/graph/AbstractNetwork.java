@@ -25,7 +25,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.math.IntMath;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -92,7 +91,7 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
                     // Network<LinkedList>.
                     @SuppressWarnings("unchecked")
                     @Override
-                    public boolean contains(@CheckForNull Object obj) {
+                    public boolean contains(Object obj) {
                         if (!(obj instanceof EndpointPair)) {
                             return false;
                         }
@@ -208,7 +207,6 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
     }
 
     @Override
-    @CheckForNull
     public E edgeConnectingOrNull(N nodeU, N nodeV) {
         Set<E> edgesConnecting = edgesConnecting(nodeU, nodeV);
         switch (edgesConnecting.size()) {
@@ -222,7 +220,6 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
     }
 
     @Override
-    @CheckForNull
     public E edgeConnectingOrNull(EndpointPair<N> endpoints) {
         validateEndpoints(endpoints);
         return edgeConnectingOrNull(endpoints.nodeU(), endpoints.nodeV());
@@ -258,7 +255,7 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
     }
 
     @Override
-    public final boolean equals(@CheckForNull Object obj) {
+    public final boolean equals(Object obj) {
         if (obj == this) {
             return true;
         }

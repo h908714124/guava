@@ -17,11 +17,8 @@ package com.google.common.primitives;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Preconditions;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.CheckReturnValue;
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Arrays;
@@ -88,7 +85,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @Beta
 @GwtCompatible
-@Immutable
 @ElementTypesAreNonnullByDefault
 public final class ImmutableDoubleArray implements Serializable {
     private static final ImmutableDoubleArray EMPTY = new ImmutableDoubleArray(new double[0]);
@@ -211,7 +207,6 @@ public final class ImmutableDoubleArray implements Serializable {
      * A builder for {@link ImmutableDoubleArray} instances; obtained using {@link
      * ImmutableDoubleArray#builder}.
      */
-    @CanIgnoreReturnValue
     public static final class Builder {
         private double[] array;
         private int count = 0; // <= array.length
@@ -324,7 +319,6 @@ public final class ImmutableDoubleArray implements Serializable {
          * no data is copied as part of this step, but this may occupy more memory than strictly
          * necessary. To copy the data to a right-sized backing array, use {@code .build().trimmed()}.
          */
-        @CheckReturnValue
         public ImmutableDoubleArray build() {
             return count == 0 ? EMPTY : new ImmutableDoubleArray(array, 0, count);
         }
@@ -485,17 +479,17 @@ public final class ImmutableDoubleArray implements Serializable {
         }
 
         @Override
-        public boolean contains(@CheckForNull Object target) {
+        public boolean contains(Object target) {
             return indexOf(target) >= 0;
         }
 
         @Override
-        public int indexOf(@CheckForNull Object target) {
+        public int indexOf(Object target) {
             return target instanceof Double ? parent.indexOf((Double) target) : -1;
         }
 
         @Override
-        public int lastIndexOf(@CheckForNull Object target) {
+        public int lastIndexOf(Object target) {
             return target instanceof Double ? parent.lastIndexOf((Double) target) : -1;
         }
 
@@ -511,7 +505,7 @@ public final class ImmutableDoubleArray implements Serializable {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object object) {
+        public boolean equals(Object object) {
             if (object instanceof AsList) {
                 AsList that = (AsList) object;
                 return this.parent.equals(that.parent);
@@ -551,7 +545,7 @@ public final class ImmutableDoubleArray implements Serializable {
      * values as this one, in the same order. Values are compared as if by {@link Double#equals}.
      */
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }

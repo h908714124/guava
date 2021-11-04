@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Predicate;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.List;
 
 /**
@@ -30,7 +28,7 @@ import java.util.List;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-final class FilteredKeyListMultimap<K extends @Nullable Object, V extends @Nullable Object>
+final class FilteredKeyListMultimap<K, V>
         extends FilteredKeyMultimap<K, V> implements ListMultimap<K, V> {
     FilteredKeyListMultimap(ListMultimap<K, V> unfiltered, Predicate<? super K> keyPredicate) {
         super(unfiltered, keyPredicate);
@@ -47,7 +45,7 @@ final class FilteredKeyListMultimap<K extends @Nullable Object, V extends @Nulla
     }
 
     @Override
-    public List<V> removeAll(@CheckForNull Object key) {
+    public List<V> removeAll(Object key) {
         return (List<V>) super.removeAll(key);
     }
 

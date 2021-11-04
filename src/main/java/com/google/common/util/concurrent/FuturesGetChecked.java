@@ -18,11 +18,8 @@ import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
 import com.google.common.collect.Ordering;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2objc.annotations.J2ObjCIncompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -43,18 +40,16 @@ import static java.util.Arrays.asList;
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
 final class FuturesGetChecked {
-    @CanIgnoreReturnValue
     @ParametricNullness
-    static <V extends @Nullable Object, X extends Exception> V getChecked(
+    static <V, X extends Exception> V getChecked(
             Future<V> future, Class<X> exceptionClass) throws X {
         return getChecked(bestGetCheckedTypeValidator(), future, exceptionClass);
     }
 
     /** Implementation of {@link Futures#getChecked(Future, Class)}. */
-    @CanIgnoreReturnValue
     @VisibleForTesting
     @ParametricNullness
-    static <V extends @Nullable Object, X extends Exception> V getChecked(
+    static <V, X extends Exception> V getChecked(
             GetCheckedTypeValidator validator, Future<V> future, Class<X> exceptionClass) throws X {
         validator.validateClass(exceptionClass);
         try {
@@ -69,9 +64,8 @@ final class FuturesGetChecked {
     }
 
     /** Implementation of {@link Futures#getChecked(Future, Class, long, TimeUnit)}. */
-    @CanIgnoreReturnValue
     @ParametricNullness
-    static <V extends @Nullable Object, X extends Exception> V getChecked(
+    static <V, X extends Exception> V getChecked(
             Future<V> future, Class<X> exceptionClass, long timeout, TimeUnit unit) throws X {
         // TODO(cpovirk): benchmark a version of this method that accepts a GetCheckedTypeValidator
         bestGetCheckedTypeValidator().validateClass(exceptionClass);
@@ -263,7 +257,6 @@ final class FuturesGetChecked {
                             })
                     .reverse();
 
-    @CheckForNull
     private static <X> X newFromConstructor(Constructor<X> constructor, Throwable cause) {
         Class<?>[] paramTypes = constructor.getParameterTypes();
         Object[] params = new Object[paramTypes.length];

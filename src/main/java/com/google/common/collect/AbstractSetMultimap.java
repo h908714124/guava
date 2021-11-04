@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -36,7 +33,7 @@ import java.util.Set;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullable Object>
+abstract class AbstractSetMultimap<K, V>
         extends AbstractMapBasedMultimap<K, V> implements SetMultimap<K, V> {
     /**
      * Creates a new multimap that uses the provided map.
@@ -56,7 +53,7 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
     }
 
     @Override
-    <E extends @Nullable Object> Collection<E> unmodifiableCollectionSubclass(
+    <E> Collection<E> unmodifiableCollectionSubclass(
             Collection<E> collection) {
         return Collections.unmodifiableSet((Set<E>) collection);
     }
@@ -96,9 +93,8 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
      * <p>Because a {@code SetMultimap} has unique values for a given key, this method returns a
      * {@link Set}, instead of the {@link Collection} specified in the {@link Multimap} interface.
      */
-    @CanIgnoreReturnValue
     @Override
-    public Set<V> removeAll(@CheckForNull Object key) {
+    public Set<V> removeAll(Object key) {
         return (Set<V>) super.removeAll(key);
     }
 
@@ -110,7 +106,6 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
      *
      * <p>Any duplicates in {@code values} will be stored in the multimap once.
      */
-    @CanIgnoreReturnValue
     @Override
     public Set<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
         return (Set<V>) super.replaceValues(key, values);
@@ -135,7 +130,6 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
      * @return {@code true} if the method increased the size of the multimap, or {@code false} if the
      *     multimap already contained the key-value pair
      */
-    @CanIgnoreReturnValue
     @Override
     public boolean put(@ParametricNullness K key, @ParametricNullness V value) {
         return super.put(key, value);
@@ -148,7 +142,7 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
      * Equality does not depend on the ordering of keys or values.
      */
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         return super.equals(object);
     }
 

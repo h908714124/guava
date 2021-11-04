@@ -17,12 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
@@ -45,7 +40,7 @@ import static com.google.common.collect.Multisets.setCountImpl;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractCollection<E>
+abstract class AbstractMultiset<E> extends AbstractCollection<E>
         implements Multiset<E> {
     // Query Operations
 
@@ -55,43 +50,37 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
     }
 
     @Override
-    public boolean contains(@CheckForNull Object element) {
+    public boolean contains(Object element) {
         return count(element) > 0;
     }
 
     // Modification Operations
-    @CanIgnoreReturnValue
     @Override
     public final boolean add(@ParametricNullness E element) {
         add(element, 1);
         return true;
     }
 
-    @CanIgnoreReturnValue
     @Override
     public int add(@ParametricNullness E element, int occurrences) {
         throw new UnsupportedOperationException();
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public final boolean remove(@CheckForNull Object element) {
+    public final boolean remove(Object element) {
         return remove(element, 1) > 0;
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public int remove(@CheckForNull Object element, int occurrences) {
+    public int remove(Object element, int occurrences) {
         throw new UnsupportedOperationException();
     }
 
-    @CanIgnoreReturnValue
     @Override
     public int setCount(@ParametricNullness E element, int count) {
         return setCountImpl(this, element, count);
     }
 
-    @CanIgnoreReturnValue
     @Override
     public boolean setCount(@ParametricNullness E element, int oldCount, int newCount) {
         return setCountImpl(this, element, oldCount, newCount);
@@ -105,19 +94,16 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
      * <p>This implementation is highly efficient when {@code elementsToAdd} is itself a {@link
      * Multiset}.
      */
-    @CanIgnoreReturnValue
     @Override
     public final boolean addAll(Collection<? extends E> elementsToAdd) {
         return Multisets.addAllImpl(this, elementsToAdd);
     }
 
-    @CanIgnoreReturnValue
     @Override
     public final boolean removeAll(Collection<?> elementsToRemove) {
         return Multisets.removeAllImpl(this, elementsToRemove);
     }
 
-    @CanIgnoreReturnValue
     @Override
     public final boolean retainAll(Collection<?> elementsToRetain) {
         return Multisets.retainAllImpl(this, elementsToRetain);
@@ -128,8 +114,6 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
 
     // Views
 
-    @LazyInit
-    @CheckForNull
     private transient Set<E> elementSet;
 
     @Override
@@ -149,7 +133,6 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
         return new ElementSet();
     }
 
-    @WeakOuter
     class ElementSet extends Multisets.ElementSet<E> {
         @Override
         Multiset<E> multiset() {
@@ -164,8 +147,6 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
 
     abstract Iterator<E> elementIterator();
 
-    @LazyInit
-    @CheckForNull
     private transient Set<Entry<E>> entrySet;
 
     @Override
@@ -177,7 +158,6 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
         return result;
     }
 
-    @WeakOuter
     class EntrySet extends Multisets.EntrySet<E> {
         @Override
         Multiset<E> multiset() {
@@ -212,7 +192,7 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
      * and if, for each element, the two multisets have the same count.
      */
     @Override
-    public final boolean equals(@CheckForNull Object object) {
+    public final boolean equals(Object object) {
         return Multisets.equalsImpl(this, object);
     }
 

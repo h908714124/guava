@@ -14,7 +14,6 @@
 
 package com.google.common.util.concurrent;
 
-import javax.annotation.CheckForNull;
 import java.util.concurrent.locks.LockSupport;
 
 import static java.lang.Math.min;
@@ -31,7 +30,7 @@ final class OverflowAvoidingLockSupport {
     private OverflowAvoidingLockSupport() {
     }
 
-    static void parkNanos(@CheckForNull Object blocker, long nanos) {
+    static void parkNanos(Object blocker, long nanos) {
         // Even in the extremely unlikely event that a thread unblocks itself early after only 68 years,
         // this is indistinguishable from a spurious wakeup, which LockSupport allows.
         LockSupport.parkNanos(blocker, min(nanos, MAX_NANOSECONDS_THRESHOLD));

@@ -15,9 +15,7 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicReference;
@@ -94,7 +92,7 @@ public final class ExecutionSequencer {
     }
 
     /** This reference acts as a pointer tracking the head of a linked list of ListenableFutures. */
-    private final AtomicReference<ListenableFuture<@Nullable Void>> ref =
+    private final AtomicReference<ListenableFuture<Void>> ref =
             new AtomicReference<>(immediateVoidFuture());
 
     private ThreadConfinedTaskQueue latestTaskQueue = new ThreadConfinedTaskQueue();
@@ -128,13 +126,10 @@ public final class ExecutionSequencer {
          * All the states where thread != currentThread are identical for our purposes, and so even
          * though it's racy, we don't care which of those values we get, so no need to synchronize.
          */
-        @CheckForNull
         Thread thread;
         /** Only used by the thread associated with this object */
-        @CheckForNull
         Runnable nextTask;
         /** Only used by the thread associated with this object */
-        @CheckForNull
         Executor nextExecutor;
     }
 
@@ -145,7 +140,7 @@ public final class ExecutionSequencer {
      * execute, but if the output future is cancelled before {@link Callable#call()} is invoked,
      * {@link Callable#call()} will not be invoked.
      */
-    public <T extends @Nullable Object> ListenableFuture<T> submit(
+    public <T> ListenableFuture<T> submit(
             Callable<T> callable, Executor executor) {
         checkNotNull(callable);
         checkNotNull(executor);
@@ -171,7 +166,7 @@ public final class ExecutionSequencer {
      * callable} or a callable that has begun to execute, but if the output future is cancelled before
      * {@link AsyncCallable#call()} is invoked, {@link AsyncCallable#call()} will not be invoked.
      */
-    public <T extends @Nullable Object> ListenableFuture<T> submitAsync(
+    public <T> ListenableFuture<T> submitAsync(
             AsyncCallable<T> callable, Executor executor) {
         checkNotNull(callable);
         checkNotNull(executor);
@@ -202,9 +197,9 @@ public final class ExecutionSequencer {
          * have completed - namely after oldFuture is done, and taskFuture has either completed or been
          * cancelled before the callable started execution.
          */
-        SettableFuture<@Nullable Void> newFuture = SettableFuture.create();
+        SettableFuture<Void> newFuture = SettableFuture.create();
 
-        ListenableFuture<@Nullable Void> oldFuture = ref.getAndSet(newFuture);
+        ListenableFuture<Void> oldFuture = ref.getAndSet(newFuture);
 
         // Invoke our task once the previous future completes.
         TrustedListenableFutureTask<T> taskFuture = TrustedListenableFutureTask.create(task);
@@ -293,25 +288,21 @@ public final class ExecutionSequencer {
          * Used to update and read the latestTaskQueue field. Set to null once the runnable has been run
          * or queued.
          */
-        @CheckForNull
         ExecutionSequencer sequencer;
 
         /**
          * Executor the task was set to run on. Set to null when the task has been queued, run, or
          * cancelled.
          */
-        @CheckForNull
         Executor delegate;
 
         /**
          * Set before calling delegate.execute(); set to null once run, so that it can be GCed; this
          * object may live on after, if submitAsync returns an incomplete future.
          */
-        @CheckForNull
         Runnable task;
 
         /** Thread that called execute(). Set in execute, cleared when delegate.execute() returns. */
-        @CheckForNull
         Thread submitting;
 
         private TaskNonReentrantExecutor(Executor delegate, ExecutionSequencer sequencer) {

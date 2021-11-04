@@ -15,9 +15,7 @@
 package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
@@ -66,7 +64,7 @@ public final class MoreObjects {
      * We annotate firstNonNull in a way that protects against NullPointerException at the cost of
      * forbidding some reasonable calls.
      *
-     * The more permissive signature would be to accept (@CheckForNull T first, @CheckForNull T
+     * The more permissive signature would be to accept (T first, T
      * second), since it's OK for `second` to be null as long as `first` is not also null. But we
      * expect for that flexibility to be useful relatively rarely: The more common use case is to
      * supply a clearly non-null default, like `firstNonNull(someString, "")`. And users who really
@@ -79,7 +77,7 @@ public final class MoreObjects {
      * consider the more flexible signature if we judge it worth the risks. If we do, we would likely
      * update both methods so that they continue to match.
      */
-    public static <T> T firstNonNull(@CheckForNull T first, T second) {
+    public static <T> T firstNonNull(T first, T second) {
         if (first != null) {
             return first;
         }
@@ -184,7 +182,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 12.0 as {@code Objects.ToStringHelper.omitNullValues()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper omitNullValues() {
             omitNullValues = true;
             return this;
@@ -195,8 +192,7 @@ public final class MoreObjects {
          * is {@code null}, the string {@code "null"} is used, unless {@link #omitNullValues()} is
          * called, in which case this name/value pair will not be added.
          */
-        @CanIgnoreReturnValue
-        public ToStringHelper add(String name, @CheckForNull Object value) {
+        public ToStringHelper add(String name, Object value) {
             return addHolder(name, value);
         }
 
@@ -205,7 +201,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper add(String name, boolean value) {
             return addUnconditionalHolder(name, String.valueOf(value));
         }
@@ -215,7 +210,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper add(String name, char value) {
             return addUnconditionalHolder(name, String.valueOf(value));
         }
@@ -225,7 +219,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper add(String name, double value) {
             return addUnconditionalHolder(name, String.valueOf(value));
         }
@@ -235,7 +228,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper add(String name, float value) {
             return addUnconditionalHolder(name, String.valueOf(value));
         }
@@ -245,7 +237,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper add(String name, int value) {
             return addUnconditionalHolder(name, String.valueOf(value));
         }
@@ -255,7 +246,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper add(String name, long value) {
             return addUnconditionalHolder(name, String.valueOf(value));
         }
@@ -266,8 +256,7 @@ public final class MoreObjects {
          * <p>It is strongly encouraged to use {@link #add(String, Object)} instead and give value a
          * readable name.
          */
-        @CanIgnoreReturnValue
-        public ToStringHelper addValue(@CheckForNull Object value) {
+        public ToStringHelper addValue(Object value) {
             return addHolder(value);
         }
 
@@ -279,7 +268,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper addValue(boolean value) {
             return addUnconditionalHolder(String.valueOf(value));
         }
@@ -292,7 +280,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper addValue(char value) {
             return addUnconditionalHolder(String.valueOf(value));
         }
@@ -305,7 +292,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper addValue(double value) {
             return addUnconditionalHolder(String.valueOf(value));
         }
@@ -318,7 +304,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper addValue(float value) {
             return addUnconditionalHolder(String.valueOf(value));
         }
@@ -331,7 +316,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper addValue(int value) {
             return addUnconditionalHolder(String.valueOf(value));
         }
@@ -344,7 +328,6 @@ public final class MoreObjects {
          *
          * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
          */
-        @CanIgnoreReturnValue
         public ToStringHelper addValue(long value) {
             return addUnconditionalHolder(String.valueOf(value));
         }
@@ -420,13 +403,13 @@ public final class MoreObjects {
             return valueHolder;
         }
 
-        private ToStringHelper addHolder(@CheckForNull Object value) {
+        private ToStringHelper addHolder(Object value) {
             ValueHolder valueHolder = addHolder();
             valueHolder.value = value;
             return this;
         }
 
-        private ToStringHelper addHolder(String name, @CheckForNull Object value) {
+        private ToStringHelper addHolder(String name, Object value) {
             ValueHolder valueHolder = addHolder();
             valueHolder.value = value;
             valueHolder.name = checkNotNull(name);
@@ -454,11 +437,8 @@ public final class MoreObjects {
 
         // Holder object for values that might be null and/or empty.
         private static class ValueHolder {
-            @CheckForNull
             String name;
-            @CheckForNull
             Object value;
-            @CheckForNull
             ValueHolder next;
         }
 

@@ -20,10 +20,7 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMapEntry.NonTerminalImmutableMapEntry;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.function.BiConsumer;
 
@@ -73,9 +70,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     @VisibleForTesting
     final transient Entry<K, V>[] entries;
     // array of linked lists of entries
-    @CheckForNull
-    private final transient @Nullable
-    ImmutableMapEntry<K, V>[] table;
+    private final transient ImmutableMapEntry<K, V>[] table;
     // 'and' with an int to get a table index
     private final transient int mask;
 
@@ -88,7 +83,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
      * the entries in entryArray with its own entry objects (though they will have the same key/value
      * contents), and may take ownership of entryArray.
      */
-    static <K, V> ImmutableMap<K, V> fromEntryArray(int n, @Nullable Entry<K, V>[] entryArray) {
+    static <K, V> ImmutableMap<K, V> fromEntryArray(int n, Entry<K, V>[] entryArray) {
         checkPositionIndex(n, entryArray.length);
         if (n == 0) {
             return (RegularImmutableMap<K, V>) EMPTY;
@@ -102,7 +97,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
         Entry<K, V>[] entries =
                 (n == entryArray.length) ? (Entry<K, V>[]) entryArray : createEntryArray(n);
         int tableSize = Hashing.closedTableSize(n, MAX_LOAD_FACTOR);
-        @Nullable ImmutableMapEntry<K, V>[] table = createEntryArray(tableSize);
+        ImmutableMapEntry<K, V>[] table = createEntryArray(tableSize);
         int mask = tableSize - 1;
         for (int entryIndex = 0; entryIndex < n; entryIndex++) {
             // requireNonNull is safe because the first `n` elements have been filled in.
@@ -142,7 +137,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     }
 
     private RegularImmutableMap(
-            Entry<K, V>[] entries, @CheckForNull @Nullable ImmutableMapEntry<K, V>[] table, int mask) {
+            Entry<K, V>[] entries, ImmutableMapEntry<K, V>[] table, int mask) {
         this.entries = entries;
         this.table = table;
         this.mask = mask;
@@ -152,9 +147,8 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
      * @return number of entries in this bucket
      * @throws IllegalArgumentException if another entry in the bucket has the same key
      */
-    @CanIgnoreReturnValue
     static int checkNoConflictInKeyBucket(
-            Object key, Entry<?, ?> entry, @CheckForNull ImmutableMapEntry<?, ?> keyBucketHead) {
+            Object key, Entry<?, ?> entry, ImmutableMapEntry<?, ?> keyBucketHead) {
         int bucketSize = 0;
         for (; keyBucketHead != null; keyBucketHead = keyBucketHead.getNextInKeyBucket()) {
             checkNoConflict(!key.equals(keyBucketHead.getKey()), "key", entry, keyBucketHead);
@@ -164,15 +158,13 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object key) {
+    public V get(Object key) {
         return get(key, table, mask);
     }
 
-    @CheckForNull
     static <V> V get(
-            @CheckForNull Object key,
-            @CheckForNull @Nullable ImmutableMapEntry<?, V>[] keyTable,
+            Object key,
+            ImmutableMapEntry<?, V>[] keyTable,
             int mask) {
         if (key == null || keyTable == null) {
             return null;
@@ -238,7 +230,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
         }
 
         @Override
-        public boolean contains(@CheckForNull Object object) {
+        public boolean contains(Object object) {
             return map.containsKey(object);
         }
 

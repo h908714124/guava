@@ -16,7 +16,6 @@ package com.google.common.primitives;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -318,7 +317,6 @@ public final class UnsignedLongs {
      * @throws NullPointerException if {@code string} is null (in contrast to {@link
      *     Long#parseLong(String)})
      */
-    @CanIgnoreReturnValue
     public static long parseUnsignedLong(String string) {
         return parseUnsignedLong(string, 10);
     }
@@ -336,7 +334,6 @@ public final class UnsignedLongs {
      * @throws NullPointerException if {@code string} is null (in contrast to {@link
      *     Long#parseLong(String)})
      */
-    @CanIgnoreReturnValue
     public static long parseUnsignedLong(String string, int radix) {
         checkNotNull(string);
         if (string.length() == 0) {
@@ -378,7 +375,6 @@ public final class UnsignedLongs {
      *     value
      * @since 13.0
      */
-    @CanIgnoreReturnValue
     public static long decode(String stringValue) {
         ParseRequest request = ParseRequest.fromString(stringValue);
 

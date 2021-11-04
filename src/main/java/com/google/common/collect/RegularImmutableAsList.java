@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.function.Consumer;
 
 /**
@@ -68,12 +66,11 @@ class RegularImmutableAsList<E> extends ImmutableAsList<E> {
 
     @GwtIncompatible // not present in emulated superclass
     @Override
-    int copyIntoArray(@Nullable Object[] dst, int offset) {
+    int copyIntoArray(Object[] dst, int offset) {
         return delegateList.copyIntoArray(dst, offset);
     }
 
     @Override
-    @CheckForNull
     Object[] internalArray() {
         return delegateList.internalArray();
     }

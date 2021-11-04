@@ -16,7 +16,6 @@ package com.google.common.reflect;
 
 import com.google.common.annotations.Beta;
 
-import javax.annotation.CheckForNull;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
@@ -39,7 +38,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @ElementTypesAreNonnullByDefault
 /*
  * A nullable bound would let users create a TypeParameter instance for a parameter with a nullable
- * bound. However, it would also let them create `new TypeParameter<@Nullable T>() {}`, which
+ * bound. However, it would also let them create `new TypeParameter<T>() {}`, which
  * wouldn't behave as users might expect. Additionally, it's not clear how the TypeToken API could
  * support even a "normal" `TypeParameter<T>` when `<T>` has a nullable bound. (See the discussion
  * on TypeToken.where.) So, in the interest of failing fast and encouraging the user to switch to a
@@ -63,7 +62,7 @@ public abstract class TypeParameter<T> extends TypeCapture<T> {
     }
 
     @Override
-    public final boolean equals(@CheckForNull Object o) {
+    public final boolean equals(Object o) {
         if (o instanceof TypeParameter) {
             TypeParameter<?> that = (TypeParameter<?>) o;
             return typeVariable.equals(that.typeVariable);

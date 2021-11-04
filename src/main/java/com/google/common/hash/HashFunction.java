@@ -16,7 +16,6 @@ package com.google.common.hash;
 
 import com.google.common.primitives.Ints;
 import com.google.errorprone.annotations.Immutable;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -116,7 +115,6 @@ import java.nio.charset.Charset;
  * @author Kevin Bourrillion
  * @since 11.0
  */
-@Immutable
 @ElementTypesAreNonnullByDefault
 public interface HashFunction {
     /**
@@ -212,7 +210,7 @@ public interface HashFunction {
      *
      * @since 14.0
      */
-    <T extends @Nullable Object> HashCode hashObject(
+    <T> HashCode hashObject(
             @ParametricNullness T instance, Funnel<? super T> funnel);
 
     /**

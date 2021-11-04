@@ -15,10 +15,7 @@
 package com.google.common.reflect;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotMock;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 
 /**
@@ -44,7 +41,6 @@ import java.util.Map;
  * @since 13.0
  */
 @Beta
-@DoNotMock("Use ImmutableTypeToInstanceMap or MutableTypeToInstanceMap")
 @ElementTypesAreNonnullByDefault
 public interface TypeToInstanceMap<B> extends Map<TypeToken<? extends B>, B> {
 
@@ -56,7 +52,6 @@ public interface TypeToInstanceMap<B> extends Map<TypeToken<? extends B>, B> {
      * <p>{@code getInstance(Foo.class)} is equivalent to {@code
      * getInstance(TypeToken.of(Foo.class))}.
      */
-    @CheckForNull
     <T extends B> T getInstance(Class<T> type);
 
     /**
@@ -64,7 +59,6 @@ public interface TypeToInstanceMap<B> extends Map<TypeToken<? extends B>, B> {
      * present. This will only return a value that was bound to this specific type, not a value that
      * may have been bound to a subtype.
      */
-    @CheckForNull
     <T extends B> T getInstance(TypeToken<T> type);
 
     /**
@@ -77,8 +71,6 @@ public interface TypeToInstanceMap<B> extends Map<TypeToken<? extends B>, B> {
      * @return the value previously associated with this class (possibly {@code null}), or {@code
      *     null} if there was no previous entry.
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     <T extends B> T putInstance(Class<T> type, T value);
 
     /**
@@ -88,7 +80,5 @@ public interface TypeToInstanceMap<B> extends Map<TypeToken<? extends B>, B> {
      * @return the value previously associated with this type (possibly {@code null}), or {@code null}
      *     if there was no previous entry.
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     <T extends B> T putInstance(TypeToken<T> type, T value);
 }

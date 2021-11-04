@@ -18,11 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.CompatibleWith;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -89,7 +85,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public interface Multiset<E extends @Nullable Object> extends Collection<E> {
+public interface Multiset<E> extends Collection<E> {
     // Query Operations
 
     /**
@@ -114,7 +110,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      * @return the number of occurrences of the element in this multiset; possibly zero but never
      *     negative
      */
-    int count(@CompatibleWith("E") @CheckForNull Object element);
+    int count(Object element);
 
     // Bulk Operations
 
@@ -136,7 +132,6 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      *     null elements. Note that if {@code occurrences} is zero, the implementation may opt to
      *     return normally.
      */
-    @CanIgnoreReturnValue
     int add(@ParametricNullness E element, int occurrences);
 
     /**
@@ -158,7 +153,6 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      * @throws IllegalArgumentException if {@link Integer#MAX_VALUE} occurrences of {@code element}
      *     are already contained in this multiset
      */
-    @CanIgnoreReturnValue
     @Override
     boolean add(@ParametricNullness E element);
 
@@ -174,8 +168,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      * @return the count of the element before the operation; possibly zero
      * @throws IllegalArgumentException if {@code occurrences} is negative
      */
-    @CanIgnoreReturnValue
-    int remove(@CompatibleWith("E") @CheckForNull Object element, int occurrences);
+    int remove(Object element, int occurrences);
 
     /**
      * Removes a <i>single</i> occurrence of the specified element from this multiset, if present.
@@ -189,9 +182,8 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      * @param element the element to remove one occurrence of
      * @return {@code true} if an occurrence was found and removed
      */
-    @CanIgnoreReturnValue
     @Override
-    boolean remove(@CheckForNull Object element);
+    boolean remove(Object element);
 
     /**
      * Adds or removes the necessary occurrences of an element such that the element attains the
@@ -206,7 +198,6 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      *     null elements. Note that if {@code count} is zero, the implementor may optionally return
      *     zero instead.
      */
-    @CanIgnoreReturnValue
     int setCount(@ParametricNullness E element, int count);
 
     /**
@@ -225,7 +216,6 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      *     null elements. Note that if {@code oldCount} and {@code newCount} are both zero, the
      *     implementor may optionally return {@code true} instead.
      */
-    @CanIgnoreReturnValue
     boolean setCount(@ParametricNullness E element, int oldCount, int newCount);
 
     // Views
@@ -272,7 +262,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      *
      * @since 2.0
      */
-    interface Entry<E extends @Nullable Object> {
+    interface Entry<E> {
 
         /**
          * Returns the multiset element corresponding to this entry. Multiple calls to this method
@@ -308,7 +298,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
          */
         @Override
         // TODO(kevinb): check this wrt TreeMultiset?
-        boolean equals(@CheckForNull Object o);
+        boolean equals(Object o);
 
         /**
          * {@inheritDoc}
@@ -356,7 +346,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      */
     @Override
     // TODO(kevinb): caveats about equivalence-relation?
-    boolean equals(@CheckForNull Object object);
+    boolean equals(Object object);
 
     /**
      * Returns the hash code for this multiset. This is defined as the sum of
@@ -402,7 +392,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      * @return {@code true} if this multiset contains at least one occurrence of the element
      */
     @Override
-    boolean contains(@CheckForNull Object element);
+    boolean contains(Object element);
 
     /**
      * Returns {@code true} if this multiset contains at least one occurrence of each element in the
@@ -435,7 +425,6 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      * <p>This method refines {@link Collection#removeAll} to further specify that it <b>may not</b>
      * throw an exception in response to any of {@code elements} being null or of the wrong type.
      */
-    @CanIgnoreReturnValue
     @Override
     boolean removeAll(Collection<?> c);
 
@@ -452,7 +441,6 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      *
      * @see Multisets#retainOccurrences(Multiset, Multiset)
      */
-    @CanIgnoreReturnValue
     @Override
     boolean retainAll(Collection<?> c);
 

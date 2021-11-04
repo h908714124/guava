@@ -16,7 +16,6 @@ package com.google.common.io;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -174,7 +173,6 @@ public abstract class CharSink {
      * @throws IOException if an I/O error occurs while reading from {@code readable} or writing to
      *     this sink
      */
-    @CanIgnoreReturnValue
     public long writeFrom(Readable readable) throws IOException {
         checkNotNull(readable);
 

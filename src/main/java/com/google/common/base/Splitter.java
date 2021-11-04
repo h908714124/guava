@@ -18,7 +18,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -567,7 +566,6 @@ public final class Splitter {
             this.toSplit = toSplit;
         }
 
-        @CheckForNull
         @Override
         protected String computeNext() {
             /*

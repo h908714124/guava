@@ -16,8 +16,6 @@ package com.google.common.base;
 
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -41,7 +39,6 @@ public final class Defaults {
      * {@code void}, {@code null} is returned.
      */
     @SuppressWarnings("unchecked")
-    @CheckForNull
     public static <T> T defaultValue(Class<T> type) {
         checkNotNull(type);
         if (type.isPrimitive()) {

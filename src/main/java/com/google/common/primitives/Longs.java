@@ -18,7 +18,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Converter;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Arrays;
@@ -367,7 +366,6 @@ public final class Longs {
      * @since 14.0
      */
     @Beta
-    @CheckForNull
     public static Long tryParse(String string) {
         return tryParse(string, 10);
     }
@@ -393,7 +391,6 @@ public final class Longs {
      * @since 19.0
      */
     @Beta
-    @CheckForNull
     public static Long tryParse(String string, int radix) {
         if (checkNotNull(string).isEmpty()) {
             return null;
@@ -700,13 +697,13 @@ public final class Longs {
         }
 
         @Override
-        public boolean contains(@CheckForNull Object target) {
+        public boolean contains(Object target) {
             // Overridden to prevent a ton of boxing
             return (target instanceof Long) && Longs.indexOf(array, (Long) target, start, end) != -1;
         }
 
         @Override
-        public int indexOf(@CheckForNull Object target) {
+        public int indexOf(Object target) {
             // Overridden to prevent a ton of boxing
             if (target instanceof Long) {
                 int i = Longs.indexOf(array, (Long) target, start, end);
@@ -718,7 +715,7 @@ public final class Longs {
         }
 
         @Override
-        public int lastIndexOf(@CheckForNull Object target) {
+        public int lastIndexOf(Object target) {
             // Overridden to prevent a ton of boxing
             if (target instanceof Long) {
                 int i = Longs.lastIndexOf(array, (Long) target, start, end);
@@ -749,7 +746,7 @@ public final class Longs {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object object) {
+        public boolean equals(Object object) {
             if (object == this) {
                 return true;
             }

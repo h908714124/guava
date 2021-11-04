@@ -15,10 +15,7 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.CheckReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Locale;
 import java.util.concurrent.Executors;
@@ -46,19 +43,13 @@ import static java.util.Objects.requireNonNull;
  * @author Kurt Alfred Kluever
  * @since 4.0
  */
-@CanIgnoreReturnValue
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
 public final class ThreadFactoryBuilder {
-    @CheckForNull
     private String nameFormat = null;
-    @CheckForNull
     private Boolean daemon = null;
-    @CheckForNull
     private Integer priority = null;
-    @CheckForNull
     private UncaughtExceptionHandler uncaughtExceptionHandler = null;
-    @CheckForNull
     private ThreadFactory backingThreadFactory = null;
 
     /** Creates a new {@link ThreadFactory} builder. */
@@ -150,7 +141,6 @@ public final class ThreadFactoryBuilder {
      *
      * @return the fully constructed {@link ThreadFactory}
      */
-    @CheckReturnValue
     public ThreadFactory build() {
         return doBuild(this);
     }

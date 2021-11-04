@@ -18,12 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.MoreObjects;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
-import com.google.errorprone.annotations.DoNotMock;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -61,7 +56,7 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
      *
      * @since 21.0
      */
-    public static <T extends @Nullable Object, R, C, V>
+    public static <T, R, C, V>
     Collector<T, ?, ImmutableTable<R, C, V>> toImmutableTable(
             Function<? super T, ? extends R> rowFunction,
             Function<? super T, ? extends C> columnFunction,
@@ -80,7 +75,7 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
      *
      * @since 21.0
      */
-    public static <T extends @Nullable Object, R, C, V>
+    public static <T, R, C, V>
     Collector<T, ?, ImmutableTable<R, C, V>> toImmutableTable(
             Function<? super T, ? extends R> rowFunction,
             Function<? super T, ? extends C> columnFunction,
@@ -183,12 +178,9 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
      *
      * @since 11.0
      */
-    @DoNotMock
     public static final class Builder<R, C, V> {
         private final List<Cell<R, C, V>> cells = Lists.newArrayList();
-        @CheckForNull
         private Comparator<? super R> rowComparator;
-        @CheckForNull
         private Comparator<? super C> columnComparator;
 
         /**
@@ -199,14 +191,12 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
         }
 
         /** Specifies the ordering of the generated table's rows. */
-        @CanIgnoreReturnValue
         public Builder<R, C, V> orderRowsBy(Comparator<? super R> rowComparator) {
             this.rowComparator = checkNotNull(rowComparator, "rowComparator");
             return this;
         }
 
         /** Specifies the ordering of the generated table's columns. */
-        @CanIgnoreReturnValue
         public Builder<R, C, V> orderColumnsBy(Comparator<? super C> columnComparator) {
             this.columnComparator = checkNotNull(columnComparator, "columnComparator");
             return this;
@@ -216,7 +206,6 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
          * Associates the ({@code rowKey}, {@code columnKey}) pair with {@code value} in the built
          * table. Duplicate key pairs are not allowed and will cause {@link #build} to fail.
          */
-        @CanIgnoreReturnValue
         public Builder<R, C, V> put(R rowKey, C columnKey, V value) {
             cells.add(cellOf(rowKey, columnKey, value));
             return this;
@@ -226,7 +215,6 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
          * Adds the given {@code cell} to the table, making it immutable if necessary. Duplicate key
          * pairs are not allowed and will cause {@link #build} to fail.
          */
-        @CanIgnoreReturnValue
         public Builder<R, C, V> put(Cell<? extends R, ? extends C, ? extends V> cell) {
             if (cell instanceof Tables.ImmutableCell) {
                 checkNotNull(cell.getRowKey(), "row");
@@ -247,7 +235,6 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
          *
          * @throws NullPointerException if any key or value in {@code table} is null
          */
-        @CanIgnoreReturnValue
         public Builder<R, C, V> putAll(Table<? extends R, ? extends C, ? extends V> table) {
             for (Cell<? extends R, ? extends C, ? extends V> cell : table.cellSet()) {
                 put(cell);
@@ -255,7 +242,6 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
             return this;
         }
 
-        @CanIgnoreReturnValue
         Builder<R, C, V> combine(Builder<R, C, V> other) {
             this.cells.addAll(other.cells);
             return this;
@@ -381,12 +367,12 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
     public abstract ImmutableMap<R, Map<C, V>> rowMap();
 
     @Override
-    public boolean contains(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+    public boolean contains(Object rowKey, Object columnKey) {
         return get(rowKey, columnKey) != null;
     }
 
     @Override
-    public boolean containsValue(@CheckForNull Object value) {
+    public boolean containsValue(Object value) {
         return values().contains(value);
     }
 
@@ -398,7 +384,6 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void clear() {
         throw new UnsupportedOperationException();
     }
@@ -409,11 +394,8 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public final V put(R rowKey, C columnKey, V value) {
         throw new UnsupportedOperationException();
     }
@@ -426,7 +408,6 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void putAll(Table<? extends R, ? extends C, ? extends V> table) {
         throw new UnsupportedOperationException();
     }
@@ -437,12 +418,9 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
-    public final V remove(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+    public final V remove(Object rowKey, Object columnKey) {
         throw new UnsupportedOperationException();
     }
 

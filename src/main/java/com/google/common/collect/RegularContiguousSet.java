@@ -17,7 +17,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -74,7 +73,7 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> 
 
     @GwtIncompatible // not used by GWT emulation
     @Override
-    int indexOf(@CheckForNull Object target) {
+    int indexOf(Object target) {
         // requireNonNull is safe because of the contains check.
         return contains(target) ? (int) domain.distance(first(), (C) requireNonNull(target)) : -1;
     }
@@ -85,7 +84,6 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> 
             final C last = last();
 
             @Override
-            @CheckForNull
             protected C computeNext(C previous) {
                 return equalsOrThrow(previous, last) ? null : domain.next(previous);
             }
@@ -99,14 +97,13 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> 
             final C first = first();
 
             @Override
-            @CheckForNull
             protected C computeNext(C previous) {
                 return equalsOrThrow(previous, first) ? null : domain.previous(previous);
             }
         };
     }
 
-    private static boolean equalsOrThrow(Comparable<?> left, @CheckForNull Comparable<?> right) {
+    private static boolean equalsOrThrow(Comparable<?> left, Comparable<?> right) {
         return right != null && Range.compareOrThrow(left, right) == 0;
     }
 
@@ -154,7 +151,7 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> 
     }
 
     @Override
-    public boolean contains(@CheckForNull Object object) {
+    public boolean contains(Object object) {
         if (object == null) {
             return false;
         }
@@ -203,7 +200,7 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> 
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         } else if (object instanceof RegularContiguousSet) {

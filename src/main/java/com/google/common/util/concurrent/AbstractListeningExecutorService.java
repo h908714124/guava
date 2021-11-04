@@ -17,7 +17,6 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.Callable;
@@ -43,14 +42,14 @@ public abstract class AbstractListeningExecutorService extends AbstractExecutorS
 
     /** @since 19.0 (present with return type {@code ListenableFutureTask} since 14.0) */
     @Override
-    protected final <T extends @Nullable Object> RunnableFuture<T> newTaskFor(
+    protected final <T> RunnableFuture<T> newTaskFor(
             Runnable runnable, @ParametricNullness T value) {
         return TrustedListenableFutureTask.create(runnable, value);
     }
 
     /** @since 19.0 (present with return type {@code ListenableFutureTask} since 14.0) */
     @Override
-    protected final <T extends @Nullable Object> RunnableFuture<T> newTaskFor(Callable<T> callable) {
+    protected final <T> RunnableFuture<T> newTaskFor(Callable<T> callable) {
         return TrustedListenableFutureTask.create(callable);
     }
 
@@ -60,13 +59,13 @@ public abstract class AbstractListeningExecutorService extends AbstractExecutorS
     }
 
     @Override
-    public <T extends @Nullable Object> ListenableFuture<T> submit(
+    public <T> ListenableFuture<T> submit(
             Runnable task, @ParametricNullness T result) {
         return (ListenableFuture<T>) super.submit(task, result);
     }
 
     @Override
-    public <T extends @Nullable Object> ListenableFuture<T> submit(Callable<T> task) {
+    public <T> ListenableFuture<T> submit(Callable<T> task) {
         return (ListenableFuture<T>) super.submit(task);
     }
 }

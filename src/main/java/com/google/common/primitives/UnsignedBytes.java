@@ -17,7 +17,6 @@ package com.google.common.primitives;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import sun.misc.Unsafe;
 
 import java.nio.ByteOrder;
@@ -86,7 +85,6 @@ public final class UnsignedBytes {
      * @return the {@code byte} value that, when treated as unsigned, equals {@code value}
      * @throws IllegalArgumentException if {@code value} is negative or greater than 255
      */
-    @CanIgnoreReturnValue
     public static byte checkedCast(long value) {
         checkArgument(value >> Byte.SIZE == 0, "out of range: %s", value);
         return (byte) value;
@@ -204,7 +202,6 @@ public final class UnsignedBytes {
      * @since 13.0
      */
     @Beta
-    @CanIgnoreReturnValue
     public static byte parseUnsignedByte(String string) {
         return parseUnsignedByte(string, 10);
     }
@@ -222,7 +219,6 @@ public final class UnsignedBytes {
      * @since 13.0
      */
     @Beta
-    @CanIgnoreReturnValue
     public static byte parseUnsignedByte(String string, int radix) {
         int parse = Integer.parseInt(checkNotNull(string), radix);
         // We need to throw a NumberFormatException, so we have to duplicate checkedCast. =(

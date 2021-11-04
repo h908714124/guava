@@ -16,8 +16,6 @@ package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2objc.annotations.J2ObjCIncompatible;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -155,7 +153,6 @@ public final class Stopwatch {
      * @return this {@code Stopwatch} instance
      * @throws IllegalStateException if the stopwatch is already running.
      */
-    @CanIgnoreReturnValue
     public Stopwatch start() {
         checkState(!isRunning, "This stopwatch is already running.");
         isRunning = true;
@@ -170,7 +167,6 @@ public final class Stopwatch {
      * @return this {@code Stopwatch} instance
      * @throws IllegalStateException if the stopwatch is already stopped.
      */
-    @CanIgnoreReturnValue
     public Stopwatch stop() {
         long tick = ticker.read();
         checkState(isRunning, "This stopwatch is already stopped.");
@@ -184,7 +180,6 @@ public final class Stopwatch {
      *
      * @return this {@code Stopwatch} instance
      */
-    @CanIgnoreReturnValue
     public Stopwatch reset() {
         elapsedNanos = 0;
         isRunning = false;
@@ -219,7 +214,6 @@ public final class Stopwatch {
      * @since 22.0
      */
     @GwtIncompatible
-    @J2ObjCIncompatible
     public Duration elapsed() {
         return Duration.ofNanos(elapsedNanos());
     }

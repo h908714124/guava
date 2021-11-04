@@ -15,12 +15,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -37,16 +32,16 @@ import java.util.Spliterator;
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 abstract class AbstractTable<
-        R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+        R, C, V>
         implements Table<R, C, V> {
 
     @Override
-    public boolean containsRow(@CheckForNull Object rowKey) {
+    public boolean containsRow(Object rowKey) {
         return Maps.safeContainsKey(rowMap(), rowKey);
     }
 
     @Override
-    public boolean containsColumn(@CheckForNull Object columnKey) {
+    public boolean containsColumn(Object columnKey) {
         return Maps.safeContainsKey(columnMap(), columnKey);
     }
 
@@ -61,7 +56,7 @@ abstract class AbstractTable<
     }
 
     @Override
-    public boolean containsValue(@CheckForNull Object value) {
+    public boolean containsValue(Object value) {
         for (Map<C, V> row : rowMap().values()) {
             if (row.containsValue(value)) {
                 return true;
@@ -71,14 +66,13 @@ abstract class AbstractTable<
     }
 
     @Override
-    public boolean contains(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+    public boolean contains(Object rowKey, Object columnKey) {
         Map<C, V> row = Maps.safeGet(rowMap(), rowKey);
         return row != null && Maps.safeContainsKey(row, columnKey);
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+    public V get(Object rowKey, Object columnKey) {
         Map<C, V> row = Maps.safeGet(rowMap(), rowKey);
         return (row == null) ? null : Maps.safeGet(row, columnKey);
     }
@@ -93,17 +87,13 @@ abstract class AbstractTable<
         Iterators.clear(cellSet().iterator());
     }
 
-    @CanIgnoreReturnValue
     @Override
-    @CheckForNull
-    public V remove(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+    public V remove(Object rowKey, Object columnKey) {
         Map<C, V> row = Maps.safeGet(rowMap(), rowKey);
         return (row == null) ? null : Maps.safeRemove(row, columnKey);
     }
 
-    @CanIgnoreReturnValue
     @Override
-    @CheckForNull
     public V put(
             @ParametricNullness R rowKey, @ParametricNullness C columnKey, @ParametricNullness V value) {
         return row(rowKey).put(columnKey, value);
@@ -116,8 +106,6 @@ abstract class AbstractTable<
         }
     }
 
-    @LazyInit
-    @CheckForNull
     private transient Set<Cell<R, C, V>> cellSet;
 
     @Override
@@ -134,10 +122,9 @@ abstract class AbstractTable<
 
     abstract Spliterator<Table.Cell<R, C, V>> cellSpliterator();
 
-    @WeakOuter
     class CellSet extends AbstractSet<Cell<R, C, V>> {
         @Override
-        public boolean contains(@CheckForNull Object o) {
+        public boolean contains(Object o) {
             if (o instanceof Cell) {
                 Cell<?, ?, ?> cell = (Cell<?, ?, ?>) o;
                 Map<C, V> row = Maps.safeGet(rowMap(), cell.getRowKey());
@@ -149,7 +136,7 @@ abstract class AbstractTable<
         }
 
         @Override
-        public boolean remove(@CheckForNull Object o) {
+        public boolean remove(Object o) {
             if (o instanceof Cell) {
                 Cell<?, ?, ?> cell = (Cell<?, ?, ?>) o;
                 Map<C, V> row = Maps.safeGet(rowMap(), cell.getRowKey());
@@ -181,8 +168,6 @@ abstract class AbstractTable<
         }
     }
 
-    @LazyInit
-    @CheckForNull
     private transient Collection<V> values;
 
     @Override
@@ -209,7 +194,6 @@ abstract class AbstractTable<
         return CollectSpliterators.map(cellSpliterator(), Table.Cell::getValue);
     }
 
-    @WeakOuter
     class Values extends AbstractCollection<V> {
         @Override
         public Iterator<V> iterator() {
@@ -222,7 +206,7 @@ abstract class AbstractTable<
         }
 
         @Override
-        public boolean contains(@CheckForNull Object o) {
+        public boolean contains(Object o) {
             return containsValue(o);
         }
 
@@ -238,7 +222,7 @@ abstract class AbstractTable<
     }
 
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         return Tables.equalsImpl(this, obj);
     }
 

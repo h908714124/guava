@@ -17,7 +17,6 @@ package com.google.common.hash;
 import com.google.common.annotations.Beta;
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.ArrayList;
@@ -426,8 +425,7 @@ public final class Hashing {
         return ChecksumType.ADLER_32.hashFunction;
     }
 
-    @Immutable
-    enum ChecksumType implements ImmutableSupplier<Checksum> {
+        enum ChecksumType implements ImmutableSupplier<Checksum> {
         CRC_32("Hashing.crc32()") {
             @Override
             public Checksum get() {
@@ -681,7 +679,7 @@ public final class Hashing {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object object) {
+        public boolean equals(Object object) {
             if (object instanceof ConcatenatedHashFunction) {
                 ConcatenatedHashFunction other = (ConcatenatedHashFunction) object;
                 return Arrays.equals(functions, other.functions);

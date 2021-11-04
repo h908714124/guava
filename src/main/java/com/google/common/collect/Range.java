@@ -21,7 +21,6 @@ import com.google.common.base.Equivalence;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -675,7 +674,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
      * {@code [3..3)}, {@code (3..3]}, {@code (4..4]} are all unequal.
      */
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object instanceof Range) {
             Range<?> other = (Range<?>) object;
             return lowerBound.equals(other.lowerBound) && upperBound.equals(other.upperBound);

@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Supplier;
-import com.google.j2objc.annotations.WeakOuter;
 
-import javax.annotation.CheckForNull;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
@@ -92,7 +90,6 @@ class StandardRowSortedTable<R, C, V> extends StandardTable<R, C, V>
         return new RowSortedMap();
     }
 
-    @WeakOuter
     private class RowSortedMap extends RowMap implements SortedMap<R, Map<C, V>> {
         @Override
         public SortedSet<R> keySet() {
@@ -105,7 +102,6 @@ class StandardRowSortedTable<R, C, V> extends StandardTable<R, C, V>
         }
 
         @Override
-        @CheckForNull
         public Comparator<? super R> comparator() {
             return sortedBackingMap().comparator();
         }

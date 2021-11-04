@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -38,7 +35,7 @@ import java.util.Set;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingSetMultimap<K extends @Nullable Object, V extends @Nullable Object>
+public abstract class ForwardingSetMultimap<K, V>
         extends ForwardingMultimap<K, V> implements SetMultimap<K, V> {
 
     @Override
@@ -54,13 +51,11 @@ public abstract class ForwardingSetMultimap<K extends @Nullable Object, V extend
         return delegate().get(key);
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public Set<V> removeAll(@CheckForNull Object key) {
+    public Set<V> removeAll(Object key) {
         return delegate().removeAll(key);
     }
 
-    @CanIgnoreReturnValue
     @Override
     public Set<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
         return delegate().replaceValues(key, values);

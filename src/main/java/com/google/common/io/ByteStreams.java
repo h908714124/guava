@@ -18,9 +18,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.math.IntMath;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInput;
@@ -104,7 +102,6 @@ public final class ByteStreams {
      * @return the number of bytes copied
      * @throws IOException if an I/O error occurs
      */
-    @CanIgnoreReturnValue
     public static long copy(InputStream from, OutputStream to) throws IOException {
         checkNotNull(from);
         checkNotNull(to);
@@ -130,7 +127,6 @@ public final class ByteStreams {
      * @return the number of bytes copied
      * @throws IOException if an I/O error occurs
      */
-    @CanIgnoreReturnValue
     public static long copy(ReadableByteChannel from, WritableByteChannel to) throws IOException {
         checkNotNull(from);
         checkNotNull(to);
@@ -270,7 +266,6 @@ public final class ByteStreams {
      *
      * @since 20.0
      */
-    @CanIgnoreReturnValue
     @Beta
     public static long exhaust(InputStream in) throws IOException {
         long total = 0;
@@ -443,7 +438,6 @@ public final class ByteStreams {
         }
 
         @Override
-        @CheckForNull
         public String readLine() {
             try {
                 return input.readLine();
@@ -877,7 +871,7 @@ public final class ByteStreams {
     @Beta
     @CanIgnoreReturnValue // some processors won't return a useful result
     @ParametricNullness
-    public static <T extends @Nullable Object> T readBytes(
+    public static <T> T readBytes(
             InputStream input, ByteProcessor<T> processor) throws IOException {
         checkNotNull(input);
         checkNotNull(processor);
@@ -915,7 +909,6 @@ public final class ByteStreams {
      *     {@code off + len} is greater than {@code b.length}
      */
     @Beta
-    @CanIgnoreReturnValue
     // Sometimes you don't care how many bytes you actually read, I guess.
     // (You know that it's either going to read len bytes or stop at EOF.)
     public static int read(InputStream in, byte[] b, int off, int len) throws IOException {

@@ -15,7 +15,6 @@
 package com.google.common.io;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.IOException;
 
@@ -85,7 +84,6 @@ abstract class LineBuffer {
     }
 
     /** Called when a line is complete. */
-    @CanIgnoreReturnValue
     private boolean finishLine(boolean sawNewline) throws IOException {
         String separator = sawReturn ? (sawNewline ? "\r\n" : "\r") : (sawNewline ? "\n" : "");
         handleLine(line.toString(), separator);

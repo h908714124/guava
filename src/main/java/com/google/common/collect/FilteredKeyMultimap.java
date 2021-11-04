@@ -16,11 +16,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Predicate;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -41,7 +37,7 @@ import static java.util.Collections.emptySet;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object>
+class FilteredKeyMultimap<K, V>
         extends AbstractMultimap<K, V> implements FilteredMultimap<K, V> {
     final Multimap<K, V> unfiltered;
     final Predicate<? super K> keyPredicate;
@@ -71,7 +67,7 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
     }
 
     @Override
-    public boolean containsKey(@CheckForNull Object key) {
+    public boolean containsKey(Object key) {
         if (unfiltered.containsKey(key)) {
             @SuppressWarnings("unchecked") // k is equal to a K, if not one itself
             K k = (K) key;
@@ -81,7 +77,7 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
     }
 
     @Override
-    public Collection<V> removeAll(@CheckForNull Object key) {
+    public Collection<V> removeAll(Object key) {
         return containsKey(key) ? unfiltered.removeAll(key) : unmodifiableEmptyCollection();
     }
 
@@ -114,7 +110,7 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
         }
     }
 
-    static class AddRejectingSet<K extends @Nullable Object, V extends @Nullable Object>
+    static class AddRejectingSet<K, V>
             extends ForwardingSet<V> {
         @ParametricNullness
         final K key;
@@ -140,7 +136,7 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
         }
     }
 
-    static class AddRejectingList<K extends @Nullable Object, V extends @Nullable Object>
+    static class AddRejectingList<K, V>
             extends ForwardingList<V> {
         @ParametricNullness
         final K key;
@@ -167,7 +163,6 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
             return true;
         }
 
-        @CanIgnoreReturnValue
         @Override
         public boolean addAll(int index, Collection<? extends V> elements) {
             checkNotNull(elements);
@@ -191,7 +186,6 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
         return new Entries();
     }
 
-    @WeakOuter
     class Entries extends ForwardingCollection<Entry<K, V>> {
         @Override
         protected Collection<Entry<K, V>> delegate() {
@@ -200,7 +194,7 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
 
         @Override
         @SuppressWarnings("unchecked")
-        public boolean remove(@CheckForNull Object o) {
+        public boolean remove(Object o) {
             if (o instanceof Entry) {
                 Entry<?, ?> entry = (Entry<?, ?>) o;
                 if (unfiltered.containsKey(entry.getKey())

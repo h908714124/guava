@@ -17,12 +17,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
@@ -35,7 +30,7 @@ import static java.util.Objects.requireNonNull;
 @ElementTypesAreNonnullByDefault
 final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     @VisibleForTesting
-    static <K, V> ImmutableBiMap<K, V> create(int n, @Nullable Entry<K, V>[] entryArray) {
+    static <K, V> ImmutableBiMap<K, V> create(int n, Entry<K, V>[] entryArray) {
         Map<K, V> forwardDelegate = Maps.newHashMapWithExpectedSize(n);
         Map<V, K> backwardDelegate = Maps.newHashMapWithExpectedSize(n);
         for (int i = 0; i < n; i++) {
@@ -71,9 +66,6 @@ final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
         return entries.size();
     }
 
-    @LazyInit
-    @RetainedWith
-    @CheckForNull
     private transient JdkBackedImmutableBiMap<V, K> inverse;
 
     @Override
@@ -89,7 +81,6 @@ final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
         return result;
     }
 
-    @WeakOuter
     private final class InverseEntries extends ImmutableList<Entry<V, K>> {
         @Override
         public Entry<V, K> get(int index) {
@@ -109,8 +100,7 @@ final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object key) {
+    public V get(Object key) {
         return forwardDelegate.get(key);
     }
 

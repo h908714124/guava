@@ -18,7 +18,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.CharBuffer;
@@ -41,7 +40,6 @@ import static com.google.common.io.CharStreams.createBuffer;
 @ElementTypesAreNonnullByDefault
 public final class LineReader {
     private final Readable readable;
-    @CheckForNull
     private final Reader reader;
     private final CharBuffer cbuf = createBuffer();
     private final char[] buf = cbuf.array();
@@ -71,7 +69,6 @@ public final class LineReader {
      * @throws IOException if an I/O error occurs
      */
     @CanIgnoreReturnValue // to skip a line
-    @CheckForNull
     public String readLine() throws IOException {
         while (lines.peek() == null) {
             Java8Compatibility.clear(cbuf);

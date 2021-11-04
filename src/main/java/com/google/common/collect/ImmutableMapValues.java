@@ -19,7 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Map.Entry;
 import java.util.Spliterator;
@@ -70,7 +69,7 @@ final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
     }
 
     @Override
-    public boolean contains(@CheckForNull Object object) {
+    public boolean contains(Object object) {
         return object != null && Iterators.contains(iterator(), object);
     }
 

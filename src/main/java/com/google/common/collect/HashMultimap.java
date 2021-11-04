@@ -20,7 +20,6 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -51,7 +50,7 @@ import java.util.Set;
  */
 @GwtCompatible(serializable = true, emulated = true)
 @ElementTypesAreNonnullByDefault
-public final class HashMultimap<K extends @Nullable Object, V extends @Nullable Object>
+public final class HashMultimap<K, V>
         extends HashMultimapGwtSerializationDependencies<K, V> {
     private static final int DEFAULT_VALUES_PER_KEY = 2;
 
@@ -64,7 +63,7 @@ public final class HashMultimap<K extends @Nullable Object, V extends @Nullable 
      * <p>This method will soon be deprecated in favor of {@code
      * MultimapBuilder.hashKeys().hashSetValues().build()}.
      */
-    public static <K extends @Nullable Object, V extends @Nullable Object>
+    public static <K, V>
     HashMultimap<K, V> create() {
         return new HashMultimap<>();
     }
@@ -81,7 +80,7 @@ public final class HashMultimap<K extends @Nullable Object, V extends @Nullable 
      * @throws IllegalArgumentException if {@code expectedKeys} or {@code expectedValuesPerKey} is
      *     negative
      */
-    public static <K extends @Nullable Object, V extends @Nullable Object> HashMultimap<K, V> create(
+    public static <K, V> HashMultimap<K, V> create(
             int expectedKeys, int expectedValuesPerKey) {
         return new HashMultimap<>(expectedKeys, expectedValuesPerKey);
     }
@@ -96,7 +95,7 @@ public final class HashMultimap<K extends @Nullable Object, V extends @Nullable 
      *
      * @param multimap the multimap whose contents are copied to this multimap
      */
-    public static <K extends @Nullable Object, V extends @Nullable Object> HashMultimap<K, V> create(
+    public static <K, V> HashMultimap<K, V> create(
             Multimap<? extends K, ? extends V> multimap) {
         return new HashMultimap<>(multimap);
     }

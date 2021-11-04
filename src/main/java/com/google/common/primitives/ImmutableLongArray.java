@@ -17,11 +17,8 @@ package com.google.common.primitives;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Preconditions;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.CheckReturnValue;
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Arrays;
@@ -88,7 +85,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @Beta
 @GwtCompatible
-@Immutable
 @ElementTypesAreNonnullByDefault
 public final class ImmutableLongArray implements Serializable {
     private static final ImmutableLongArray EMPTY = new ImmutableLongArray(new long[0]);
@@ -210,7 +206,6 @@ public final class ImmutableLongArray implements Serializable {
      * A builder for {@link ImmutableLongArray} instances; obtained using {@link
      * ImmutableLongArray#builder}.
      */
-    @CanIgnoreReturnValue
     public static final class Builder {
         private long[] array;
         private int count = 0; // <= array.length
@@ -323,7 +318,6 @@ public final class ImmutableLongArray implements Serializable {
          * no data is copied as part of this step, but this may occupy more memory than strictly
          * necessary. To copy the data to a right-sized backing array, use {@code .build().trimmed()}.
          */
-        @CheckReturnValue
         public ImmutableLongArray build() {
             return count == 0 ? EMPTY : new ImmutableLongArray(array, 0, count);
         }
@@ -482,17 +476,17 @@ public final class ImmutableLongArray implements Serializable {
         }
 
         @Override
-        public boolean contains(@CheckForNull Object target) {
+        public boolean contains(Object target) {
             return indexOf(target) >= 0;
         }
 
         @Override
-        public int indexOf(@CheckForNull Object target) {
+        public int indexOf(Object target) {
             return target instanceof Long ? parent.indexOf((Long) target) : -1;
         }
 
         @Override
-        public int lastIndexOf(@CheckForNull Object target) {
+        public int lastIndexOf(Object target) {
             return target instanceof Long ? parent.lastIndexOf((Long) target) : -1;
         }
 
@@ -508,7 +502,7 @@ public final class ImmutableLongArray implements Serializable {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object object) {
+        public boolean equals(Object object) {
             if (object instanceof AsList) {
                 AsList that = (AsList) object;
                 return this.parent.equals(that.parent);
@@ -548,7 +542,7 @@ public final class ImmutableLongArray implements Serializable {
      * values as this one, in the same order.
      */
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }

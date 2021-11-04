@@ -16,9 +16,6 @@
 
 package com.google.common.graph;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
-import javax.annotation.CheckForNull;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -50,7 +47,6 @@ interface GraphConnections<N, V> {
      * Returns the value associated with the edge connecting the origin node to {@code node}, or null
      * if there is no such edge.
      */
-    @CheckForNull
     V value(N node);
 
     /** Remove {@code node} from the set of predecessors. */
@@ -60,8 +56,6 @@ interface GraphConnections<N, V> {
      * Remove {@code node} from the set of successors. Returns the value previously associated with
      * the edge connecting the two nodes.
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     V removeSuccessor(N node);
 
     /**
@@ -75,7 +69,5 @@ interface GraphConnections<N, V> {
      * becomes a predecessor. Associates {@code value} with the edge connecting the two nodes. Returns
      * the value previously associated with the edge connecting the two nodes.
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     V addSuccessor(N node, V value);
 }

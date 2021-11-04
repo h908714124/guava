@@ -21,9 +21,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Array;
@@ -81,7 +79,7 @@ final class Types {
      * {@code ownerType}.
      */
     static ParameterizedType newParameterizedTypeWithOwner(
-            @CheckForNull Type ownerType, Class<?> rawType, Type... arguments) {
+            Type ownerType, Class<?> rawType, Type... arguments) {
         if (ownerType == null) {
             return newParameterizedType(rawType, arguments);
         }
@@ -101,14 +99,12 @@ final class Types {
     private enum ClassOwnership {
         OWNED_BY_ENCLOSING_CLASS {
             @Override
-            @CheckForNull
             Class<?> getOwnerType(Class<?> rawType) {
                 return rawType.getEnclosingClass();
             }
         },
         LOCAL_CLASS_HAS_NO_OWNER {
             @Override
-            @CheckForNull
             Class<?> getOwnerType(Class<?> rawType) {
                 if (rawType.isLocalClass()) {
                     return null;
@@ -118,7 +114,6 @@ final class Types {
             }
         };
 
-        @CheckForNull
         abstract Class<?> getOwnerType(Class<?> rawType);
 
         static final ClassOwnership JVM_BEHAVIOR = detectJvmBehavior();
@@ -171,10 +166,9 @@ final class Types {
         return (type instanceof Class) ? ((Class<?>) type).getName() : type.toString();
     }
 
-    @CheckForNull
     static Type getComponentType(Type type) {
         checkNotNull(type);
-        AtomicReference<@Nullable Type> result = new AtomicReference<>();
+        AtomicReference<Type> result = new AtomicReference<>();
         new TypeVisitor() {
             @Override
             void visitTypeVariable(TypeVariable<?> t) {
@@ -203,7 +197,6 @@ final class Types {
      * Returns {@code ? extends X} if any of {@code bounds} is a subtype of {@code X[]}; or null
      * otherwise.
      */
-    @CheckForNull
     private static Type subtypeOfComponentType(Type[] bounds) {
         for (Type bound : bounds) {
             Type componentType = getComponentType(bound);
@@ -246,7 +239,7 @@ final class Types {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (obj instanceof GenericArrayType) {
                 GenericArrayType that = (GenericArrayType) obj;
                 return Objects.equal(getGenericComponentType(), that.getGenericComponentType());
@@ -259,12 +252,11 @@ final class Types {
 
     private static final class ParameterizedTypeImpl implements ParameterizedType, Serializable {
 
-        @CheckForNull
         private final Type ownerType;
         private final ImmutableList<Type> argumentsList;
         private final Class<?> rawType;
 
-        ParameterizedTypeImpl(@CheckForNull Type ownerType, Class<?> rawType, Type[] typeArguments) {
+        ParameterizedTypeImpl(Type ownerType, Class<?> rawType, Type[] typeArguments) {
             checkNotNull(rawType);
             checkArgument(typeArguments.length == rawType.getTypeParameters().length);
             disallowPrimitiveType(typeArguments, "type parameter");
@@ -284,7 +276,6 @@ final class Types {
         }
 
         @Override
-        @CheckForNull
         public Type getOwnerType() {
             return ownerType;
         }
@@ -311,7 +302,7 @@ final class Types {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object other) {
+        public boolean equals(Object other) {
             if (!(other instanceof ParameterizedType)) {
                 return false;
             }
@@ -386,8 +377,7 @@ final class Types {
         }
 
         @Override
-        @CheckForNull
-        public Object invoke(Object proxy, Method method, @CheckForNull @Nullable Object[] args)
+        public Object invoke(Object proxy, Method method, Object[] args)
                 throws Throwable {
             String methodName = method.getName();
             Method typeVariableMethod = typeVariableMethods.get(methodName);
@@ -443,7 +433,7 @@ final class Types {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (NativeTypeVariableEquals.NATIVE_TYPE_VARIABLE_ONLY) {
                 // equal only to our TypeVariable implementation with identical bounds
                 if (obj != null
@@ -492,7 +482,7 @@ final class Types {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (obj instanceof WildcardType) {
                 WildcardType that = (WildcardType) obj;
                 return lowerBounds.equals(Arrays.asList(that.getLowerBounds()))

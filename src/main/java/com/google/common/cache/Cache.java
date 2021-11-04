@@ -18,11 +18,7 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.ExecutionError;
 import com.google.common.util.concurrent.UncheckedExecutionException;
-import com.google.errorprone.annotations.CheckReturnValue;
-import com.google.errorprone.annotations.CompatibleWith;
-import com.google.errorprone.annotations.DoNotMock;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
@@ -41,7 +37,6 @@ import java.util.concurrent.ExecutionException;
  * @author Charles Fry
  * @since 10.0
  */
-@DoNotMock("Use CacheBuilder.newBuilder().build()")
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 public interface Cache<K, V> {
@@ -52,8 +47,7 @@ public interface Cache<K, V> {
      *
      * @since 11.0
      */
-    @CheckForNull
-    V getIfPresent(@CompatibleWith("K") Object key);
+    V getIfPresent(Object key);
 
     /**
      * Returns the value associated with {@code key} in this cache, obtaining that value from {@code
@@ -137,7 +131,7 @@ public interface Cache<K, V> {
     void putAll(Map<? extends K, ? extends V> m);
 
     /** Discards any cached value for key {@code key}. */
-    void invalidate(@CompatibleWith("K") Object key);
+    void invalidate(Object key);
 
     /**
      * Discards any cached values for keys {@code keys}.
@@ -151,7 +145,6 @@ public interface Cache<K, V> {
     void invalidateAll();
 
     /** Returns the approximate number of entries in this cache. */
-    @CheckReturnValue
     long size();
 
     /**
@@ -165,7 +158,6 @@ public interface Cache<K, V> {
      * all values is returned.
      *
      */
-    @CheckReturnValue
     CacheStats stats();
 
     /**
@@ -176,7 +168,6 @@ public interface Cache<K, V> {
      * concurrent use, but if the cache is modified (including by eviction) after the iterator is
      * created, it is undefined which of the changes (if any) will be reflected in that iterator.
      */
-    @CheckReturnValue
     ConcurrentMap<K, V> asMap();
 
     /**

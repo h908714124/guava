@@ -17,7 +17,6 @@ package com.google.common.io;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.io.DataInput;
 import java.io.IOException;
 
@@ -89,7 +88,6 @@ public interface ByteArrayDataInput extends DataInput {
 
     @CanIgnoreReturnValue // to skip a line
     @Override
-    @CheckForNull
     String readLine();
 
     @CanIgnoreReturnValue // to skip a field

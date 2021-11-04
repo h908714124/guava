@@ -16,7 +16,6 @@
 
 package com.google.common.graph;
 
-import javax.annotation.CheckForNull;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -73,7 +72,6 @@ abstract class AbstractUndirectedNetworkConnections<N, E> implements NetworkConn
     }
 
     @Override
-    @CheckForNull
     public N removeInEdge(E edge, boolean isSelfLoop) {
         if (!isSelfLoop) {
             return removeOutEdge(edge);

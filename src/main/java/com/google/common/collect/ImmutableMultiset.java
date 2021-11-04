@@ -19,13 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
@@ -82,7 +76,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
      *
      * @since 22.0
      */
-    public static <T extends @Nullable Object, E>
+    public static <T, E>
     Collector<T, ?, ImmutableMultiset<E>> toImmutableMultiset(
             Function<? super T, ? extends E> elementFunction,
             ToIntFunction<? super T> countFunction) {
@@ -232,7 +226,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
         final Iterator<Entry<E>> entryIterator = entrySet().iterator();
         return new UnmodifiableIterator<E>() {
             int remaining;
-            @CheckForNull
             E element;
 
             @Override
@@ -257,8 +250,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
         };
     }
 
-    @LazyInit
-    @CheckForNull
     private transient ImmutableList<E> asList;
 
     @Override
@@ -268,7 +259,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
     }
 
     @Override
-    public boolean contains(@CheckForNull Object object) {
+    public boolean contains(Object object) {
         return count(object) > 0;
     }
 
@@ -278,10 +269,8 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final int add(E element, int occurrences) {
         throw new UnsupportedOperationException();
     }
@@ -292,11 +281,9 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    public final int remove(@CheckForNull Object element, int occurrences) {
+    public final int remove(Object element, int occurrences) {
         throw new UnsupportedOperationException();
     }
 
@@ -306,10 +293,8 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final int setCount(E element, int count) {
         throw new UnsupportedOperationException();
     }
@@ -320,10 +305,8 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final boolean setCount(E element, int oldCount, int newCount) {
         throw new UnsupportedOperationException();
     }
@@ -339,7 +322,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         return Multisets.equalsImpl(this, object);
     }
 
@@ -357,8 +340,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
     @Override
     public abstract ImmutableSet<E> elementSet();
 
-    @LazyInit
-    @CheckForNull
     private transient ImmutableSet<Entry<E>> entrySet;
 
     @Override
@@ -373,7 +354,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
 
     abstract Entry<E> getEntry(int index);
 
-    @WeakOuter
     private final class EntrySet extends IndexedImmutableSet<Entry<E>> {
         @Override
         boolean isPartialView() {
@@ -391,7 +371,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
         }
 
         @Override
-        public boolean contains(@CheckForNull Object o) {
+        public boolean contains(Object o) {
             if (o instanceof Entry) {
                 Entry<?> entry = (Entry<?>) o;
                 if (entry.getCount() <= 0) {
@@ -485,7 +465,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
          * @return this {@code Builder} object
          * @throws NullPointerException if {@code element} is null
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> add(E element) {
             contents.add(checkNotNull(element));
@@ -499,7 +478,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
          * @return this {@code Builder} object
          * @throws NullPointerException if {@code elements} is null or contains a null element
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> add(E... elements) {
             super.add(elements);
@@ -517,7 +495,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
          * @throws IllegalArgumentException if {@code occurrences} is negative, or if this operation
          *     would result in more than {@link Integer#MAX_VALUE} occurrences of the element
          */
-        @CanIgnoreReturnValue
         public Builder<E> addCopies(E element, int occurrences) {
             contents.add(checkNotNull(element), occurrences);
             return this;
@@ -533,7 +510,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
          * @throws NullPointerException if {@code element} is null
          * @throws IllegalArgumentException if {@code count} is negative
          */
-        @CanIgnoreReturnValue
         public Builder<E> setCount(E element, int count) {
             contents.setCount(checkNotNull(element), count);
             return this;
@@ -546,7 +522,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
          * @return this {@code Builder} object
          * @throws NullPointerException if {@code elements} is null or contains a null element
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> addAll(Iterable<? extends E> elements) {
             if (elements instanceof Multiset) {
@@ -565,7 +540,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
          * @return this {@code Builder} object
          * @throws NullPointerException if {@code elements} is null or contains a null element
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<E> addAll(Iterator<? extends E> elements) {
             super.addAll(elements);
@@ -606,7 +580,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
         }
 
         @Override
-        public boolean contains(@CheckForNull Object object) {
+        public boolean contains(Object object) {
             return delegate.contains(object);
         }
 

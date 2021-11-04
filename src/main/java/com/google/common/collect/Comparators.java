@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -65,7 +64,7 @@ public final class Comparators {
     // desired return type. However, *nested* generics introduce a special class of problems that we
     // think tip it over into being worthwhile.
     @Beta
-    public static <T extends @Nullable Object, S extends T> Comparator<Iterable<S>> lexicographical(
+    public static <T, S extends T> Comparator<Iterable<S>> lexicographical(
             Comparator<T> comparator) {
         return new LexicographicalOrdering<S>(checkNotNull(comparator));
     }
@@ -76,7 +75,7 @@ public final class Comparators {
      * always true when the iterable has fewer than two elements.
      */
     @Beta
-    public static <T extends @Nullable Object> boolean isInOrder(
+    public static <T> boolean isInOrder(
             Iterable<? extends T> iterable, Comparator<T> comparator) {
         checkNotNull(comparator);
         Iterator<? extends T> it = iterable.iterator();
@@ -99,7 +98,7 @@ public final class Comparators {
      * this is always true when the iterable has fewer than two elements.
      */
     @Beta
-    public static <T extends @Nullable Object> boolean isInStrictOrder(
+    public static <T> boolean isInStrictOrder(
             Iterable<? extends T> iterable, Comparator<T> comparator) {
         checkNotNull(comparator);
         Iterator<? extends T> it = iterable.iterator();
@@ -136,7 +135,7 @@ public final class Comparators {
      * @throws IllegalArgumentException if {@code k < 0}
      * @since 22.0
      */
-    public static <T extends @Nullable Object> Collector<T, ?, List<T>> least(
+    public static <T> Collector<T, ?, List<T>> least(
             int k, Comparator<? super T> comparator) {
         checkNonnegative(k, "k");
         checkNotNull(comparator);
@@ -168,7 +167,7 @@ public final class Comparators {
      * @throws IllegalArgumentException if {@code k < 0}
      * @since 22.0
      */
-    public static <T extends @Nullable Object> Collector<T, ?, List<T>> greatest(
+    public static <T> Collector<T, ?, List<T>> greatest(
             int k, Comparator<? super T> comparator) {
         return least(k, comparator.reversed());
     }
@@ -183,7 +182,7 @@ public final class Comparators {
     @Beta
     public static <T> Comparator<Optional<T>> emptiesFirst(Comparator<? super T> valueComparator) {
         checkNotNull(valueComparator);
-        return Comparator.<Optional<T>, @Nullable T>comparing(
+        return Comparator.<Optional<T>, T>comparing(
                 o -> o.orElse(null), Comparator.nullsFirst(valueComparator));
     }
 
@@ -197,7 +196,7 @@ public final class Comparators {
     @Beta
     public static <T> Comparator<Optional<T>> emptiesLast(Comparator<? super T> valueComparator) {
         checkNotNull(valueComparator);
-        return Comparator.<Optional<T>, @Nullable T>comparing(
+        return Comparator.<Optional<T>, T>comparing(
                 o -> o.orElse(null), Comparator.nullsLast(valueComparator));
     }
 
@@ -236,7 +235,7 @@ public final class Comparators {
      */
     @Beta
     @ParametricNullness
-    public static <T extends @Nullable Object> T min(
+    public static <T> T min(
             @ParametricNullness T a, @ParametricNullness T b, Comparator<T> comparator) {
         return (comparator.compare(a, b) <= 0) ? a : b;
     }
@@ -276,7 +275,7 @@ public final class Comparators {
      */
     @Beta
     @ParametricNullness
-    public static <T extends @Nullable Object> T max(
+    public static <T> T max(
             @ParametricNullness T a, @ParametricNullness T b, Comparator<T> comparator) {
         return (comparator.compare(a, b) >= 0) ? a : b;
     }

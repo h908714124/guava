@@ -16,7 +16,6 @@ package com.google.common.hash;
 
 import com.google.common.annotations.Beta;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -122,7 +121,7 @@ public interface Hasher extends PrimitiveSink {
     Hasher putString(CharSequence charSequence, Charset charset);
 
     /** A simple convenience for {@code funnel.funnel(object, this)}. */
-    <T extends @Nullable Object> Hasher putObject(
+    <T> Hasher putObject(
             @ParametricNullness T instance, Funnel<? super T> funnel);
 
     /**

@@ -17,7 +17,6 @@ package com.google.common.base;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
@@ -131,7 +130,7 @@ public final class Enums {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object object) {
+        public boolean equals(Object object) {
             if (object instanceof StringConverter) {
                 StringConverter<?> that = (StringConverter<?>) object;
                 return this.enumClass.equals(that.enumClass);

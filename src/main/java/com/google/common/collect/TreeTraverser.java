@@ -20,7 +20,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 
-import javax.annotation.CheckForNull;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
@@ -225,7 +224,6 @@ public abstract class TreeTraverser<T> {
         }
 
         @Override
-        @CheckForNull
         protected T computeNext() {
             while (!stack.isEmpty()) {
                 PostOrderNode<T> top = stack.getLast();

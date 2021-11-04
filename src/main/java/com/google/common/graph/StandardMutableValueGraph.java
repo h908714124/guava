@@ -16,10 +16,6 @@
 
 package com.google.common.graph;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
-import javax.annotation.CheckForNull;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -59,7 +55,6 @@ final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
     }
 
     @Override
-    @CanIgnoreReturnValue
     public boolean addNode(N node) {
         checkNotNull(node, "node");
 
@@ -76,7 +71,6 @@ final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
      *
      * @throws IllegalStateException if {@code node} is already present
      */
-    @CanIgnoreReturnValue
     private GraphConnections<N, V> addNodeInternal(N node) {
         GraphConnections<N, V> connections = newConnections();
         checkState(nodeConnections.put(node, connections) == null);
@@ -84,8 +78,6 @@ final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
     }
 
     @Override
-    @CanIgnoreReturnValue
-    @CheckForNull
     public V putEdgeValue(N nodeU, N nodeV, V value) {
         checkNotNull(nodeU, "nodeU");
         checkNotNull(nodeV, "nodeV");
@@ -112,15 +104,12 @@ final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
     }
 
     @Override
-    @CanIgnoreReturnValue
-    @CheckForNull
     public V putEdgeValue(EndpointPair<N> endpoints, V value) {
         validateEndpoints(endpoints);
         return putEdgeValue(endpoints.nodeU(), endpoints.nodeV(), value);
     }
 
     @Override
-    @CanIgnoreReturnValue
     public boolean removeNode(N node) {
         checkNotNull(node, "node");
 
@@ -157,8 +146,6 @@ final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
     }
 
     @Override
-    @CanIgnoreReturnValue
-    @CheckForNull
     public V removeEdge(N nodeU, N nodeV) {
         checkNotNull(nodeU, "nodeU");
         checkNotNull(nodeV, "nodeV");
@@ -178,8 +165,6 @@ final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
     }
 
     @Override
-    @CanIgnoreReturnValue
-    @CheckForNull
     public V removeEdge(EndpointPair<N> endpoints) {
         validateEndpoints(endpoints);
         return removeEdge(endpoints.nodeU(), endpoints.nodeV());

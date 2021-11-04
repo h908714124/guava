@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Iterator;
 
@@ -31,7 +30,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-abstract class TransformedIterator<F extends @Nullable Object, T extends @Nullable Object>
+abstract class TransformedIterator<F, T>
         implements Iterator<T> {
     final Iterator<? extends F> backingIterator;
 

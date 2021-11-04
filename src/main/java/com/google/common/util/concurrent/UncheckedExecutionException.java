@@ -16,8 +16,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
-
 /**
  * Unchecked variant of {@link java.util.concurrent.ExecutionException}. As with {@code
  * ExecutionException}, the exception's {@linkplain #getCause() cause} comes from a failed task,
@@ -47,17 +45,17 @@ public class UncheckedExecutionException extends RuntimeException {
     }
 
     /** Creates a new instance with the given detail message. */
-    protected UncheckedExecutionException(@CheckForNull String message) {
+    protected UncheckedExecutionException(String message) {
         super(message);
     }
 
     /** Creates a new instance with the given detail message and cause. */
-    public UncheckedExecutionException(@CheckForNull String message, @CheckForNull Throwable cause) {
+    public UncheckedExecutionException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /** Creates a new instance with the given cause. */
-    public UncheckedExecutionException(@CheckForNull Throwable cause) {
+    public UncheckedExecutionException(Throwable cause) {
         super(cause);
     }
 

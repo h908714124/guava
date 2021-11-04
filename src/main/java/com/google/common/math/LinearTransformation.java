@@ -16,9 +16,6 @@ package com.google.common.math;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-
-import javax.annotation.CheckForNull;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.math.DoubleUtils.isFinite;
@@ -164,8 +161,6 @@ public abstract class LinearTransformation {
         final double slope;
         final double yIntercept;
 
-        @CheckForNull
-        @LazyInit
         LinearTransformation inverse;
 
         RegularLinearTransformation(double slope, double yIntercept) {
@@ -224,8 +219,6 @@ public abstract class LinearTransformation {
 
         final double x;
 
-        @CheckForNull
-        @LazyInit
         LinearTransformation inverse;
 
         VerticalLinearTransformation(double x) {

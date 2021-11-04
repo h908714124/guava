@@ -17,7 +17,6 @@ package com.google.common.base;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 
-import javax.annotation.CheckForNull;
 import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -230,7 +229,6 @@ public class FinalizableReferenceQueue implements Closeable {
          *
          * @throws SecurityException if we don't have the appropriate privileges
          */
-        @CheckForNull
         Class<?> loadFinalizer();
     }
 
@@ -245,7 +243,6 @@ public class FinalizableReferenceQueue implements Closeable {
         static boolean disabled;
 
         @Override
-        @CheckForNull
         public Class<?> loadFinalizer() {
             if (disabled) {
                 return null;
@@ -283,7 +280,6 @@ public class FinalizableReferenceQueue implements Closeable {
                         + "issue, or move Guava to your system class path.";
 
         @Override
-        @CheckForNull
         public Class<?> loadFinalizer() {
             try {
                 /*

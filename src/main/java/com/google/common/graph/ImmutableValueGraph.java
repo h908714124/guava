@@ -20,7 +20,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -141,7 +140,6 @@ public final class ImmutableValueGraph<N, V> extends StandardValueGraph<N, V> {
          *
          * @return this {@code Builder} object
          */
-        @CanIgnoreReturnValue
         public ImmutableValueGraph.Builder<N, V> addNode(N node) {
             mutableValueGraph.addNode(node);
             return this;
@@ -163,7 +161,6 @@ public final class ImmutableValueGraph<N, V> extends StandardValueGraph<N, V> {
          * @throws IllegalArgumentException if the introduction of the edge would violate {@link
          *     #allowsSelfLoops()}
          */
-        @CanIgnoreReturnValue
         public ImmutableValueGraph.Builder<N, V> putEdgeValue(N nodeU, N nodeV, V value) {
             mutableValueGraph.putEdgeValue(nodeU, nodeV, value);
             return this;
@@ -188,7 +185,6 @@ public final class ImmutableValueGraph<N, V> extends StandardValueGraph<N, V> {
          *     #allowsSelfLoops()}
          * @throws IllegalArgumentException if the endpoints are unordered and the graph is directed
          */
-        @CanIgnoreReturnValue
         public ImmutableValueGraph.Builder<N, V> putEdgeValue(EndpointPair<N> endpoints, V value) {
             mutableValueGraph.putEdgeValue(endpoints, value);
             return this;

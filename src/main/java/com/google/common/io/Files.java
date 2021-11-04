@@ -28,9 +28,7 @@ import com.google.common.graph.Traverser;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -534,7 +532,6 @@ public final class Files {
      */
     @Beta
     @Deprecated
-    @CheckForNull
     public
     static String readFirstLine(File file, Charset charset) throws IOException {
         return asCharSource(file, charset).readFirstLine();
@@ -596,7 +593,7 @@ public final class Files {
     @CanIgnoreReturnValue // some processors won't return a useful result
     @ParametricNullness
     public
-    static <T extends @Nullable Object> T readLines(
+    static <T> T readLines(
             File file, Charset charset, LineProcessor<T> callback) throws IOException {
         return asCharSource(file, charset).readLines(callback);
     }
@@ -618,7 +615,7 @@ public final class Files {
     @CanIgnoreReturnValue // some processors won't return a useful result
     @ParametricNullness
     public
-    static <T extends @Nullable Object> T readBytes(File file, ByteProcessor<T> processor)
+    static <T> T readBytes(File file, ByteProcessor<T> processor)
             throws IOException {
         return asByteSource(file).read(processor);
     }

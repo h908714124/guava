@@ -17,9 +17,7 @@
 package com.google.common.graph;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.DoNotMock;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Set;
 
@@ -103,7 +101,6 @@ import java.util.Set;
  * @since 20.0
  */
 @Beta
-@DoNotMock("Use GraphBuilder to create a real instance")
 @ElementTypesAreNonnullByDefault
 public interface Graph<N> extends BaseGraph<N> {
     //
@@ -291,7 +288,7 @@ public interface Graph<N> extends BaseGraph<N> {
      * <p>A reference implementation of this is provided by {@link AbstractGraph#equals(Object)}.
      */
     @Override
-    boolean equals(@CheckForNull Object object);
+    boolean equals(Object object);
 
     /**
      * Returns the hash code for this graph. The hash code of a graph is defined as the hash code of

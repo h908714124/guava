@@ -48,7 +48,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @GwtCompatible
 @Retention(RUNTIME)
 @Target({FIELD, METHOD, PARAMETER})
-@javax.annotation.meta.TypeQualifierNickname
-@javax.annotation.Nonnull(when = javax.annotation.meta.When.UNKNOWN)
 @interface ParametricNullness {
 }

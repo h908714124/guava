@@ -19,8 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.primitives.Ints;
 
-import javax.annotation.CheckForNull;
-
 /**
  * Static methods for implementing hash-based collections.
  *
@@ -53,7 +51,7 @@ final class Hashing {
         return (int) (C2 * Integer.rotateLeft((int) (hashCode * C1), 15));
     }
 
-    static int smearedHash(@CheckForNull Object o) {
+    static int smearedHash(Object o) {
         return smear((o == null) ? 0 : o.hashCode());
     }
 

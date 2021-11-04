@@ -16,7 +16,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.DoNotCall;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
@@ -68,7 +67,7 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
      */
     @DoNotCall("Use toImmutableSortedMultiset.")
     @Deprecated
-    public static <T extends @Nullable Object, E>
+    public static <T, E>
     Collector<T, ?, ImmutableMultiset<E>> toImmutableMultiset(
             Function<? super T, ? extends E> elementFunction,
             ToIntFunction<? super T> countFunction) {

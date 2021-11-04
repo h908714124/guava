@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.Tables.AbstractCell;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @ElementTypesAreNonnullByDefault
 final class TableCollectors {
 
-    static <T extends @Nullable Object, R, C, V>
+    static <T, R, C, V>
     Collector<T, ?, ImmutableTable<R, C, V>> toImmutableTable(
             Function<? super T, ? extends R> rowFunction,
             Function<? super T, ? extends C> columnFunction,
@@ -50,7 +49,7 @@ final class TableCollectors {
                 ImmutableTable.Builder::build);
     }
 
-    static <T extends @Nullable Object, R, C, V>
+    static <T, R, C, V>
     Collector<T, ?, ImmutableTable<R, C, V>> toImmutableTable(
             Function<? super T, ? extends R> rowFunction,
             Function<? super T, ? extends C> columnFunction,
@@ -81,10 +80,10 @@ final class TableCollectors {
     }
 
     static <
-            T extends @Nullable Object,
-            R extends @Nullable Object,
-            C extends @Nullable Object,
-            V extends @Nullable Object,
+            T,
+            R,
+            C,
+            V,
             I extends Table<R, C, V>>
     Collector<T, ?, I> toTable(
             java.util.function.Function<? super T, ? extends R> rowFunction,
@@ -102,10 +101,10 @@ final class TableCollectors {
     }
 
     static <
-            T extends @Nullable Object,
-            R extends @Nullable Object,
-            C extends @Nullable Object,
-            V extends @Nullable Object,
+            T,
+            R,
+            C,
+            V,
             I extends Table<R, C, V>>
     Collector<T, ?, I> toTable(
             java.util.function.Function<? super T, ? extends R> rowFunction,
@@ -197,7 +196,7 @@ final class TableCollectors {
     }
 
     private static <
-            R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+            R, C, V>
     void mergeTables(
             Table<R, C, V> table,
             @ParametricNullness R row,

@@ -31,9 +31,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.primitives.Primitives;
 import com.google.common.reflect.TypeToken;
 import com.google.common.util.concurrent.UncheckedExecutionException;
-import com.google.j2objc.annotations.Weak;
 
-import javax.annotation.CheckForNull;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
@@ -67,7 +65,6 @@ final class SubscriberRegistry {
             Maps.newConcurrentMap();
 
     /** The event bus this registry belongs to. */
-    @Weak
     private final EventBus bus;
 
     SubscriberRegistry(EventBus bus) {
@@ -261,7 +258,7 @@ final class SubscriberRegistry {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object o) {
+        public boolean equals(Object o) {
             if (o instanceof MethodIdentifier) {
                 MethodIdentifier ident = (MethodIdentifier) o;
                 return name.equals(ident.name) && parameterTypes.equals(ident.parameterTypes);

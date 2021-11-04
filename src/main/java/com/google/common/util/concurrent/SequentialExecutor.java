@@ -17,9 +17,7 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.RetainedWith;
 
-import javax.annotation.CheckForNull;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.Executor;
@@ -83,7 +81,6 @@ final class SequentialExecutor implements Executor {
     @GuardedBy("queue")
     private long workerRunCount = 0;
 
-    @RetainedWith
     private final QueueWorker worker = new QueueWorker();
 
     /** Use {@link MoreExecutors#newSequentialExecutor} */
@@ -174,7 +171,6 @@ final class SequentialExecutor implements Executor {
 
     /** Worker that runs tasks from {@link #queue} until it is empty. */
     private final class QueueWorker implements Runnable {
-        @CheckForNull
         Runnable task;
 
         @Override

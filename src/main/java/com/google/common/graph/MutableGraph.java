@@ -17,7 +17,6 @@
 package com.google.common.graph;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 /**
  * A subinterface of {@link Graph} which adds mutation methods. When mutation is not required, users
@@ -39,7 +38,6 @@ public interface MutableGraph<N> extends Graph<N> {
      *
      * @return {@code true} if the graph was modified as a result of this call
      */
-    @CanIgnoreReturnValue
     boolean addNode(N node);
 
     /**
@@ -55,7 +53,6 @@ public interface MutableGraph<N> extends Graph<N> {
      * @throws IllegalArgumentException if the introduction of the edge would violate {@link
      *     #allowsSelfLoops()}
      */
-    @CanIgnoreReturnValue
     boolean putEdge(N nodeU, N nodeV);
 
     /**
@@ -76,7 +73,6 @@ public interface MutableGraph<N> extends Graph<N> {
      * @throws IllegalArgumentException if the endpoints are unordered and the graph is directed
      * @since 27.1
      */
-    @CanIgnoreReturnValue
     boolean putEdge(EndpointPair<N> endpoints);
 
     /**
@@ -84,7 +80,6 @@ public interface MutableGraph<N> extends Graph<N> {
      *
      * @return {@code true} if the graph was modified as a result of this call
      */
-    @CanIgnoreReturnValue
     boolean removeNode(N node);
 
     /**
@@ -92,7 +87,6 @@ public interface MutableGraph<N> extends Graph<N> {
      *
      * @return {@code true} if the graph was modified as a result of this call
      */
-    @CanIgnoreReturnValue
     boolean removeEdge(N nodeU, N nodeV);
 
     /**
@@ -104,6 +98,5 @@ public interface MutableGraph<N> extends Graph<N> {
      * @return {@code true} if the graph was modified as a result of this call
      * @since 27.1
      */
-    @CanIgnoreReturnValue
     boolean removeEdge(EndpointPair<N> endpoints);
 }

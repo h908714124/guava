@@ -15,10 +15,6 @@
 package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
-import javax.annotation.CheckForNull;
 
 /**
  * Legacy version of {@link java.util.function.Function java.util.function.Function}.
@@ -44,10 +40,9 @@ import javax.annotation.CheckForNull;
 @GwtCompatible
 @FunctionalInterface
 @ElementTypesAreNonnullByDefault
-public interface Function<F extends @Nullable Object, T extends @Nullable Object>
+public interface Function<F, T>
         extends java.util.function.Function<F, T> {
     @Override
-    @CanIgnoreReturnValue // TODO(kevinb): remove this
     @ParametricNullness
     T apply(@ParametricNullness F input);
 
@@ -63,5 +58,5 @@ public interface Function<F extends @Nullable Object, T extends @Nullable Object
      * disappear. It is best not to depend on it.
      */
     @Override
-    boolean equals(@CheckForNull Object object);
+    boolean equals(Object object);
 }

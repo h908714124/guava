@@ -22,11 +22,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Serialization.FieldSetter;
 import com.google.common.math.IntMath;
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -140,7 +136,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
      * @return the nonnegative number of occurrences of the element
      */
     @Override
-    public int count(@CheckForNull Object element) {
+    public int count(Object element) {
         AtomicInteger existingCounter = Maps.safeGet(countMap, element);
         return (existingCounter == null) ? 0 : existingCounter.get();
     }
@@ -172,7 +168,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
 
     @Override
     @SuppressWarnings("nullness") // b/192354773 in our checker affects toArray declarations
-    public <T extends @Nullable Object> T[] toArray(T[] array) {
+    public <T> T[] toArray(T[] array) {
         return snapshot().toArray(array);
     }
 
@@ -202,7 +198,6 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
      * @throws IllegalArgumentException if {@code occurrences} is negative, or if the resulting amount
      *     would exceed {@link Integer#MAX_VALUE}
      */
-    @CanIgnoreReturnValue
     @Override
     public int add(E element, int occurrences) {
         checkNotNull(element);
@@ -269,9 +264,8 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
      * we'll want to remove @Nullable, add an eager checkNotNull, and loosen up
      * testRemove_nullAllowed.
      */
-    @CanIgnoreReturnValue
     @Override
-    public int remove(@CheckForNull Object element, int occurrences) {
+    public int remove(Object element, int occurrences) {
         if (occurrences == 0) {
             return count(element);
         }
@@ -311,8 +305,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
      * @return {@code true} if the removal was possible (including if {@code occurrences} is zero)
      * @throws IllegalArgumentException if {@code occurrences} is negative
      */
-    @CanIgnoreReturnValue
-    public boolean removeExactly(@CheckForNull Object element, int occurrences) {
+    public boolean removeExactly(Object element, int occurrences) {
         if (occurrences == 0) {
             return true;
         }
@@ -346,7 +339,6 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
      * @return the count of {@code element} in the multiset before this call
      * @throws IllegalArgumentException if {@code count} is negative
      */
-    @CanIgnoreReturnValue
     @Override
     public int setCount(E element, int count) {
         checkNotNull(element);
@@ -402,7 +394,6 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
      *     method will return {@code true} if the condition was met.
      * @throws IllegalArgumentException if {@code expectedOldCount} or {@code newCount} is negative
      */
-    @CanIgnoreReturnValue
     @Override
     public boolean setCount(E element, int expectedOldCount, int newCount) {
         checkNotNull(element);
@@ -458,7 +449,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
             }
 
             @Override
-            public boolean contains(@CheckForNull Object object) {
+            public boolean contains(Object object) {
                 return object != null && Collections2.safeContains(delegate, object);
             }
 
@@ -468,7 +459,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
             }
 
             @Override
-            public boolean remove(@CheckForNull Object object) {
+            public boolean remove(Object object) {
                 return object != null && Collections2.safeRemove(delegate, object);
             }
 
@@ -511,7 +502,6 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
                             countMap.entrySet().iterator();
 
                     @Override
-                    @CheckForNull
                     protected Entry<E> computeNext() {
                         while (true) {
                             if (!mapEntries.hasNext()) {
@@ -527,7 +517,6 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
                 };
 
         return new ForwardingIterator<Entry<E>>() {
-            @CheckForNull
             private Entry<E> last;
 
             @Override
@@ -560,7 +549,6 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
         countMap.clear();
     }
 
-    @WeakOuter
     private class EntrySet extends AbstractMultiset<E>.EntrySet {
         @Override
         ConcurrentHashMultiset<E> multiset() {
@@ -579,7 +567,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
 
         @Override
         @SuppressWarnings("nullness") // b/192354773 in our checker affects toArray declarations
-        public <T extends @Nullable Object> T[] toArray(T[] array) {
+        public <T> T[] toArray(T[] array) {
             return snapshot().toArray(array);
         }
 

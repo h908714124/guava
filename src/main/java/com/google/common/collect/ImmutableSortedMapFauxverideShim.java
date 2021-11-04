@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.DoNotCall;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -44,7 +43,7 @@ abstract class ImmutableSortedMapFauxverideShim<K, V> extends ImmutableMap<K, V>
      */
     @DoNotCall("Use toImmutableSortedMap")
     @Deprecated
-    public static <T extends @Nullable Object, K, V>
+    public static <T, K, V>
     Collector<T, ?, ImmutableMap<K, V>> toImmutableMap(
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction) {
@@ -61,7 +60,7 @@ abstract class ImmutableSortedMapFauxverideShim<K, V> extends ImmutableMap<K, V>
      */
     @DoNotCall("Use toImmutableSortedMap")
     @Deprecated
-    public static <T extends @Nullable Object, K, V>
+    public static <T, K, V>
     Collector<T, ?, ImmutableMap<K, V>> toImmutableMap(
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction,

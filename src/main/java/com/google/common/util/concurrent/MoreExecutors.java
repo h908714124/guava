@@ -23,9 +23,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ForwardingListenableFuture.SimpleForwardingListenableFuture;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
@@ -640,14 +638,14 @@ public final class MoreExecutors {
 
         @Override
         public ListenableScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit) {
-            TrustedListenableFutureTask<@Nullable Void> task =
+            TrustedListenableFutureTask<Void> task =
                     TrustedListenableFutureTask.create(command, null);
             ScheduledFuture<?> scheduled = delegate.schedule(task, delay, unit);
-            return new ListenableScheduledTask<@Nullable Void>(task, scheduled);
+            return new ListenableScheduledTask<Void>(task, scheduled);
         }
 
         @Override
-        public <V extends @Nullable Object> ListenableScheduledFuture<V> schedule(
+        public <V> ListenableScheduledFuture<V> schedule(
                 Callable<V> callable, long delay, TimeUnit unit) {
             TrustedListenableFutureTask<V> task = TrustedListenableFutureTask.create(callable);
             ScheduledFuture<?> scheduled = delegate.schedule(task, delay, unit);
@@ -659,7 +657,7 @@ public final class MoreExecutors {
                 Runnable command, long initialDelay, long period, TimeUnit unit) {
             NeverSuccessfulListenableFutureTask task = new NeverSuccessfulListenableFutureTask(command);
             ScheduledFuture<?> scheduled = delegate.scheduleAtFixedRate(task, initialDelay, period, unit);
-            return new ListenableScheduledTask<@Nullable Void>(task, scheduled);
+            return new ListenableScheduledTask<Void>(task, scheduled);
         }
 
         @Override
@@ -668,10 +666,10 @@ public final class MoreExecutors {
             NeverSuccessfulListenableFutureTask task = new NeverSuccessfulListenableFutureTask(command);
             ScheduledFuture<?> scheduled =
                     delegate.scheduleWithFixedDelay(task, initialDelay, delay, unit);
-            return new ListenableScheduledTask<@Nullable Void>(task, scheduled);
+            return new ListenableScheduledTask<Void>(task, scheduled);
         }
 
-        private static final class ListenableScheduledTask<V extends @Nullable Object>
+        private static final class ListenableScheduledTask<V>
                 extends SimpleForwardingListenableFuture<V> implements ListenableScheduledFuture<V> {
 
             private final ScheduledFuture<?> scheduledDelegate;
@@ -707,7 +705,7 @@ public final class MoreExecutors {
 
         @GwtIncompatible // TODO
         private static final class NeverSuccessfulListenableFutureTask
-                extends AbstractFuture.TrustedFuture<@Nullable Void> implements Runnable {
+                extends AbstractFuture.TrustedFuture<Void> implements Runnable {
             private final Runnable delegate;
 
             public NeverSuccessfulListenableFutureTask(Runnable delegate) {
@@ -748,7 +746,7 @@ public final class MoreExecutors {
      */
     @GwtIncompatible
     @ParametricNullness
-    static <T extends @Nullable Object> T invokeAnyImpl(
+    static <T> T invokeAnyImpl(
             ListeningExecutorService executorService,
             Collection<? extends Callable<T>> tasks,
             boolean timed,
@@ -765,7 +763,7 @@ public final class MoreExecutors {
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
     @GwtIncompatible
     @ParametricNullness
-    static <T extends @Nullable Object> T invokeAnyImpl(
+    static <T> T invokeAnyImpl(
             ListeningExecutorService executorService,
             Collection<? extends Callable<T>> tasks,
             boolean timed,
@@ -845,7 +843,7 @@ public final class MoreExecutors {
      * Submits the task and adds a listener that adds the future to {@code queue} when it completes.
      */
     @GwtIncompatible // TODO
-    private static <T extends @Nullable Object> ListenableFuture<T> submitAndAddQueueListener(
+    private static <T> ListenableFuture<T> submitAndAddQueueListener(
             ListeningExecutorService executorService,
             Callable<T> task,
             final BlockingQueue<Future<T>> queue) {
@@ -990,7 +988,7 @@ public final class MoreExecutors {
         checkNotNull(nameSupplier);
         return new WrappingExecutorService(service) {
             @Override
-            protected <T extends @Nullable Object> Callable<T> wrapTask(Callable<T> callable) {
+            protected <T> Callable<T> wrapTask(Callable<T> callable) {
                 return Callables.threadRenaming(callable, nameSupplier);
             }
 
@@ -1019,7 +1017,7 @@ public final class MoreExecutors {
         checkNotNull(nameSupplier);
         return new WrappingScheduledExecutorService(service) {
             @Override
-            protected <T extends @Nullable Object> Callable<T> wrapTask(Callable<T> callable) {
+            protected <T> Callable<T> wrapTask(Callable<T> callable) {
                 return Callables.threadRenaming(callable, nameSupplier);
             }
 
@@ -1054,7 +1052,6 @@ public final class MoreExecutors {
      * @since 28.0
      */
     @Beta
-    @CanIgnoreReturnValue
     @GwtIncompatible // java.time.Duration
     public static boolean shutdownAndAwaitTermination(ExecutorService service, Duration timeout) {
         return shutdownAndAwaitTermination(service, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
@@ -1085,7 +1082,6 @@ public final class MoreExecutors {
      * @since 17.0
      */
     @Beta
-    @CanIgnoreReturnValue
     @GwtIncompatible // concurrency
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
     public static boolean shutdownAndAwaitTermination(

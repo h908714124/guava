@@ -17,9 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -28,7 +26,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /** An ordering that uses the reverse of a given order. */
 @GwtCompatible(serializable = true)
 @ElementTypesAreNonnullByDefault
-final class ReverseOrdering<T extends @Nullable Object> extends Ordering<T>
+final class ReverseOrdering<T> extends Ordering<T>
         implements Serializable {
     final Ordering<? super T> forwardOrder;
 
@@ -97,7 +95,7 @@ final class ReverseOrdering<T extends @Nullable Object> extends Ordering<T>
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }

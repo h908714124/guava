@@ -20,7 +20,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
-import javax.annotation.CheckForNull;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -530,8 +529,7 @@ public final class TypeResolver {
             return new WildcardCapturer(id);
         }
 
-        @CheckForNull
-        private Type captureNullable(@CheckForNull Type type) {
+        private Type captureNullable(Type type) {
             if (type == null) {
                 return null;
             }
@@ -565,7 +563,7 @@ public final class TypeResolver {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (obj instanceof TypeVariableKey) {
                 TypeVariableKey that = (TypeVariableKey) obj;
                 return equalsTypeVariable(that.var);
@@ -580,7 +578,6 @@ public final class TypeResolver {
         }
 
         /** Wraps {@code t} in a {@code TypeVariableKey} if it's a type variable. */
-        @CheckForNull
         static TypeVariableKey forLookup(Type t) {
             if (t instanceof TypeVariable) {
                 return new TypeVariableKey((TypeVariable<?>) t);

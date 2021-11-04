@@ -19,9 +19,7 @@ package com.google.common.graph;
 import com.google.common.annotations.Beta;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableSet;
-import com.google.errorprone.annotations.DoNotMock;
 
-import javax.annotation.CheckForNull;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashSet;
@@ -62,9 +60,6 @@ import static java.util.Objects.requireNonNull;
  * @since 23.1
  */
 @Beta
-@DoNotMock(
-        "Call forGraph or forTree, passing a lambda or a Graph with the desired edges (built with"
-                + " GraphBuilder)")
 @ElementTypesAreNonnullByDefault
 public abstract class Traverser<N> {
     private final SuccessorsFunction<N> successorFunction;
@@ -386,7 +381,6 @@ public abstract class Traverser<N> {
             Set<N> visited = new HashSet<>();
             return new Traversal<N>(graph) {
                 @Override
-                @CheckForNull
                 N visitNext(Deque<Iterator<? extends N>> horizon) {
                     Iterator<? extends N> top = horizon.getFirst();
                     while (top.hasNext()) {
@@ -412,7 +406,6 @@ public abstract class Traverser<N> {
 
         static <N> Traversal<N> inTree(SuccessorsFunction<N> tree) {
             return new Traversal<N>(tree) {
-                @CheckForNull
                 @Override
                 N visitNext(Deque<Iterator<? extends N>> horizon) {
                     Iterator<? extends N> top = horizon.getFirst();
@@ -444,7 +437,6 @@ public abstract class Traverser<N> {
             horizon.add(startNodes);
             return new AbstractIterator<N>() {
                 @Override
-                @CheckForNull
                 protected N computeNext() {
                     do {
                         N next = visitNext(horizon);
@@ -469,7 +461,6 @@ public abstract class Traverser<N> {
             horizon.add(startNodes);
             return new AbstractIterator<N>() {
                 @Override
-                @CheckForNull
                 protected N computeNext() {
                     for (N next = visitNext(horizon); next != null; next = visitNext(horizon)) {
                         Iterator<? extends N> successors = successorFunction.successors(next).iterator();
@@ -498,7 +489,6 @@ public abstract class Traverser<N> {
          * into {@code horizon} between calls to {@code visitNext()}. This causes them to receive
          * additional values interleaved with those shown above.)
          */
-        @CheckForNull
         abstract N visitNext(Deque<Iterator<? extends N>> horizon);
     }
 

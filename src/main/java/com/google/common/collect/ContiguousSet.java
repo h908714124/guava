@@ -17,7 +17,6 @@ package com.google.common.collect;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.DoNotCall;
 
 import java.util.Collections;
 import java.util.NoSuchElementException;
@@ -262,7 +261,6 @@ public abstract class ContiguousSet<C extends Comparable> extends ImmutableSorte
      * @deprecated Use {@link #create}.
      */
     @Deprecated
-    @DoNotCall("Always throws UnsupportedOperationException")
     public static <E> ImmutableSortedSet.Builder<E> builder() {
         throw new UnsupportedOperationException();
     }

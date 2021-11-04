@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -37,7 +36,7 @@ final class Platform {
             java.util.logging.Logger.getLogger(Platform.class.getName());
 
     /** Returns the platform preferred implementation of a map based on a hash table. */
-    static <K extends @Nullable Object, V extends @Nullable Object>
+    static <K, V>
     Map<K, V> newHashMapWithExpectedSize(int expectedSize) {
         return Maps.newHashMapWithExpectedSize(expectedSize);
     }
@@ -46,13 +45,13 @@ final class Platform {
      * Returns the platform preferred implementation of an insertion ordered map based on a hash
      * table.
      */
-    static <K extends @Nullable Object, V extends @Nullable Object>
+    static <K, V>
     Map<K, V> newLinkedHashMapWithExpectedSize(int expectedSize) {
         return Maps.newLinkedHashMapWithExpectedSize(expectedSize);
     }
 
     /** Returns the platform preferred implementation of a set based on a hash table. */
-    static <E extends @Nullable Object> Set<E> newHashSetWithExpectedSize(int expectedSize) {
+    static <E> Set<E> newHashSetWithExpectedSize(int expectedSize) {
         return Sets.newHashSetWithExpectedSize(expectedSize);
     }
 
@@ -65,7 +64,7 @@ final class Platform {
      * Returns the platform preferred implementation of an insertion ordered set based on a hash
      * table.
      */
-    static <E extends @Nullable Object> Set<E> newLinkedHashSetWithExpectedSize(int expectedSize) {
+    static <E> Set<E> newLinkedHashSetWithExpectedSize(int expectedSize) {
         return Sets.newLinkedHashSetWithExpectedSize(expectedSize);
     }
 
@@ -73,7 +72,7 @@ final class Platform {
      * Returns the platform preferred map implementation that preserves insertion order when used only
      * for insertions.
      */
-    static <K extends @Nullable Object, V extends @Nullable Object>
+    static <K, V>
     Map<K, V> preservesInsertionOrderOnPutsMap() {
         return Maps.newLinkedHashMap();
     }
@@ -82,7 +81,7 @@ final class Platform {
      * Returns the platform preferred set implementation that preserves insertion order when used only
      * for insertions.
      */
-    static <E extends @Nullable Object> Set<E> preservesInsertionOrderOnAddsSet() {
+    static <E> Set<E> preservesInsertionOrderOnAddsSet() {
         return Sets.newLinkedHashSet();
     }
 
@@ -94,11 +93,11 @@ final class Platform {
      */
     /*
      * The new array contains nulls, even if the old array did not. If we wanted to be accurate, we
-     * would declare a return type of `@Nullable T[]`. However, we've decided not to think too hard
+     * would declare a return type of `T[]`. However, we've decided not to think too hard
      * about arrays for now, as they're a mess. (We previously discussed this in the review of
      * ObjectArrays, which is the main caller of this method.)
      */
-    static <T extends @Nullable Object> T[] newArray(T[] reference, int length) {
+    static <T> T[] newArray(T[] reference, int length) {
         Class<?> type = reference.getClass().getComponentType();
 
         // the cast is safe because
@@ -118,7 +117,7 @@ final class Platform {
      * - https://github.com/jspecify/jdk/commit/71d826792b8c7ef95d492c50a274deab938f2552
      */
     @SuppressWarnings("nullness")
-    static <T extends @Nullable Object> T[] copy(Object[] source, int from, int to, T[] arrayOfType) {
+    static <T> T[] copy(Object[] source, int from, int to, T[] arrayOfType) {
         return Arrays.copyOfRange(source, from, to, (Class<? extends T[]>) arrayOfType.getClass());
     }
 

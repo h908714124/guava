@@ -18,10 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.DoNotMock;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -39,7 +36,6 @@ import java.util.function.BiFunction;
  * @since 14.0
  */
 @Beta
-@DoNotMock("Use ImmutableRangeMap or TreeRangeMap")
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
 public interface RangeMap<K extends Comparable, V> {
@@ -54,14 +50,12 @@ public interface RangeMap<K extends Comparable, V> {
      * <p>Specifically, if any range in this range map contains the specified key, the value
      * associated with that range is returned.
      */
-    @CheckForNull
     V get(K key);
 
     /**
      * Returns the range containing this key and its associated value, if such a range is present in
      * the range map, or {@code null} otherwise.
      */
-    @CheckForNull
     Entry<Range<K>, V> getEntry(K key);
 
     /**
@@ -138,8 +132,8 @@ public interface RangeMap<K extends Comparable, V> {
      */
     void merge(
             Range<K> range,
-            @CheckForNull V value,
-            BiFunction<? super V, ? super @Nullable V, ? extends @Nullable V> remappingFunction);
+            V value,
+            BiFunction<? super V, ? super V, ? extends V> remappingFunction);
 
     /**
      * Returns a view of this range map as an unmodifiable {@code Map<Range<K>, V>}. Modifications to
@@ -186,7 +180,7 @@ public interface RangeMap<K extends Comparable, V> {
      * #asMapOfRanges()}.
      */
     @Override
-    boolean equals(@CheckForNull Object o);
+    boolean equals(Object o);
 
     /** Returns {@code asMapOfRanges().hashCode()}. */
     @Override

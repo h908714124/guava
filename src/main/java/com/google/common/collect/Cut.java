@@ -17,7 +17,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.primitives.Booleans;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
@@ -55,10 +54,8 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
 
     abstract void describeAsUpperBound(StringBuilder sb);
 
-    @CheckForNull
     abstract C leastValueAbove(DiscreteDomain<C> domain);
 
-    @CheckForNull
     abstract C greatestValueBelow(DiscreteDomain<C> domain);
 
     /*
@@ -92,7 +89,7 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
 
     @SuppressWarnings("unchecked") // catching CCE
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         if (obj instanceof Cut) {
             // It might not really be a Cut<C>, but we'll catch a CCE if it's not
             Cut<C> that = (Cut<C>) obj;
@@ -374,7 +371,6 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
         }
 
         @Override
-        @CheckForNull
         C greatestValueBelow(DiscreteDomain<C> domain) {
             return domain.previous(endpoint);
         }
@@ -453,7 +449,6 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
         }
 
         @Override
-        @CheckForNull
         C leastValueAbove(DiscreteDomain<C> domain) {
             return domain.next(endpoint);
         }

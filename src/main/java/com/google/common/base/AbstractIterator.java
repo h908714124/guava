@@ -15,10 +15,7 @@
 package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -31,7 +28,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-abstract class AbstractIterator<T extends @Nullable Object> implements Iterator<T> {
+abstract class AbstractIterator<T> implements Iterator<T> {
     private State state = State.NOT_READY;
 
     protected AbstractIterator() {
@@ -44,14 +41,10 @@ abstract class AbstractIterator<T extends @Nullable Object> implements Iterator<
         FAILED,
     }
 
-    @CheckForNull
     private T next;
 
-    @CheckForNull
     protected abstract T computeNext();
 
-    @CanIgnoreReturnValue
-    @CheckForNull
     protected final T endOfData() {
         state = State.DONE;
         return null;

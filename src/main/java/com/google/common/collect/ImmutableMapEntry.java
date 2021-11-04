@@ -18,8 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
-
 import static com.google.common.collect.CollectPreconditions.checkEntryNotNull;
 
 /**
@@ -41,7 +39,7 @@ class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
      * be upcast back to ImmutableMapEntry[] (or Object[], etc.), or allowed to escape the class.
      *
      * <p>The returned array has all its elements set to their initial null values. However, we don't
-     * declare it as {@code @Nullable ImmutableMapEntry[]} because our checker doesn't require newly
+     * declare it as {@code ImmutableMapEntry[]} because our checker doesn't require newly
      * created arrays to have a {@code @Nullable} element type even when they're created directly with
      * {@code new ImmutableMapEntry[...]}, so it seems silly to insist on that only here.
      */
@@ -60,12 +58,10 @@ class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
         // null check would be redundant
     }
 
-    @CheckForNull
     ImmutableMapEntry<K, V> getNextInKeyBucket() {
         return null;
     }
 
-    @CheckForNull
     ImmutableMapEntry<K, V> getNextInValueBucket() {
         return null;
     }
@@ -85,17 +81,15 @@ class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
          * subclass below. That's because the Entry might be non-terminal in the key bucket but terminal
          * in the value bucket (or vice versa).
          */
-        @CheckForNull
         private final transient ImmutableMapEntry<K, V> nextInKeyBucket;
 
         NonTerminalImmutableMapEntry(
-                K key, V value, @CheckForNull ImmutableMapEntry<K, V> nextInKeyBucket) {
+                K key, V value, ImmutableMapEntry<K, V> nextInKeyBucket) {
             super(key, value);
             this.nextInKeyBucket = nextInKeyBucket;
         }
 
         @Override
-        @CheckForNull
         final ImmutableMapEntry<K, V> getNextInKeyBucket() {
             return nextInKeyBucket;
         }
@@ -108,20 +102,18 @@ class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
 
     static final class NonTerminalImmutableBiMapEntry<K, V>
             extends NonTerminalImmutableMapEntry<K, V> {
-        @CheckForNull
         private final transient ImmutableMapEntry<K, V> nextInValueBucket;
 
         NonTerminalImmutableBiMapEntry(
                 K key,
                 V value,
-                @CheckForNull ImmutableMapEntry<K, V> nextInKeyBucket,
-                @CheckForNull ImmutableMapEntry<K, V> nextInValueBucket) {
+                ImmutableMapEntry<K, V> nextInKeyBucket,
+                ImmutableMapEntry<K, V> nextInValueBucket) {
             super(key, value, nextInKeyBucket);
             this.nextInValueBucket = nextInValueBucket;
         }
 
         @Override
-        @CheckForNull
         ImmutableMapEntry<K, V> getNextInValueBucket() {
             return nextInValueBucket;
         }

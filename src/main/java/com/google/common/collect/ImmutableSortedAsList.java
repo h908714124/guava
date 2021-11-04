@@ -17,7 +17,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.util.Comparator;
 import java.util.Spliterator;
 
@@ -51,7 +50,7 @@ final class ImmutableSortedAsList<E> extends RegularImmutableAsList<E>
     @GwtIncompatible // ImmutableSortedSet.indexOf
     // TODO(cpovirk): consider manual binary search under GWT to preserve O(log N) lookup
     @Override
-    public int indexOf(@CheckForNull Object target) {
+    public int indexOf(Object target) {
         int index = delegateCollection().indexOf(target);
 
         // TODO(kevinb): reconsider if it's really worth making feeble attempts at
@@ -64,12 +63,12 @@ final class ImmutableSortedAsList<E> extends RegularImmutableAsList<E>
 
     @GwtIncompatible // ImmutableSortedSet.indexOf
     @Override
-    public int lastIndexOf(@CheckForNull Object target) {
+    public int lastIndexOf(Object target) {
         return indexOf(target);
     }
 
     @Override
-    public boolean contains(@CheckForNull Object target) {
+    public boolean contains(Object target) {
         // Necessary for ISS's with comparators inconsistent with equals.
         return indexOf(target) >= 0;
     }

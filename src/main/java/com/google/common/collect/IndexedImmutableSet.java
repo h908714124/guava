@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Spliterator;
 import java.util.function.Consumer;
@@ -51,7 +50,7 @@ abstract class IndexedImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
 
     @Override
     @GwtIncompatible
-    int copyIntoArray(@Nullable Object[] dst, int offset) {
+    int copyIntoArray(Object[] dst, int offset) {
         return asList().copyIntoArray(dst, offset);
     }
 

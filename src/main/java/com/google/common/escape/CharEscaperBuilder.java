@@ -16,10 +16,7 @@ package com.google.common.escape;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -44,10 +41,10 @@ public final class CharEscaperBuilder {
      * a very fast escape method.
      */
     private static class CharArrayDecorator extends CharEscaper {
-        private final char[] @Nullable [] replacements;
+        private final char[][] replacements;
         private final int replaceLength;
 
-        CharArrayDecorator(char[] @Nullable [] replacements) {
+        CharArrayDecorator(char[][] replacements) {
             this.replacements = replacements;
             this.replaceLength = replacements.length;
         }
@@ -69,7 +66,6 @@ public final class CharEscaperBuilder {
         }
 
         @Override
-        @CheckForNull
         protected char[] escape(char c) {
             return c < replaceLength ? replacements[c] : null;
         }
@@ -87,7 +83,6 @@ public final class CharEscaperBuilder {
     }
 
     /** Add a new mapping from an index to an object to the escaping. */
-    @CanIgnoreReturnValue
     public CharEscaperBuilder addEscape(char c, String r) {
         map.put(c, checkNotNull(r));
         if (c > max) {
@@ -97,7 +92,6 @@ public final class CharEscaperBuilder {
     }
 
     /** Add multiple mappings at once for a particular index. */
-    @CanIgnoreReturnValue
     public CharEscaperBuilder addEscapes(char[] cs, String r) {
         checkNotNull(r);
         for (char c : cs) {
@@ -113,7 +107,7 @@ public final class CharEscaperBuilder {
      *
      * @return a "sparse" array that holds the replacement mappings.
      */
-    public char[] @Nullable [] toArray() {
+    public char[][] toArray() {
         char[][] result = new char[max + 1][];
         for (Entry<Character, String> entry : map.entrySet()) {
             result[entry.getKey()] = entry.getValue().toCharArray();

@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.TimeUnit;
@@ -95,13 +94,11 @@ public abstract class ForwardingBlockingDeque<E> extends ForwardingDeque<E>
     }
 
     @Override
-    @CheckForNull
     public E pollFirst(long timeout, TimeUnit unit) throws InterruptedException {
         return delegate().pollFirst(timeout, unit);
     }
 
     @Override
-    @CheckForNull
     public E pollLast(long timeout, TimeUnit unit) throws InterruptedException {
         return delegate().pollLast(timeout, unit);
     }
@@ -122,7 +119,6 @@ public abstract class ForwardingBlockingDeque<E> extends ForwardingDeque<E>
     }
 
     @Override
-    @CheckForNull
     public E poll(long timeout, TimeUnit unit) throws InterruptedException {
         return delegate().poll(timeout, unit);
     }

@@ -17,15 +17,13 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 
 /** An ordering that treats {@code null} as less than all other values. */
 @GwtCompatible(serializable = true)
 @ElementTypesAreNonnullByDefault
-final class NullsFirstOrdering<T extends @Nullable Object> extends Ordering<@Nullable T>
+final class NullsFirstOrdering<T> extends Ordering<T>
         implements Serializable {
     final Ordering<? super T> ordering;
 
@@ -34,7 +32,7 @@ final class NullsFirstOrdering<T extends @Nullable Object> extends Ordering<@Nul
     }
 
     @Override
-    public int compare(@CheckForNull T left, @CheckForNull T right) {
+    public int compare(T left, T right) {
         if (left == right) {
             return 0;
         }
@@ -49,24 +47,24 @@ final class NullsFirstOrdering<T extends @Nullable Object> extends Ordering<@Nul
 
     @Override
     @SuppressWarnings("nullness") // should be safe, but not sure if we can avoid the warning
-    public <S extends @Nullable T> Ordering<S> reverse() {
+    public <S extends T> Ordering<S> reverse() {
         // ordering.reverse() might be optimized, so let it do its thing
         return ordering.reverse().nullsLast();
     }
 
     @SuppressWarnings("unchecked") // still need the right way to explain this
     @Override
-    public <S extends T> Ordering<@Nullable S> nullsFirst() {
-        return (Ordering<@Nullable S>) this;
+    public <S extends T> Ordering<S> nullsFirst() {
+        return (Ordering<S>) this;
     }
 
     @Override
-    public <S extends T> Ordering<@Nullable S> nullsLast() {
+    public <S extends T> Ordering<S> nullsLast() {
         return ordering.<S>nullsLast();
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }

@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +33,7 @@ import java.util.Set;
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 public abstract class ForwardingTable<
-        R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+        R, C, V>
         extends ForwardingObject implements Table<R, C, V> {
     /** Constructor for use by subclasses. */
     protected ForwardingTable() {
@@ -71,28 +68,27 @@ public abstract class ForwardingTable<
     }
 
     @Override
-    public boolean contains(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+    public boolean contains(Object rowKey, Object columnKey) {
         return delegate().contains(rowKey, columnKey);
     }
 
     @Override
-    public boolean containsColumn(@CheckForNull Object columnKey) {
+    public boolean containsColumn(Object columnKey) {
         return delegate().containsColumn(columnKey);
     }
 
     @Override
-    public boolean containsRow(@CheckForNull Object rowKey) {
+    public boolean containsRow(Object rowKey) {
         return delegate().containsRow(rowKey);
     }
 
     @Override
-    public boolean containsValue(@CheckForNull Object value) {
+    public boolean containsValue(Object value) {
         return delegate().containsValue(value);
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+    public V get(Object rowKey, Object columnKey) {
         return delegate().get(rowKey, columnKey);
     }
 
@@ -101,9 +97,7 @@ public abstract class ForwardingTable<
         return delegate().isEmpty();
     }
 
-    @CanIgnoreReturnValue
     @Override
-    @CheckForNull
     public V put(
             @ParametricNullness R rowKey, @ParametricNullness C columnKey, @ParametricNullness V value) {
         return delegate().put(rowKey, columnKey, value);
@@ -114,10 +108,8 @@ public abstract class ForwardingTable<
         delegate().putAll(table);
     }
 
-    @CanIgnoreReturnValue
     @Override
-    @CheckForNull
-    public V remove(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+    public V remove(Object rowKey, Object columnKey) {
         return delegate().remove(rowKey, columnKey);
     }
 
@@ -147,7 +139,7 @@ public abstract class ForwardingTable<
     }
 
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         return (obj == this) || delegate().equals(obj);
     }
 

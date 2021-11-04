@@ -19,12 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMapEntry.NonTerminalImmutableBiMapEntry;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -51,12 +46,8 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
 
     static final double MAX_LOAD_FACTOR = 1.2;
 
-    @CheckForNull
-    private final transient @Nullable
-    ImmutableMapEntry<K, V>[] keyTable;
-    @CheckForNull
-    private final transient @Nullable
-    ImmutableMapEntry<K, V>[] valueTable;
+    private final transient ImmutableMapEntry<K, V>[] keyTable;
+    private final transient ImmutableMapEntry<K, V>[] valueTable;
     @VisibleForTesting
     final transient Entry<K, V>[] entries;
     private final transient int mask;
@@ -66,12 +57,12 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
         return fromEntryArray(entries.length, entries);
     }
 
-    static <K, V> ImmutableBiMap<K, V> fromEntryArray(int n, @Nullable Entry<K, V>[] entryArray) {
+    static <K, V> ImmutableBiMap<K, V> fromEntryArray(int n, Entry<K, V>[] entryArray) {
         checkPositionIndex(n, entryArray.length);
         int tableSize = Hashing.closedTableSize(n, MAX_LOAD_FACTOR);
         int mask = tableSize - 1;
-        @Nullable ImmutableMapEntry<K, V>[] keyTable = createEntryArray(tableSize);
-        @Nullable ImmutableMapEntry<K, V>[] valueTable = createEntryArray(tableSize);
+        ImmutableMapEntry<K, V>[] keyTable = createEntryArray(tableSize);
+        ImmutableMapEntry<K, V>[] valueTable = createEntryArray(tableSize);
         /*
          * The cast is safe: n==entryArray.length means that we have filled the whole array with Entry
          * instances, in which case it is safe to cast it from an array of nullable entries to an array
@@ -115,8 +106,8 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     private RegularImmutableBiMap(
-            @CheckForNull @Nullable ImmutableMapEntry<K, V>[] keyTable,
-            @CheckForNull @Nullable ImmutableMapEntry<K, V>[] valueTable,
+            ImmutableMapEntry<K, V>[] keyTable,
+            ImmutableMapEntry<K, V>[] valueTable,
             Entry<K, V>[] entries,
             int mask,
             int hashCode) {
@@ -133,9 +124,8 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
      * @return number of entries in this bucket
      * @throws IllegalArgumentException if another entry in the bucket has the same key
      */
-    @CanIgnoreReturnValue
     private static int checkNoConflictInValueBucket(
-            Object value, Entry<?, ?> entry, @CheckForNull ImmutableMapEntry<?, ?> valueBucketHead) {
+            Object value, Entry<?, ?> entry, ImmutableMapEntry<?, ?> valueBucketHead) {
         int bucketSize = 0;
         for (; valueBucketHead != null; valueBucketHead = valueBucketHead.getNextInValueBucket()) {
             checkNoConflict(!value.equals(valueBucketHead.getValue()), "value", entry, valueBucketHead);
@@ -145,8 +135,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object key) {
+    public V get(Object key) {
         return RegularImmutableMap.get(key, keyTable, mask);
     }
 
@@ -190,9 +179,6 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
         return entries.length;
     }
 
-    @LazyInit
-    @RetainedWith
-    @CheckForNull
     private transient ImmutableBiMap<V, K> inverse;
 
     @Override
@@ -223,8 +209,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
         }
 
         @Override
-        @CheckForNull
-        public K get(@CheckForNull Object value) {
+        public K get(Object value) {
             if (value == null || valueTable == null) {
                 return null;
             }

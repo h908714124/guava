@@ -21,7 +21,6 @@ package com.google.common.hash;
 
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 
@@ -34,7 +33,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author Jean-Philippe Aumasson
  * @author Daniel J. Bernstein
  */
-@Immutable
 @ElementTypesAreNonnullByDefault
 final class SipHashFunction extends AbstractHashFunction implements Serializable {
     static final HashFunction SIP_HASH_24 =
@@ -83,7 +81,7 @@ final class SipHashFunction extends AbstractHashFunction implements Serializable
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object instanceof SipHashFunction) {
             SipHashFunction other = (SipHashFunction) object;
             return (c == other.c) && (d == other.d) && (k0 == other.k0) && (k1 == other.k1);

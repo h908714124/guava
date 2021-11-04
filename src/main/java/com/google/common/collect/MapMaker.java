@@ -20,9 +20,7 @@ import com.google.common.base.Ascii;
 import com.google.common.base.Equivalence;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.MapMakerInternalMap.Strength;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.lang.ref.WeakReference;
 import java.util.ConcurrentModificationException;
 import java.util.Map;
@@ -100,12 +98,9 @@ public final class MapMaker {
     int initialCapacity = UNSET_INT;
     int concurrencyLevel = UNSET_INT;
 
-    @CheckForNull
     Strength keyStrength;
-    @CheckForNull
     Strength valueStrength;
 
-    @CheckForNull
     Equivalence<Object> keyEquivalence;
 
     /**
@@ -122,7 +117,6 @@ public final class MapMaker {
      * #weakKeys} is specified, and {@link Equivalence#equals()} otherwise. The only place this is
      * used is in {@link Interners.WeakInterner}.
      */
-    @CanIgnoreReturnValue
     @GwtIncompatible
     // To be supported
     MapMaker keyEquivalence(Equivalence<Object> equivalence) {
@@ -146,7 +140,6 @@ public final class MapMaker {
      * @throws IllegalArgumentException if {@code initialCapacity} is negative
      * @throws IllegalStateException if an initial capacity was already set
      */
-    @CanIgnoreReturnValue
     public MapMaker initialCapacity(int initialCapacity) {
         checkState(
                 this.initialCapacity == UNSET_INT,
@@ -180,7 +173,6 @@ public final class MapMaker {
      * @throws IllegalArgumentException if {@code concurrencyLevel} is nonpositive
      * @throws IllegalStateException if a concurrency level was already set
      */
-    @CanIgnoreReturnValue
     public MapMaker concurrencyLevel(int concurrencyLevel) {
         checkState(
                 this.concurrencyLevel == UNSET_INT,
@@ -206,7 +198,6 @@ public final class MapMaker {
      * @throws IllegalStateException if the key strength was already set
      * @see WeakReference
      */
-    @CanIgnoreReturnValue
     @GwtIncompatible // java.lang.ref.WeakReference
     public MapMaker weakKeys() {
         return setKeyStrength(Strength.WEAK);
@@ -242,7 +233,6 @@ public final class MapMaker {
      * @throws IllegalStateException if the value strength was already set
      * @see WeakReference
      */
-    @CanIgnoreReturnValue
     @GwtIncompatible // java.lang.ref.WeakReference
     public MapMaker weakValues() {
         return setValueStrength(Strength.WEAK);

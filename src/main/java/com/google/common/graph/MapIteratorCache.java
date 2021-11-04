@@ -17,9 +17,7 @@
 package com.google.common.graph;
 
 import com.google.common.collect.UnmodifiableIterator;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -55,15 +53,12 @@ class MapIteratorCache<K, V> {
      * while writing to it in another. All it does is help with _reading_ from multiple threads
      * concurrently. For more information, see AbstractNetworkTest.concurrentIteration.
      */
-    @CheckForNull
     private transient volatile Entry<K, V> cacheEntry;
 
     MapIteratorCache(Map<K, V> backingMap) {
         this.backingMap = checkNotNull(backingMap);
     }
 
-    @CanIgnoreReturnValue
-    @CheckForNull
     final V put(K key, V value) {
         checkNotNull(key);
         checkNotNull(value);
@@ -71,8 +66,6 @@ class MapIteratorCache<K, V> {
         return backingMap.put(key, value);
     }
 
-    @CanIgnoreReturnValue
-    @CheckForNull
     final V remove(Object key) {
         checkNotNull(key);
         clearCache();
@@ -84,7 +77,6 @@ class MapIteratorCache<K, V> {
         backingMap.clear();
     }
 
-    @CheckForNull
     V get(Object key) {
         checkNotNull(key);
         V value = getIfCached(key);
@@ -96,13 +88,12 @@ class MapIteratorCache<K, V> {
         }
     }
 
-    @CheckForNull
     final V getWithoutCaching(Object key) {
         checkNotNull(key);
         return backingMap.get(key);
     }
 
-    final boolean containsKey(@CheckForNull Object key) {
+    final boolean containsKey(Object key) {
         return getIfCached(key) != null || backingMap.containsKey(key);
     }
 
@@ -133,7 +124,7 @@ class MapIteratorCache<K, V> {
             }
 
             @Override
-            public boolean contains(@CheckForNull Object key) {
+            public boolean contains(Object key) {
                 return containsKey(key);
             }
         };
@@ -141,8 +132,7 @@ class MapIteratorCache<K, V> {
 
     // Internal methods (package-visible, but treat as only subclass-visible)
 
-    @CheckForNull
-    V getIfCached(@CheckForNull Object key) {
+    V getIfCached(Object key) {
         Entry<K, V> entry = cacheEntry; // store local reference for thread-safety
 
         // Check cache. We use == on purpose because it's cheaper and a cache miss is ok.

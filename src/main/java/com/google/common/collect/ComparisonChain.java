@@ -20,7 +20,6 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.primitives.Booleans;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Comparator;
 
@@ -77,7 +76,7 @@ public abstract class ComparisonChain {
                 }
 
                 @Override
-                public <T extends @Nullable Object> ComparisonChain compare(
+                public <T> ComparisonChain compare(
                         @ParametricNullness T left, @ParametricNullness T right, Comparator<T> comparator) {
                     return classify(comparator.compare(left, right));
                 }
@@ -139,7 +138,7 @@ public abstract class ComparisonChain {
         }
 
         @Override
-        public <T extends @Nullable Object> ComparisonChain compare(
+        public <T> ComparisonChain compare(
                 @ParametricNullness T left, @ParametricNullness T right, Comparator<T> comparator) {
             return this;
         }
@@ -202,7 +201,7 @@ public abstract class ComparisonChain {
      * Compares two objects using a comparator, <i>if</i> the result of this comparison chain has not
      * already been determined.
      */
-    public abstract <T extends @Nullable Object> ComparisonChain compare(
+    public abstract <T> ComparisonChain compare(
             @ParametricNullness T left, @ParametricNullness T right, Comparator<T> comparator);
 
     /**

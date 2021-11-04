@@ -30,9 +30,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.errorprone.annotations.Immutable;
-import com.google.errorprone.annotations.concurrent.LazyInit;
 
-import javax.annotation.CheckForNull;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
@@ -73,7 +71,6 @@ import static com.google.common.base.Preconditions.checkState;
  */
 @Beta
 @GwtCompatible
-@Immutable
 @ElementTypesAreNonnullByDefault
 public final class MediaType {
     private static final String CHARSET_ATTRIBUTE = "charset";
@@ -763,15 +760,10 @@ public final class MediaType {
     private final String subtype;
     private final ImmutableListMultimap<String, String> parameters;
 
-    @LazyInit
-    @CheckForNull
     private String toString;
 
-    @LazyInit
     private int hashCode;
 
-    @LazyInit
-    @CheckForNull
     private Optional<Charset> parsedCharset;
 
     private MediaType(String type, String subtype, ImmutableListMultimap<String, String> parameters) {
@@ -1133,7 +1125,7 @@ public final class MediaType {
     }
 
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         if (obj == this) {
             return true;
         } else if (obj instanceof MediaType) {

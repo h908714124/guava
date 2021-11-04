@@ -17,7 +17,6 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Queues;
-import com.google.errorprone.annotations.concurrent.GuardedBy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -134,13 +133,10 @@ final class ListenerCallQueue<L> {
         final L listener;
         final Executor executor;
 
-        @GuardedBy("this")
         final Queue<ListenerCallQueue.Event<L>> waitQueue = Queues.newArrayDeque();
 
-        @GuardedBy("this")
         final Queue<Object> labelQueue = Queues.newArrayDeque();
 
-        @GuardedBy("this")
         boolean isThreadScheduled;
 
         PerListenerQueue(L listener, Executor executor) {

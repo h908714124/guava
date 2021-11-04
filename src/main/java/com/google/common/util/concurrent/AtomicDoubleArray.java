@@ -15,7 +15,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.ImmutableLongArray;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.util.concurrent.atomic.AtomicLongArray;
 
@@ -170,7 +169,6 @@ public class AtomicDoubleArray implements java.io.Serializable {
      * @param delta the value to add
      * @return the previous value
      */
-    @CanIgnoreReturnValue
     public final double getAndAdd(int i, double delta) {
         while (true) {
             long current = longs.get(i);
@@ -190,7 +188,6 @@ public class AtomicDoubleArray implements java.io.Serializable {
      * @param delta the value to add
      * @return the updated value
      */
-    @CanIgnoreReturnValue
     public double addAndGet(int i, double delta) {
         while (true) {
             long current = longs.get(i);

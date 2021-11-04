@@ -16,7 +16,6 @@ package com.google.common.io;
 
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.CharBuffer;
@@ -37,7 +36,6 @@ import static java.util.Objects.requireNonNull;
 @ElementTypesAreNonnullByDefault
 final class CharSequenceReader extends Reader {
 
-    @CheckForNull
     private CharSequence seq;
     private int pos;
     private int mark;

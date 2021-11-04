@@ -18,11 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -77,7 +73,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
      *
      * @since 21.0
      */
-    public static <T extends @Nullable Object, K, V>
+    public static <T, K, V>
     Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMap(
             Comparator<? super K> comparator,
             Function<? super T, ? extends K> keyFunction,
@@ -96,7 +92,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
      *
      * @since 21.0
      */
-    public static <T extends @Nullable Object, K, V>
+    public static <T, K, V>
     Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMap(
             Comparator<? super K> comparator,
             Function<? super T, ? extends K> keyFunction,
@@ -505,7 +501,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
     private static <K, V> ImmutableSortedMap<K, V> fromEntries(
             final Comparator<? super K> comparator,
             boolean sameComparator,
-            @Nullable Entry<K, V>[] entryArray,
+            Entry<K, V>[] entryArray,
             int size) {
         switch (size) {
             case 0:
@@ -536,9 +532,9 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
                             entryArray,
                             0,
                             size,
-                            new Comparator<@Nullable Entry<K, V>>() {
+                            new Comparator<Entry<K, V>>() {
                                 @Override
-                                public int compare(@CheckForNull Entry<K, V> e1, @CheckForNull Entry<K, V> e2) {
+                                public int compare(Entry<K, V> e1, Entry<K, V> e2) {
                                     // requireNonNull is safe because the first `size` elements have been filled in.
                                     requireNonNull(e1);
                                     requireNonNull(e2);
@@ -636,7 +632,6 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
          * comparator (which might be the keys' natural order), are not allowed, and will cause {@link
          * #build} to fail.
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<K, V> put(K key, V value) {
             super.put(key, value);
@@ -650,7 +645,6 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
          *
          * @since 11.0
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<K, V> put(Entry<? extends K, ? extends V> entry) {
             super.put(entry);
@@ -664,7 +658,6 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
          *
          * @throws NullPointerException if any key or value in {@code map} is null
          */
-        @CanIgnoreReturnValue
         @Override
         public Builder<K, V> putAll(Map<? extends K, ? extends V> map) {
             super.putAll(map);
@@ -679,7 +672,6 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
          * @throws NullPointerException if any key, value, or entry is null
          * @since 19.0
          */
-        @CanIgnoreReturnValue
         @Beta
         @Override
         public Builder<K, V> putAll(Iterable<? extends Entry<? extends K, ? extends V>> entries) {
@@ -693,11 +685,9 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
          * @since 19.0
          * @deprecated Unsupported by ImmutableSortedMap.Builder.
          */
-        @CanIgnoreReturnValue
         @Beta
         @Override
         @Deprecated
-        @DoNotCall("Always throws UnsupportedOperationException")
         public final Builder<K, V> orderEntriesByValue(Comparator<? super V> valueComparator) {
             throw new UnsupportedOperationException("Not available on ImmutableSortedMap.Builder");
         }
@@ -748,7 +738,6 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
 
     private final transient RegularImmutableSortedSet<K> keySet;
     private final transient ImmutableList<V> valueList;
-    @CheckForNull
     private transient ImmutableSortedMap<K, V> descendingMap;
 
     ImmutableSortedMap(RegularImmutableSortedSet<K> keySet, ImmutableList<V> valueList) {
@@ -758,7 +747,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
     ImmutableSortedMap(
             RegularImmutableSortedSet<K> keySet,
             ImmutableList<V> valueList,
-            @CheckForNull ImmutableSortedMap<K, V> descendingMap) {
+            ImmutableSortedMap<K, V> descendingMap) {
         this.keySet = keySet;
         this.valueList = valueList;
         this.descendingMap = descendingMap;
@@ -779,8 +768,7 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object key) {
+    public V get(Object key) {
         int index = keySet.indexOf(key);
         return (index == -1) ? null : valueList.get(index);
     }
@@ -1002,61 +990,51 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
     }
 
     @Override
-    @CheckForNull
     public Entry<K, V> lowerEntry(K key) {
         return headMap(key, false).lastEntry();
     }
 
     @Override
-    @CheckForNull
     public K lowerKey(K key) {
         return keyOrNull(lowerEntry(key));
     }
 
     @Override
-    @CheckForNull
     public Entry<K, V> floorEntry(K key) {
         return headMap(key, true).lastEntry();
     }
 
     @Override
-    @CheckForNull
     public K floorKey(K key) {
         return keyOrNull(floorEntry(key));
     }
 
     @Override
-    @CheckForNull
     public Entry<K, V> ceilingEntry(K key) {
         return tailMap(key, true).firstEntry();
     }
 
     @Override
-    @CheckForNull
     public K ceilingKey(K key) {
         return keyOrNull(ceilingEntry(key));
     }
 
     @Override
-    @CheckForNull
     public Entry<K, V> higherEntry(K key) {
         return tailMap(key, false).firstEntry();
     }
 
     @Override
-    @CheckForNull
     public K higherKey(K key) {
         return keyOrNull(higherEntry(key));
     }
 
     @Override
-    @CheckForNull
     public Entry<K, V> firstEntry() {
         return isEmpty() ? null : entrySet().asList().get(0);
     }
 
     @Override
-    @CheckForNull
     public Entry<K, V> lastEntry() {
         return isEmpty() ? null : entrySet().asList().get(size() - 1);
     }
@@ -1067,11 +1045,8 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public final Entry<K, V> pollFirstEntry() {
         throw new UnsupportedOperationException();
     }
@@ -1082,11 +1057,8 @@ public final class ImmutableSortedMap<K, V> extends ImmutableSortedMapFauxveride
      * @throws UnsupportedOperationException always
      * @deprecated Unsupported operation.
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public final Entry<K, V> pollLastEntry() {
         throw new UnsupportedOperationException();
     }

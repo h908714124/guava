@@ -18,12 +18,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.SortedLists.KeyAbsentBehavior;
 import com.google.common.collect.SortedLists.KeyPresentBehavior;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
-import com.google.errorprone.annotations.DoNotMock;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
@@ -59,7 +54,7 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
      *
      * @since 23.1
      */
-    public static <T extends @Nullable Object, K extends Comparable<? super K>, V>
+    public static <T, K extends Comparable<? super K>, V>
     Collector<T, ?, ImmutableRangeMap<K, V>> toImmutableRangeMap(
             Function<? super T, Range<K>> keyFunction,
             Function<? super T, ? extends V> valueFunction) {
@@ -107,7 +102,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
      *
      * @since 14.0
      */
-    @DoNotMock
     public static final class Builder<K extends Comparable<?>, V> {
         private final List<Entry<Range<K>, V>> entries;
 
@@ -120,7 +114,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
          *
          * @throws IllegalArgumentException if {@code range} is empty
          */
-        @CanIgnoreReturnValue
         public Builder<K, V> put(Range<K> range, V value) {
             checkNotNull(range);
             checkNotNull(value);
@@ -130,7 +123,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
         }
 
         /** Copies all associations from the specified range map into this builder. */
-        @CanIgnoreReturnValue
         public Builder<K, V> putAll(RangeMap<K, ? extends V> rangeMap) {
             for (Entry<Range<K>, ? extends V> entry : rangeMap.asMapOfRanges().entrySet()) {
                 put(entry.getKey(), entry.getValue());
@@ -138,7 +130,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
             return this;
         }
 
-        @CanIgnoreReturnValue
         Builder<K, V> combine(Builder<K, V> builder) {
             entries.addAll(builder.entries);
             return this;
@@ -179,7 +170,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
     }
 
     @Override
-    @CheckForNull
     public V get(K key) {
         int index =
                 SortedLists.binarySearch(
@@ -197,7 +187,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
     }
 
     @Override
-    @CheckForNull
     public Entry<Range<K>, V> getEntry(K key) {
         int index =
                 SortedLists.binarySearch(
@@ -232,7 +221,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void put(Range<K> range, V value) {
         throw new UnsupportedOperationException();
     }
@@ -245,7 +233,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void putCoalescing(Range<K> range, V value) {
         throw new UnsupportedOperationException();
     }
@@ -258,7 +245,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void putAll(RangeMap<K, V> rangeMap) {
         throw new UnsupportedOperationException();
     }
@@ -271,7 +257,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void clear() {
         throw new UnsupportedOperationException();
     }
@@ -284,7 +269,6 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void remove(Range<K> range) {
         throw new UnsupportedOperationException();
     }
@@ -297,11 +281,10 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public final void merge(
             Range<K> range,
-            @CheckForNull V value,
-            BiFunction<? super V, ? super @Nullable V, ? extends @Nullable V> remappingFunction) {
+            V value,
+            BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
         throw new UnsupportedOperationException();
     }
 
@@ -392,7 +375,7 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
     }
 
     @Override
-    public boolean equals(@CheckForNull Object o) {
+    public boolean equals(Object o) {
         if (o instanceof RangeMap) {
             RangeMap<?, ?> rangeMap = (RangeMap<?, ?>) o;
             return asMapOfRanges().equals(rangeMap.asMapOfRanges());

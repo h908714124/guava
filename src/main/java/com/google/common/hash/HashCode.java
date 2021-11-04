@@ -17,9 +17,7 @@ package com.google.common.hash;
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.UnsignedInts;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -83,7 +81,6 @@ public abstract class HashCode {
      * @return the number of bytes written to {@code dest}
      * @throws IndexOutOfBoundsException if there is not enough room in {@code dest}
      */
-    @CanIgnoreReturnValue
     public int writeBytesTo(byte[] dest, int offset, int maxLength) {
         maxLength = Ints.min(maxLength, bits() / 8);
         Preconditions.checkPositionIndexes(offset, offset + maxLength, dest.length);
@@ -370,7 +367,7 @@ public abstract class HashCode {
      * to protect against <a href="http://en.wikipedia.org/wiki/Timing_attack">timing attacks</a>.
      */
     @Override
-    public final boolean equals(@CheckForNull Object object) {
+    public final boolean equals(Object object) {
         if (object instanceof HashCode) {
             HashCode that = (HashCode) object;
             return bits() == that.bits() && equalsSameBits(that);

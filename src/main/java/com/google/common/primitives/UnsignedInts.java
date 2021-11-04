@@ -16,7 +16,6 @@ package com.google.common.primitives;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -314,7 +313,6 @@ public final class UnsignedInts {
      * @throws NumberFormatException if the string does not contain a valid unsigned {@code int} value
      * @since 13.0
      */
-    @CanIgnoreReturnValue
     public static int decode(String stringValue) {
         ParseRequest request = ParseRequest.fromString(stringValue);
 
@@ -337,7 +335,6 @@ public final class UnsignedInts {
      * @throws NullPointerException if {@code s} is null (in contrast to {@link
      *     Integer#parseInt(String)})
      */
-    @CanIgnoreReturnValue
     public static int parseUnsignedInt(String s) {
         return parseUnsignedInt(s, 10);
     }
@@ -355,7 +352,6 @@ public final class UnsignedInts {
      * @throws NullPointerException if {@code s} is null (in contrast to {@link
      *     Integer#parseInt(String)})
      */
-    @CanIgnoreReturnValue
     public static int parseUnsignedInt(String string, int radix) {
         checkNotNull(string);
         long result = Long.parseLong(string, radix);

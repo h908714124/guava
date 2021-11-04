@@ -16,7 +16,6 @@ package com.google.common.base;
 
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 
@@ -38,7 +37,7 @@ public abstract class FinalizableWeakReference<T> extends WeakReference<T>
      * @param referent to weakly reference
      * @param queue that should finalize the referent
      */
-    protected FinalizableWeakReference(@CheckForNull T referent, FinalizableReferenceQueue queue) {
+    protected FinalizableWeakReference(T referent, FinalizableReferenceQueue queue) {
         super(referent, queue.queue);
         queue.cleanUp();
     }

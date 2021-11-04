@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
@@ -41,12 +39,11 @@ final class RegularImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
     private final transient int hashCode;
     // the same values as `elements` in hashed positions (plus nulls)
     @VisibleForTesting
-    final transient @Nullable
-    Object[] table;
+    final transient Object[] table;
     // 'and' with an int to get a valid table index.
     private final transient int mask;
 
-    RegularImmutableSet(Object[] elements, int hashCode, @Nullable Object[] table, int mask) {
+    RegularImmutableSet(Object[] elements, int hashCode, Object[] table, int mask) {
         this.elements = elements;
         this.hashCode = hashCode;
         this.table = table;
@@ -54,8 +51,8 @@ final class RegularImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
     }
 
     @Override
-    public boolean contains(@CheckForNull Object target) {
-        @Nullable Object[] table = this.table;
+    public boolean contains(Object target) {
+        Object[] table = this.table;
         if (target == null || table.length == 0) {
             return false;
         }
@@ -101,7 +98,7 @@ final class RegularImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
     }
 
     @Override
-    int copyIntoArray(@Nullable Object[] dst, int offset) {
+    int copyIntoArray(Object[] dst, int offset) {
         System.arraycopy(elements, 0, dst, offset, elements.length);
         return offset + elements.length;
     }

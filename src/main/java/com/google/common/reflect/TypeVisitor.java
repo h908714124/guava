@@ -15,7 +15,6 @@
 package com.google.common.reflect;
 
 import com.google.common.collect.Sets;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
@@ -64,7 +63,7 @@ abstract class TypeVisitor {
      * Visits the given types. Null types are ignored. This allows subclasses to call {@code
      * visit(parameterizedType.getOwnerType())} safely without having to check nulls.
      */
-    public final void visit(@Nullable Type... types) {
+    public final void visit(Type... types) {
         for (Type type : types) {
             if (type == null || !visited.add(type)) {
                 // null owner type, or already visited;

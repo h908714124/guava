@@ -23,9 +23,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -106,7 +104,7 @@ public final class Graphs {
             Graph<N> graph,
             Map<Object, NodeVisitState> visitedNodes,
             N node,
-            @CheckForNull N previousNode) {
+            N previousNode) {
         NodeVisitState state = visitedNodes.get(node);
         if (state == NodeVisitState.COMPLETE) {
             return false;
@@ -133,7 +131,7 @@ public final class Graphs {
      * from B to A).
      */
     private static boolean canTraverseWithoutReusingEdge(
-            Graph<?> graph, Object nextNode, @CheckForNull Object previousNode) {
+            Graph<?> graph, Object nextNode, Object previousNode) {
         if (graph.isDirected() || !Objects.equal(previousNode, nextNode)) {
             return true;
         }
@@ -377,14 +375,12 @@ public final class Graphs {
         }
 
         @Override
-        @CheckForNull
-        public V edgeValueOrDefault(N nodeU, N nodeV, @CheckForNull V defaultValue) {
+        public V edgeValueOrDefault(N nodeU, N nodeV, V defaultValue) {
             return delegate().edgeValueOrDefault(nodeV, nodeU, defaultValue); // transpose
         }
 
         @Override
-        @CheckForNull
-        public V edgeValueOrDefault(EndpointPair<N> endpoints, @CheckForNull V defaultValue) {
+        public V edgeValueOrDefault(EndpointPair<N> endpoints, V defaultValue) {
             return delegate().edgeValueOrDefault(transpose(endpoints), defaultValue);
         }
     }
@@ -458,13 +454,11 @@ public final class Graphs {
         }
 
         @Override
-        @CheckForNull
         public E edgeConnectingOrNull(N nodeU, N nodeV) {
             return delegate().edgeConnectingOrNull(nodeV, nodeU); // transpose
         }
 
         @Override
-        @CheckForNull
         public E edgeConnectingOrNull(EndpointPair<N> endpoints) {
             return delegate().edgeConnectingOrNull(transpose(endpoints));
         }
@@ -612,25 +606,21 @@ public final class Graphs {
         return copy;
     }
 
-    @CanIgnoreReturnValue
     static int checkNonNegative(int value) {
         checkArgument(value >= 0, "Not true that %s is non-negative.", value);
         return value;
     }
 
-    @CanIgnoreReturnValue
     static long checkNonNegative(long value) {
         checkArgument(value >= 0, "Not true that %s is non-negative.", value);
         return value;
     }
 
-    @CanIgnoreReturnValue
     static int checkPositive(int value) {
         checkArgument(value > 0, "Not true that %s is positive.", value);
         return value;
     }
 
-    @CanIgnoreReturnValue
     static long checkPositive(long value) {
         checkArgument(value > 0, "Not true that %s is positive.", value);
         return value;

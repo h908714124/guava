@@ -17,8 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Iterator;
 
@@ -39,7 +37,7 @@ import java.util.Iterator;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingIterator<T extends @Nullable Object> extends ForwardingObject
+public abstract class ForwardingIterator<T> extends ForwardingObject
         implements Iterator<T> {
 
     /** Constructor for use by subclasses. */
@@ -54,7 +52,6 @@ public abstract class ForwardingIterator<T extends @Nullable Object> extends For
         return delegate().hasNext();
     }
 
-    @CanIgnoreReturnValue
     @Override
     @ParametricNullness
     public T next() {

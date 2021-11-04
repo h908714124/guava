@@ -18,10 +18,7 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.internal.InternalFutureFailureAccess;
 import com.google.common.util.concurrent.internal.InternalFutures;
-import com.google.errorprone.annotations.ForOverride;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
@@ -36,9 +33,9 @@ import static com.google.common.util.concurrent.Platform.isInstanceOfThrowableCl
 @ElementTypesAreNonnullByDefault
 @SuppressWarnings("nullness") // TODO(b/147136275): Remove once our checker understands & and |.
 abstract class AbstractCatchingFuture<
-        V extends @Nullable Object, X extends Throwable, F, T extends @Nullable Object>
+        V, X extends Throwable, F, T>
         extends FluentFuture.TrustedFuture<V> implements Runnable {
-    static <V extends @Nullable Object, X extends Throwable> ListenableFuture<V> create(
+    static <V, X extends Throwable> ListenableFuture<V> create(
             ListenableFuture<? extends V> input,
             Class<X> exceptionType,
             Function<? super X, ? extends V> fallback,
@@ -48,7 +45,7 @@ abstract class AbstractCatchingFuture<
         return future;
     }
 
-    static <X extends Throwable, V extends @Nullable Object> ListenableFuture<V> create(
+    static <X extends Throwable, V> ListenableFuture<V> create(
             ListenableFuture<? extends V> input,
             Class<X> exceptionType,
             AsyncFunction<? super X, ? extends V> fallback,
@@ -62,11 +59,8 @@ abstract class AbstractCatchingFuture<
      * In certain circumstances, this field might theoretically not be visible to an afterDone() call
      * triggered by cancel(). For details, see the comments on the fields of TimeoutFuture.
      */
-    @CheckForNull
     ListenableFuture<? extends V> inputFuture;
-    @CheckForNull
     Class<X> exceptionType;
-    @CheckForNull
     F fallback;
 
     AbstractCatchingFuture(
@@ -147,7 +141,6 @@ abstract class AbstractCatchingFuture<
     }
 
     @Override
-    @CheckForNull
     protected String pendingToString() {
         ListenableFuture<? extends V> localInputFuture = inputFuture;
         Class<X> localExceptionType = exceptionType;
@@ -171,12 +164,10 @@ abstract class AbstractCatchingFuture<
     }
 
     /** Template method for subtypes to actually run the fallback. */
-    @ForOverride
     @ParametricNullness
     abstract T doFallback(F fallback, X throwable) throws Exception;
 
     /** Template method for subtypes to actually set the result. */
-    @ForOverride
     abstract void setResult(@ParametricNullness T result);
 
     @Override
@@ -191,7 +182,7 @@ abstract class AbstractCatchingFuture<
      * An {@link AbstractCatchingFuture} that delegates to an {@link AsyncFunction} and {@link
      * #setFuture(ListenableFuture)}.
      */
-    private static final class AsyncCatchingFuture<V extends @Nullable Object, X extends Throwable>
+    private static final class AsyncCatchingFuture<V, X extends Throwable>
             extends AbstractCatchingFuture<
             V, X, AsyncFunction<? super X, ? extends V>, ListenableFuture<? extends V>> {
         AsyncCatchingFuture(
@@ -223,7 +214,7 @@ abstract class AbstractCatchingFuture<
      * An {@link AbstractCatchingFuture} that delegates to a {@link Function} and {@link
      * #set(Object)}.
      */
-    private static final class CatchingFuture<V extends @Nullable Object, X extends Throwable>
+    private static final class CatchingFuture<V, X extends Throwable>
             extends AbstractCatchingFuture<V, X, Function<? super X, ? extends V>, V> {
         CatchingFuture(
                 ListenableFuture<? extends V> input,

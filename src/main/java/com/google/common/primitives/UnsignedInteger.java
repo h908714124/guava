@@ -17,7 +17,6 @@ package com.google.common.primitives;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.math.BigInteger;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -228,7 +227,7 @@ public final class UnsignedInteger extends Number implements Comparable<Unsigned
     }
 
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         if (obj instanceof UnsignedInteger) {
             UnsignedInteger other = (UnsignedInteger) obj;
             return value == other.value;

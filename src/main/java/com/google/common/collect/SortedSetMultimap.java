@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
@@ -52,7 +49,7 @@ import java.util.SortedSet;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public interface SortedSetMultimap<K extends @Nullable Object, V extends @Nullable Object>
+public interface SortedSetMultimap<K, V>
         extends SetMultimap<K, V> {
     // Following Javadoc copied from Multimap.
 
@@ -76,9 +73,8 @@ public interface SortedSetMultimap<K extends @Nullable Object, V extends @Nullab
      * returns a {@link SortedSet}, instead of the {@link java.util.Collection} specified in the
      * {@link Multimap} interface.
      */
-    @CanIgnoreReturnValue
     @Override
-    SortedSet<V> removeAll(@CheckForNull Object key);
+    SortedSet<V> removeAll(Object key);
 
     /**
      * Stores a collection of values with the same key, replacing any existing values for that key.
@@ -89,7 +85,6 @@ public interface SortedSetMultimap<K extends @Nullable Object, V extends @Nullab
      *
      * <p>Any duplicates in {@code values} will be stored in the multimap once.
      */
-    @CanIgnoreReturnValue
     @Override
     SortedSet<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values);
 
@@ -117,6 +112,5 @@ public interface SortedSetMultimap<K extends @Nullable Object, V extends @Nullab
      * Returns the comparator that orders the multimap values, with {@code null} indicating that
      * natural ordering is used.
      */
-    @CheckForNull
     Comparator<? super V> valueComparator();
 }

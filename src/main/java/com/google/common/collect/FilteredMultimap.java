@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Predicate;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Map.Entry;
 
@@ -29,7 +28,7 @@ import java.util.Map.Entry;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-interface FilteredMultimap<K extends @Nullable Object, V extends @Nullable Object>
+interface FilteredMultimap<K, V>
         extends Multimap<K, V> {
     Multimap<K, V> unfiltered();
 

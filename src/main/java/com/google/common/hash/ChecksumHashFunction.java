@@ -27,7 +27,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Colin Decker
  */
-@Immutable
 @ElementTypesAreNonnullByDefault
 final class ChecksumHashFunction extends AbstractHashFunction implements Serializable {
     private final ImmutableSupplier<? extends Checksum> checksumSupplier;

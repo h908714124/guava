@@ -32,7 +32,6 @@ import static com.google.common.base.Preconditions.checkState;
  * @author Kevin Bourrillion
  * @author Dimitris Andreou
  */
-@Immutable
 @ElementTypesAreNonnullByDefault
 final class MessageDigestHashFunction extends AbstractHashFunction implements Serializable {
 

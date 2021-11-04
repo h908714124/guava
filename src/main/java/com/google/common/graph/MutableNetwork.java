@@ -17,7 +17,6 @@
 package com.google.common.graph;
 
 import com.google.common.annotations.Beta;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 /**
  * A subinterface of {@link Network} which adds mutation methods. When mutation is not required,
@@ -40,7 +39,6 @@ public interface MutableNetwork<N, E> extends Network<N, E> {
      *
      * @return {@code true} if the network was modified as a result of this call
      */
-    @CanIgnoreReturnValue
     boolean addNode(N node);
 
     /**
@@ -64,7 +62,6 @@ public interface MutableNetwork<N, E> extends Network<N, E> {
      * @throws IllegalArgumentException if the introduction of the edge would violate {@link
      *     #allowsParallelEdges()} or {@link #allowsSelfLoops()}
      */
-    @CanIgnoreReturnValue
     boolean addEdge(N nodeU, N nodeV, E edge);
 
     /**
@@ -93,7 +90,6 @@ public interface MutableNetwork<N, E> extends Network<N, E> {
      * @throws IllegalArgumentException if the endpoints are unordered and the graph is directed
      * @since 27.1
      */
-    @CanIgnoreReturnValue
     boolean addEdge(EndpointPair<N> endpoints, E edge);
 
     /**
@@ -101,7 +97,6 @@ public interface MutableNetwork<N, E> extends Network<N, E> {
      *
      * @return {@code true} if the network was modified as a result of this call
      */
-    @CanIgnoreReturnValue
     boolean removeNode(N node);
 
     /**
@@ -109,6 +104,5 @@ public interface MutableNetwork<N, E> extends Network<N, E> {
      *
      * @return {@code true} if the network was modified as a result of this call
      */
-    @CanIgnoreReturnValue
     boolean removeEdge(E edge);
 }

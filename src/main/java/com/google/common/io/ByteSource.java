@@ -24,7 +24,6 @@ import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hasher;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -249,7 +248,6 @@ public abstract class ByteSource {
      * @throws IOException if an I/O error occurs while reading from this source or writing to {@code
      *     output}
      */
-    @CanIgnoreReturnValue
     public long copyTo(OutputStream output) throws IOException {
         checkNotNull(output);
 
@@ -271,7 +269,6 @@ public abstract class ByteSource {
      * @throws IOException if an I/O error occurs while reading from this source or writing to {@code
      *     sink}
      */
-    @CanIgnoreReturnValue
     public long copyTo(ByteSink sink) throws IOException {
         checkNotNull(sink);
 
@@ -318,7 +315,7 @@ public abstract class ByteSource {
      */
     @Beta
     @CanIgnoreReturnValue // some processors won't return a useful result
-    public <T extends @Nullable Object> T read(ByteProcessor<T> processor) throws IOException {
+    public <T> T read(ByteProcessor<T> processor) throws IOException {
         checkNotNull(processor);
 
         Closer closer = Closer.create();
@@ -623,7 +620,7 @@ public abstract class ByteSource {
         @SuppressWarnings("CheckReturnValue") // it doesn't matter what processBytes returns here
         @Override
         @ParametricNullness
-        public <T extends @Nullable Object> T read(ByteProcessor<T> processor) throws IOException {
+        public <T> T read(ByteProcessor<T> processor) throws IOException {
             processor.processBytes(bytes, offset, length);
             return processor.getResult();
         }

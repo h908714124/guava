@@ -16,8 +16,6 @@ package com.google.common.io;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.IOException;
 
@@ -33,7 +31,7 @@ import java.io.IOException;
 @Beta
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
-public interface LineProcessor<T extends @Nullable Object> {
+public interface LineProcessor<T> {
 
     /**
      * This method will be called once for each line.
@@ -41,7 +39,6 @@ public interface LineProcessor<T extends @Nullable Object> {
      * @param line the line read from the input, without delimiter
      * @return true to continue processing, false to stop
      */
-    @CanIgnoreReturnValue
     // some uses know that their processor never returns false
     boolean processLine(String line) throws IOException;
 

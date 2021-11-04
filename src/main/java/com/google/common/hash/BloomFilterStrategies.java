@@ -17,9 +17,7 @@ package com.google.common.hash;
 import com.google.common.math.LongMath;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLongArray;
@@ -47,7 +45,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
      */
     MURMUR128_MITZ_32() {
         @Override
-        public <T extends @Nullable Object> boolean put(
+        public <T> boolean put(
                 @ParametricNullness T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
@@ -70,7 +68,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
         }
 
         @Override
-        public <T extends @Nullable Object> boolean mightContain(
+        public <T> boolean mightContain(
                 @ParametricNullness T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
@@ -101,7 +99,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
      */
     MURMUR128_MITZ_64() {
         @Override
-        public <T extends @Nullable Object> boolean put(
+        public <T> boolean put(
                 @ParametricNullness T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
@@ -122,7 +120,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
         }
 
         @Override
-        public <T extends @Nullable Object> boolean mightContain(
+        public <T> boolean mightContain(
                 @ParametricNullness T object,
                 Funnel<? super T> funnel,
                 int numHashFunctions,
@@ -286,7 +284,7 @@ enum BloomFilterStrategies implements BloomFilter.Strategy {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object o) {
+        public boolean equals(Object o) {
             if (o instanceof LockFreeBitArray) {
                 LockFreeBitArray lockFreeBitArray = (LockFreeBitArray) o;
                 // TODO(lowasser): avoid allocation here

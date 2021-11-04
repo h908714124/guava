@@ -16,9 +16,7 @@ package com.google.common.hash;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Preconditions;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
@@ -107,7 +105,7 @@ public final class Funnels {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object o) {
+        public boolean equals(Object o) {
             if (o instanceof StringCharsetFunnel) {
                 StringCharsetFunnel funnel = (StringCharsetFunnel) o;
                 return this.charset.equals(funnel.charset);
@@ -168,12 +166,12 @@ public final class Funnels {
      *
      * @since 15.0
      */
-    public static <E extends @Nullable Object> Funnel<Iterable<? extends E>> sequentialFunnel(
+    public static <E> Funnel<Iterable<? extends E>> sequentialFunnel(
             Funnel<E> elementFunnel) {
         return new SequentialFunnel<>(elementFunnel);
     }
 
-    private static class SequentialFunnel<E extends @Nullable Object>
+    private static class SequentialFunnel<E>
             implements Funnel<Iterable<? extends E>>, Serializable {
         private final Funnel<E> elementFunnel;
 
@@ -194,7 +192,7 @@ public final class Funnels {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object o) {
+        public boolean equals(Object o) {
             if (o instanceof SequentialFunnel) {
                 SequentialFunnel<?> funnel = (SequentialFunnel<?>) o;
                 return elementFunnel.equals(funnel.elementFunnel);

@@ -19,10 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.InvalidObjectException;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
@@ -49,7 +46,7 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtCompatible(emulated = true)
 @ElementTypesAreNonnullByDefault
-abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends AbstractMultiset<E>
+abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E>
         implements Serializable {
     // TODO(lowasser): consider overhauling this back to Map<E, Integer>
     private transient Map<E, Count> backingMap;
@@ -90,7 +87,6 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
     Iterator<E> elementIterator() {
         final Iterator<Map.Entry<E, Count>> backingEntries = backingMap.entrySet().iterator();
         return new Iterator<E>() {
-            @CheckForNull
             Map.Entry<E, Count> toRemove;
 
             @Override
@@ -120,7 +116,6 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
     Iterator<Entry<E>> entryIterator() {
         final Iterator<Map.Entry<E, Count>> backingEntries = backingMap.entrySet().iterator();
         return new Iterator<Multiset.Entry<E>>() {
-            @CheckForNull
             Map.Entry<E, Count> toRemove;
 
             @Override
@@ -202,7 +197,6 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
      */
     private class MapBasedMultisetIterator implements Iterator<E> {
         final Iterator<Map.Entry<E, Count>> entryIterator;
-        @CheckForNull
         Map.Entry<E, Count> currentEntry;
         int occurrencesLeft;
         boolean canRemove;
@@ -252,7 +246,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
     }
 
     @Override
-    public int count(@CheckForNull Object element) {
+    public int count(Object element) {
         Count frequency = Maps.safeGet(backingMap, element);
         return (frequency == null) ? 0 : frequency.get();
     }
@@ -265,7 +259,6 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
      * @throws IllegalArgumentException if the call would result in more than {@link
      *     Integer#MAX_VALUE} occurrences of {@code element} in this multiset.
      */
-    @CanIgnoreReturnValue
     @Override
     public int add(@ParametricNullness E element, int occurrences) {
         if (occurrences == 0) {
@@ -287,9 +280,8 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
         return oldCount;
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public int remove(@CheckForNull Object element, int occurrences) {
+    public int remove(Object element, int occurrences) {
         if (occurrences == 0) {
             return count(element);
         }
@@ -315,7 +307,6 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
     }
 
     // Roughly a 33% performance improvement over AbstractMultiset.setCount().
-    @CanIgnoreReturnValue
     @Override
     public int setCount(@ParametricNullness E element, int count) {
         checkNonnegative(count, "count");
@@ -338,7 +329,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
         return oldCount;
     }
 
-    private static int getAndSet(@CheckForNull Count i, int count) {
+    private static int getAndSet(Count i, int count) {
         if (i == null) {
             return 0;
         }

@@ -19,9 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Objects;
 import com.google.common.primitives.Ints;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Arrays;
 
 /**
@@ -159,13 +157,13 @@ final class CompactHashing {
     }
 
     static int remove(
-            @CheckForNull Object key,
-            @CheckForNull Object value,
+            Object key,
+            Object value,
             int mask,
             Object table,
             int[] entries,
-            @Nullable Object[] keys,
-            @CheckForNull @Nullable Object[] values) {
+            Object[] keys,
+            Object[] values) {
         int hash = Hashing.smearedHash(key);
         int tableIndex = hash & mask;
         int next = tableGet(table, tableIndex);

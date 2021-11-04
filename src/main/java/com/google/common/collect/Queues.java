@@ -18,8 +18,6 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -273,7 +271,6 @@ public final class Queues {
      * @since 28.0
      */
     @Beta
-    @CanIgnoreReturnValue
     @GwtIncompatible // BlockingQueue
     public static <E> int drain(
             BlockingQueue<E> q, Collection<? super E> buffer, int numElements, java.time.Duration timeout)
@@ -295,7 +292,6 @@ public final class Queues {
      * @throws InterruptedException if interrupted while waiting
      */
     @Beta
-    @CanIgnoreReturnValue
     @GwtIncompatible // BlockingQueue
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
     public static <E> int drain(
@@ -343,7 +339,6 @@ public final class Queues {
      * @since 28.0
      */
     @Beta
-    @CanIgnoreReturnValue
     @GwtIncompatible // BlockingQueue
     public static <E> int drainUninterruptibly(
             BlockingQueue<E> q,
@@ -368,7 +363,6 @@ public final class Queues {
      * @return the number of elements transferred
      */
     @Beta
-    @CanIgnoreReturnValue
     @GwtIncompatible // BlockingQueue
     @SuppressWarnings("GoodTime") // should accept a java.time.Duration
     public static <E> int drainUninterruptibly(
@@ -440,7 +434,7 @@ public final class Queues {
      * @return a synchronized view of the specified queue
      * @since 14.0
      */
-    public static <E extends @Nullable Object> Queue<E> synchronizedQueue(Queue<E> queue) {
+    public static <E> Queue<E> synchronizedQueue(Queue<E> queue) {
         return Synchronized.queue(queue, null);
     }
 
@@ -473,7 +467,7 @@ public final class Queues {
      * @return a synchronized view of the specified deque
      * @since 15.0
      */
-    public static <E extends @Nullable Object> Deque<E> synchronizedDeque(Deque<E> deque) {
+    public static <E> Deque<E> synchronizedDeque(Deque<E> deque) {
         return Synchronized.deque(deque, null);
     }
 }

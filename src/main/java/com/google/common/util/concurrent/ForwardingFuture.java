@@ -17,8 +17,6 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ForwardingObject;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -35,10 +33,9 @@ import java.util.concurrent.TimeoutException;
  * @author Sven Mawson
  * @since 1.0
  */
-@CanIgnoreReturnValue // TODO(cpovirk): Consider being more strict.
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingFuture<V extends @Nullable Object> extends ForwardingObject
+public abstract class ForwardingFuture<V> extends ForwardingObject
         implements Future<V> {
     /** Constructor for use by subclasses. */
     protected ForwardingFuture() {
@@ -83,7 +80,7 @@ public abstract class ForwardingFuture<V extends @Nullable Object> extends Forwa
      *
      * @since 9.0
      */
-    public abstract static class SimpleForwardingFuture<V extends @Nullable Object>
+    public abstract static class SimpleForwardingFuture<V>
             extends ForwardingFuture<V> {
         private final Future<V> delegate;
 

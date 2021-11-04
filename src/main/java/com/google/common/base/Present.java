@@ -16,7 +16,6 @@ package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.util.Collections;
 import java.util.Set;
 
@@ -79,7 +78,7 @@ final class Present<T> extends Optional<T> {
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object instanceof Present) {
             Present<?> other = (Present<?>) object;
             return reference.equals(other.reference);

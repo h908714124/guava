@@ -16,8 +16,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
-
 /**
  * Unchecked version of {@link java.util.concurrent.TimeoutException}.
  *
@@ -30,15 +28,15 @@ public class UncheckedTimeoutException extends RuntimeException {
     public UncheckedTimeoutException() {
     }
 
-    public UncheckedTimeoutException(@CheckForNull String message) {
+    public UncheckedTimeoutException(String message) {
         super(message);
     }
 
-    public UncheckedTimeoutException(@CheckForNull Throwable cause) {
+    public UncheckedTimeoutException(Throwable cause) {
         super(cause);
     }
 
-    public UncheckedTimeoutException(@CheckForNull String message, @CheckForNull Throwable cause) {
+    public UncheckedTimeoutException(String message, Throwable cause) {
         super(message, cause);
     }
 

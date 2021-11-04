@@ -27,7 +27,6 @@ package com.google.common.hash;
 
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -41,7 +40,6 @@ import static com.google.common.primitives.UnsignedBytes.toInt;
  * @author Austin Appleby
  * @author Dimitris Andreou
  */
-@Immutable
 @ElementTypesAreNonnullByDefault
 final class Murmur3_128HashFunction extends AbstractHashFunction implements Serializable {
     static final HashFunction MURMUR3_128 = new Murmur3_128HashFunction(0);
@@ -72,7 +70,7 @@ final class Murmur3_128HashFunction extends AbstractHashFunction implements Seri
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object instanceof Murmur3_128HashFunction) {
             Murmur3_128HashFunction other = (Murmur3_128HashFunction) object;
             return seed == other.seed;

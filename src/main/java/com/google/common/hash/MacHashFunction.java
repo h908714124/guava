@@ -30,7 +30,6 @@ import static com.google.common.base.Preconditions.checkState;
  *
  * @author Kurt Alfred Kluever
  */
-@Immutable
 @ElementTypesAreNonnullByDefault
 final class MacHashFunction extends AbstractHashFunction {
 

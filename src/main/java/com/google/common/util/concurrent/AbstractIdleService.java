@@ -16,8 +16,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Supplier;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2objc.annotations.WeakOuter;
 
 import java.time.Duration;
 import java.util.concurrent.Executor;
@@ -39,7 +37,6 @@ public abstract class AbstractIdleService implements Service {
     /* Thread names will look like {@code "MyService STARTING"}. */
     private final Supplier<String> threadNameSupplier = new ThreadNameSupplier();
 
-    @WeakOuter
     private final class ThreadNameSupplier implements Supplier<String> {
         @Override
         public String get() {
@@ -50,7 +47,6 @@ public abstract class AbstractIdleService implements Service {
     /* use AbstractService for state management */
     private final Service delegate = new DelegateService();
 
-    @WeakOuter
     private final class DelegateService extends AbstractService {
         @Override
         protected final void doStart() {
@@ -146,7 +142,6 @@ public abstract class AbstractIdleService implements Service {
     }
 
     /** @since 15.0 */
-    @CanIgnoreReturnValue
     @Override
     public final Service startAsync() {
         delegate.startAsync();
@@ -154,7 +149,6 @@ public abstract class AbstractIdleService implements Service {
     }
 
     /** @since 15.0 */
-    @CanIgnoreReturnValue
     @Override
     public final Service stopAsync() {
         delegate.stopAsync();

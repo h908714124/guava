@@ -17,10 +17,7 @@ package com.google.common.reflect;
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.ImmutableMap;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 
 /**
@@ -73,7 +70,6 @@ public final class ImmutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken
          * Associates {@code key} with {@code value} in the built map. Duplicate keys are not allowed,
          * and will cause {@link #build} to fail.
          */
-        @CanIgnoreReturnValue
         public <T extends B> Builder<B> put(Class<T> key, T value) {
             mapBuilder.put(TypeToken.of(key), value);
             return this;
@@ -83,7 +79,6 @@ public final class ImmutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken
          * Associates {@code key} with {@code value} in the built map. Duplicate keys are not allowed,
          * and will cause {@link #build} to fail.
          */
-        @CanIgnoreReturnValue
         public <T extends B> Builder<B> put(TypeToken<T> key, T value) {
             mapBuilder.put(key.rejectTypeVariables(), value);
             return this;
@@ -106,13 +101,11 @@ public final class ImmutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken
     }
 
     @Override
-    @CheckForNull
     public <T extends B> T getInstance(TypeToken<T> type) {
         return trustedGet(type.rejectTypeVariables());
     }
 
     @Override
-    @CheckForNull
     public <T extends B> T getInstance(Class<T> type) {
         return trustedGet(TypeToken.of(type));
     }
@@ -123,11 +116,8 @@ public final class ImmutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken
      * @deprecated unsupported operation
      * @throws UnsupportedOperationException always
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public <T extends B> T putInstance(TypeToken<T> type, T value) {
         throw new UnsupportedOperationException();
     }
@@ -138,11 +128,8 @@ public final class ImmutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken
      * @deprecated unsupported operation
      * @throws UnsupportedOperationException always
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public <T extends B> T putInstance(Class<T> type, T value) {
         throw new UnsupportedOperationException();
     }
@@ -153,11 +140,8 @@ public final class ImmutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken
      * @deprecated unsupported operation
      * @throws UnsupportedOperationException always
      */
-    @CanIgnoreReturnValue
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
-    @CheckForNull
     public B put(TypeToken<? extends B> key, B value) {
         throw new UnsupportedOperationException();
     }
@@ -170,7 +154,6 @@ public final class ImmutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public void putAll(Map<? extends TypeToken<? extends B>, ? extends B> map) {
         throw new UnsupportedOperationException();
     }
@@ -181,7 +164,6 @@ public final class ImmutableTypeToInstanceMap<B> extends ForwardingMap<TypeToken
     }
 
     @SuppressWarnings("unchecked") // value could not get in if not a T
-    @CheckForNull
     private <T extends B> T trustedGet(TypeToken<T> type) {
         return (T) delegate.get(type);
     }

@@ -17,9 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotMock;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -34,10 +31,9 @@ import java.util.NoSuchElementException;
  * @author Mick Killianey
  * @since 2.0
  */
-@DoNotMock("Use Iterators.peekingIterator")
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public interface PeekingIterator<E extends @Nullable Object> extends Iterator<E> {
+public interface PeekingIterator<E> extends Iterator<E> {
     /**
      * Returns the next element in the iteration, without advancing the iteration.
      *
@@ -56,7 +52,6 @@ public interface PeekingIterator<E extends @Nullable Object> extends Iterator<E>
      * <p>The objects returned by consecutive calls to {@link #peek()} then {@link #next()} are
      * guaranteed to be equal to each other.
      */
-    @CanIgnoreReturnValue
     @Override
     @ParametricNullness
     E next();

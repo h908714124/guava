@@ -15,8 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledExecutorService;
@@ -31,7 +29,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Luke Sandberg
  */
-@CanIgnoreReturnValue // TODO(cpovirk): Consider being more strict.
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
 abstract class WrappingScheduledExecutorService extends WrappingExecutorService
@@ -49,7 +46,7 @@ abstract class WrappingScheduledExecutorService extends WrappingExecutorService
     }
 
     @Override
-    public final <V extends @Nullable Object> ScheduledFuture<V> schedule(
+    public final <V> ScheduledFuture<V> schedule(
             Callable<V> task, long delay, TimeUnit unit) {
         return delegate.schedule(wrapTask(task), delay, unit);
     }

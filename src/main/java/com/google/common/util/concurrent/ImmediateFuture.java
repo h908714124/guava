@@ -16,7 +16,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.util.concurrent.AbstractFuture.TrustedFuture;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -30,8 +29,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 // TODO(cpovirk): Make this final (but that may break Mockito spy calls).
-class ImmediateFuture<V extends @Nullable Object> implements ListenableFuture<V> {
-    static final ListenableFuture<?> NULL = new ImmediateFuture<@Nullable Object>(null);
+class ImmediateFuture<V> implements ListenableFuture<V> {
+    static final ListenableFuture<?> NULL = new ImmediateFuture<Object>(null);
 
     private static final Logger log = Logger.getLogger(ImmediateFuture.class.getName());
 
@@ -93,13 +92,13 @@ class ImmediateFuture<V extends @Nullable Object> implements ListenableFuture<V>
         return super.toString() + "[status=SUCCESS, result=[" + value + "]]";
     }
 
-    static final class ImmediateFailedFuture<V extends @Nullable Object> extends TrustedFuture<V> {
+    static final class ImmediateFailedFuture<V> extends TrustedFuture<V> {
         ImmediateFailedFuture(Throwable thrown) {
             setException(thrown);
         }
     }
 
-    static final class ImmediateCancelledFuture<V extends @Nullable Object> extends TrustedFuture<V> {
+    static final class ImmediateCancelledFuture<V> extends TrustedFuture<V> {
         ImmediateCancelledFuture() {
             cancel(false);
         }

@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.NoSuchElementException;
@@ -65,14 +63,12 @@ public abstract class DiscreteDomain<C extends Comparable> {
         }
 
         @Override
-        @CheckForNull
         public Integer next(Integer value) {
             int i = value;
             return (i == Integer.MAX_VALUE) ? null : i + 1;
         }
 
         @Override
-        @CheckForNull
         public Integer previous(Integer value) {
             int i = value;
             return (i == Integer.MIN_VALUE) ? null : i - 1;
@@ -128,14 +124,12 @@ public abstract class DiscreteDomain<C extends Comparable> {
         }
 
         @Override
-        @CheckForNull
         public Long next(Long value) {
             long l = value;
             return (l == Long.MAX_VALUE) ? null : l + 1;
         }
 
         @Override
-        @CheckForNull
         public Long previous(Long value) {
             long l = value;
             return (l == Long.MIN_VALUE) ? null : l - 1;
@@ -275,7 +269,6 @@ public abstract class DiscreteDomain<C extends Comparable> {
      * @return the least value greater than {@code value}, or {@code null} if {@code value} is {@code
      *     maxValue()}
      */
-    @CheckForNull
     public abstract C next(C value);
 
     /**
@@ -286,7 +279,6 @@ public abstract class DiscreteDomain<C extends Comparable> {
      * @return the greatest value less than {@code value}, or {@code null} if {@code value} is {@code
      *     minValue()}
      */
-    @CheckForNull
     public abstract C previous(C value);
 
     /**
@@ -313,7 +305,6 @@ public abstract class DiscreteDomain<C extends Comparable> {
      * @throws NoSuchElementException if the type has no (practical) minimum value; for example,
      *     {@link java.math.BigInteger}
      */
-    @CanIgnoreReturnValue
     public C minValue() {
         throw new NoSuchElementException();
     }
@@ -329,7 +320,6 @@ public abstract class DiscreteDomain<C extends Comparable> {
      * @throws NoSuchElementException if the type has no (practical) maximum value; for example,
      *     {@link java.math.BigInteger}
      */
-    @CanIgnoreReturnValue
     public C maxValue() {
         throw new NoSuchElementException();
     }

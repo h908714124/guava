@@ -15,10 +15,7 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RunnableFuture;
@@ -33,15 +30,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFuture.TrustedFuture<V>
+class TrustedListenableFutureTask<V> extends FluentFuture.TrustedFuture<V>
         implements RunnableFuture<V> {
 
-    static <V extends @Nullable Object> TrustedListenableFutureTask<V> create(
+    static <V> TrustedListenableFutureTask<V> create(
             AsyncCallable<V> callable) {
         return new TrustedListenableFutureTask<>(callable);
     }
 
-    static <V extends @Nullable Object> TrustedListenableFutureTask<V> create(Callable<V> callable) {
+    static <V> TrustedListenableFutureTask<V> create(Callable<V> callable) {
         return new TrustedListenableFutureTask<>(callable);
     }
 
@@ -54,7 +51,7 @@ class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFutu
      *     result, consider using constructions of the form: {@code ListenableFuture<?> f =
      *     ListenableFutureTask.create(runnable, null)}
      */
-    static <V extends @Nullable Object> TrustedListenableFutureTask<V> create(
+    static <V> TrustedListenableFutureTask<V> create(
             Runnable runnable, @ParametricNullness V result) {
         return new TrustedListenableFutureTask<>(Executors.callable(runnable, result));
     }
@@ -66,7 +63,6 @@ class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFutu
      * <p>{@code volatile} is required for j2objc transpiling:
      * https://developers.google.com/j2objc/guides/j2objc-memory-model#atomicity
      */
-    @CheckForNull
     private volatile InterruptibleTask<?> task;
 
     TrustedListenableFutureTask(Callable<V> callable) {
@@ -105,7 +101,6 @@ class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFutu
     }
 
     @Override
-    @CheckForNull
     protected String pendingToString() {
         InterruptibleTask<?> localTask = task;
         if (localTask != null) {
@@ -114,7 +109,6 @@ class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFutu
         return super.pendingToString();
     }
 
-    @WeakOuter
     private final class TrustedFutureInterruptibleTask extends InterruptibleTask<V> {
         private final Callable<V> callable;
 
@@ -149,7 +143,6 @@ class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFutu
         }
     }
 
-    @WeakOuter
     private final class TrustedFutureInterruptibleAsyncTask
             extends InterruptibleTask<ListenableFuture<V>> {
         private final AsyncCallable<V> callable;

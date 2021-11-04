@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -67,7 +66,7 @@ class RegularImmutableList<E> extends ImmutableList<E> {
     }
 
     @Override
-    int copyIntoArray(@Nullable Object[] dst, int dstOff) {
+    int copyIntoArray(Object[] dst, int dstOff) {
         System.arraycopy(array, 0, dst, dstOff, array.length);
         return dstOff + array.length;
     }

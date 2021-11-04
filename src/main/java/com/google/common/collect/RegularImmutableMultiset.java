@@ -19,10 +19,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.collect.Multisets.ImmutableEntry;
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -51,8 +48,7 @@ class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
         int tableSize = Hashing.closedTableSize(distinct, MAX_LOAD_FACTOR);
         int mask = tableSize - 1;
         @SuppressWarnings({"unchecked", "rawtypes"})
-        @Nullable
-        ImmutableEntry<E>[] hashTable = new @Nullable ImmutableEntry[tableSize];
+        ImmutableEntry<E>[] hashTable = new ImmutableEntry[tableSize];
 
         int index = 0;
         int hashCode = 0;
@@ -86,7 +82,7 @@ class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
                 entryArray, hashTable, Ints.saturatedCast(size), hashCode, null);
     }
 
-    private static boolean hashFloodingDetected(@Nullable ImmutableEntry<?>[] hashTable) {
+    private static boolean hashFloodingDetected(ImmutableEntry<?>[] hashTable) {
         for (int i = 0; i < hashTable.length; i++) {
             int bucketLength = 0;
             for (ImmutableEntry<?> entry = hashTable[i]; entry != null; entry = entry.nextInBucket()) {
@@ -122,21 +118,18 @@ class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
     static final int MAX_HASH_BUCKET_LENGTH = 9;
 
     private final transient ImmutableEntry<E>[] entries;
-    private final transient @Nullable
-    ImmutableEntry<?>[] hashTable;
+    private final transient ImmutableEntry<?>[] hashTable;
     private final transient int size;
     private final transient int hashCode;
 
-    @LazyInit
-    @CheckForNull
     private transient ImmutableSet<E> elementSet;
 
     private RegularImmutableMultiset(
             ImmutableEntry<E>[] entries,
-            @Nullable ImmutableEntry<?>[] hashTable,
+            ImmutableEntry<?>[] hashTable,
             int size,
             int hashCode,
-            @CheckForNull ImmutableSet<E> elementSet) {
+            ImmutableSet<E> elementSet) {
         this.entries = entries;
         this.hashTable = hashTable;
         this.size = size;
@@ -164,8 +157,8 @@ class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
     }
 
     @Override
-    public int count(@CheckForNull Object element) {
-        @Nullable ImmutableEntry<?>[] hashTable = this.hashTable;
+    public int count(Object element) {
+        ImmutableEntry<?>[] hashTable = this.hashTable;
         if (element == null || hashTable.length == 0) {
             return 0;
         }

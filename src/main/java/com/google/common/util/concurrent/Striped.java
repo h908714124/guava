@@ -24,7 +24,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.MapMaker;
 import com.google.common.math.IntMath;
 import com.google.common.primitives.Ints;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
@@ -396,7 +395,7 @@ public abstract class Striped<L> {
      */
     @VisibleForTesting
     static class SmallLazyStriped<L> extends PowerOfTwoStriped<L> {
-        final AtomicReferenceArray<@Nullable ArrayReference<? extends L>> locks;
+        final AtomicReferenceArray<ArrayReference<? extends L>> locks;
         final Supplier<L> supplier;
         final int size;
         final ReferenceQueue<L> queue = new ReferenceQueue<>();

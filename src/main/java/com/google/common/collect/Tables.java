@@ -22,9 +22,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Table.Cell;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
@@ -71,10 +69,10 @@ public final class Tables {
      */
     @Beta
     public static <
-            T extends @Nullable Object,
-            R extends @Nullable Object,
-            C extends @Nullable Object,
-            V extends @Nullable Object,
+            T,
+            R,
+            C,
+            V,
             I extends Table<R, C, V>>
     Collector<T, ?, I> toTable(
             java.util.function.Function<? super T, ? extends R> rowFunction,
@@ -99,10 +97,10 @@ public final class Tables {
      * @since 21.0
      */
     public static <
-            T extends @Nullable Object,
-            R extends @Nullable Object,
-            C extends @Nullable Object,
-            V extends @Nullable Object,
+            T,
+            R,
+            C,
+            V,
             I extends Table<R, C, V>>
     Collector<T, ?, I> toTable(
             java.util.function.Function<? super T, ? extends R> rowFunction,
@@ -123,7 +121,7 @@ public final class Tables {
      * @param columnKey the column key to be associated with the returned cell
      * @param value the value to be associated with the returned cell
      */
-    public static <R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+    public static <R, C, V>
     Cell<R, C, V> immutableCell(
             @ParametricNullness R rowKey,
             @ParametricNullness C columnKey,
@@ -132,7 +130,7 @@ public final class Tables {
     }
 
     static final class ImmutableCell<
-            R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+            R, C, V>
             extends AbstractCell<R, C, V> implements Serializable {
         @ParametricNullness
         private final R rowKey;
@@ -172,14 +170,14 @@ public final class Tables {
     }
 
     abstract static class AbstractCell<
-            R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+            R, C, V>
             implements Cell<R, C, V> {
         // needed for serialization
         AbstractCell() {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (obj == this) {
                 return true;
             }
@@ -215,7 +213,7 @@ public final class Tables {
      * columnKeySet().iterator()} doesn't. With a transposed {@link HashBasedTable}, it's the other
      * way around.
      */
-    public static <R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+    public static <R, C, V>
     Table<C, R, V> transpose(Table<R, C, V> table) {
         return (table instanceof TransposeTable)
                 ? ((TransposeTable<R, C, V>) table).original
@@ -223,7 +221,7 @@ public final class Tables {
     }
 
     private static class TransposeTable<
-            C extends @Nullable Object, R extends @Nullable Object, V extends @Nullable Object>
+            C, R, V>
             extends AbstractTable<C, R, V> {
         final Table<R, C, V> original;
 
@@ -252,33 +250,31 @@ public final class Tables {
         }
 
         @Override
-        public boolean contains(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+        public boolean contains(Object rowKey, Object columnKey) {
             return original.contains(columnKey, rowKey);
         }
 
         @Override
-        public boolean containsColumn(@CheckForNull Object columnKey) {
+        public boolean containsColumn(Object columnKey) {
             return original.containsRow(columnKey);
         }
 
         @Override
-        public boolean containsRow(@CheckForNull Object rowKey) {
+        public boolean containsRow(Object rowKey) {
             return original.containsColumn(rowKey);
         }
 
         @Override
-        public boolean containsValue(@CheckForNull Object value) {
+        public boolean containsValue(Object value) {
             return original.containsValue(value);
         }
 
         @Override
-        @CheckForNull
-        public V get(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+        public V get(Object rowKey, Object columnKey) {
             return original.get(columnKey, rowKey);
         }
 
         @Override
-        @CheckForNull
         public V put(
                 @ParametricNullness C rowKey,
                 @ParametricNullness R columnKey,
@@ -292,8 +288,7 @@ public final class Tables {
         }
 
         @Override
-        @CheckForNull
-        public V remove(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+        public V remove(Object rowKey, Object columnKey) {
             return original.remove(columnKey, rowKey);
         }
 
@@ -414,20 +409,20 @@ public final class Tables {
      */
     @Beta
     public static <
-            R extends @Nullable Object,
-            C extends @Nullable Object,
-            V1 extends @Nullable Object,
-            V2 extends @Nullable Object>
+            R,
+            C,
+            V1,
+            V2>
     Table<R, C, V2> transformValues(
             Table<R, C, V1> fromTable, Function<? super V1, V2> function) {
         return new TransformedTable<>(fromTable, function);
     }
 
     private static class TransformedTable<
-            R extends @Nullable Object,
-            C extends @Nullable Object,
-            V1 extends @Nullable Object,
-            V2 extends @Nullable Object>
+            R,
+            C,
+            V1,
+            V2>
             extends AbstractTable<R, C, V2> {
         final Table<R, C, V1> fromTable;
         final Function<? super V1, V2> function;
@@ -438,13 +433,12 @@ public final class Tables {
         }
 
         @Override
-        public boolean contains(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+        public boolean contains(Object rowKey, Object columnKey) {
             return fromTable.contains(rowKey, columnKey);
         }
 
         @Override
-        @CheckForNull
-        public V2 get(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+        public V2 get(Object rowKey, Object columnKey) {
             // The function is passed a null input only when the table contains a null
             // value.
             // The cast is safe because of the contains() check.
@@ -464,7 +458,6 @@ public final class Tables {
         }
 
         @Override
-        @CheckForNull
         public V2 put(
                 @ParametricNullness R rowKey,
                 @ParametricNullness C columnKey,
@@ -478,8 +471,7 @@ public final class Tables {
         }
 
         @Override
-        @CheckForNull
-        public V2 remove(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+        public V2 remove(Object rowKey, Object columnKey) {
             return contains(rowKey, columnKey)
                     // The cast is safe because of the contains() check.
                     ? function.apply(uncheckedCastNullableTToT(fromTable.remove(rowKey, columnKey)))
@@ -568,13 +560,13 @@ public final class Tables {
      *
      * @since 11.0
      */
-    public static <R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+    public static <R, C, V>
     Table<R, C, V> unmodifiableTable(Table<? extends R, ? extends C, ? extends V> table) {
         return new UnmodifiableTable<>(table);
     }
 
     private static class UnmodifiableTable<
-            R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+            R, C, V>
             extends ForwardingTable<R, C, V> implements Serializable {
         final Table<? extends R, ? extends C, ? extends V> delegate;
 
@@ -615,7 +607,6 @@ public final class Tables {
         }
 
         @Override
-        @CheckForNull
         public V put(
                 @ParametricNullness R rowKey,
                 @ParametricNullness C columnKey,
@@ -629,8 +620,7 @@ public final class Tables {
         }
 
         @Override
-        @CheckForNull
-        public V remove(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
+        public V remove(Object rowKey, Object columnKey) {
             throw new UnsupportedOperationException();
         }
 
@@ -671,7 +661,7 @@ public final class Tables {
      * @since 11.0
      */
     @Beta
-    public static <R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+    public static <R, C, V>
     RowSortedTable<R, C, V> unmodifiableRowSortedTable(
             RowSortedTable<R, ? extends C, ? extends V> table) {
         /*
@@ -683,7 +673,7 @@ public final class Tables {
     }
 
     static final class UnmodifiableRowSortedMap<
-            R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+            R, C, V>
             extends UnmodifiableTable<R, C, V> implements RowSortedTable<R, C, V> {
 
         public UnmodifiableRowSortedMap(RowSortedTable<R, ? extends C, ? extends V> delegate) {
@@ -710,7 +700,7 @@ public final class Tables {
     }
 
     @SuppressWarnings("unchecked")
-    private static <K extends @Nullable Object, V extends @Nullable Object>
+    private static <K, V>
     Function<Map<K, V>, Map<K, V>> unmodifiableWrapper() {
         return (Function) UNMODIFIABLE_WRAPPER;
     }
@@ -752,12 +742,12 @@ public final class Tables {
      * @return a synchronized view of the specified table
      * @since 22.0
      */
-    public static <R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+    public static <R, C, V>
     Table<R, C, V> synchronizedTable(Table<R, C, V> table) {
         return Synchronized.table(table, null);
     }
 
-    static boolean equalsImpl(Table<?, ?, ?> table, @CheckForNull Object obj) {
+    static boolean equalsImpl(Table<?, ?, ?> table, Object obj) {
         if (obj == table) {
             return true;
         } else if (obj instanceof Table) {

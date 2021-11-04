@@ -17,7 +17,6 @@
 package com.google.common.graph;
 
 import com.google.common.collect.ImmutableList;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -50,7 +49,6 @@ final class StandardMutableNetwork<N, E> extends StandardNetwork<N, E>
     }
 
     @Override
-    @CanIgnoreReturnValue
     public boolean addNode(N node) {
         checkNotNull(node, "node");
 
@@ -67,7 +65,6 @@ final class StandardMutableNetwork<N, E> extends StandardNetwork<N, E>
      *
      * @throws IllegalStateException if {@code node} is already present
      */
-    @CanIgnoreReturnValue
     private NetworkConnections<N, E> addNodeInternal(N node) {
         NetworkConnections<N, E> connections = newConnections();
         checkState(nodeConnections.put(node, connections) == null);
@@ -75,7 +72,6 @@ final class StandardMutableNetwork<N, E> extends StandardNetwork<N, E>
     }
 
     @Override
-    @CanIgnoreReturnValue
     public boolean addEdge(N nodeU, N nodeV, E edge) {
         checkNotNull(nodeU, "nodeU");
         checkNotNull(nodeV, "nodeV");
@@ -119,14 +115,12 @@ final class StandardMutableNetwork<N, E> extends StandardNetwork<N, E>
     }
 
     @Override
-    @CanIgnoreReturnValue
     public boolean addEdge(EndpointPair<N> endpoints, E edge) {
         validateEndpoints(endpoints);
         return addEdge(endpoints.nodeU(), endpoints.nodeV(), edge);
     }
 
     @Override
-    @CanIgnoreReturnValue
     public boolean removeNode(N node) {
         checkNotNull(node, "node");
 
@@ -145,7 +139,6 @@ final class StandardMutableNetwork<N, E> extends StandardNetwork<N, E>
     }
 
     @Override
-    @CanIgnoreReturnValue
     public boolean removeEdge(E edge) {
         checkNotNull(edge, "edge");
 

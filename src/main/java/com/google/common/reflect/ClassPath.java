@@ -27,7 +27,6 @@ import com.google.common.io.ByteSource;
 import com.google.common.io.CharSource;
 import com.google.common.io.Resources;
 
-import javax.annotation.CheckForNull;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -281,7 +280,7 @@ public final class ClassPath {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (obj instanceof ResourceInfo) {
                 ResourceInfo that = (ResourceInfo) obj;
                 return resourceName.equals(that.resourceName) && loader == that.loader;
@@ -555,7 +554,7 @@ public final class ClassPath {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (obj instanceof LocationInfo) {
                 LocationInfo that = (LocationInfo) obj;
                 return home.equals(that.home) && classloader.equals(that.classloader);
@@ -583,7 +582,7 @@ public final class ClassPath {
      */
     @VisibleForTesting
     static ImmutableSet<File> getClassPathFromManifest(
-            File jarFile, @CheckForNull Manifest manifest) {
+            File jarFile, Manifest manifest) {
         if (manifest == null) {
             return ImmutableSet.of();
         }

@@ -16,7 +16,6 @@ package com.google.common.io;
 
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Closeable;
 import java.io.Flushable;
 import java.io.IOException;
@@ -108,14 +107,14 @@ class AppendableWriter extends Writer {
     }
 
     @Override
-    public Writer append(@CheckForNull CharSequence charSeq) throws IOException {
+    public Writer append(CharSequence charSeq) throws IOException {
         checkNotClosed();
         target.append(charSeq);
         return this;
     }
 
     @Override
-    public Writer append(@CheckForNull CharSequence charSeq, int start, int end) throws IOException {
+    public Writer append(CharSequence charSeq, int start, int end) throws IOException {
         checkNotClosed();
         target.append(charSeq, start, end);
         return this;

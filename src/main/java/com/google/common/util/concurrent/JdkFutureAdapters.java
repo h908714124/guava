@@ -16,7 +16,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -52,7 +51,7 @@ public final class JdkFutureAdapters {
      * ListenableFutureTask}, {@link AbstractFuture}, and other utilities over creating plain {@code
      * Future} instances to be upgraded to {@code ListenableFuture} after the fact.
      */
-    public static <V extends @Nullable Object> ListenableFuture<V> listenInPoolThread(
+    public static <V> ListenableFuture<V> listenInPoolThread(
             Future<V> future) {
         if (future instanceof ListenableFuture) {
             return (ListenableFuture<V>) future;
@@ -80,7 +79,7 @@ public final class JdkFutureAdapters {
      *
      * @since 12.0
      */
-    public static <V extends @Nullable Object> ListenableFuture<V> listenInPoolThread(
+    public static <V> ListenableFuture<V> listenInPoolThread(
             Future<V> future, Executor executor) {
         checkNotNull(executor);
         if (future instanceof ListenableFuture) {
@@ -98,7 +97,7 @@ public final class JdkFutureAdapters {
      * <p>If the delegate future is interrupted or throws an unexpected unchecked exception, the
      * listeners will not be invoked.
      */
-    private static class ListenableFutureAdapter<V extends @Nullable Object>
+    private static class ListenableFutureAdapter<V>
             extends ForwardingFuture<V> implements ListenableFuture<V> {
 
         private static final ThreadFactory threadFactory =

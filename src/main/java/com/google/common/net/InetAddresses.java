@@ -22,7 +22,6 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.ByteStreams;
 import com.google.common.primitives.Ints;
 
-import javax.annotation.CheckForNull;
 import java.math.BigInteger;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
@@ -174,7 +173,6 @@ public final class InetAddresses {
     }
 
     /** Returns {@code null} if unable to parse into a {@code byte[]}. */
-    @CheckForNull
     private static byte[] ipStringToBytes(String ipStringParam) {
         String ipString = ipStringParam;
         // Make a first pass to categorize the characters in this string.
@@ -219,7 +217,6 @@ public final class InetAddresses {
         return null;
     }
 
-    @CheckForNull
     private static byte[] textToNumericFormatV4(String ipString) {
         if (IPV4_DELIMITER_MATCHER.countIn(ipString) + 1 != IPV4_PART_COUNT) {
             return null; // Wrong number of parts
@@ -245,7 +242,6 @@ public final class InetAddresses {
         return bytes;
     }
 
-    @CheckForNull
     private static byte[] textToNumericFormatV6(String ipString) {
         // An address can have [2..8] colons.
         int delimiterCount = IPV6_DELIMITER_MATCHER.countIn(ipString);
@@ -316,7 +312,6 @@ public final class InetAddresses {
         return rawBytes.array();
     }
 
-    @CheckForNull
     private static String convertDottedQuadToHex(String ipString) {
         int lastColon = ipString.lastIndexOf(':');
         String initialPart = ipString.substring(0, lastColon + 1);
@@ -538,7 +533,6 @@ public final class InetAddresses {
         return addr;
     }
 
-    @CheckForNull
     private static InetAddress forUriStringNoThrow(String hostAddr) {
         checkNotNull(hostAddr);
 
@@ -687,7 +681,7 @@ public final class InetAddresses {
          */
         // TODO: why is this public?
         public TeredoInfo(
-                @CheckForNull Inet4Address server, @CheckForNull Inet4Address client, int port, int flags) {
+                Inet4Address server, Inet4Address client, int port, int flags) {
             checkArgument(
                     (port >= 0) && (port <= 0xffff), "port '%s' is out of range (0 <= port <= 0xffff)", port);
             checkArgument(

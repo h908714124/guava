@@ -16,9 +16,7 @@ package com.google.common.escape;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -76,7 +74,7 @@ public abstract class ArrayBasedUnicodeEscaper extends UnicodeEscaper {
             Map<Character, String> replacementMap,
             int safeMin,
             int safeMax,
-            @Nullable String unsafeReplacement) {
+            String unsafeReplacement) {
         this(ArrayBasedEscaperMap.create(replacementMap), safeMin, safeMax, unsafeReplacement);
     }
 
@@ -99,7 +97,7 @@ public abstract class ArrayBasedUnicodeEscaper extends UnicodeEscaper {
             ArrayBasedEscaperMap escaperMap,
             int safeMin,
             int safeMax,
-            @Nullable String unsafeReplacement) {
+            String unsafeReplacement) {
         checkNotNull(escaperMap); // GWT specific check (do not optimize)
         this.replacements = escaperMap.getReplacementArray();
         this.replacementsLength = replacements.length;
@@ -164,7 +162,6 @@ public abstract class ArrayBasedUnicodeEscaper extends UnicodeEscaper {
      * @return the replacement characters, or {@code null} if no escaping was required
      */
     @Override
-    @CheckForNull
     protected final char[] escape(int cp) {
         if (cp < replacementsLength) {
             char[] chars = replacements[cp];
@@ -205,6 +202,5 @@ public abstract class ArrayBasedUnicodeEscaper extends UnicodeEscaper {
      * @param cp the Unicode code point to escape
      * @return the replacement characters, or {@code null} if no escaping was required
      */
-    @CheckForNull
     protected abstract char[] escapeUnsafe(int cp);
 }

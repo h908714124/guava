@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Map.Entry;
 import java.util.Spliterator;
@@ -55,7 +53,7 @@ abstract class ImmutableMapEntrySet<K, V> extends ImmutableSet.CachingAsList<Ent
 
         @Override
         @GwtIncompatible("not used in GWT")
-        int copyIntoArray(@Nullable Object[] dst, int offset) {
+        int copyIntoArray(Object[] dst, int offset) {
             return entries.copyIntoArray(dst, offset);
         }
 
@@ -91,7 +89,7 @@ abstract class ImmutableMapEntrySet<K, V> extends ImmutableSet.CachingAsList<Ent
     }
 
     @Override
-    public boolean contains(@CheckForNull Object object) {
+    public boolean contains(Object object) {
         if (object instanceof Entry) {
             Entry<?, ?> entry = (Entry<?, ?>) object;
             V value = map().get(entry.getKey());

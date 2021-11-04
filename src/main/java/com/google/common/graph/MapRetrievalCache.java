@@ -16,7 +16,6 @@
 
 package com.google.common.graph;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -30,9 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @ElementTypesAreNonnullByDefault
 final class MapRetrievalCache<K, V> extends MapIteratorCache<K, V> {
     // See the note about volatile in the superclass.
-    @CheckForNull
     private transient volatile CacheEntry<K, V> cacheEntry1;
-    @CheckForNull
     private transient volatile CacheEntry<K, V> cacheEntry2;
 
     MapRetrievalCache(Map<K, V> backingMap) {
@@ -41,7 +38,6 @@ final class MapRetrievalCache<K, V> extends MapIteratorCache<K, V> {
 
     @SuppressWarnings("unchecked") // Safe because we only cast if key is found in map.
     @Override
-    @CheckForNull
     V get(Object key) {
         checkNotNull(key);
         V value = getIfCached(key);
@@ -59,8 +55,7 @@ final class MapRetrievalCache<K, V> extends MapIteratorCache<K, V> {
     // Internal methods (package-visible, but treat as only subclass-visible)
 
     @Override
-    @CheckForNull
-    V getIfCached(@CheckForNull Object key) {
+    V getIfCached(Object key) {
         V value = super.getIfCached(key);
         if (value != null) {
             return value;

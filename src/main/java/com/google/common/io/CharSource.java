@@ -25,9 +25,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Streams;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.MustBeClosed;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -246,7 +244,6 @@ public abstract class CharSource {
      * @throws IOException if an I/O error occurs while reading from this source or writing to {@code
      *     appendable}
      */
-    @CanIgnoreReturnValue
     public long copyTo(Appendable appendable) throws IOException {
         checkNotNull(appendable);
 
@@ -268,7 +265,6 @@ public abstract class CharSource {
      * @throws IOException if an I/O error occurs while reading from this source or writing to {@code
      *     sink}
      */
-    @CanIgnoreReturnValue
     public long copyTo(CharSink sink) throws IOException {
         checkNotNull(sink);
 
@@ -311,7 +307,6 @@ public abstract class CharSource {
      *
      * @throws IOException if an I/O error occurs while reading from this source
      */
-    @CheckForNull
     public String readFirstLine() throws IOException {
         Closer closer = Closer.create();
         try {
@@ -369,7 +364,7 @@ public abstract class CharSource {
     @Beta
     @CanIgnoreReturnValue // some processors won't return a useful result
     @ParametricNullness
-    public <T extends @Nullable Object> T readLines(LineProcessor<T> processor) throws IOException {
+    public <T> T readLines(LineProcessor<T> processor) throws IOException {
         checkNotNull(processor);
 
         Closer closer = Closer.create();
@@ -581,7 +576,6 @@ public abstract class CharSource {
                 Iterator<String> lines = LINE_SPLITTER.split(seq).iterator();
 
                 @Override
-                @CheckForNull
                 protected String computeNext() {
                     if (lines.hasNext()) {
                         String next = lines.next();
@@ -601,7 +595,6 @@ public abstract class CharSource {
         }
 
         @Override
-        @CheckForNull
         public String readFirstLine() {
             Iterator<String> lines = linesIterator();
             return lines.hasNext() ? lines.next() : null;
@@ -614,7 +607,7 @@ public abstract class CharSource {
 
         @Override
         @ParametricNullness
-        public <T extends @Nullable Object> T readLines(LineProcessor<T> processor) throws IOException {
+        public <T> T readLines(LineProcessor<T> processor) throws IOException {
             Iterator<String> lines = linesIterator();
             while (lines.hasNext()) {
                 if (!processor.processLine(lines.next())) {

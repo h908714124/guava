@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Deque;
 import java.util.Iterator;
 
@@ -43,7 +41,7 @@ import java.util.Iterator;
  */
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
-public abstract class ForwardingDeque<E extends @Nullable Object> extends ForwardingQueue<E>
+public abstract class ForwardingDeque<E> extends ForwardingQueue<E>
         implements Deque<E> {
 
     /** Constructor for use by subclasses. */
@@ -93,32 +91,27 @@ public abstract class ForwardingDeque<E extends @Nullable Object> extends Forwar
     }
 
     @Override
-    @CheckForNull
     public E peekFirst() {
         return delegate().peekFirst();
     }
 
     @Override
-    @CheckForNull
     public E peekLast() {
         return delegate().peekLast();
     }
 
     @CanIgnoreReturnValue // TODO(cpovirk): Consider removing this?
     @Override
-    @CheckForNull
     public E pollFirst() {
         return delegate().pollFirst();
     }
 
     @CanIgnoreReturnValue // TODO(cpovirk): Consider removing this?
     @Override
-    @CheckForNull
     public E pollLast() {
         return delegate().pollLast();
     }
 
-    @CanIgnoreReturnValue
     @Override
     @ParametricNullness
     public E pop() {
@@ -130,29 +123,25 @@ public abstract class ForwardingDeque<E extends @Nullable Object> extends Forwar
         delegate().push(e);
     }
 
-    @CanIgnoreReturnValue
     @Override
     @ParametricNullness
     public E removeFirst() {
         return delegate().removeFirst();
     }
 
-    @CanIgnoreReturnValue
     @Override
     @ParametricNullness
     public E removeLast() {
         return delegate().removeLast();
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public boolean removeFirstOccurrence(@CheckForNull Object o) {
+    public boolean removeFirstOccurrence(Object o) {
         return delegate().removeFirstOccurrence(o);
     }
 
-    @CanIgnoreReturnValue
     @Override
-    public boolean removeLastOccurrence(@CheckForNull Object o) {
+    public boolean removeLastOccurrence(Object o) {
         return delegate().removeLastOccurrence(o);
     }
 }

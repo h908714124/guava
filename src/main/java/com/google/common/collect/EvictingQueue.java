@@ -19,7 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.io.Serializable;
 import java.util.ArrayDeque;
@@ -92,7 +91,6 @@ public final class EvictingQueue<E> extends ForwardingQueue<E> implements Serial
      * @return {@code true} always
      */
     @Override
-    @CanIgnoreReturnValue
     public boolean offer(E e) {
         return add(e);
     }
@@ -104,7 +102,6 @@ public final class EvictingQueue<E> extends ForwardingQueue<E> implements Serial
      * @return {@code true} always
      */
     @Override
-    @CanIgnoreReturnValue
     public boolean add(E e) {
         checkNotNull(e); // check before removing
         if (maxSize == 0) {
@@ -118,7 +115,6 @@ public final class EvictingQueue<E> extends ForwardingQueue<E> implements Serial
     }
 
     @Override
-    @CanIgnoreReturnValue
     public boolean addAll(Collection<? extends E> collection) {
         int size = collection.size();
         if (size >= maxSize) {

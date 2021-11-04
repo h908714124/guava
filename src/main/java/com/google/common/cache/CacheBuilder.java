@@ -25,9 +25,6 @@ import com.google.common.base.Ticker;
 import com.google.common.cache.AbstractCache.SimpleStatsCounter;
 import com.google.common.cache.AbstractCache.StatsCounter;
 import com.google.common.cache.LocalCache.Strength;
-import com.google.errorprone.annotations.CheckReturnValue;
-import com.google.j2objc.annotations.J2ObjCIncompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ConcurrentModificationException;
 import java.util.IdentityHashMap;
@@ -277,12 +274,9 @@ public final class CacheBuilder<K, V> {
     int concurrencyLevel = UNSET_INT;
     long maximumSize = UNSET_INT;
     long maximumWeight = UNSET_INT;
-    @Nullable
     Weigher<? super K, ? super V> weigher;
 
-    @Nullable
     Strength keyStrength;
-    @Nullable
     Strength valueStrength;
 
     @SuppressWarnings("GoodTime") // should be a java.time.Duration
@@ -294,14 +288,10 @@ public final class CacheBuilder<K, V> {
     @SuppressWarnings("GoodTime") // should be a java.time.Duration
     long refreshNanos = UNSET_INT;
 
-    @Nullable
     Equivalence<Object> keyEquivalence;
-    @Nullable
     Equivalence<Object> valueEquivalence;
 
-    @Nullable
     RemovalListener<? super K, ? super V> removalListener;
-    @Nullable
     Ticker ticker;
 
     Supplier<? extends StatsCounter> statsCounterSupplier = NULL_STATS_COUNTER;
@@ -316,7 +306,6 @@ public final class CacheBuilder<K, V> {
      * <p>Note that while this return type is {@code CacheBuilder<Object, Object>}, type parameters on
      * the {@link #build} methods allow you to create a cache of any key and value type desired.
      */
-    @CheckReturnValue
     public static CacheBuilder<Object, Object> newBuilder() {
         return new CacheBuilder<>();
     }
@@ -327,7 +316,6 @@ public final class CacheBuilder<K, V> {
      * @since 12.0
      */
     @GwtIncompatible // To be supported
-    @CheckReturnValue
     public static CacheBuilder<Object, Object> from(CacheBuilderSpec spec) {
         return spec.toCacheBuilder().lenientParsing();
     }
@@ -340,7 +328,6 @@ public final class CacheBuilder<K, V> {
      * @since 12.0
      */
     @GwtIncompatible // To be supported
-    @CheckReturnValue
     public static CacheBuilder<Object, Object> from(String spec) {
         return from(CacheBuilderSpec.parse(spec));
     }
@@ -604,7 +591,7 @@ public final class CacheBuilder<K, V> {
     }
 
     /**
-     * Specifies that each key (not value) stored in the cache should be wrapped in a {@link
+     * Specifies that each key (not value) stored in the cache should be wrapped in a {@code
      * WeakReference} (by default, strong references are used).
      *
      * <p><b>Warning:</b> when this method is used, the resulting cache will use identity ({@code ==})
@@ -635,7 +622,7 @@ public final class CacheBuilder<K, V> {
     }
 
     /**
-     * Specifies that each value (not key) stored in the cache should be wrapped in a {@link
+     * Specifies that each value (not key) stored in the cache should be wrapped in a {@code
      * WeakReference} (by default, strong references are used).
      *
      * <p>Weak values will be garbage collected once they are weakly reachable. This makes them a poor
@@ -657,7 +644,7 @@ public final class CacheBuilder<K, V> {
     }
 
     /**
-     * Specifies that each value (not key) stored in the cache should be wrapped in a {@link
+     * Specifies that each value (not key) stored in the cache should be wrapped in a {@code
      * SoftReference} (by default, strong references are used). Softly-referenced objects will be
      * garbage-collected in a <i>globally</i> least-recently-used manner, in response to memory
      * demand.
@@ -711,7 +698,6 @@ public final class CacheBuilder<K, V> {
      * @throws ArithmeticException for durations greater than +/- approximately 292 years
      * @since 25.0
      */
-    @J2ObjCIncompatible
     @GwtIncompatible // java.time.Duration
     @SuppressWarnings("GoodTime") // java.time.Duration decomposition
     public CacheBuilder<K, V> expireAfterWrite(java.time.Duration duration) {
@@ -731,7 +717,7 @@ public final class CacheBuilder<K, V> {
      * in the class javadoc.
      *
      * <p>If you can represent the duration as a {@link java.time.Duration} (which should be preferred
-     * when feasible), use {@link #expireAfterWrite(Duration)} instead.
+     * when feasible), use {@code #expireAfterWrite(Duration)} instead.
      *
      * @param duration the length of time after an entry is created that it should be automatically
      *     removed
@@ -782,7 +768,6 @@ public final class CacheBuilder<K, V> {
      * @throws ArithmeticException for durations greater than +/- approximately 292 years
      * @since 25.0
      */
-    @J2ObjCIncompatible
     @GwtIncompatible // java.time.Duration
     @SuppressWarnings("GoodTime") // java.time.Duration decomposition
     public CacheBuilder<K, V> expireAfterAccess(java.time.Duration duration) {
@@ -807,7 +792,7 @@ public final class CacheBuilder<K, V> {
      * in the class javadoc.
      *
      * <p>If you can represent the duration as a {@link java.time.Duration} (which should be preferred
-     * when feasible), use {@link #expireAfterAccess(Duration)} instead.
+     * when feasible), use {@code #expireAfterAccess(Duration)} instead.
      *
      * @param duration the length of time after an entry is last accessed that it should be
      *     automatically removed
@@ -862,7 +847,6 @@ public final class CacheBuilder<K, V> {
      * @throws ArithmeticException for durations greater than +/- approximately 292 years
      * @since 25.0
      */
-    @J2ObjCIncompatible
     @GwtIncompatible // java.time.Duration
     @SuppressWarnings("GoodTime") // java.time.Duration decomposition
     public CacheBuilder<K, V> refreshAfterWrite(java.time.Duration duration) {
@@ -889,7 +873,7 @@ public final class CacheBuilder<K, V> {
      * <p><b>Note:</b> <i>all exceptions thrown during refresh will be logged and then swallowed</i>.
      *
      * <p>If you can represent the duration as a {@link java.time.Duration} (which should be preferred
-     * when feasible), use {@link #refreshAfterWrite(Duration)} instead.
+     * when feasible), use {@code #refreshAfterWrite(Duration)} instead.
      *
      * @param duration the length of time after an entry is created that it should be considered
      *     stale, and thus eligible for refresh
@@ -959,7 +943,6 @@ public final class CacheBuilder<K, V> {
      * @return this {@code CacheBuilder} instance (for chaining)
      * @throws IllegalStateException if a removal listener was already set
      */
-    @CheckReturnValue
     public <K1 extends K, V1 extends V> CacheBuilder<K1, V1> removalListener(
             RemovalListener<? super K1, ? super V1> listener) {
         checkState(this.removalListener == null);
@@ -1012,7 +995,6 @@ public final class CacheBuilder<K, V> {
      * @param loader the cache loader used to obtain new values
      * @return a cache having the requested features
      */
-    @CheckReturnValue
     public <K1 extends K, V1 extends V> LoadingCache<K1, V1> build(
             CacheLoader<? super K1, V1> loader) {
         checkWeightWithWeigher();
@@ -1031,7 +1013,6 @@ public final class CacheBuilder<K, V> {
      * @return a cache having the requested features
      * @since 11.0
      */
-    @CheckReturnValue
     public <K1 extends K, V1 extends V> Cache<K1, V1> build() {
         checkWeightWithWeigher();
         checkNonLoadingCache();

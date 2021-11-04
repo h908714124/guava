@@ -16,9 +16,7 @@ package com.google.common.base;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.DoNotMock;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Set;
@@ -81,7 +79,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Kevin Bourrillion
  * @since 10.0
  */
-@DoNotMock("Use Optional.of(value) or Optional.absent()")
 @GwtCompatible(serializable = true)
 @ElementTypesAreNonnullByDefault
 public abstract class Optional<T> implements Serializable {
@@ -114,7 +111,7 @@ public abstract class Optional<T> implements Serializable {
      * <p><b>Comparison to {@code java.util.Optional}:</b> this method is equivalent to Java 8's
      * {@code Optional.ofNullable}.
      */
-    public static <T> Optional<T> fromNullable(@CheckForNull T nullableReference) {
+    public static <T> Optional<T> fromNullable(T nullableReference) {
         return (nullableReference == null) ? Optional.<T>absent() : new Present<T>(nullableReference);
     }
 
@@ -124,8 +121,7 @@ public abstract class Optional<T> implements Serializable {
      *
      * @since 21.0
      */
-    @CheckForNull
-    public static <T> Optional<T> fromJavaUtil(@CheckForNull java.util.Optional<T> javaUtilOptional) {
+    public static <T> Optional<T> fromJavaUtil(java.util.Optional<T> javaUtilOptional) {
         return (javaUtilOptional == null) ? null : fromNullable(javaUtilOptional.orElse(null));
     }
 
@@ -142,8 +138,7 @@ public abstract class Optional<T> implements Serializable {
      *
      * @since 21.0
      */
-    @CheckForNull
-    public static <T> java.util.Optional<T> toJavaUtil(@CheckForNull Optional<T> googleOptional) {
+    public static <T> java.util.Optional<T> toJavaUtil(Optional<T> googleOptional) {
         return googleOptional == null ? null : googleOptional.toJavaUtil();
     }
 
@@ -251,7 +246,6 @@ public abstract class Optional<T> implements Serializable {
      * <p><b>Comparison to {@code java.util.Optional}:</b> this method is equivalent to Java 8's
      * {@code Optional.orElse(null)}.
      */
-    @CheckForNull
     public abstract T orNull();
 
     /**
@@ -300,7 +294,7 @@ public abstract class Optional<T> implements Serializable {
      * <p><b>Comparison to {@code java.util.Optional}:</b> no differences.
      */
     @Override
-    public abstract boolean equals(@CheckForNull Object object);
+    public abstract boolean equals(Object object);
 
     /**
      * Returns a hash code for this instance.
@@ -345,7 +339,6 @@ public abstract class Optional<T> implements Serializable {
                             checkNotNull(optionals.iterator());
 
                     @Override
-                    @CheckForNull
                     protected T computeNext() {
                         while (iterator.hasNext()) {
                             Optional<? extends T> optional = iterator.next();

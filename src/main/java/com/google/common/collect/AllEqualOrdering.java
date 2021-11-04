@@ -17,9 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,28 +28,28 @@ import java.util.List;
  */
 @GwtCompatible(serializable = true)
 @ElementTypesAreNonnullByDefault
-final class AllEqualOrdering extends Ordering<@Nullable Object> implements Serializable {
+final class AllEqualOrdering extends Ordering<Object> implements Serializable {
     static final AllEqualOrdering INSTANCE = new AllEqualOrdering();
 
     @Override
-    public int compare(@CheckForNull Object left, @CheckForNull Object right) {
+    public int compare(Object left, Object right) {
         return 0;
     }
 
     @Override
-    public <E extends @Nullable Object> List<E> sortedCopy(Iterable<E> iterable) {
+    public <E> List<E> sortedCopy(Iterable<E> iterable) {
         return Lists.newArrayList(iterable);
     }
 
     @Override
     @SuppressWarnings("nullness") // unsafe: see supertype
-    public <E extends @Nullable Object> ImmutableList<E> immutableSortedCopy(Iterable<E> iterable) {
+    public <E> ImmutableList<E> immutableSortedCopy(Iterable<E> iterable) {
         return ImmutableList.copyOf(iterable);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public <S extends @Nullable Object> Ordering<S> reverse() {
+    public <S> Ordering<S> reverse() {
         return (Ordering<S>) this;
     }
 

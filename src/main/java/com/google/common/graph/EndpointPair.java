@@ -22,8 +22,6 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.graph.GraphConstants.NOT_AVAILABLE_ON_UNDIRECTED;
 
@@ -135,7 +133,7 @@ public abstract class EndpointPair<N> implements Iterable<N> {
      * ordered {@link EndpointPair} is never equal to an unordered {@link EndpointPair}.
      */
     @Override
-    public abstract boolean equals(@CheckForNull Object obj);
+    public abstract boolean equals(Object obj);
 
     /**
      * The hashcode of an ordered {@link EndpointPair} is equal to {@code Objects.hashCode(source(),
@@ -166,7 +164,7 @@ public abstract class EndpointPair<N> implements Iterable<N> {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (obj == this) {
                 return true;
             }
@@ -214,7 +212,7 @@ public abstract class EndpointPair<N> implements Iterable<N> {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object obj) {
+        public boolean equals(Object obj) {
             if (obj == this) {
                 return true;
             }

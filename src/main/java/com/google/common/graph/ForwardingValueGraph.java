@@ -16,7 +16,6 @@
 
 package com.google.common.graph;
 
-import javax.annotation.CheckForNull;
 import java.util.Optional;
 import java.util.Set;
 
@@ -117,14 +116,12 @@ abstract class ForwardingValueGraph<N, V> extends AbstractValueGraph<N, V> {
     }
 
     @Override
-    @CheckForNull
-    public V edgeValueOrDefault(N nodeU, N nodeV, @CheckForNull V defaultValue) {
+    public V edgeValueOrDefault(N nodeU, N nodeV, V defaultValue) {
         return delegate().edgeValueOrDefault(nodeU, nodeV, defaultValue);
     }
 
     @Override
-    @CheckForNull
-    public V edgeValueOrDefault(EndpointPair<N> endpoints, @CheckForNull V defaultValue) {
+    public V edgeValueOrDefault(EndpointPair<N> endpoints, V defaultValue) {
         return delegate().edgeValueOrDefault(endpoints, defaultValue);
     }
 }

@@ -23,9 +23,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.graph.SuccessorsFunction;
 import com.google.common.graph.Traverser;
-import com.google.j2objc.annotations.J2ObjCIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -70,7 +68,6 @@ import static java.util.Objects.requireNonNull;
  */
 @Beta
 @GwtIncompatible
-@J2ObjCIncompatible // java.nio.file
 @ElementTypesAreNonnullByDefault
 public final class MoreFiles {
 
@@ -623,7 +620,6 @@ public final class MoreFiles {
      * Secure recursive delete using {@code SecureDirectoryStream}. Returns a collection of exceptions
      * that occurred or null if no exceptions were thrown.
      */
-    @CheckForNull
     private static Collection<IOException> deleteRecursivelySecure(
             SecureDirectoryStream<Path> dir, Path path) {
         Collection<IOException> exceptions = null;
@@ -652,7 +648,6 @@ public final class MoreFiles {
      * Secure method for deleting the contents of a directory using {@code SecureDirectoryStream}.
      * Returns a collection of exceptions that occurred or null if no exceptions were thrown.
      */
-    @CheckForNull
     private static Collection<IOException> deleteDirectoryContentsSecure(
             SecureDirectoryStream<Path> dir) {
         Collection<IOException> exceptions = null;
@@ -671,7 +666,6 @@ public final class MoreFiles {
      * Insecure recursive delete for file systems that don't support {@code SecureDirectoryStream}.
      * Returns a collection of exceptions that occurred or null if no exceptions were thrown.
      */
-    @CheckForNull
     private static Collection<IOException> deleteRecursivelyInsecure(Path path) {
         Collection<IOException> exceptions = null;
         try {
@@ -698,7 +692,6 @@ public final class MoreFiles {
      * support {@code SecureDirectoryStream}. Returns a collection of exceptions that occurred or null
      * if no exceptions were thrown.
      */
-    @CheckForNull
     private static Collection<IOException> deleteDirectoryContentsInsecure(
             DirectoryStream<Path> dir) {
         Collection<IOException> exceptions = null;
@@ -718,7 +711,6 @@ public final class MoreFiles {
      * path, this is simple. Otherwise, we need to do some trickier things. Returns null if the path
      * is a root or is the empty path.
      */
-    @CheckForNull
     private static Path getParentPath(Path path) {
         Path parent = path.getParent();
 
@@ -765,7 +757,7 @@ public final class MoreFiles {
      * the collection.
      */
     private static Collection<IOException> addException(
-            @CheckForNull Collection<IOException> exceptions, IOException e) {
+            Collection<IOException> exceptions, IOException e) {
         if (exceptions == null) {
             exceptions = new ArrayList<>(); // don't need Set semantics
         }
@@ -778,10 +770,9 @@ public final class MoreFiles {
      * null, the other collection is returned. Otherwise, the elements of {@code other} are added to
      * {@code exceptions} and {@code exceptions} is returned.
      */
-    @CheckForNull
     private static Collection<IOException> concat(
-            @CheckForNull Collection<IOException> exceptions,
-            @CheckForNull Collection<IOException> other) {
+            Collection<IOException> exceptions,
+            Collection<IOException> other) {
         if (exceptions == null) {
             return other;
         } else if (other != null) {
@@ -818,7 +809,6 @@ public final class MoreFiles {
         throw deleteFailed;
     }
 
-    @CheckForNull
     private static NoSuchFileException pathNotFound(Path path, Collection<IOException> exceptions) {
         if (exceptions.size() != 1) {
             return null;

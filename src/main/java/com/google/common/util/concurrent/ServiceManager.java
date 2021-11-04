@@ -32,10 +32,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.SetMultimap;
 import com.google.common.util.concurrent.Service.State;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.J2ObjCIncompatible;
-import com.google.j2objc.annotations.WeakOuter;
 
 import java.lang.ref.WeakReference;
 import java.time.Duration;
@@ -266,7 +263,6 @@ public final class ServiceManager implements ServiceManagerBridge {
      * @throws IllegalStateException if any of the Services are not {@link State#NEW new} when the
      *     method is called.
      */
-    @CanIgnoreReturnValue
     public ServiceManager startAsync() {
         for (Service service : services) {
             State state = service.state();
@@ -336,7 +332,6 @@ public final class ServiceManager implements ServiceManagerBridge {
      *
      * @return this
      */
-    @CanIgnoreReturnValue
     public ServiceManager stopAsync() {
         for (Service service : services) {
             service.stopAsync();
@@ -427,7 +422,6 @@ public final class ServiceManager implements ServiceManagerBridge {
      *     by startup time.
      * @since 31.0
      */
-    @J2ObjCIncompatible
     public ImmutableMap<Service, Duration> startupDurations() {
         return ImmutableMap.copyOf(
                 Maps.<Service, Long, Duration>transformValues(startupTimes(), Duration::ofMillis));
@@ -484,7 +478,6 @@ public final class ServiceManager implements ServiceManagerBridge {
          */
         final Monitor.Guard awaitHealthGuard = new AwaitHealthGuard();
 
-        @WeakOuter
         final class AwaitHealthGuard extends Monitor.Guard {
             AwaitHealthGuard() {
                 super(ServiceManagerState.this.monitor);
@@ -504,7 +497,6 @@ public final class ServiceManager implements ServiceManagerBridge {
         /** Controls how long to wait for all services to reach a terminal state. */
         final Monitor.Guard stoppedGuard = new StoppedGuard();
 
-        @WeakOuter
         final class StoppedGuard extends Monitor.Guard {
             StoppedGuard() {
                 super(ServiceManagerState.this.monitor);

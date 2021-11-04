@@ -22,7 +22,6 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.common.math.IntMath;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractSet;
 import java.util.Collections;
 import java.util.Map;
@@ -81,7 +80,7 @@ abstract class AbstractDirectedNetworkConnections<N, E> implements NetworkConnec
             }
 
             @Override
-            public boolean contains(@CheckForNull Object obj) {
+            public boolean contains(Object obj) {
                 return inEdgeMap.containsKey(obj) || outEdgeMap.containsKey(obj);
             }
         };

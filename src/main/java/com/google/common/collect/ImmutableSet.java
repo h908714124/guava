@@ -21,12 +21,7 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.math.IntMath;
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.RetainedWith;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.Arrays;
@@ -314,7 +309,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }
@@ -339,9 +334,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
     @GwtCompatible
     abstract static class CachingAsList<E> extends ImmutableSet<E> {
-        @LazyInit
-        @RetainedWith
-        @CheckForNull
         private transient ImmutableList<E> asList;
 
         @Override
@@ -382,7 +374,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
         }
 
         @Override
-        int copyIntoArray(@Nullable Object[] dst, int offset) {
+        int copyIntoArray(Object[] dst, int offset) {
             return asList().copyIntoArray(dst, offset);
         }
 
@@ -478,7 +470,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
          * overrides all the methods that access it here. Thus, all the methods here can safely assume
          * that this field is non-null.
          */
-        @CheckForNull
         private SetBuilderImpl<E> impl;
         boolean forceCopy;
 
@@ -517,7 +508,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
         }
 
         @Override
-        @CanIgnoreReturnValue
         public Builder<E> add(E element) {
             requireNonNull(impl); // see the comment on the field
             checkNotNull(element);
@@ -527,7 +517,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
         }
 
         @Override
-        @CanIgnoreReturnValue
         public Builder<E> add(E... elements) {
             super.add(elements);
             return this;
@@ -542,14 +531,12 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
          * @throws NullPointerException if {@code elements} is null or contains a null element
          */
         @Override
-        @CanIgnoreReturnValue
         public Builder<E> addAll(Iterable<? extends E> elements) {
             super.addAll(elements);
             return this;
         }
 
         @Override
-        @CanIgnoreReturnValue
         public Builder<E> addAll(Iterator<? extends E> elements) {
             super.addAll(elements);
             return this;
@@ -723,8 +710,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
      */
     private static final class RegularSetBuilderImpl<E> extends SetBuilderImpl<E> {
         // null until at least two elements are present
-        private @Nullable
-        Object @Nullable [] hashTable;
+        private Object[] hashTable;
         private int maxRunBeforeFallback;
         private int expandTableThreshold;
         private int hashCode;
@@ -829,9 +815,8 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
         }
 
         /** Builds a new open-addressed hash table from the first n objects in elements. */
-        static @Nullable
-        Object[] rebuildHashTable(int newTableSize, Object[] elements, int n) {
-            @Nullable Object[] hashTable = new @Nullable Object[newTableSize];
+        static Object[] rebuildHashTable(int newTableSize, Object[] elements, int n) {
+            Object[] hashTable = new Object[newTableSize];
             int mask = hashTable.length - 1;
             for (int i = 0; i < n; i++) {
                 // requireNonNull is safe because we ensure that the first n elements have been populated.
@@ -891,7 +876,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
          * <p>This method may return {@code true} even on truly random input, but {@code
          * ImmutableSetTest} tests that the probability of that is low.
          */
-        static boolean hashFloodingDetected(@Nullable Object[] hashTable) {
+        static boolean hashFloodingDetected(Object[] hashTable) {
             int maxRunBeforeFallback = maxRunBeforeFallback(hashTable.length);
             int mask = hashTable.length - 1;
 

@@ -16,7 +16,6 @@ package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -182,7 +181,7 @@ public enum CaseFormat {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object object) {
+        public boolean equals(Object object) {
             if (object instanceof StringConverter) {
                 StringConverter that = (StringConverter) object;
                 return sourceFormat.equals(that.sourceFormat) && targetFormat.equals(that.targetFormat);

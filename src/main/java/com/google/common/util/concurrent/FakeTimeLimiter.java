@@ -17,7 +17,6 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -51,7 +50,7 @@ public final class FakeTimeLimiter implements TimeLimiter {
 
     @Override
     @ParametricNullness
-    public <T extends @Nullable Object> T callWithTimeout(
+    public <T> T callWithTimeout(
             Callable<T> callable, long timeoutDuration, TimeUnit timeoutUnit) throws ExecutionException {
         checkNotNull(callable);
         checkNotNull(timeoutUnit);
@@ -72,7 +71,7 @@ public final class FakeTimeLimiter implements TimeLimiter {
 
     @Override
     @ParametricNullness
-    public <T extends @Nullable Object> T callUninterruptiblyWithTimeout(
+    public <T> T callUninterruptiblyWithTimeout(
             Callable<T> callable, long timeoutDuration, TimeUnit timeoutUnit) throws ExecutionException {
         return callWithTimeout(callable, timeoutDuration, timeoutUnit);
     }

@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -55,7 +52,7 @@ import java.util.Set;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public interface SetMultimap<K extends @Nullable Object, V extends @Nullable Object>
+public interface SetMultimap<K, V>
         extends Multimap<K, V> {
     /**
      * {@inheritDoc}
@@ -74,9 +71,8 @@ public interface SetMultimap<K extends @Nullable Object, V extends @Nullable Obj
      * {@link Set}, instead of the {@link java.util.Collection} specified in the {@link Multimap}
      * interface.
      */
-    @CanIgnoreReturnValue
     @Override
-    Set<V> removeAll(@CheckForNull Object key);
+    Set<V> removeAll(Object key);
 
     /**
      * {@inheritDoc}
@@ -87,7 +83,6 @@ public interface SetMultimap<K extends @Nullable Object, V extends @Nullable Obj
      *
      * <p>Any duplicates in {@code values} will be stored in the multimap once.
      */
-    @CanIgnoreReturnValue
     @Override
     Set<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values);
 
@@ -121,5 +116,5 @@ public interface SetMultimap<K extends @Nullable Object, V extends @Nullable Obj
      * empty {@code ListMultimap}.
      */
     @Override
-    boolean equals(@CheckForNull Object obj);
+    boolean equals(Object obj);
 }

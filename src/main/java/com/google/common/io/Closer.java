@@ -18,10 +18,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Throwables;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -111,7 +108,6 @@ public final class Closer implements Closeable {
 
     // only need space for 2 elements in most cases, so try to use the smallest array possible
     private final Deque<Closeable> stack = new ArrayDeque<>(4);
-    @CheckForNull
     private Throwable thrown;
 
     @VisibleForTesting
@@ -126,9 +122,8 @@ public final class Closer implements Closeable {
      * @return the given {@code closeable}
      */
     // close. this word no longer has any meaning to me.
-    @CanIgnoreReturnValue
     @ParametricNullness
-    public <C extends @Nullable Closeable> C register(@ParametricNullness C closeable) {
+    public <C extends Closeable> C register(@ParametricNullness C closeable) {
         if (closeable != null) {
             stack.addFirst(closeable);
         }
@@ -265,7 +260,6 @@ public final class Closer implements Closeable {
      */
     @VisibleForTesting
     static final class SuppressingSuppressor implements Suppressor {
-        @CheckForNull
         static SuppressingSuppressor tryCreate() {
             Method addSuppressed;
             try {

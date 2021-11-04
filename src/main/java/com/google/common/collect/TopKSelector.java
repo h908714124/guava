@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.math.IntMath;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Collections;
@@ -57,7 +55,7 @@ import static com.google.common.collect.NullnessCasts.uncheckedCastNullableTToT;
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 final class TopKSelector<
-        T extends @Nullable Object> {
+        T> {
 
     /**
      * Returns a {@code TopKSelector} that collects the lowest {@code k} elements added to it,
@@ -76,7 +74,7 @@ final class TopKSelector<
      *
      * @throws IllegalArgumentException if {@code k < 0} or {@code k > Integer.MAX_VALUE / 2}
      */
-    public static <T extends @Nullable Object> TopKSelector<T> least(
+    public static <T> TopKSelector<T> least(
             int k, Comparator<? super T> comparator) {
         return new TopKSelector<T>(comparator, k);
     }
@@ -98,7 +96,7 @@ final class TopKSelector<
      *
      * @throws IllegalArgumentException if {@code k < 0} or {@code k > Integer.MAX_VALUE / 2}
      */
-    public static <T extends @Nullable Object> TopKSelector<T> greatest(
+    public static <T> TopKSelector<T> greatest(
             int k, Comparator<? super T> comparator) {
         return new TopKSelector<T>(Ordering.from(comparator).reverse(), k);
     }
@@ -111,15 +109,13 @@ final class TopKSelector<
      * for the top k elements. Whenever the buffer is filled, we quickselect the top k elements to the
      * range [0, k) and ignore the remaining elements.
      */
-    private final @Nullable
-    T[] buffer;
+    private final T[] buffer;
     private int bufferSize;
 
     /**
      * The largest of the lowest k elements we've seen so far relative to this comparator. If
      * bufferSize ≥ k, then we can ignore any elements greater than this value.
      */
-    @CheckForNull
     private T threshold;
 
     private TopKSelector(Comparator<? super T> comparator, int k) {

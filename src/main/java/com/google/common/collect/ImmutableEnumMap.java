@@ -19,7 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableMap.IteratorBasedImmutableMap;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Spliterator;
@@ -71,18 +70,17 @@ final class ImmutableEnumMap<K extends Enum<K>, V> extends IteratorBasedImmutabl
     }
 
     @Override
-    public boolean containsKey(@CheckForNull Object key) {
+    public boolean containsKey(Object key) {
         return delegate.containsKey(key);
     }
 
     @Override
-    @CheckForNull
-    public V get(@CheckForNull Object key) {
+    public V get(Object key) {
         return delegate.get(key);
     }
 
     @Override
-    public boolean equals(@CheckForNull Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }

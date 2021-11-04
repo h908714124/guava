@@ -17,7 +17,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.primitives.Ints;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Map;
 
@@ -63,11 +62,10 @@ final class JdkBackedImmutableMultiset<E> extends ImmutableMultiset<E> {
     }
 
     @Override
-    public int count(@CheckForNull Object element) {
+    public int count(Object element) {
         return delegateMap.getOrDefault(element, 0);
     }
 
-    @CheckForNull
     private transient ImmutableSet<E> elementSet;
 
     @Override

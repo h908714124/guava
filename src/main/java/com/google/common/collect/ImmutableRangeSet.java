@@ -19,11 +19,7 @@ import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.SortedLists.KeyAbsentBehavior;
 import com.google.common.collect.SortedLists.KeyPresentBehavior;
 import com.google.common.primitives.Ints;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotCall;
-import com.google.errorprone.annotations.concurrent.LazyInit;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
@@ -189,7 +185,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     }
 
     @Override
-    @CheckForNull
     public Range<C> rangeContaining(C value) {
         int index =
                 SortedLists.binarySearch(
@@ -227,7 +222,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public void add(Range<C> range) {
         throw new UnsupportedOperationException();
     }
@@ -240,7 +234,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public void addAll(RangeSet<C> other) {
         throw new UnsupportedOperationException();
     }
@@ -253,7 +246,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public void addAll(Iterable<Range<C>> other) {
         throw new UnsupportedOperationException();
     }
@@ -266,7 +258,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public void remove(Range<C> range) {
         throw new UnsupportedOperationException();
     }
@@ -279,7 +270,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public void removeAll(RangeSet<C> other) {
         throw new UnsupportedOperationException();
     }
@@ -292,7 +282,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
      */
     @Deprecated
     @Override
-    @DoNotCall("Always throws UnsupportedOperationException")
     public void removeAll(Iterable<Range<C>> other) {
         throw new UnsupportedOperationException();
     }
@@ -313,8 +302,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
         return new RegularImmutableSortedSet<>(ranges.reverse(), Range.<C>rangeLexOrdering().reverse());
     }
 
-    @LazyInit
-    @CheckForNull
     private transient ImmutableRangeSet<C> complement;
 
     private final class ComplementRanges extends ImmutableList<Range<C>> {
@@ -557,7 +544,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
             this.domain = domain;
         }
 
-        @CheckForNull
         private transient Integer size;
 
         @Override
@@ -584,7 +570,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
                 Iterator<C> elemItr = Iterators.emptyIterator();
 
                 @Override
-                @CheckForNull
                 protected C computeNext() {
                     while (!elemItr.hasNext()) {
                         if (rangeItr.hasNext()) {
@@ -606,7 +591,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
                 Iterator<C> elemItr = Iterators.emptyIterator();
 
                 @Override
-                @CheckForNull
                 protected C computeNext() {
                     while (!elemItr.hasNext()) {
                         if (rangeItr.hasNext()) {
@@ -647,7 +631,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
         }
 
         @Override
-        public boolean contains(@CheckForNull Object o) {
+        public boolean contains(Object o) {
             if (o == null) {
                 return false;
             }
@@ -661,7 +645,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
         }
 
         @Override
-        int indexOf(@CheckForNull Object target) {
+        int indexOf(Object target) {
             if (contains(target)) {
                 @SuppressWarnings("unchecked") // if it's contained, it's definitely a C
                 C c = (C) requireNonNull(target);
@@ -748,7 +732,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
          *
          * @throws IllegalArgumentException if {@code range} is empty
          */
-        @CanIgnoreReturnValue
         public Builder<C> add(Range<C> range) {
             checkArgument(!range.isEmpty(), "range must not be empty, but was %s", range);
             ranges.add(range);
@@ -760,7 +743,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
          * and will be merged, but overlapping ranges will cause an exception when {@link #build()} is
          * called.
          */
-        @CanIgnoreReturnValue
         public Builder<C> addAll(RangeSet<C> ranges) {
             return addAll(ranges.asRanges());
         }
@@ -772,7 +754,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
          * @throws IllegalArgumentException if any inserted ranges are empty
          * @since 21.0
          */
-        @CanIgnoreReturnValue
         public Builder<C> addAll(Iterable<Range<C>> ranges) {
             for (Range<C> range : ranges) {
                 add(range);
@@ -780,7 +761,6 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
             return this;
         }
 
-        @CanIgnoreReturnValue
         Builder<C> combine(Builder<C> builder) {
             addAll(builder.ranges);
             return this;

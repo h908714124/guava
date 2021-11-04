@@ -17,7 +17,6 @@ package com.google.common.io;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
 
-import javax.annotation.CheckForNull;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Iterator;
@@ -34,7 +33,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @ElementTypesAreNonnullByDefault
 class MultiReader extends Reader {
     private final Iterator<? extends CharSource> it;
-    @CheckForNull
     private Reader current;
 
     MultiReader(Iterator<? extends CharSource> readers) throws IOException {

@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +36,7 @@ import java.util.SortedSet;
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 public interface RowSortedTable<
-        R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
+        R, C, V>
         extends Table<R, C, V> {
     /**
      * {@inheritDoc}

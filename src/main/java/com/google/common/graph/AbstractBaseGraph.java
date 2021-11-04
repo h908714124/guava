@@ -23,7 +23,6 @@ import com.google.common.collect.UnmodifiableIterator;
 import com.google.common.math.IntMath;
 import com.google.common.primitives.Ints;
 
-import javax.annotation.CheckForNull;
 import java.util.AbstractSet;
 import java.util.Set;
 
@@ -77,7 +76,7 @@ abstract class AbstractBaseGraph<N> implements BaseGraph<N> {
             }
 
             @Override
-            public boolean remove(@CheckForNull Object o) {
+            public boolean remove(Object o) {
                 throw new UnsupportedOperationException();
             }
 
@@ -86,7 +85,7 @@ abstract class AbstractBaseGraph<N> implements BaseGraph<N> {
             // Graph<LinkedList>.
             @SuppressWarnings("unchecked")
             @Override
-            public boolean contains(@CheckForNull Object obj) {
+            public boolean contains(Object obj) {
                 if (!(obj instanceof EndpointPair)) {
                     return false;
                 }

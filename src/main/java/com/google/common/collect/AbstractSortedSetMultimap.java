@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -36,7 +33,7 @@ import java.util.SortedSet;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @Nullable Object>
+abstract class AbstractSortedSetMultimap<K, V>
         extends AbstractSetMultimap<K, V> implements SortedSetMultimap<K, V> {
     /**
      * Creates a new multimap that uses the provided map.
@@ -56,7 +53,7 @@ abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @
     }
 
     @Override
-    <E extends @Nullable Object> SortedSet<E> unmodifiableCollectionSubclass(
+    <E> SortedSet<E> unmodifiableCollectionSubclass(
             Collection<E> collection) {
         if (collection instanceof NavigableSet) {
             return Sets.unmodifiableNavigableSet((NavigableSet<E>) collection);
@@ -98,9 +95,8 @@ abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @
      * returns a {@link SortedSet}, instead of the {@link Collection} specified in the {@link
      * Multimap} interface.
      */
-    @CanIgnoreReturnValue
     @Override
-    public SortedSet<V> removeAll(@CheckForNull Object key) {
+    public SortedSet<V> removeAll(Object key) {
         return (SortedSet<V>) super.removeAll(key);
     }
 
@@ -114,7 +110,6 @@ abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @
      *
      * <p>Any duplicates in {@code values} will be stored in the multimap once.
      */
-    @CanIgnoreReturnValue
     @Override
     public SortedSet<V> replaceValues(@ParametricNullness K key, Iterable<? extends V> values) {
         return (SortedSet<V>) super.replaceValues(key, values);

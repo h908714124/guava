@@ -16,10 +16,7 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableCollection;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -32,9 +29,8 @@ import static com.google.common.util.concurrent.AggregateFuture.ReleaseResources
 /** Aggregate future that computes its value by calling a callable. */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-final class CombinedFuture<V extends @Nullable Object>
-        extends AggregateFuture<@Nullable Object, V> {
-    @CheckForNull
+final class CombinedFuture<V>
+        extends AggregateFuture<Object, V> {
     private CombinedFutureInterruptibleTask<?> task;
 
     CombinedFuture(
@@ -58,7 +54,7 @@ final class CombinedFuture<V extends @Nullable Object>
     }
 
     @Override
-    void collectOneValue(int index, @CheckForNull Object returnValue) {
+    void collectOneValue(int index, Object returnValue) {
     }
 
     @Override
@@ -92,8 +88,7 @@ final class CombinedFuture<V extends @Nullable Object>
         }
     }
 
-    @WeakOuter
-    private abstract class CombinedFutureInterruptibleTask<T extends @Nullable Object>
+    private abstract class CombinedFutureInterruptibleTask<T>
             extends InterruptibleTask<T> {
         private final Executor listenerExecutor;
 
@@ -153,7 +148,6 @@ final class CombinedFuture<V extends @Nullable Object>
         abstract void setValue(@ParametricNullness T value);
     }
 
-    @WeakOuter
     private final class AsyncCallableInterruptibleTask
             extends CombinedFutureInterruptibleTask<ListenableFuture<V>> {
         private final AsyncCallable<V> callable;
@@ -184,7 +178,6 @@ final class CombinedFuture<V extends @Nullable Object>
         }
     }
 
-    @WeakOuter
     private final class CallableInterruptibleTask extends CombinedFutureInterruptibleTask<V> {
         private final Callable<V> callable;
 

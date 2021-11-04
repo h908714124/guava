@@ -16,9 +16,6 @@ package com.google.common.io;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.DoNotMock;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.IOException;
 
@@ -32,10 +29,9 @@ import java.io.IOException;
  * @since 1.0
  */
 @Beta
-@DoNotMock("Implement it normally")
 @GwtIncompatible
 @ElementTypesAreNonnullByDefault
-public interface ByteProcessor<T extends @Nullable Object> {
+public interface ByteProcessor<T> {
     /**
      * This method will be called for each chunk of bytes in an input stream. The implementation
      * should process the bytes from {@code buf[off]} through {@code buf[off + len - 1]} (inclusive).
@@ -45,7 +41,6 @@ public interface ByteProcessor<T extends @Nullable Object> {
      * @param len the length of data to be processed
      * @return true to continue processing, false to stop
      */
-    @CanIgnoreReturnValue
     // some uses know that their processor never returns false
     boolean processBytes(byte[] buf, int off, int len) throws IOException;
 

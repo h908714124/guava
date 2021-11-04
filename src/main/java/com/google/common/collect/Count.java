@@ -16,7 +16,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 
 /**
@@ -61,7 +60,7 @@ final class Count implements Serializable {
     }
 
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         return obj instanceof Count && ((Count) obj).value == value;
     }
 

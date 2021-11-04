@@ -18,9 +18,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.Longs;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.j2objc.annotations.Weak;
 
-import javax.annotation.CheckForNull;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
@@ -308,7 +306,6 @@ public final class Monitor {
     @Beta
     public abstract static class Guard {
 
-        @Weak
         final Monitor monitor;
         final Condition condition;
 
@@ -317,7 +314,6 @@ public final class Monitor {
 
         /** The next active guard */
         @GuardedBy("monitor.lock")
-        @CheckForNull
         Guard next;
 
         protected Guard(Monitor monitor) {
@@ -344,7 +340,6 @@ public final class Monitor {
      * A linked list threaded through the Guard.next field.
      */
     @GuardedBy("lock")
-    @CheckForNull
     private Guard activeGuards = null;
 
     /**

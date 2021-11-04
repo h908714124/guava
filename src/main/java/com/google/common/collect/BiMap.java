@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Map;
 import java.util.Set;
 
@@ -37,7 +34,7 @@ import java.util.Set;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public interface BiMap<K extends @Nullable Object, V extends @Nullable Object> extends Map<K, V> {
+public interface BiMap<K, V> extends Map<K, V> {
     // Modification Operations
 
     /**
@@ -47,9 +44,7 @@ public interface BiMap<K extends @Nullable Object, V extends @Nullable Object> e
      *     bimap. The bimap will remain unmodified in this event. To avoid this exception, call {@link
      *     #forcePut} instead.
      */
-    @CanIgnoreReturnValue
     @Override
-    @CheckForNull
     V put(@ParametricNullness K key, @ParametricNullness V value);
 
     /**
@@ -70,8 +65,6 @@ public interface BiMap<K extends @Nullable Object, V extends @Nullable Object> e
      *     put}, returns {@code null} both if the key is absent and if it is present with a null
      *     value.)
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     V forcePut(@ParametricNullness K key, @ParametricNullness V value);
 
     // Bulk Operations

@@ -19,7 +19,6 @@ package com.google.common.graph;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterators;
 
-import javax.annotation.CheckForNull;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -86,7 +85,6 @@ final class UndirectedGraphConnections<N, V> implements GraphConnections<N, V> {
     }
 
     @Override
-    @CheckForNull
     public V value(N node) {
         return adjacentNodeValues.get(node);
     }
@@ -98,7 +96,6 @@ final class UndirectedGraphConnections<N, V> implements GraphConnections<N, V> {
     }
 
     @Override
-    @CheckForNull
     public V removeSuccessor(N node) {
         return adjacentNodeValues.remove(node);
     }
@@ -110,7 +107,6 @@ final class UndirectedGraphConnections<N, V> implements GraphConnections<N, V> {
     }
 
     @Override
-    @CheckForNull
     public V addSuccessor(N node, V value) {
         return adjacentNodeValues.put(node, value);
     }

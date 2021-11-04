@@ -15,10 +15,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.j2objc.annotations.WeakOuter;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -36,7 +33,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @GwtCompatible(emulated = true)
 @ElementTypesAreNonnullByDefault
-abstract class AbstractSortedMultiset<E extends @Nullable Object> extends AbstractMultiset<E>
+abstract class AbstractSortedMultiset<E> extends AbstractMultiset<E>
         implements SortedMultiset<E> {
     @GwtTransient
     final Comparator<? super E> comparator;
@@ -67,21 +64,18 @@ abstract class AbstractSortedMultiset<E extends @Nullable Object> extends Abstra
     }
 
     @Override
-    @CheckForNull
     public Entry<E> firstEntry() {
         Iterator<Entry<E>> entryIterator = entryIterator();
         return entryIterator.hasNext() ? entryIterator.next() : null;
     }
 
     @Override
-    @CheckForNull
     public Entry<E> lastEntry() {
         Iterator<Entry<E>> entryIterator = descendingEntryIterator();
         return entryIterator.hasNext() ? entryIterator.next() : null;
     }
 
     @Override
-    @CheckForNull
     public Entry<E> pollFirstEntry() {
         Iterator<Entry<E>> entryIterator = entryIterator();
         if (entryIterator.hasNext()) {
@@ -94,7 +88,6 @@ abstract class AbstractSortedMultiset<E extends @Nullable Object> extends Abstra
     }
 
     @Override
-    @CheckForNull
     public Entry<E> pollLastEntry() {
         Iterator<Entry<E>> entryIterator = descendingEntryIterator();
         if (entryIterator.hasNext()) {
@@ -124,7 +117,6 @@ abstract class AbstractSortedMultiset<E extends @Nullable Object> extends Abstra
         return Multisets.iteratorImpl(descendingMultiset());
     }
 
-    @CheckForNull
     private transient SortedMultiset<E> descendingMultiset;
 
     @Override
@@ -134,7 +126,6 @@ abstract class AbstractSortedMultiset<E extends @Nullable Object> extends Abstra
     }
 
     SortedMultiset<E> createDescendingMultiset() {
-        @WeakOuter
         class DescendingMultisetImpl extends DescendingMultiset<E> {
             @Override
             SortedMultiset<E> forwardMultiset() {

@@ -16,8 +16,6 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
-
 /**
  * {@link Error} variant of {@link java.util.concurrent.ExecutionException}. As with {@code
  * ExecutionException}, the error's {@linkplain #getCause() cause} comes from a failed task,
@@ -42,17 +40,17 @@ public class ExecutionError extends Error {
     }
 
     /** Creates a new instance with the given detail message. */
-    protected ExecutionError(@CheckForNull String message) {
+    protected ExecutionError(String message) {
         super(message);
     }
 
     /** Creates a new instance with the given detail message and cause. */
-    public ExecutionError(@CheckForNull String message, @CheckForNull Error cause) {
+    public ExecutionError(String message, Error cause) {
         super(message, cause);
     }
 
     /** Creates a new instance with the given cause. */
-    public ExecutionError(@CheckForNull Error cause) {
+    public ExecutionError(Error cause) {
         super(cause);
     }
 

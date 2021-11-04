@@ -18,9 +18,7 @@ package com.google.common.util.concurrent;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Map;
@@ -87,7 +85,6 @@ public final class AtomicLongMap<K> implements Serializable {
     /**
      * Increments by one the value currently associated with {@code key}, and returns the new value.
      */
-    @CanIgnoreReturnValue
     public long incrementAndGet(K key) {
         return addAndGet(key, 1);
     }
@@ -95,7 +92,6 @@ public final class AtomicLongMap<K> implements Serializable {
     /**
      * Decrements by one the value currently associated with {@code key}, and returns the new value.
      */
-    @CanIgnoreReturnValue
     public long decrementAndGet(K key) {
         return addAndGet(key, -1);
     }
@@ -104,7 +100,6 @@ public final class AtomicLongMap<K> implements Serializable {
      * Adds {@code delta} to the value currently associated with {@code key}, and returns the new
      * value.
      */
-    @CanIgnoreReturnValue
     public long addAndGet(K key, long delta) {
         return accumulateAndGet(key, delta, Long::sum);
     }
@@ -112,7 +107,6 @@ public final class AtomicLongMap<K> implements Serializable {
     /**
      * Increments by one the value currently associated with {@code key}, and returns the old value.
      */
-    @CanIgnoreReturnValue
     public long getAndIncrement(K key) {
         return getAndAdd(key, 1);
     }
@@ -120,7 +114,6 @@ public final class AtomicLongMap<K> implements Serializable {
     /**
      * Decrements by one the value currently associated with {@code key}, and returns the old value.
      */
-    @CanIgnoreReturnValue
     public long getAndDecrement(K key) {
         return getAndAdd(key, -1);
     }
@@ -129,7 +122,6 @@ public final class AtomicLongMap<K> implements Serializable {
      * Adds {@code delta} to the value currently associated with {@code key}, and returns the old
      * value.
      */
-    @CanIgnoreReturnValue
     public long getAndAdd(K key, long delta) {
         return getAndAccumulate(key, delta, Long::sum);
     }
@@ -141,7 +133,6 @@ public final class AtomicLongMap<K> implements Serializable {
      *
      * @since 21.0
      */
-    @CanIgnoreReturnValue
     public long updateAndGet(K key, LongUnaryOperator updaterFunction) {
         checkNotNull(updaterFunction);
         return map.compute(
@@ -155,7 +146,6 @@ public final class AtomicLongMap<K> implements Serializable {
      *
      * @since 21.0
      */
-    @CanIgnoreReturnValue
     public long getAndUpdate(K key, LongUnaryOperator updaterFunction) {
         checkNotNull(updaterFunction);
         AtomicLong holder = new AtomicLong();
@@ -177,7 +167,6 @@ public final class AtomicLongMap<K> implements Serializable {
      *
      * @since 21.0
      */
-    @CanIgnoreReturnValue
     public long accumulateAndGet(K key, long x, LongBinaryOperator accumulatorFunction) {
         checkNotNull(accumulatorFunction);
         return updateAndGet(key, oldValue -> accumulatorFunction.applyAsLong(oldValue, x));
@@ -191,7 +180,6 @@ public final class AtomicLongMap<K> implements Serializable {
      *
      * @since 21.0
      */
-    @CanIgnoreReturnValue
     public long getAndAccumulate(K key, long x, LongBinaryOperator accumulatorFunction) {
         checkNotNull(accumulatorFunction);
         return getAndUpdate(key, oldValue -> accumulatorFunction.applyAsLong(oldValue, x));
@@ -201,7 +189,6 @@ public final class AtomicLongMap<K> implements Serializable {
      * Associates {@code newValue} with {@code key} in this map, and returns the value previously
      * associated with {@code key}, or zero if there was no such value.
      */
-    @CanIgnoreReturnValue
     public long put(K key, long newValue) {
         return getAndUpdate(key, x -> newValue);
     }
@@ -220,7 +207,6 @@ public final class AtomicLongMap<K> implements Serializable {
      * Removes and returns the value associated with {@code key}. If {@code key} is not in the map,
      * this method has no effect and returns zero.
      */
-    @CanIgnoreReturnValue
     public long remove(K key) {
         Long result = map.remove(key);
         return (result == null) ? 0L : result.longValue();
@@ -240,7 +226,6 @@ public final class AtomicLongMap<K> implements Serializable {
      * @since 20.0
      */
     @Beta
-    @CanIgnoreReturnValue
     public boolean removeIfZero(K key) {
         return remove(key, 0);
     }
@@ -264,7 +249,6 @@ public final class AtomicLongMap<K> implements Serializable {
         return map.values().stream().mapToLong(Long::longValue).sum();
     }
 
-    @CheckForNull
     private transient Map<K, Long> asMap;
 
     /** Returns a live, read-only view of the map backing this {@code AtomicLongMap}. */

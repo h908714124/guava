@@ -18,7 +18,6 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 
-import javax.annotation.CheckForNull;
 import java.util.NoSuchElementException;
 
 /**
@@ -43,14 +42,13 @@ import java.util.NoSuchElementException;
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 public abstract class AbstractSequentialIterator<T> extends UnmodifiableIterator<T> {
-    @CheckForNull
     private T nextOrNull;
 
     /**
      * Creates a new iterator with the given first element, or, if {@code firstOrNull} is null,
      * creates a new empty iterator.
      */
-    protected AbstractSequentialIterator(@CheckForNull T firstOrNull) {
+    protected AbstractSequentialIterator(T firstOrNull) {
         this.nextOrNull = firstOrNull;
     }
 
@@ -59,7 +57,6 @@ public abstract class AbstractSequentialIterator<T> extends UnmodifiableIterator
      * remain. This method is invoked during each call to {@link #next()} in order to compute the
      * result of a <i>future</i> call to {@code next()}.
      */
-    @CheckForNull
     protected abstract T computeNext(T previous);
 
     @Override

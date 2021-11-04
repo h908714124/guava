@@ -19,7 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Supplier;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -175,16 +174,14 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
     }
 
     private class TreeRow extends Row implements SortedMap<C, V> {
-        @CheckForNull
         final C lowerBound;
-        @CheckForNull
         final C upperBound;
 
         TreeRow(R rowKey) {
             this(rowKey, null, null);
         }
 
-        TreeRow(R rowKey, @CheckForNull C lowerBound, @CheckForNull C upperBound) {
+        TreeRow(R rowKey, C lowerBound, C upperBound) {
             super(rowKey);
             this.lowerBound = lowerBound;
             this.upperBound = upperBound;
@@ -209,7 +206,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
             return cmp.compare(a, b);
         }
 
-        boolean rangeContains(@CheckForNull Object o) {
+        boolean rangeContains(Object o) {
             return o != null
                     && (lowerBound == null || compare(lowerBound, o) <= 0)
                     && (upperBound == null || compare(upperBound, o) > 0);
@@ -251,7 +248,6 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
             return ((SortedMap<C, V>) backingRowMap).lastKey();
         }
 
-        @CheckForNull
         transient SortedMap<C, V> wholeRow;
 
         // If the row was previously empty, we check if there's a new row here every time we're queried.
@@ -262,7 +258,6 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
         }
 
         @Override
-        @CheckForNull
         SortedMap<C, V> computeBackingRowMap() {
             updateWholeRowField();
             SortedMap<C, V> map = wholeRow;
@@ -289,12 +284,11 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
         }
 
         @Override
-        public boolean containsKey(@CheckForNull Object key) {
+        public boolean containsKey(Object key) {
             return rangeContains(key) && super.containsKey(key);
         }
 
         @Override
-        @CheckForNull
         public V put(C key, V value) {
             checkArgument(rangeContains(checkNotNull(key)));
             return super.put(key, value);
@@ -325,11 +319,9 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
                         comparator);
 
         return new AbstractIterator<C>() {
-            @CheckForNull
             C lastValue;
 
             @Override
-            @CheckForNull
             protected C computeNext() {
                 while (merged.hasNext()) {
                     C next = merged.next();

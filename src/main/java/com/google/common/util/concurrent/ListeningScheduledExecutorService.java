@@ -15,7 +15,6 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.annotations.GwtIncompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.time.Duration;
 import java.util.concurrent.Callable;
@@ -53,7 +52,7 @@ public interface ListeningScheduledExecutorService
 
     /** @since 15.0 (previously returned ScheduledFuture) */
     @Override
-    <V extends @Nullable Object> ListenableScheduledFuture<V> schedule(
+    <V> ListenableScheduledFuture<V> schedule(
             Callable<V> callable, long delay, TimeUnit unit);
 
     /**
@@ -61,7 +60,7 @@ public interface ListeningScheduledExecutorService
      *
      * @since 29.0
      */
-    default <V extends @Nullable Object> ListenableScheduledFuture<V> schedule(
+    default <V> ListenableScheduledFuture<V> schedule(
             Callable<V> callable, Duration delay) {
         return schedule(callable, toNanosSaturated(delay), TimeUnit.NANOSECONDS);
     }

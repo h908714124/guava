@@ -17,10 +17,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -53,10 +50,10 @@ import static java.util.Objects.requireNonNull;
  */
 @GwtIncompatible // not worth using in GWT for now
 @ElementTypesAreNonnullByDefault
-class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E> {
+class CompactLinkedHashSet<E> extends CompactHashSet<E> {
 
     /** Creates an empty {@code CompactLinkedHashSet} instance. */
-    public static <E extends @Nullable Object> CompactLinkedHashSet<E> create() {
+    public static <E> CompactLinkedHashSet<E> create() {
         return new CompactLinkedHashSet<>();
     }
 
@@ -67,7 +64,7 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
      * @param collection the elements that the set should contain
      * @return a new {@code CompactLinkedHashSet} containing those elements (minus duplicates)
      */
-    public static <E extends @Nullable Object> CompactLinkedHashSet<E> create(
+    public static <E> CompactLinkedHashSet<E> create(
             Collection<? extends E> collection) {
         CompactLinkedHashSet<E> set = createWithExpectedSize(collection.size());
         set.addAll(collection);
@@ -82,7 +79,7 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
      * @return a new {@code CompactLinkedHashSet} containing those elements (minus duplicates)
      */
     @SafeVarargs
-    public static <E extends @Nullable Object> CompactLinkedHashSet<E> create(E... elements) {
+    public static <E> CompactLinkedHashSet<E> create(E... elements) {
         CompactLinkedHashSet<E> set = createWithExpectedSize(elements.length);
         Collections.addAll(set, elements);
         return set;
@@ -97,7 +94,7 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
      *     expectedSize} elements without resizing
      * @throws IllegalArgumentException if {@code expectedSize} is negative
      */
-    public static <E extends @Nullable Object> CompactLinkedHashSet<E> createWithExpectedSize(
+    public static <E> CompactLinkedHashSet<E> createWithExpectedSize(
             int expectedSize) {
         return new CompactLinkedHashSet<>(expectedSize);
     }
@@ -112,14 +109,12 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
      * Pointer to the predecessor of an entry in insertion order. ENDPOINT indicates a node is the
      * first node in insertion order; all values at indices ≥ {@link #size()} are UNSET.
      */
-    @CheckForNull
     private transient int[] predecessor;
 
     /**
      * Pointer to the successor of an entry in insertion order. ENDPOINT indicates a node is the last
      * node in insertion order; all values at indices ≥ {@link #size()} are UNSET.
      */
-    @CheckForNull
     private transient int[] successor;
 
     /** Pointer to the first node in the linked list, or {@code ENDPOINT} if there are no entries. */
@@ -152,7 +147,6 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
     }
 
     @Override
-    @CanIgnoreReturnValue
     Set<E> convertToHashFloodingResistantImplementation() {
         Set<E> result = super.convertToHashFloodingResistantImplementation();
         this.predecessor = null;
@@ -236,14 +230,13 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
     }
 
     @Override
-    public @Nullable
-    Object[] toArray() {
+    public Object[] toArray() {
         return ObjectArrays.toArrayImpl(this);
     }
 
     @Override
     @SuppressWarnings("nullness") // b/192354773 in our checker affects toArray declarations
-    public <T extends @Nullable Object> T[] toArray(T[] a) {
+    public <T> T[] toArray(T[] a) {
         return ObjectArrays.toArrayImpl(this, a);
     }
 

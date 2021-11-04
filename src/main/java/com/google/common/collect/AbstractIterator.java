@@ -18,9 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.CheckForNull;
 import java.util.NoSuchElementException;
 
 import static com.google.common.base.Preconditions.checkState;
@@ -65,7 +63,7 @@ import static com.google.common.collect.NullnessCasts.uncheckedCastNullableTToT;
 // com.google.common.base.AbstractIterator
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public abstract class AbstractIterator<T extends @Nullable Object> extends UnmodifiableIterator<T> {
+public abstract class AbstractIterator<T> extends UnmodifiableIterator<T> {
     private State state = State.NOT_READY;
 
     /** Constructor for use by subclasses. */
@@ -86,7 +84,6 @@ public abstract class AbstractIterator<T extends @Nullable Object> extends Unmod
         FAILED,
     }
 
-    @CheckForNull
     private T next;
 
     /**
@@ -113,7 +110,6 @@ public abstract class AbstractIterator<T extends @Nullable Object> extends Unmod
      *     this method. Any further attempts to use the iterator will result in an {@link
      *     IllegalStateException}.
      */
-    @CheckForNull
     protected abstract T computeNext();
 
     /**
@@ -123,8 +119,6 @@ public abstract class AbstractIterator<T extends @Nullable Object> extends Unmod
      * @return {@code null}; a convenience so your {@code computeNext} implementation can use the
      *     simple statement {@code return endOfData();}
      */
-    @CanIgnoreReturnValue
-    @CheckForNull
     protected final T endOfData() {
         state = State.DONE;
         return null;

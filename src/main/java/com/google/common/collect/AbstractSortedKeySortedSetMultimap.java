@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Collection;
 import java.util.Set;
@@ -35,7 +34,7 @@ import java.util.SortedSet;
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
 abstract class AbstractSortedKeySortedSetMultimap<
-        K extends @Nullable Object, V extends @Nullable Object>
+        K, V>
         extends AbstractSortedSetMultimap<K, V> {
 
     AbstractSortedKeySortedSetMultimap(SortedMap<K, Collection<V>> map) {

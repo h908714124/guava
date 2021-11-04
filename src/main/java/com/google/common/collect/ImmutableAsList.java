@@ -19,7 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 
-import javax.annotation.CheckForNull;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -38,7 +37,7 @@ abstract class ImmutableAsList<E> extends ImmutableList<E> {
     abstract ImmutableCollection<E> delegateCollection();
 
     @Override
-    public boolean contains(@CheckForNull Object target) {
+    public boolean contains(Object target) {
         // The collection's contains() is at least as fast as ImmutableList's
         // and is often faster.
         return delegateCollection().contains(target);

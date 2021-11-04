@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.SortedMap;
 
@@ -29,7 +28,7 @@ import java.util.SortedMap;
  */
 @GwtCompatible
 @ElementTypesAreNonnullByDefault
-public interface SortedMapDifference<K extends @Nullable Object, V extends @Nullable Object>
+public interface SortedMapDifference<K, V>
         extends MapDifference<K, V> {
 
     @Override

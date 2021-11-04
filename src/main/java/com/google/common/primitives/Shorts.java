@@ -19,7 +19,6 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Converter;
 
-import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Arrays;
@@ -595,13 +594,13 @@ public final class Shorts extends ShortsMethodsForWeb {
         }
 
         @Override
-        public boolean contains(@CheckForNull Object target) {
+        public boolean contains(Object target) {
             // Overridden to prevent a ton of boxing
             return (target instanceof Short) && Shorts.indexOf(array, (Short) target, start, end) != -1;
         }
 
         @Override
-        public int indexOf(@CheckForNull Object target) {
+        public int indexOf(Object target) {
             // Overridden to prevent a ton of boxing
             if (target instanceof Short) {
                 int i = Shorts.indexOf(array, (Short) target, start, end);
@@ -613,7 +612,7 @@ public final class Shorts extends ShortsMethodsForWeb {
         }
 
         @Override
-        public int lastIndexOf(@CheckForNull Object target) {
+        public int lastIndexOf(Object target) {
             // Overridden to prevent a ton of boxing
             if (target instanceof Short) {
                 int i = Shorts.lastIndexOf(array, (Short) target, start, end);
@@ -644,7 +643,7 @@ public final class Shorts extends ShortsMethodsForWeb {
         }
 
         @Override
-        public boolean equals(@CheckForNull Object object) {
+        public boolean equals(Object object) {
             if (object == this) {
                 return true;
             }

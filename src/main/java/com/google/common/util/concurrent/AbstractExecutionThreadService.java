@@ -17,7 +17,6 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Supplier;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 import java.time.Duration;
 import java.util.concurrent.Executor;
@@ -203,7 +202,6 @@ public abstract class AbstractExecutionThreadService implements Service {
     }
 
     /** @since 15.0 */
-    @CanIgnoreReturnValue
     @Override
     public final Service startAsync() {
         delegate.startAsync();
@@ -211,7 +209,6 @@ public abstract class AbstractExecutionThreadService implements Service {
     }
 
     /** @since 15.0 */
-    @CanIgnoreReturnValue
     @Override
     public final Service stopAsync() {
         delegate.stopAsync();

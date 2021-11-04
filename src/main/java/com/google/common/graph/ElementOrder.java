@@ -24,7 +24,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 import com.google.errorprone.annotations.Immutable;
 
-import javax.annotation.CheckForNull;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -46,13 +45,11 @@ import static com.google.common.base.Preconditions.checkState;
  * @since 20.0
  */
 @Beta
-@Immutable
 @ElementTypesAreNonnullByDefault
 public final class ElementOrder<T> {
     private final Type type;
 
     @SuppressWarnings("Immutable") // Hopefully the comparator provided is immutable!
-    @CheckForNull
     private final Comparator<T> comparator;
 
     /**
@@ -73,7 +70,7 @@ public final class ElementOrder<T> {
         SORTED
     }
 
-    private ElementOrder(Type type, @CheckForNull Comparator<T> comparator) {
+    private ElementOrder(Type type, Comparator<T> comparator) {
         this.type = checkNotNull(type);
         this.comparator = comparator;
         checkState((type == Type.SORTED) == (comparator != null));
@@ -162,7 +159,7 @@ public final class ElementOrder<T> {
     }
 
     @Override
-    public boolean equals(@CheckForNull Object obj) {
+    public boolean equals(Object obj) {
         if (obj == this) {
             return true;
         }
