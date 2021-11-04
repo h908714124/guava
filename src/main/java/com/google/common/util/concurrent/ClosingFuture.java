@@ -248,7 +248,7 @@ public final class ClosingFuture<V> {
         /**
          * Computes a result, or throws an exception if unable to do so.
          *
-         * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          * closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline is done (but
          * not before this method completes), even if this method throws or the pipeline is cancelled.
          */
@@ -266,7 +266,7 @@ public final class ClosingFuture<V> {
         /**
          * Computes a result, or throws an exception if unable to do so.
          *
-         * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          * closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline is done (but
          * not before this method completes), even if this method throws or the pipeline is cancelled.
          */
@@ -285,7 +285,7 @@ public final class ClosingFuture<V> {
         /**
          * Applies this function to an input, or throws an exception if unable to do so.
          *
-         * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          * closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline is done (but
          * not before this method completes), even if this method throws or the pipeline is cancelled.
          */
@@ -303,7 +303,7 @@ public final class ClosingFuture<V> {
         /**
          * Applies this function to an input, or throws an exception if unable to do so.
          *
-         * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          * closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline is done (but
          * not before this method completes), even if this method throws or the pipeline is cancelled.
          */
@@ -344,7 +344,7 @@ public final class ClosingFuture<V> {
 
         /**
          * Starts closing all closeable objects captured during the {@link ClosingFuture}'s asynchronous
-         * operation on the {@link Executor}s specified by calls to {@link
+         * operation on the {@link Executor}s specified by calls to {@code
          * DeferredCloser#eventuallyClose(Closeable, Executor)}.
          *
          * <p>If any such calls specified {@link MoreExecutors#directExecutor()}, those objects will be
@@ -415,7 +415,7 @@ public final class ClosingFuture<V> {
      * value in order to close it.
      *
      * @param future the future to create the {@code ClosingFuture} from. For discussion of the
-     *     future's result type {@code C}, see {@link DeferredCloser#eventuallyClose(Closeable,
+     *     future's result type {@code C}, see {@code DeferredCloser#eventuallyClose(Closeable,
      *     Executor)}.
      * @param closingExecutor the future's result will be closed on this executor
      * @deprecated Creating {@link Future}s of closeable types is dangerous in general because the
@@ -593,7 +593,7 @@ public final class ClosingFuture<V> {
                 TrustedListenableFutureTask.create(
                         new Callable<V>() {
                             @Override
-                                                public V call() throws Exception {
+                            public V call() throws Exception {
                                 return callable.call(closeables.closer);
                             }
 
@@ -722,7 +722,7 @@ public final class ClosingFuture<V> {
      *   <li>Use this method only when calling an API that returns a {@link ListenableFuture} or a
      *       {@code ClosingFuture}. If possible, prefer calling {@link #transform(ClosingFunction,
      *       Executor)} instead, with a function that returns the next value directly.
-     *   <li>Call {@link DeferredCloser#eventuallyClose(Closeable, Executor) closer.eventuallyClose()}
+     *   <li>Call {@code DeferredCloser#eventuallyClose(Closeable, Executor) closer.eventuallyClose()}
      *       for every closeable object this step creates in order to capture it for later closing.
      *   <li>Return a {@code ClosingFuture}. To turn a {@link ListenableFuture} into a {@code
      *       ClosingFuture} call {@link #from(ListenableFuture)}.
@@ -802,7 +802,7 @@ public final class ClosingFuture<V> {
      * meets these conditions:
      *
      * <ul>
-     *   <li>It does not need to capture any {@link Closeable} objects by calling {@link
+     *   <li>It does not need to capture any {@link Closeable} objects by calling {@code
      *       DeferredCloser#eventuallyClose(Closeable, Executor)}.
      *   <li>It returns a {@link ListenableFuture}.
      * </ul>
@@ -920,7 +920,7 @@ public final class ClosingFuture<V> {
      *       {@code ClosingFuture}. If possible, prefer calling {@link #catching(Class,
      *       ClosingFunction, Executor)} instead, with a function that returns the next value
      *       directly.
-     *   <li>Call {@link DeferredCloser#eventuallyClose(Closeable, Executor) closer.eventuallyClose()}
+     *   <li>Call {@code DeferredCloser#eventuallyClose(Closeable, Executor) closer.eventuallyClose()}
      *       for every closeable object this step creates in order to capture it for later closing.
      *   <li>Return a {@code ClosingFuture}. To turn a {@link ListenableFuture} into a {@code
      *       ClosingFuture} call {@link #from(ListenableFuture)}.
@@ -1231,14 +1231,14 @@ public final class ClosingFuture<V> {
             /**
              * Computes a result, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
              *
              * @param peeker used to get the value of any of the input futures
              */
-                V call(DeferredCloser closer, Peeker peeker) throws Exception;
+            V call(DeferredCloser closer, Peeker peeker) throws Exception;
         }
 
         /**
@@ -1251,7 +1251,7 @@ public final class ClosingFuture<V> {
             /**
              * Computes a {@link ClosingFuture} result, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
@@ -1291,7 +1291,7 @@ public final class ClosingFuture<V> {
             Callable<V> callable =
                     new Callable<V>() {
                         @Override
-                                        public V call() throws Exception {
+                        public V call() throws Exception {
                             return new Peeker(inputs).call(combiningCallable, closeables);
                         }
 
@@ -1332,7 +1332,7 @@ public final class ClosingFuture<V> {
          *   <li>Use this method only when calling an API that returns a {@link ListenableFuture} or a
          *       {@code ClosingFuture}. If possible, prefer calling {@link #call(CombiningCallable,
          *       Executor)} instead, with a function that returns the next value directly.
-         *   <li>Call {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         *   <li>Call {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          *       closer.eventuallyClose()} for every closeable object this step creates in order to
          *       capture it for later closing.
          *   <li>Return a {@code ClosingFuture}. To turn a {@link ListenableFuture} into a {@code
@@ -1407,12 +1407,12 @@ public final class ClosingFuture<V> {
             /**
              * Applies this function to two inputs, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
              */
-                U apply(DeferredCloser closer, V1 value1, V2 value2)
+            U apply(DeferredCloser closer, V1 value1, V2 value2)
                     throws Exception;
         }
 
@@ -1431,7 +1431,7 @@ public final class ClosingFuture<V> {
             /**
              * Applies this function to two inputs, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
@@ -1468,7 +1468,7 @@ public final class ClosingFuture<V> {
             return call(
                     new CombiningCallable<U>() {
                         @Override
-                                        public U call(DeferredCloser closer, Peeker peeker) throws Exception {
+                        public U call(DeferredCloser closer, Peeker peeker) throws Exception {
                             return function.apply(closer, peeker.getDone(future1), peeker.getDone(future2));
                         }
 
@@ -1506,7 +1506,7 @@ public final class ClosingFuture<V> {
          *   <li>Use this method only when calling an API that returns a {@link ListenableFuture} or a
          *       {@code ClosingFuture}. If possible, prefer calling {@link #call(CombiningCallable,
          *       Executor)} instead, with a function that returns the next value directly.
-         *   <li>Call {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         *   <li>Call {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          *       closer.eventuallyClose()} for every closeable object this step creates in order to
          *       capture it for later closing.
          *   <li>Return a {@code ClosingFuture}. To turn a {@link ListenableFuture} into a {@code
@@ -1564,12 +1564,12 @@ public final class ClosingFuture<V> {
             /**
              * Applies this function to three inputs, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
              */
-                U apply(
+            U apply(
                     DeferredCloser closer,
                     V1 value1,
                     V2 value2,
@@ -1595,7 +1595,7 @@ public final class ClosingFuture<V> {
             /**
              * Applies this function to three inputs, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
@@ -1638,7 +1638,7 @@ public final class ClosingFuture<V> {
             return call(
                     new CombiningCallable<U>() {
                         @Override
-                                        public U call(DeferredCloser closer, Peeker peeker) throws Exception {
+                        public U call(DeferredCloser closer, Peeker peeker) throws Exception {
                             return function.apply(
                                     closer,
                                     peeker.getDone(future1),
@@ -1680,7 +1680,7 @@ public final class ClosingFuture<V> {
          *   <li>Use this method only when calling an API that returns a {@link ListenableFuture} or a
          *       {@code ClosingFuture}. If possible, prefer calling {@link #call(CombiningCallable,
          *       Executor)} instead, with a function that returns the next value directly.
-         *   <li>Call {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         *   <li>Call {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          *       closer.eventuallyClose()} for every closeable object this step creates in order to
          *       capture it for later closing.
          *   <li>Return a {@code ClosingFuture}. To turn a {@link ListenableFuture} into a {@code
@@ -1748,12 +1748,12 @@ public final class ClosingFuture<V> {
             /**
              * Applies this function to four inputs, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
              */
-                U apply(
+            U apply(
                     DeferredCloser closer,
                     V1 value1,
                     V2 value2,
@@ -1783,7 +1783,7 @@ public final class ClosingFuture<V> {
             /**
              * Applies this function to four inputs, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
@@ -1832,7 +1832,7 @@ public final class ClosingFuture<V> {
             return call(
                     new CombiningCallable<U>() {
                         @Override
-                                        public U call(DeferredCloser closer, Peeker peeker) throws Exception {
+                        public U call(DeferredCloser closer, Peeker peeker) throws Exception {
                             return function.apply(
                                     closer,
                                     peeker.getDone(future1),
@@ -1875,7 +1875,7 @@ public final class ClosingFuture<V> {
          *   <li>Use this method only when calling an API that returns a {@link ListenableFuture} or a
          *       {@code ClosingFuture}. If possible, prefer calling {@link #call(CombiningCallable,
          *       Executor)} instead, with a function that returns the next value directly.
-         *   <li>Call {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         *   <li>Call {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          *       closer.eventuallyClose()} for every closeable object this step creates in order to
          *       capture it for later closing.
          *   <li>Return a {@code ClosingFuture}. To turn a {@link ListenableFuture} into a {@code
@@ -1949,12 +1949,12 @@ public final class ClosingFuture<V> {
             /**
              * Applies this function to five inputs, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
              */
-                U apply(
+            U apply(
                     DeferredCloser closer,
                     V1 value1,
                     V2 value2,
@@ -1987,7 +1987,7 @@ public final class ClosingFuture<V> {
             /**
              * Applies this function to five inputs, or throws an exception if unable to do so.
              *
-             * <p>Any objects that are passed to {@link DeferredCloser#eventuallyClose(Closeable,
+             * <p>Any objects that are passed to {@code DeferredCloser#eventuallyClose(Closeable,
              * Executor) closer.eventuallyClose()} will be closed when the {@link ClosingFuture} pipeline
              * is done (but not before this method completes), even if this method throws or the pipeline
              * is cancelled.
@@ -2041,7 +2041,7 @@ public final class ClosingFuture<V> {
             return call(
                     new CombiningCallable<U>() {
                         @Override
-                                        public U call(DeferredCloser closer, Peeker peeker) throws Exception {
+                        public U call(DeferredCloser closer, Peeker peeker) throws Exception {
                             return function.apply(
                                     closer,
                                     peeker.getDone(future1),
@@ -2086,7 +2086,7 @@ public final class ClosingFuture<V> {
          *   <li>Use this method only when calling an API that returns a {@link ListenableFuture} or a
          *       {@code ClosingFuture}. If possible, prefer calling {@link #call(CombiningCallable,
          *       Executor)} instead, with a function that returns the next value directly.
-         *   <li>Call {@link DeferredCloser#eventuallyClose(Closeable, Executor)
+         *   <li>Call {@code DeferredCloser#eventuallyClose(Closeable, Executor)
          *       closer.eventuallyClose()} for every closeable object this step creates in order to
          *       capture it for later closing.
          *   <li>Return a {@code ClosingFuture}. To turn a {@link ListenableFuture} into a {@code
