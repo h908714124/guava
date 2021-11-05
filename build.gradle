@@ -72,7 +72,7 @@ test {
     excludes << '**/*$*8.class'
     excludes << '**/*$*9.class'
     maxHeapSize = '1536m'
-    setForkEvery(64)
+    setForkEvery(32)
     setFailFast(true)
 }
 
