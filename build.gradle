@@ -60,10 +60,12 @@ test {
     testLogging {
         events('failed')
     }
+    maxHeapSize = "2048m"
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
     }
-    failFast(true)
+    setForkEvery(100)
+    setFailFast(true)
 }
 
 task javadocJar(type: Jar) {

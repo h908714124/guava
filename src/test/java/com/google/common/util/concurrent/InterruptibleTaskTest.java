@@ -15,7 +15,11 @@
  */
 package com.google.common.util.concurrent;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.lang.reflect.Method;
 import java.nio.channels.spi.AbstractInterruptibleChannel;
@@ -27,10 +31,12 @@ import java.util.concurrent.locks.LockSupport;
 import static com.google.common.truth.Truth.assertThat;
 
 
-public final class InterruptibleTaskTest extends TestCase {
+@RunWith(JUnit4.class)
+public final class InterruptibleTaskTest {
 
     // Regression test for a deadlock where a task could be stuck busy waiting for the task to
     // transition to DONE
+    @Test
     public void testInterruptThrows() throws Exception {
         final CountDownLatch isInterruptibleRegistered = new CountDownLatch(1);
         InterruptibleTask<Void> task =
@@ -67,7 +73,7 @@ public final class InterruptibleTaskTest extends TestCase {
         isInterruptibleRegistered.await();
         try {
             task.interruptTask();
-            fail();
+            Assert.fail();
         } catch (RuntimeException expected) {
             assertThat(expected)
                     .hasMessageThat()
@@ -94,6 +100,11 @@ public final class InterruptibleTaskTest extends TestCase {
      * protect ourselves from that we want to make sure that tasks don't spin too much waiting for the
      * interrupting thread to complete the protocol.
      */
+    @Ignore("Unable to make protected final java.lang.Thread" +
+            " java.util.concurrent.locks.AbstractOwnableSynchronizer.getExclusiveOwnerThread()" +
+            " accessible: module java.base does not open java.util.concurrent.locks" +
+            " to unnamed module")
+    @Test
     public void testInterruptIsSlow() throws Exception {
         final CountDownLatch isInterruptibleRegistered = new CountDownLatch(1);
         final SlowChannel slowChannel = new SlowChannel();
