@@ -60,10 +60,10 @@ test {
     testLogging {
         events('failed')
     }
-    excludes(['%regex[.*Tester.class]',
-              '%regex[.*PackageSanityTests.*.class]',
-              '%regex[.*[$]\\d+.class]'])
-    maxHeapSize = "1536m"
+    excludes << '%regex[.*Tester.class]'
+    excludes << '%regex[.*PackageSanityTests.*.class]'
+    excludes << '%regex[.*[$]\\d+.class]'
+    maxHeapSize = '1536m'
     setFailFast(true)
 }
 
