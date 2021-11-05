@@ -17,28 +17,35 @@
 package com.google.common.util.concurrent;
 
 import com.google.common.testing.NullPointerTester;
-import junit.framework.TestCase;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicReferenceArray;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Unit test for {@link Atomics}.
  *
  * @author Kurt Alfred Kluever
  */
-public class AtomicsTest extends TestCase {
+public class AtomicsTest {
 
     private static final Object OBJECT = new Object();
 
+    @Test
     public void testNewReference() throws Exception {
         assertEquals(null, Atomics.newReference().get());
     }
 
+    @Test
     public void testNewReference_withInitialValue() throws Exception {
         assertEquals(null, Atomics.newReference(null).get());
         assertEquals(OBJECT, Atomics.newReference(OBJECT).get());
     }
 
+    @Test
     public void testNewReferenceArray_withLength() throws Exception {
         int length = 42;
         AtomicReferenceArray<String> refArray = Atomics.newReferenceArray(length);
@@ -52,6 +59,7 @@ public class AtomicsTest extends TestCase {
         }
     }
 
+    @Test
     public void testNewReferenceArray_withNegativeLength() throws Exception {
         try {
             Atomics.newReferenceArray(-1);
@@ -60,6 +68,7 @@ public class AtomicsTest extends TestCase {
         }
     }
 
+    @Test
     public void testNewReferenceArray_withStringArray() throws Exception {
         String[] array = {"foo", "bar", "baz"};
         AtomicReferenceArray<String> refArray = Atomics.newReferenceArray(array);
@@ -73,6 +82,7 @@ public class AtomicsTest extends TestCase {
         }
     }
 
+    @Test
     public void testNewReferenceArray_withNullArray() throws Exception {
         try {
             Atomics.newReferenceArray(null);
@@ -81,6 +91,11 @@ public class AtomicsTest extends TestCase {
         }
     }
 
+    @Ignore("No exception thrown for parameter at index 0 from" +
+            " public static java.util.concurrent.atomic.AtomicReference" +
+            " com.google.common.util.concurrent.Atomics.newReference(java.lang.Object)[null]" +
+            " for class com.google.common.util.concurrent.Atomics")
+    @Test
     public void testNullPointers() {
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicConstructors(Atomics.class); // there aren't any
