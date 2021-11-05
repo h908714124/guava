@@ -61,6 +61,7 @@ test {
         events('failed')
     }
     excludes << '**/*Tester.class'
+    excludes << 'com/google/common/io/ResourcesTest.class'
     excludes << '**/*$*0.class'
     excludes << '**/*$*1.class'
     excludes << '**/*$*2.class'
@@ -72,7 +73,7 @@ test {
     excludes << '**/*$*8.class'
     excludes << '**/*$*9.class'
     maxHeapSize = '1536m'
-    setForkEvery(32)
+    setForkEvery(16)
     setFailFast(true)
 }
 
