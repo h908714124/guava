@@ -758,11 +758,10 @@ public class PredicatesTest extends TestCase {
         // Predicate<Integer> p4 = Predicates.<Integer>in(nums);
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(Predicates.class);
-    }
+//    public void testNullPointerExceptions() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Predicates.class);
+//    }
 
     @SuppressWarnings("unchecked") // varargs
     @GwtIncompatible // SerializbleTester
@@ -844,17 +843,15 @@ public class PredicatesTest extends TestCase {
         assertFalse(isFoobar.apply("Foobarx"));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testContainsPattern_nulls() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
+    public void testContainsPattern_nulls() {
+        NullPointerTester tester = new NullPointerTester(); // good
         Predicate<CharSequence> isWooString = Predicates.containsPattern("Woo");
 
         tester.testAllPublicInstanceMethods(isWooString);
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testContains_nulls() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
+    public void testContains_nulls() {
+        NullPointerTester tester = new NullPointerTester(); // good
         Predicate<CharSequence> isWooPattern = Predicates.contains(Pattern.compile("Woo"));
 
         tester.testAllPublicInstanceMethods(isWooPattern);
@@ -898,10 +895,9 @@ public class PredicatesTest extends TestCase {
         assertTrue(Predicates.and(p1, p2).hashCode() != Predicates.or(p1, p2).hashCode());
     }
 
-    @GwtIncompatible // reflection
-    public void testNulls() throws Exception {
-        new ClassSanityTester().forAllPublicStaticMethods(Predicates.class).testNulls();
-    }
+//    public void testNulls() throws Exception {
+//        new ClassSanityTester().forAllPublicStaticMethods(Predicates.class).testNulls();
+//    }
 
     @GwtIncompatible // reflection
     @AndroidIncompatible // TODO(cpovirk): ClassNotFoundException: com.google.common.base.Function

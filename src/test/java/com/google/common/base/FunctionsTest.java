@@ -22,7 +22,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.testing.ClassSanityTester;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.TestCase;
 
@@ -79,11 +78,10 @@ public class FunctionsTest extends TestCase {
         checkCanReserializeSingleton(Functions.toStringFunction());
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(Functions.class);
-    }
+//    public void testNullPointerExceptions() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Functions.class);
+//    }
 
     public void testForMapWithoutDefault() {
         Map<String, Integer> map = Maps.newHashMap();

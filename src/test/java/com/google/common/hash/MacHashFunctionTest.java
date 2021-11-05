@@ -59,8 +59,8 @@ public class MacHashFunctionTest extends TestCase {
                     .build();
 
     public void testNulls() {
-        NullPointerTester tester =
-                new NullPointerTester().setDefault(String.class, "HmacMD5").setDefault(Key.class, MD5_KEY);
+        NullPointerTester tester = // good
+                new NullPointerTester().setDefault(String.class, "HmacMD5").setDefault(Key.class, MD5_KEY); // good
         tester.testAllPublicConstructors(MacHashFunction.class);
         tester.testAllPublicInstanceMethods(new MacHashFunction("HmacMD5", MD5_KEY, "toString"));
     }

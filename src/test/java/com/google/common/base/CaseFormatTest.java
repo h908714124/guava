@@ -17,7 +17,6 @@
 package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.TestCase;
@@ -46,9 +45,8 @@ public class CaseFormatTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
     public void testNullArguments() {
-        NullPointerTester tester = new NullPointerTester();
+        NullPointerTester tester = new NullPointerTester(); // good
         tester.testAllPublicStaticMethods(CaseFormat.class);
         for (CaseFormat format : CaseFormat.values()) {
             tester.testAllPublicInstanceMethods(format);

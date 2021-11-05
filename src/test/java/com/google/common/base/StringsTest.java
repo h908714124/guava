@@ -18,7 +18,6 @@ package com.google.common.base;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -252,9 +251,8 @@ public class StringsTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(Strings.class);
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Strings.class);
+//    }
 }

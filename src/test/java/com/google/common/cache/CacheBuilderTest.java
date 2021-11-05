@@ -710,9 +710,8 @@ public class CacheBuilderTest extends TestCase {
         assertEquals(computeCount.get(), cache.size() + removalListener.size());
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullParameters() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
+    public void testNullParameters() {
+        NullPointerTester tester = new NullPointerTester(); // good
         CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
         tester.testAllPublicInstanceMethods(builder);
     }

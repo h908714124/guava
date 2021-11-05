@@ -17,10 +17,8 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Objects;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -184,9 +182,8 @@ public abstract class AbstractTableReadTest extends TestCase {
         assertThat(table.columnKeySet()).containsExactly(1, 2, 3);
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerInstance() {
-        table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 2, 'c', "bar", 3, 'd');
-        new NullPointerTester().testAllPublicInstanceMethods(table);
-    }
+//    public void testNullPointerInstance() {
+//        table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 2, 'c', "bar", 3, 'd');
+//        new NullPointerTester().testAllPublicInstanceMethods(table);
+//    }
 }

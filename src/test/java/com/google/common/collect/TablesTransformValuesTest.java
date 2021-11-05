@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Function;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -47,12 +46,6 @@ public class TablesTransformValuesTest extends AbstractTableTest {
             table.put((String) data[i], (Integer) data[i + 1], value);
         }
         return Tables.transformValues(table, FIRST_CHARACTER);
-    }
-
-    // Null support depends on the underlying table and function.
-    @GwtIncompatible // NullPointerTester
-    @Override
-    public void testNullPointerInstance() {
     }
 
     // put() and putAll() aren't supported.

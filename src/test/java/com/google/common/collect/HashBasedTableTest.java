@@ -17,7 +17,6 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 
@@ -91,14 +90,12 @@ public class HashBasedTableTest extends AbstractTableTest {
         assertEquals((Character) 'a', copy.get("foo", 1));
     }
 
-    @GwtIncompatible // SerializableTester
     public void testSerialization() {
         table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
         SerializableTester.reserializeAndAssert(table);
     }
 
-    @GwtIncompatible // NullPointerTester
     public void testNullPointerStatic() {
-        new NullPointerTester().testAllPublicStaticMethods(HashBasedTable.class);
+        new NullPointerTester().testAllPublicStaticMethods(HashBasedTable.class); // good
     }
 }

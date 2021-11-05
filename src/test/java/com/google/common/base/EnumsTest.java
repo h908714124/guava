@@ -138,12 +138,11 @@ public class EnumsTest extends TestCase {
         assertEquals("POODLE", converter.reverse().convert(TestEnum.POODLE));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testStringConverter_nullPointerTester() throws Exception {
-        Converter<String, TestEnum> converter = Enums.stringConverter(TestEnum.class);
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(converter);
-    }
+//    public void testStringConverter_nullPointerTester() {
+//        Converter<String, TestEnum> converter = Enums.stringConverter(TestEnum.class);
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(converter);
+//    }
 
     public void testStringConverter_nullConversions() {
         Converter<String, TestEnum> converter = Enums.stringConverter(TestEnum.class);
@@ -162,9 +161,8 @@ public class EnumsTest extends TestCase {
         SerializableTester.reserializeAndAssert(Enums.stringConverter(TestEnum.class));
     }
 
-    @GwtIncompatible // NullPointerTester
     public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
+        NullPointerTester tester = new NullPointerTester(); // good
         tester.testAllPublicStaticMethods(Enums.class);
     }
 

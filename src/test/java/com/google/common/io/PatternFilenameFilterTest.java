@@ -51,7 +51,7 @@ public class PatternFilenameFilterTest extends TestCase {
     }
 
     public void testNulls() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
+        NullPointerTester tester = new NullPointerTester(); // good
 
         tester.testConstructors(PatternFilenameFilter.class, Visibility.PACKAGE);
         tester.testStaticMethods(PatternFilenameFilter.class, Visibility.PACKAGE); // currently none

@@ -60,11 +60,19 @@ test {
     testLogging {
         events('failed')
     }
-    excludes << '%regex[.*Tester.class]'
-    excludes << '%regex[.*PackageSanityTests.*.class]'
-    excludes << '%regex[.*[$]\\d+.class]'
+    excludes << '**/*Tester.class'
+    excludes << '**/*$*0.class'
+    excludes << '**/*$*1.class'
+    excludes << '**/*$*2.class'
+    excludes << '**/*$*3.class'
+    excludes << '**/*$*4.class'
+    excludes << '**/*$*5.class'
+    excludes << '**/*$*6.class'
+    excludes << '**/*$*7.class'
+    excludes << '**/*$*8.class'
+    excludes << '**/*$*9.class'
     maxHeapSize = '1536m'
-    setForkEvery(256)
+    setForkEvery(64)
     setFailFast(true)
 }
 

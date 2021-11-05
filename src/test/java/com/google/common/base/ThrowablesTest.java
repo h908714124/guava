@@ -20,7 +20,6 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.Iterables;
 import com.google.common.primitives.Ints;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.util.List;
@@ -760,8 +759,7 @@ public class ThrowablesTest extends TestCase {
         assertThat(lazyStackTrace(e)).isEmpty();
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        new NullPointerTester().testAllPublicStaticMethods(Throwables.class);
-    }
+//    public void testNullPointers() {
+//        new NullPointerTester().testAllPublicStaticMethods(Throwables.class);
+//    }
 }

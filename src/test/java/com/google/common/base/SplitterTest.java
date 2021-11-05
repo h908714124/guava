@@ -32,7 +32,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
 
 /** @author Julien Silland */
-@GwtCompatible(emulated = true)
 public class SplitterTest extends TestCase {
 
     private static final Splitter COMMA_SPLITTER = Splitter.on(',');
@@ -671,9 +670,8 @@ public class SplitterTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
     public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester();
+        NullPointerTester tester = new NullPointerTester(); // good
         tester.testAllPublicStaticMethods(Splitter.class);
         tester.testAllPublicInstanceMethods(COMMA_SPLITTER);
         tester.testAllPublicInstanceMethods(COMMA_SPLITTER.trimResults());

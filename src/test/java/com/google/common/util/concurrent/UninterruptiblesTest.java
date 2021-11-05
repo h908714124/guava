@@ -90,8 +90,8 @@ public class UninterruptiblesTest extends TestCase {
         tearDownStack.runTearDown();
     }
 
-    public void testNull() throws Exception {
-        new NullPointerTester()
+    public void testNull() {
+        new NullPointerTester() // good
                 .setDefault(CountDownLatch.class, new CountDownLatch(0))
                 .setDefault(Semaphore.class, new Semaphore(999))
                 .testAllPublicStaticMethods(Uninterruptibles.class);

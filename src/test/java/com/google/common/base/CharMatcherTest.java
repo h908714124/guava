@@ -16,7 +16,6 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.Sets;
 import com.google.common.testing.NullPointerTester;
@@ -43,12 +42,10 @@ import static com.google.common.base.CharMatcher.whitespace;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
 public class CharMatcherTest extends TestCase {
 
-    @GwtIncompatible // NullPointerTester
-    public void testStaticNullPointers() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
+    public void testStaticNullPointers() {
+        NullPointerTester tester = new NullPointerTester(); // good
         tester.testAllPublicStaticMethods(CharMatcher.class);
         tester.testAllPublicInstanceMethods(CharMatcher.any());
         tester.testAllPublicInstanceMethods(CharMatcher.anyOf("abc"));
@@ -152,7 +149,6 @@ public class CharMatcherTest extends TestCase {
         doTestEmpty(forPredicate(Predicates.equalTo('c')));
     }
 
-    @GwtIncompatible // NullPointerTester
     public void testNull() throws Exception {
         doTestNull(CharMatcher.any());
         doTestNull(CharMatcher.none());
@@ -197,9 +193,8 @@ public class CharMatcherTest extends TestCase {
         assertEquals(0, matcher.countIn(""));
     }
 
-    @GwtIncompatible // NullPointerTester
-    private static void doTestNull(CharMatcher matcher) throws Exception {
-        NullPointerTester tester = new NullPointerTester();
+    private static void doTestNull(CharMatcher matcher) {
+        NullPointerTester tester = new NullPointerTester(); // good
         tester.testAllPublicInstanceMethods(matcher);
     }
 
@@ -720,7 +715,7 @@ public class CharMatcherTest extends TestCase {
             positive.add(c);
         }
         for (int c = 0; c <= Character.MAX_VALUE; c++) {
-            assertFalse(positive.contains(new Character((char) c)) ^ m.matches((char) c));
+            assertFalse(positive.contains((char) c) ^ m.matches((char) c));
         }
     }
 

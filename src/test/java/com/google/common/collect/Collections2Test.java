@@ -231,9 +231,8 @@ public class Collections2Test extends TestCase {
                 .createTestSuite();
     }
 
-    @GwtIncompatible // NullPointerTester
     public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
+        NullPointerTester tester = new NullPointerTester(); // good
         tester.testAllPublicStaticMethods(Collections2.class);
     }
 

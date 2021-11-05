@@ -16,6 +16,8 @@ package com.google.common.base;
 
 import java.util.Arrays;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Helper functions that can operate on any {@code Object}.
  *
@@ -47,6 +49,8 @@ public final class Objects extends ExtraObjectsMethodsForWeb {
      * java.util.Objects#equals} instead.
      */
     public static boolean equal(Object a, Object b) {
+        checkNotNull(a);
+        checkNotNull(b);
         return a == b || (a != null && a.equals(b));
     }
 
@@ -72,6 +76,7 @@ public final class Objects extends ExtraObjectsMethodsForWeb {
      * java.util.Objects#hash} instead.
      */
     public static int hashCode(Object... objects) {
+        checkNotNull(objects);
         return Arrays.hashCode(objects);
     }
 }

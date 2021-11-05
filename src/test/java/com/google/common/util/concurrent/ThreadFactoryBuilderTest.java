@@ -221,7 +221,7 @@ public class ThreadFactoryBuilderTest extends TestCase {
     }
 
     public void testNulls() {
-        NullPointerTester npTester = new NullPointerTester();
+        NullPointerTester npTester = new NullPointerTester(); // good
         npTester.testAllPublicConstructors(ThreadFactoryBuilder.class);
         npTester.testAllPublicStaticMethods(ThreadFactoryBuilder.class);
         npTester.testAllPublicInstanceMethods(builder);
