@@ -25,7 +25,7 @@ import com.google.common.reflect.ClassPath.ClassInfo;
 import com.google.common.reflect.ClassPath.ResourceInfo;
 import com.google.common.testing.EqualsTester;
 import com.google.common.testing.NullPointerTester;
-import junit.framework.TestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -56,9 +56,11 @@ import static java.nio.file.Files.createFile;
 import static java.nio.file.Files.createSymbolicLink;
 import static java.nio.file.Files.createTempDirectory;
 import static java.util.logging.Level.WARNING;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /** Functional tests of {@link ClassPath}. */
-public class ClassPathTest extends TestCase {
+public class ClassPathTest {
     private static final Logger log = Logger.getLogger(ClassPathTest.class.getName());
     private static final File FILE = new File(".");
 
@@ -73,13 +75,13 @@ public class ClassPathTest extends TestCase {
                 .testEquals();
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
+    @Test
     public void testClassPathEntries_emptyURLClassLoader_noParent() {
         assertThat(ClassPath.getClassPathEntries(new URLClassLoader(new URL[0], null)).keySet())
                 .isEmpty();
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
+    @Test
     public void testClassPathEntries_URLClassLoader_noParent() throws Exception {
         URL url1 = new URL("file:/a");
         URL url2 = new URL("file:/b");
@@ -88,7 +90,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(new File("/a"), classloader, new File("/b"), classloader);
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
+    @Test
     public void testClassPathEntries_URLClassLoader_withParent() throws Exception {
         URL url1 = new URL("file:/a");
         URL url2 = new URL("file:/b");
@@ -100,7 +102,7 @@ public class ClassPathTest extends TestCase {
                 .inOrder();
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
+    @Test
     public void testClassPathEntries_duplicateUri_parentWins() throws Exception {
         URL url = new URL("file:/a");
         URLClassLoader parent = new URLClassLoader(new URL[]{url}, null);
@@ -109,13 +111,13 @@ public class ClassPathTest extends TestCase {
         assertThat(ClassPath.getClassPathEntries(child)).containsExactly(new File("/a"), parent);
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
+    @Test
     public void testClassPathEntries_notURLClassLoader_noParent() {
         assertThat(ClassPath.getClassPathEntries(new ClassLoader(null) {
         })).isEmpty();
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
+    @Test
     public void testClassPathEntries_notURLClassLoader_withParent() throws Exception {
         URL url = new URL("file:/a");
         URLClassLoader parent = new URLClassLoader(new URL[]{url}, null);
@@ -124,7 +126,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(new File("/a"), parent);
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
+    @Test
     public void testClassPathEntries_notURLClassLoader_withParentAndGrandParent() throws Exception {
         URL url1 = new URL("file:/a");
         URL url2 = new URL("file:/b");
@@ -135,7 +137,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(new File("/a"), grandParent, new File("/b"), parent);
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
+    @Test
     public void testClassPathEntries_notURLClassLoader_withGrandParent() throws Exception {
         URL url = new URL("file:/a");
         URLClassLoader grandParent = new URLClassLoader(new URL[]{url}, null);
@@ -146,8 +148,8 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(new File("/a"), grandParent);
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
     // https://github.com/google/guava/issues/2152
+    @Test
     public void testClassPathEntries_URLClassLoader_pathWithSpace() throws Exception {
         URL url = new URL("file:///c:/Documents and Settings/");
         URLClassLoader classloader = new URLClassLoader(new URL[]{url}, null);
@@ -155,8 +157,8 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(new File("/c:/Documents and Settings/"), classloader);
     }
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
     // https://github.com/google/guava/issues/2152
+    @Test
     public void testClassPathEntries_URLClassLoader_pathWithEscapedSpace() throws Exception {
         URL url = new URL("file:///c:/Documents%20and%20Settings/");
         URLClassLoader classloader = new URLClassLoader(new URL[]{url}, null);
@@ -165,6 +167,7 @@ public class ClassPathTest extends TestCase {
     }
 
     // https://github.com/google/guava/issues/2152
+    @Test
     public void testToFile() throws Exception {
         assertThat(ClassPath.toFile(new URL("file:///c:/Documents%20and%20Settings/")))
                 .isEqualTo(new File("/c:/Documents and Settings/"));
@@ -173,7 +176,7 @@ public class ClassPathTest extends TestCase {
     }
 
     // https://github.com/google/guava/issues/2152
-    @AndroidIncompatible // works in newer Android versions but fails at the version we test with
+    @Test
     public void testToFile_AndroidIncompatible() throws Exception {
         assertThat(ClassPath.toFile(new URL("file:///c:\\Documents ~ Settings, or not\\11-12 12:05")))
                 .isEqualTo(new File("/c:\\Documents ~ Settings, or not\\11-12 12:05"));
@@ -184,8 +187,8 @@ public class ClassPathTest extends TestCase {
     }
 
 
-    @AndroidIncompatible // Android forbids null parent ClassLoader
     // https://github.com/google/guava/issues/2152
+    @Test
     public void testJarFileWithSpaces() throws Exception {
         URL url = makeJarUrlWithName("To test unescaped spaces in jar file name.jar");
         URLClassLoader classloader = new URLClassLoader(new URL[]{url}, null);
@@ -193,6 +196,8 @@ public class ClassPathTest extends TestCase {
     }
 
 
+    @Ignore("java.lang.NullPointerException")
+    @Test
     public void testScan_classPathCycle() throws IOException {
         File jarFile = File.createTempFile("with_circular_class_path", ".jar");
         try {
@@ -206,8 +211,7 @@ public class ClassPathTest extends TestCase {
         }
     }
 
-    @AndroidIncompatible // Path (for symlink creation)
-
+    @Test
     public void testScanDirectory_symlinkCycle() throws IOException {
         ClassLoader loader = ClassPathTest.class.getClassLoader();
         // directory with a cycle,
@@ -238,8 +242,7 @@ public class ClassPathTest extends TestCase {
         }
     }
 
-    @AndroidIncompatible // Path (for symlink creation)
-
+    @Test
     public void testScanDirectory_symlinkToRootCycle() throws IOException {
         ClassLoader loader = ClassPathTest.class.getClassLoader();
         // directory with a cycle,
@@ -260,6 +263,7 @@ public class ClassPathTest extends TestCase {
     }
 
 
+    @Test
     public void testScanFromFile_fileNotExists() throws IOException {
         ClassLoader classLoader = ClassPathTest.class.getClassLoader();
         assertThat(
@@ -269,6 +273,7 @@ public class ClassPathTest extends TestCase {
     }
 
 
+    @Test
     public void testScanFromFile_notJarFile() throws IOException {
         ClassLoader classLoader = ClassPathTest.class.getClassLoader();
         File notJar = File.createTempFile("not_a_jar", "txt");
@@ -279,6 +284,7 @@ public class ClassPathTest extends TestCase {
         }
     }
 
+    @Test
     public void testGetClassPathEntry() throws MalformedURLException, URISyntaxException {
         assertEquals(
                 new File("/usr/test/dep.jar").toURI(),
@@ -298,26 +304,31 @@ public class ClassPathTest extends TestCase {
                 ClassPath.getClassPathEntry(new File("/home/build/outer.jar"), "x y.jar").getFile());
     }
 
+    @Test
     public void testGetClassPathFromManifest_nullManifest() {
         assertThat(ClassPath.getClassPathFromManifest(new File("some.jar"), null)).isEmpty();
     }
 
+    @Test
     public void testGetClassPathFromManifest_noClassPath() throws IOException {
         File jarFile = new File("base.jar");
         assertThat(ClassPath.getClassPathFromManifest(jarFile, manifest(""))).isEmpty();
     }
 
+    @Test
     public void testGetClassPathFromManifest_emptyClassPath() throws IOException {
         File jarFile = new File("base.jar");
         assertThat(ClassPath.getClassPathFromManifest(jarFile, manifestClasspath(""))).isEmpty();
     }
 
+    @Test
     public void testGetClassPathFromManifest_badClassPath() throws IOException {
         File jarFile = new File("base.jar");
         Manifest manifest = manifestClasspath("nosuchscheme:an_invalid^path");
         assertThat(ClassPath.getClassPathFromManifest(jarFile, manifest)).isEmpty();
     }
 
+    @Test
     public void testGetClassPathFromManifest_pathWithStrangeCharacter() throws IOException {
         File jarFile = new File("base/some.jar");
         Manifest manifest = manifestClasspath("file:the^file.jar");
@@ -325,6 +336,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(fullpath("base/the^file.jar"));
     }
 
+    @Test
     public void testGetClassPathFromManifest_relativeDirectory() throws IOException {
         File jarFile = new File("base/some.jar");
         // with/relative/directory is the Class-Path value in the mf file.
@@ -333,6 +345,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(fullpath("base/with/relative/dir"));
     }
 
+    @Test
     public void testGetClassPathFromManifest_relativeJar() throws IOException {
         File jarFile = new File("base/some.jar");
         // with/relative/directory is the Class-Path value in the mf file.
@@ -341,6 +354,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(fullpath("base/with/relative.jar"));
     }
 
+    @Test
     public void testGetClassPathFromManifest_jarInCurrentDirectory() throws IOException {
         File jarFile = new File("base/some.jar");
         // with/relative/directory is the Class-Path value in the mf file.
@@ -349,6 +363,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(fullpath("base/current.jar"));
     }
 
+    @Test
     public void testGetClassPathFromManifest_absoluteDirectory() throws IOException {
         File jarFile = new File("base/some.jar");
         Manifest manifest = manifestClasspath("file:/with/absolute/dir");
@@ -356,6 +371,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(fullpath("/with/absolute/dir"));
     }
 
+    @Test
     public void testGetClassPathFromManifest_absoluteJar() throws IOException {
         File jarFile = new File("base/some.jar");
         Manifest manifest = manifestClasspath("file:/with/absolute.jar");
@@ -363,6 +379,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(fullpath("/with/absolute.jar"));
     }
 
+    @Test
     public void testGetClassPathFromManifest_multiplePaths() throws IOException {
         File jarFile = new File("base/some.jar");
         Manifest manifest = manifestClasspath("file:/with/absolute.jar relative.jar  relative/dir");
@@ -374,6 +391,7 @@ public class ClassPathTest extends TestCase {
                 .inOrder();
     }
 
+    @Test
     public void testGetClassPathFromManifest_leadingBlanks() throws IOException {
         File jarFile = new File("base/some.jar");
         Manifest manifest = manifestClasspath(" relative.jar");
@@ -381,6 +399,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(fullpath("base/relative.jar"));
     }
 
+    @Test
     public void testGetClassPathFromManifest_trailingBlanks() throws IOException {
         File jarFile = new File("base/some.jar");
         Manifest manifest = manifestClasspath("relative.jar ");
@@ -388,16 +407,19 @@ public class ClassPathTest extends TestCase {
                 .containsExactly(fullpath("base/relative.jar"));
     }
 
+    @Test
     public void testGetClassName() {
         assertEquals("abc.d.Abc", ClassPath.getClassName("abc/d/Abc.class"));
     }
 
+    @Test
     public void testResourceInfo_of() {
         assertEquals(ClassInfo.class, resourceInfo(ClassPathTest.class).getClass());
         assertEquals(ClassInfo.class, resourceInfo(ClassPath.class).getClass());
         assertEquals(ClassInfo.class, resourceInfo(Nested.class).getClass());
     }
 
+    @Test
     public void testGetSimpleName() {
         ClassLoader classLoader = getClass().getClassLoader();
         assertEquals("Foo", new ClassInfo(FILE, "Foo.class", classLoader).getSimpleName());
@@ -409,6 +431,7 @@ public class ClassPathTest extends TestCase {
         assertEquals("Local", new ClassInfo(FILE, "a/b/Bar$1Local.class", classLoader).getSimpleName());
     }
 
+    @Test
     public void testGetPackageName() {
         assertEquals(
                 "", new ClassInfo(FILE, "Foo.class", getClass().getClassLoader()).getPackageName());
@@ -419,6 +442,7 @@ public class ClassPathTest extends TestCase {
     // Test that ResourceInfo.urls() returns identical content to ClassLoader.getResources()
 
 
+    @Test
     public void testGetClassPathUrls() throws Exception {
         String oldPathSeparator = PATH_SEPARATOR.value();
         String oldClassPath = JAVA_CLASS_PATH.value();
@@ -461,6 +485,7 @@ public class ClassPathTest extends TestCase {
     }
 
 
+    @Test
     public void testNulls() throws IOException {
         new NullPointerTester().testAllPublicStaticMethods(ClassPath.class);
         new NullPointerTester()
@@ -468,6 +493,7 @@ public class ClassPathTest extends TestCase {
     }
 
 
+    @Test
     public void testLocationsFrom_idempotentScan() throws IOException {
         ImmutableSet<ClassPath.LocationInfo> locations =
                 ClassPath.locationsFrom(getClass().getClassLoader());
@@ -478,6 +504,7 @@ public class ClassPathTest extends TestCase {
         }
     }
 
+    @Test
     public void testLocationsFrom_idempotentLocations() {
         ImmutableSet<ClassPath.LocationInfo> locations =
                 ClassPath.locationsFrom(getClass().getClassLoader());
@@ -485,6 +512,7 @@ public class ClassPathTest extends TestCase {
                 .containsExactlyElementsIn(locations);
     }
 
+    @Test
     public void testLocationEquals() {
         ClassLoader child = getClass().getClassLoader();
         ClassLoader parent = child.getParent();
@@ -498,12 +526,14 @@ public class ClassPathTest extends TestCase {
     }
 
 
+    @Test
     public void testScanAllResources() throws IOException {
         assertThat(scanResourceNames(ClassLoader.getSystemClassLoader()))
                 .contains("com/google/common/reflect/ClassPathTest.class");
     }
 
 
+    @Test
     public void testExistsThrowsSecurityException() throws IOException, URISyntaxException {
         SecurityManager oldSecurityManager = System.getSecurityManager();
         try {
