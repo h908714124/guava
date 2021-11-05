@@ -24,7 +24,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.testing.ClassSanityTester;
 import com.google.common.testing.GcFinalization;
 import com.google.common.testing.TestLogHandler;
 import junit.framework.AssertionFailedError;
@@ -3900,13 +3899,12 @@ public class FuturesTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // ClassSanityTester
-    public void testFutures_nullChecks() throws Exception {
-        new ClassSanityTester()
-                .forAllPublicStaticMethods(Futures.class)
-                .thatReturn(Future.class)
-                .testNulls();
-    }
+//    public void testFutures_nullChecks() throws Exception {
+//        new ClassSanityTester()
+//                .forAllPublicStaticMethods(Futures.class)
+//                .thatReturn(Future.class)
+//                .testNulls();
+//    }
 
     static AssertionFailedError failureWithCause(Throwable cause, String message) {
         AssertionFailedError failure = new AssertionFailedError(message);

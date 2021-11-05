@@ -32,9 +32,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.testing.ClassSanityTester;
 import com.google.common.util.concurrent.MoreExecutors.Application;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
@@ -713,17 +711,13 @@ public class MoreExecutorsTest {
     }
 
 
-    @Ignore("Null check failed on return value of public static" +
-            " com.google.common.util.concurrent.ListeningExecutorService" +
-            " com.google.common.util.concurrent.MoreExecutors.newDirectExecutorService()")
-    @Test
-    public void testExecutors_nullCheck() throws Exception {
-        new ClassSanityTester()
-                .setDefault(RateLimiter.class, RateLimiter.create(1.0))
-                .forAllPublicStaticMethods(MoreExecutors.class)
-                .thatReturn(Executor.class)
-                .testNulls();
-    }
+//    public void testExecutors_nullCheck() throws Exception {
+//        new ClassSanityTester()
+//                .setDefault(RateLimiter.class, RateLimiter.create(1.0))
+//                .forAllPublicStaticMethods(MoreExecutors.class)
+//                .thatReturn(Executor.class)
+//                .testNulls();
+//    }
 
     private static class TestApplication extends Application {
         private final List<Thread> hooks = Lists.newArrayList();

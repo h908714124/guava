@@ -1436,13 +1436,12 @@ public class IterablesTest extends TestCase {
         verifyMergeSorted(iterables, allIntegers);
     }
 
-    @GwtIncompatible // reflection
-    public void testIterables_nullCheck() throws Exception {
-        new ClassSanityTester()
-                .forAllPublicStaticMethods(Iterables.class)
-                .thatReturn(Iterable.class)
-                .testNulls();
-    }
+//    public void testIterables_nullCheck() throws Exception {
+//        new ClassSanityTester()
+//                .forAllPublicStaticMethods(Iterables.class)
+//                .thatReturn(Iterable.class)
+//                .testNulls();
+//    }
 
     private static void verifyMergeSorted(
             Iterable<Iterable<Integer>> iterables, Iterable<Integer> unsortedExpected) {

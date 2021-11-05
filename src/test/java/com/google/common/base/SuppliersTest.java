@@ -444,10 +444,9 @@ public class SuppliersTest extends TestCase {
                 reserialize(Suppliers.synchronizedSupplier(Suppliers.ofInstance(5))).get());
     }
 
-    @GwtIncompatible // reflection
-    public void testSuppliersNullChecks() throws Exception {
-        new ClassSanityTester().forAllPublicStaticMethods(Suppliers.class).testNulls();
-    }
+//    public void testSuppliersNullChecks() throws Exception {
+//        new ClassSanityTester().forAllPublicStaticMethods(Suppliers.class).testNulls();
+//    }
 
     @GwtIncompatible // reflection
     @AndroidIncompatible // TODO(cpovirk): ClassNotFoundException: com.google.common.base.Function
