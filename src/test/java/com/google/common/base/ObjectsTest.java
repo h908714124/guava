@@ -16,19 +16,21 @@
 
 package com.google.common.base;
 
-import com.google.common.annotations.GwtCompatible;
-import com.google.common.testing.NullPointerTester;
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for {@link Objects}.
  *
  * @author Laurence Gonsalves
  */
-@GwtCompatible(emulated = true)
-public class ObjectsTest extends TestCase {
+public class ObjectsTest {
 
-    public void testEqual() throws Exception {
+    @Test
+    public void testEqual() {
         assertTrue(Objects.equal(1, 1));
         assertTrue(Objects.equal(null, null));
 
@@ -43,9 +45,10 @@ public class ObjectsTest extends TestCase {
         assertFalse(Objects.equal("1", 1));
     }
 
+    @Test
     public void testHashCode() throws Exception {
         int h1 = Objects.hashCode(1, "two", 3.0);
-        int h2 = Objects.hashCode(new Integer(1), new String("two"), new Double(3.0));
+        int h2 = Objects.hashCode(1, new String("two"), 3.0);
         // repeatable
         assertEquals(h1, h2);
 
@@ -57,8 +60,8 @@ public class ObjectsTest extends TestCase {
         assertTrue(Objects.hashCode(1, 2, 3) != Objects.hashCode(2, 3, 1));
     }
 
-    public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester(); // good
-        tester.testAllPublicStaticMethods(Objects.class);
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Objects.class);
+//    }
 }
