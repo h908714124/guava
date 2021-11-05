@@ -36,6 +36,9 @@ public class MapMakerTest extends TestCase {
 //        tester.testAllPublicInstanceMethods(new MapMaker());
 //    }
 
+    public void testDummy() {
+    }
+
     @GwtIncompatible // threads
     static final class DelayingIdentityLoader<T> implements Function<T, T> {
         private final CountDownLatch delayLatch;
