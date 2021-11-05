@@ -26,7 +26,6 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.lang.reflect.Field;
@@ -599,13 +598,12 @@ public class MediaTypeTest extends TestCase {
                 .testEquals();
     }
 
-    @GwtIncompatible // com.google.common.testing.NullPointerTester
-    public void testNullPointer() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicConstructors(MediaType.class);
-        tester.testAllPublicStaticMethods(MediaType.class);
-        tester.testAllPublicInstanceMethods(MediaType.parse("text/plain"));
-    }
+//    public void testNullPointer() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicConstructors(MediaType.class);
+//        tester.testAllPublicStaticMethods(MediaType.class);
+//        tester.testAllPublicInstanceMethods(MediaType.parse("text/plain"));
+//    }
 
     public void testToString() {
         assertEquals("text/plain", MediaType.create("text", "plain").toString());

@@ -636,10 +636,9 @@ public class DoublesTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNulls() {
-        new NullPointerTester().testAllPublicStaticMethods(Doubles.class);
-    }
+//    public void testNulls() {
+//        new NullPointerTester().testAllPublicStaticMethods(Doubles.class);
+//    }
 
     public void testStringConverter_convert() {
         Converter<String, Double> converter = Doubles.stringConverter();
@@ -676,11 +675,10 @@ public class DoublesTest extends TestCase {
         assertEquals("1.0E-6", converter.reverse().convert(1e-6));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testStringConverter_nullPointerTester() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(Doubles.stringConverter());
-    }
+//    public void testStringConverter_nullPointerTester() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(Doubles.stringConverter());
+//    }
 
     public void testTryParse_withNullNoGwt() {
         assertNull(Doubles.tryParse("null"));

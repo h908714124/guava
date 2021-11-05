@@ -28,7 +28,6 @@ import com.google.common.collect.testing.TestStringListGenerator;
 import com.google.common.collect.testing.features.CollectionFeature;
 import com.google.common.collect.testing.features.CollectionSize;
 import com.google.common.collect.testing.features.ListFeature;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.AssertionFailedError;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -892,11 +891,10 @@ public class IteratorsTest extends TestCase {
         assertFalse(changed);
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(Iterators.class);
-    }
+//    public void testNullPointerExceptions() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Iterators.class);
+//    }
 
     @GwtIncompatible // Only used by @GwtIncompatible code
     private abstract static class EmptyIteratorTester extends IteratorTester<Integer> {

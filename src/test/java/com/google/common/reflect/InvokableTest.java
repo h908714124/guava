@@ -20,9 +20,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.annotation.Retention;
@@ -832,16 +830,10 @@ public class InvokableTest {
                 .testEquals();
     }
 
-    @Ignore("No exception thrown for parameter at index 0" +
-            " from com.google.common.reflect.Invokable$MethodInvokable.public" +
-            " final java.lang.Object com.google.common.reflect.Invokable.invoke(java.lang.Object,java.lang.Object[])" +
-            " throws java.lang.reflect.InvocationTargetException,java.lang.IllegalAccessException[null, [Ljava.lang.Object;@4470fbd6]" +
-            " for class com.google.common.reflect.Invokable")
-    @Test
-    public void testNulls() {
-        new NullPointerTester().testAllPublicStaticMethods(Invokable.class);
-        new NullPointerTester().testAllPublicInstanceMethods(Prepender.method("staticMethod"));
-    }
+//    public void testNulls() {
+//        new NullPointerTester().testAllPublicStaticMethods(Invokable.class);
+//        new NullPointerTester().testAllPublicInstanceMethods(Prepender.method("staticMethod"));
+//    }
 
     @Retention(RetentionPolicy.RUNTIME)
     private @interface NotBlank {

@@ -18,7 +18,6 @@ package com.google.common.io;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestSuite;
 
 import java.io.ByteArrayInputStream;
@@ -182,11 +181,11 @@ public class ResourcesTest extends IoTestCase {
         }
     }
 
-    public void testNulls() {
-        new NullPointerTester()
-                .setDefault(URL.class, classfile(ResourcesTest.class))
-                .testAllPublicStaticMethods(Resources.class);
-    }
+//    public void testNulls() {
+//        new NullPointerTester()
+//                .setDefault(URL.class, classfile(ResourcesTest.class))
+//                .testAllPublicStaticMethods(Resources.class);
+//    }
 
     private static URL classfile(Class<?> c) {
         return c.getResource(c.getSimpleName() + ".class");

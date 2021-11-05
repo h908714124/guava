@@ -19,7 +19,6 @@ package com.google.common.primitives;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.testing.Helpers;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.TestCase;
 
@@ -453,8 +452,7 @@ public class CharsTest extends TestCase {
         assertSame(Collections.emptyList(), Chars.asList(EMPTY));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNulls() {
-        new NullPointerTester().testAllPublicStaticMethods(Chars.class);
-    }
+//    public void testNulls() {
+//        new NullPointerTester().testAllPublicStaticMethods(Chars.class);
+//    }
 }

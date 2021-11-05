@@ -30,7 +30,6 @@ import com.google.common.collect.testing.google.TestStringMultisetGenerator;
 import com.google.common.collect.testing.google.UnmodifiableCollectionTests;
 import com.google.common.testing.CollectorTester;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -579,11 +578,10 @@ public class ImmutableMultisetTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(ImmutableMultiset.class);
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(ImmutableMultiset.class);
+//    }
 
     @GwtIncompatible // SerializableTester
     public void testSerialization_empty() {

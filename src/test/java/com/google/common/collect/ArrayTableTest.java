@@ -21,7 +21,6 @@ import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Objects;
 import com.google.common.collect.Table.Cell;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 
 import java.util.Arrays;
@@ -291,10 +290,9 @@ public class ArrayTableTest extends AbstractTableTest {
         SerializableTester.reserializeAndAssert(table);
     }
 
-    @GwtIncompatible // reflection
-    public void testNullPointerStatic() {
-        new NullPointerTester().testAllPublicStaticMethods(ArrayTable.class); // good
-    }
+//    public void testNullPointerStatic() {
+//        new NullPointerTester().testAllPublicStaticMethods(ArrayTable.class); // good
+//    }
 
     public void testToString_ordered() {
         table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');

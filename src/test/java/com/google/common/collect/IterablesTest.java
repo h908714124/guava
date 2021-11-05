@@ -547,11 +547,10 @@ public class IterablesTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(Iterables.class);
-    }
+//    public void testNullPointerExceptions() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Iterables.class);
+//    }
 
     // More exhaustive tests are in IteratorsTest.
     public void testElementsEqual() throws Exception {

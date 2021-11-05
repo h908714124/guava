@@ -18,13 +18,11 @@ package com.google.common.net;
 
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Ascii;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 /**
@@ -501,11 +499,10 @@ public final class InternetDomainNameTest extends TestCase {
         return InternetDomainName.from(domain);
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNulls() {
-        final NullPointerTester tester = new NullPointerTester();
-
-        tester.testAllPublicStaticMethods(InternetDomainName.class);
-        tester.testAllPublicInstanceMethods(InternetDomainName.from("google.com"));
-    }
+//    public void testNulls() {
+//        final NullPointerTester tester = new NullPointerTester();
+//
+//        tester.testAllPublicStaticMethods(InternetDomainName.class);
+//        tester.testAllPublicInstanceMethods(InternetDomainName.from("google.com"));
+//    }
 }

@@ -15,9 +15,7 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Function;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.util.Arrays;
@@ -111,9 +109,8 @@ public class TreeTraverserTest extends TestCase {
         assertThat(iterationOrder(ADAPTER_USING_USING.preOrderTraversal(h))).isEqualTo("hdabcegf");
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNulls() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(ADAPTER);
-    }
+//    public void testNulls() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(ADAPTER);
+//    }
 }

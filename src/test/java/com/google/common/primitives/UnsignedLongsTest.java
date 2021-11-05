@@ -17,7 +17,6 @@ package com.google.common.primitives;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.testing.Helpers;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.math.BigInteger;
@@ -354,8 +353,7 @@ public class UnsignedLongsTest extends TestCase {
                 "184467440737095516159223372036854775808", UnsignedLongs.join("", -1, Long.MIN_VALUE));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNulls() {
-        new NullPointerTester().testAllPublicStaticMethods(UnsignedLongs.class);
-    }
+//    public void testNulls() {
+//        new NullPointerTester().testAllPublicStaticMethods(UnsignedLongs.class);
+//    }
 }

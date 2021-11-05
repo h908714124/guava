@@ -34,7 +34,6 @@ import com.google.common.collect.testing.google.SetGenerators.ImmutableSortedSet
 import com.google.common.collect.testing.google.SetGenerators.ImmutableSortedSetUnhashableGenerator;
 import com.google.common.collect.testing.testers.SetHashCodeTester;
 import com.google.common.testing.CollectorTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -234,10 +233,9 @@ public class ImmutableSortedSetTest extends AbstractImmutableSetTest {
         return ImmutableSortedSet.copyOf(elements);
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        new NullPointerTester().testAllPublicStaticMethods(ImmutableSortedSet.class);
-    }
+//    public void testNullPointers() {
+//        new NullPointerTester().testAllPublicStaticMethods(ImmutableSortedSet.class);
+//    }
 
     public void testEmpty_comparator() {
         SortedSet<String> set = of();

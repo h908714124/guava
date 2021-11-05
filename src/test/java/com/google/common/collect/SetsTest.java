@@ -31,7 +31,6 @@ import com.google.common.collect.testing.features.CollectionFeature;
 import com.google.common.collect.testing.features.CollectionSize;
 import com.google.common.collect.testing.features.SetFeature;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -642,13 +641,12 @@ public class SetsTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        new NullPointerTester()
-                .setDefault(Enum.class, SomeEnum.A)
-                .setDefault(Class.class, SomeEnum.class) // for newEnumSet
-                .testAllPublicStaticMethods(Sets.class);
-    }
+//    public void testNullPointerExceptions() {
+//        new NullPointerTester()
+//                .setDefault(Enum.class, SomeEnum.A)
+//                .setDefault(Class.class, SomeEnum.class) // for newEnumSet
+//                .testAllPublicStaticMethods(Sets.class);
+//    }
 
     public void testNewSetFromMap() {
         Set<Integer> set = Sets.newSetFromMap(new HashMap<Integer, Boolean>());

@@ -25,7 +25,6 @@ import com.google.common.collect.Ordering.IncomparableValueException;
 import com.google.common.collect.testing.Helpers;
 import com.google.common.primitives.Ints;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -1128,14 +1127,11 @@ public class OrderingTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(Ordering.class);
-
-        // any Ordering<Object> instance that accepts nulls should be good enough
-        tester.testAllPublicInstanceMethods(Ordering.usingToString().nullsFirst());
-    }
+//    public void testNullPointerExceptions() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Ordering.class);
+//        tester.testAllPublicInstanceMethods(Ordering.usingToString().nullsFirst());
+//    }
 
     private static <T> List<T> shuffledCopy(List<T> in, Random random) {
         List<T> mutable = newArrayList(in);

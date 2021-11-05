@@ -17,10 +17,8 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.testing.DerivedComparable;
 import com.google.common.testing.CollectorTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.util.Arrays;
@@ -294,8 +292,7 @@ public class MultisetsTest extends TestCase {
                         Multisets.immutableEntry("c", 3));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        new NullPointerTester().testAllPublicStaticMethods(Multisets.class);
-    }
+//    public void testNullPointers() {
+//        new NullPointerTester().testAllPublicStaticMethods(Multisets.class);
+//    }
 }

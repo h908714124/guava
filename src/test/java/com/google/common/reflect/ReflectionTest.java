@@ -16,7 +16,6 @@
 
 package com.google.common.reflect;
 
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.lang.reflect.InvocationHandler;
@@ -87,7 +86,7 @@ public class ReflectionTest extends TestCase {
         assertEquals(3, classesInitialized);
     }
 
-    public void testNullPointers() {
-        new NullPointerTester().testAllPublicStaticMethods(Reflection.class);
-    }
+//    public void testNullPointers() {
+//        new NullPointerTester().testAllPublicStaticMethods(Reflection.class);
+//    }
 }

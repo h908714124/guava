@@ -22,7 +22,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Table.Cell;
 import com.google.common.primitives.Ints;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.util.concurrent.AtomicLongMap;
 import junit.framework.TestCase;
 
@@ -523,13 +522,13 @@ public class HashingTest extends TestCase {
         }
     }
 
-    public void testNullPointers() {
-        NullPointerTester tester =
-                new NullPointerTester()
-                        .setDefault(byte[].class, "secret key".getBytes(UTF_8))
-                        .setDefault(HashCode.class, HashCode.fromLong(0));
-        tester.testAllPublicStaticMethods(Hashing.class);
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester =
+//                new NullPointerTester()
+//                        .setDefault(byte[].class, "secret key".getBytes(UTF_8))
+//                        .setDefault(HashCode.class, HashCode.fromLong(0));
+//        tester.testAllPublicStaticMethods(Hashing.class);
+//    }
 
     public void testSeedlessHashFunctionEquals() throws Exception {
         assertSeedlessHashFunctionEquals(Hashing.class);

@@ -28,7 +28,6 @@ import com.google.common.collect.Maps.EntryTransformer;
 import com.google.common.collect.Maps.ValueDifferenceImpl;
 import com.google.common.collect.SetsTest.Derived;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.TestCase;
 
@@ -367,10 +366,9 @@ public class MapsTest extends TestCase {
         assertEquals(hashmap.toString(), Maps.toStringImpl(hashmap));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        new NullPointerTester().testAllPublicStaticMethods(Maps.class);
-    }
+//    public void testNullPointerExceptions() {
+//        new NullPointerTester().testAllPublicStaticMethods(Maps.class);
+//    }
 
     private static final Map<Integer, Integer> EMPTY = Collections.emptyMap();
     private static final Map<Integer, Integer> SINGLETON = Collections.singletonMap(1, 2);

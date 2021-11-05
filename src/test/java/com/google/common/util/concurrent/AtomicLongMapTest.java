@@ -40,14 +40,13 @@ public class AtomicLongMapTest extends TestCase {
 
     private final Random random = new Random(301);
 
-    @GwtIncompatible // NullPointerTester
-    public void testNulls() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicConstructors(AtomicLongMap.class);
-        tester.testAllPublicStaticMethods(AtomicLongMap.class);
-        AtomicLongMap<Object> map = AtomicLongMap.create();
-        tester.testAllPublicInstanceMethods(map);
-    }
+//    public void testNulls() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicConstructors(AtomicLongMap.class);
+//        tester.testAllPublicStaticMethods(AtomicLongMap.class);
+//        AtomicLongMap<Object> map = AtomicLongMap.create();
+//        tester.testAllPublicInstanceMethods(map);
+//    }
 
     public void testCreate_map() {
         Map<String, Long> in = ImmutableMap.of("1", 1L, "2", 2L, "3", 3L);

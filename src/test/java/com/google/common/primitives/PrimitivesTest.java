@@ -17,7 +17,6 @@
 package com.google.common.primitives;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.util.Set;
@@ -89,8 +88,8 @@ public class PrimitivesTest extends TestCase {
         }
     }
 
-    public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(Primitives.class);
-    }
+//    public void testNullPointerExceptions() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Primitives.class);
+//    }
 }

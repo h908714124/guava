@@ -16,7 +16,6 @@
 
 package com.google.common.util.concurrent;
 
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.TearDownStack;
 import junit.framework.TestCase;
 
@@ -222,12 +221,12 @@ public abstract class MonitorTestCase extends TestCase {
         thread1.callAndAssertThrows(IllegalMonitorStateException.class, waitFor(), guard);
     }
 
-    public void testNulls() {
-        monitor.enter(); // Inhibit IllegalMonitorStateException
-        new NullPointerTester()
-                .setDefault(Monitor.Guard.class, new TestGuard(true))
-                .testAllPublicInstanceMethods(monitor);
-    }
+//    public void testNulls() {
+//        monitor.enter();
+//        new NullPointerTester()
+//                .setDefault(Monitor.Guard.class, new TestGuard(true))
+//                .testAllPublicInstanceMethods(monitor);
+//    }
 
     // TODO: Test enter(long, TimeUnit).
     // TODO: Test enterWhen(Guard, long, TimeUnit).

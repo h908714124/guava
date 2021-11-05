@@ -22,7 +22,6 @@ import com.google.common.hash.BloomFilterStrategies.LockFreeBitArray;
 import com.google.common.math.LongMath;
 import com.google.common.primitives.Ints;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import com.google.common.util.concurrent.Uninterruptibles;
 import junit.framework.TestCase;
@@ -255,11 +254,11 @@ public class BloomFilterTest extends TestCase {
         }
     }
 
-    public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(BloomFilter.create(Funnels.unencodedCharsFunnel(), 100));
-        tester.testAllPublicStaticMethods(BloomFilter.class);
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(BloomFilter.create(Funnels.unencodedCharsFunnel(), 100));
+//        tester.testAllPublicStaticMethods(BloomFilter.class);
+//    }
 
     /** Tests that we never get an optimal hashes number of zero. */
     public void testOptimalHashes() {

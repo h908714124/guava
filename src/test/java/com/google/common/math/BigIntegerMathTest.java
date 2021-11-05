@@ -18,7 +18,6 @@ package com.google.common.math;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.math.BigDecimal;
@@ -742,14 +741,13 @@ public class BigIntegerMathTest extends TestCase {
                 .test();
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.setDefault(BigInteger.class, ONE);
-        tester.setDefault(int.class, 1);
-        tester.setDefault(long.class, 1L);
-        tester.testAllPublicStaticMethods(BigIntegerMath.class);
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.setDefault(BigInteger.class, ONE);
+//        tester.setDefault(int.class, 1);
+//        tester.setDefault(long.class, 1L);
+//        tester.testAllPublicStaticMethods(BigIntegerMath.class);
+//    }
 
     @GwtIncompatible // String.format
     private static void failFormat(String template, Object... args) {

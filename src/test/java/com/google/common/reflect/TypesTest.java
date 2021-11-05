@@ -21,7 +21,6 @@ import com.google.common.testing.EqualsTester;
 import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.NullPointerTester.Visibility;
 import com.google.common.testing.SerializableTester;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.reflect.GenericArrayType;
@@ -436,17 +435,11 @@ public class TypesTest {
         assertEquals(elementType.toString(), Types.toString(elementType));
     }
 
-    @Ignore("No exception thrown for parameter at index 0 from static" +
-            " java.lang.reflect.ParameterizedType" +
-            " com.google.common.reflect.Types.newParameterizedTypeWithOwner(java.lang.reflect.Type,java.lang.Class,java.lang.reflect.Type[])[null, class java.lang.Object, [Ljava.lang.reflect.Type;@266374ef]" +
-            " for class com.google.common.reflect.Types")
-    @Test
-    public void testNullPointers() {
-        new NullPointerTester().testStaticMethods(Types.class, Visibility.PACKAGE);
-    }
+//    public void testNullPointers() {
+//        new NullPointerTester().testStaticMethods(Types.class, Visibility.PACKAGE);
+//    }
 
-    @Test
-    public void testNullPointersPublic() {
-        new NullPointerTester().testStaticMethods(Types.class, Visibility.PUBLIC);
-    }
+//    public void testNullPointersPublic() {
+//        new NullPointerTester().testStaticMethods(Types.class, Visibility.PUBLIC);
+//    }
 }

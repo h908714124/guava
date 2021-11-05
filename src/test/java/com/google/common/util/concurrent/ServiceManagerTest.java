@@ -20,7 +20,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.TestLogHandler;
 import com.google.common.util.concurrent.ServiceManager.Listener;
 import junit.framework.TestCase;
@@ -662,12 +661,12 @@ public class ServiceManagerTest extends TestCase {
         }
     }
 
-    public void testNulls() {
-        ServiceManager manager = new ServiceManager(Arrays.<Service>asList());
-        new NullPointerTester()
-                .setDefault(ServiceManager.Listener.class, new RecordingListener())
-                .testAllPublicInstanceMethods(manager);
-    }
+//    public void testNulls() {
+//        ServiceManager manager = new ServiceManager(Arrays.<Service>asList());
+//        new NullPointerTester()
+//                .setDefault(ServiceManager.Listener.class, new RecordingListener())
+//                .testAllPublicInstanceMethods(manager);
+//    }
 
     private static final class RecordingListener extends ServiceManager.Listener {
         volatile boolean healthyCalled;

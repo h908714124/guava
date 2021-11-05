@@ -21,7 +21,6 @@ import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.primitives.Doubles;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.math.BigDecimal;
@@ -814,10 +813,9 @@ public class DoubleMathTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.setDefault(double.class, 3.0);
-        tester.testAllPublicStaticMethods(DoubleMath.class);
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.setDefault(double.class, 3.0);
+//        tester.testAllPublicStaticMethods(DoubleMath.class);
+//    }
 }

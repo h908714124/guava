@@ -20,7 +20,6 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Converter;
 import com.google.common.collect.testing.Helpers;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.TestCase;
 
@@ -474,10 +473,9 @@ public class LongsTest extends TestCase {
         assertSame(Collections.emptyList(), Longs.asList(EMPTY));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNulls() {
-        new NullPointerTester().testAllPublicStaticMethods(Longs.class);
-    }
+//    public void testNulls() {
+//        new NullPointerTester().testAllPublicStaticMethods(Longs.class);
+//    }
 
     public void testStringConverter_convert() {
         Converter<String, Long> converter = Longs.stringConverter();
@@ -515,11 +513,10 @@ public class LongsTest extends TestCase {
         assertEquals("438", converter.reverse().convert(0666L));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testStringConverter_nullPointerTester() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(Longs.stringConverter());
-    }
+//    public void testStringConverter_nullPointerTester() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(Longs.stringConverter());
+//    }
 
     public void testTryParse() {
         tryParseAndAssertEquals(0L, "0");

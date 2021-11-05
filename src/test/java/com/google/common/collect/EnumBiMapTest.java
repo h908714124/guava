@@ -26,7 +26,6 @@ import com.google.common.collect.testing.features.MapFeature;
 import com.google.common.collect.testing.google.BiMapTestSuiteBuilder;
 import com.google.common.collect.testing.google.TestBiMapGenerator;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -292,13 +291,12 @@ public class EnumBiMapTest extends TestCase {
                 EnumBiMap.create(ImmutableMap.of(Currency.DOLLAR, Country.CANADA)));
     }
 
-    @GwtIncompatible // reflection
-    public void testNulls() {
-        new NullPointerTester().testAllPublicStaticMethods(EnumBiMap.class);
-        new NullPointerTester()
-                .testAllPublicInstanceMethods(
-                        EnumBiMap.create(ImmutableMap.of(Currency.DOLLAR, Country.CHILE)));
-    }
+//    public void testNulls() {
+//        new NullPointerTester().testAllPublicStaticMethods(EnumBiMap.class);
+//        new NullPointerTester()
+//                .testAllPublicInstanceMethods(
+//                        EnumBiMap.create(ImmutableMap.of(Currency.DOLLAR, Country.CHILE)));
+//    }
 
     public void testEquals() {
         new EqualsTester()

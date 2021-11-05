@@ -19,7 +19,6 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Function;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.util.Map;
@@ -32,11 +31,10 @@ import static com.google.common.util.concurrent.Uninterruptibles.awaitUninterrup
 @GwtCompatible(emulated = true)
 public class MapMakerTest extends TestCase {
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullParameters() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(new MapMaker());
-    }
+//    public void testNullParameters() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(new MapMaker());
+//    }
 
     @GwtIncompatible // threads
     static final class DelayingIdentityLoader<T> implements Function<T, T> {

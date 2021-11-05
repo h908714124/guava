@@ -25,7 +25,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.testing.IteratorFeature;
 import com.google.common.collect.testing.IteratorTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.truth.IterableSubject;
 import com.google.common.truth.Truth;
 import junit.framework.AssertionFailedError;
@@ -55,11 +54,10 @@ import static java.util.Arrays.asList;
 @GwtCompatible(emulated = true)
 public class FluentIterableTest extends TestCase {
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(FluentIterable.class);
-    }
+//    public void testNullPointerExceptions() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(FluentIterable.class);
+//    }
 
     public void testFromArrayAndAppend() {
         FluentIterable<TimeUnit> units =

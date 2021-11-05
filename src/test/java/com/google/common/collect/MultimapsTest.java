@@ -28,7 +28,6 @@ import com.google.common.collect.testing.IteratorTester;
 import com.google.common.collect.testing.google.UnmodifiableCollectionTests;
 import com.google.common.testing.CollectorTester;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.TestCase;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -1057,8 +1056,7 @@ public class MultimapsTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        new NullPointerTester().testAllPublicStaticMethods(Multimaps.class);
-    }
+//    public void testNullPointers() {
+//        new NullPointerTester().testAllPublicStaticMethods(Multimaps.class);
+//    }
 }

@@ -22,7 +22,6 @@ import com.google.common.collect.MapMakerInternalMap.Segment;
 import com.google.common.collect.MapMakerInternalMap.Strength;
 import com.google.common.collect.MapMakerInternalMap.WeakValueEntry;
 import com.google.common.collect.MapMakerInternalMap.WeakValueReference;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.lang.ref.Reference;
@@ -971,8 +970,8 @@ public class MapMakerInternalMapTest extends TestCase {
                 createMapMaker().weakValues(), createMapMaker().weakKeys().weakValues());
     }
 
-    public void testNullParameters() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(makeMap(createMapMaker()));
-    }
+//    public void testNullParameters() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(makeMap(createMapMaker()));
+//    }
 }

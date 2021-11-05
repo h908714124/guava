@@ -14,7 +14,6 @@
 
 package com.google.common.hash;
 
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;
@@ -84,11 +83,11 @@ public class HashingOutputStreamTest extends TestCase {
         assertEquals(expectedHash, out.hash());
     }
 
-    public void testChecksForNull() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(
-                new HashingOutputStream(Hashing.md5(), new ByteArrayOutputStream()));
-        tester.testAllPublicStaticMethods(HashingOutputStream.class);
-        tester.testAllPublicConstructors(HashingOutputStream.class);
-    }
+//    public void testChecksForNull() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(
+//                new HashingOutputStream(Hashing.md5(), new ByteArrayOutputStream()));
+//        tester.testAllPublicStaticMethods(HashingOutputStream.class);
+//        tester.testAllPublicConstructors(HashingOutputStream.class);
+//    }
 }

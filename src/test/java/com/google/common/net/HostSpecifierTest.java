@@ -18,7 +18,6 @@ package com.google.common.net;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.text.ParseException;
@@ -85,12 +84,12 @@ public final class HostSpecifierTest extends TestCase {
         return HostSpecifier.fromValid(specifier);
     }
 
-    public void testNulls() {
-        final NullPointerTester tester = new NullPointerTester();
-
-        tester.testAllPublicStaticMethods(HostSpecifier.class);
-        tester.testAllPublicInstanceMethods(HostSpecifier.fromValid("google.com"));
-    }
+//    public void testNulls() {
+//        final NullPointerTester tester = new NullPointerTester();
+//
+//        tester.testAllPublicStaticMethods(HostSpecifier.class);
+//        tester.testAllPublicInstanceMethods(HostSpecifier.fromValid("google.com"));
+//    }
 
     private void assertGood(String spec) throws ParseException {
         HostSpecifier.fromValid(spec); // Throws exception if not working correctly

@@ -18,7 +18,6 @@ package com.google.common.math;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.math.BigDecimal;
@@ -885,13 +884,12 @@ public class LongMathTest extends TestCase {
         return big.longValue();
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.setDefault(int.class, 1);
-        tester.setDefault(long.class, 1L);
-        tester.testAllPublicStaticMethods(LongMath.class);
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.setDefault(int.class, 1);
+//        tester.setDefault(long.class, 1L);
+//        tester.testAllPublicStaticMethods(LongMath.class);
+//    }
 
     @GwtIncompatible // isPrime is GWT-incompatible
     public void testIsPrimeSmall() {

@@ -24,7 +24,6 @@ import com.google.common.io.Resources;
 import com.google.common.reflect.ClassPath.ClassInfo;
 import com.google.common.reflect.ClassPath.ResourceInfo;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -485,12 +484,11 @@ public class ClassPathTest {
     }
 
 
-    @Test
-    public void testNulls() throws IOException {
-        new NullPointerTester().testAllPublicStaticMethods(ClassPath.class);
-        new NullPointerTester()
-                .testAllPublicInstanceMethods(ClassPath.from(getClass().getClassLoader()));
-    }
+//    public void testNulls() throws IOException {
+//        new NullPointerTester().testAllPublicStaticMethods(ClassPath.class);
+//        new NullPointerTester()
+//                .testAllPublicInstanceMethods(ClassPath.from(getClass().getClassLoader()));
+//    }
 
 
     @Test

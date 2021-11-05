@@ -17,10 +17,8 @@
 package com.google.common.reflect;
 
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
 
 /**
@@ -49,7 +47,6 @@ public class TypeParameterTest extends TestCase {
     }
 
     public <A, B> void testEquals() throws Exception {
-        Method method = TypeParameterTest.class.getDeclaredMethod("testEquals");
         new EqualsTester()
                 .addEqualityGroup(new TypeParameter<A>() {
                 }, new TypeParameter<A>() {
@@ -59,7 +56,7 @@ public class TypeParameterTest extends TestCase {
                 .testEquals();
     }
 
-    public void testNullPointers() {
-        new NullPointerTester().testAllPublicStaticMethods(TypeParameter.class);
-    }
+//    public void testNullPointers() {
+//        new NullPointerTester().testAllPublicStaticMethods(TypeParameter.class);
+//    }
 }

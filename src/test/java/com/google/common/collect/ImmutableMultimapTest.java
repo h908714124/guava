@@ -17,13 +17,11 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.testing.SampleElements;
 import com.google.common.collect.testing.SampleElements.Unhashables;
 import com.google.common.collect.testing.UnhashableObject;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.util.Arrays;
@@ -128,12 +126,11 @@ public class ImmutableMultimapTest extends TestCase {
                 .testEquals();
     }
 
-    @GwtIncompatible // reflection
-    public void testNulls() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(ImmutableMultimap.class);
-        tester.ignore(ImmutableListMultimap.class.getMethod("get", Object.class));
-        tester.testAllPublicInstanceMethods(ImmutableMultimap.of());
-        tester.testAllPublicInstanceMethods(ImmutableMultimap.of("a", 1));
-    }
+//    public void testNulls() throws Exception {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(ImmutableMultimap.class);
+//        tester.ignore(ImmutableListMultimap.class.getMethod("get", Object.class));
+//        tester.testAllPublicInstanceMethods(ImmutableMultimap.of());
+//        tester.testAllPublicInstanceMethods(ImmutableMultimap.of("a", 1));
+//    }
 }

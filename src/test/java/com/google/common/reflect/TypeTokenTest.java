@@ -23,7 +23,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Primitives;
 import com.google.common.testing.EqualsTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import com.google.common.truth.IterableSubject;
 import org.junit.Ignore;
@@ -2543,13 +2542,13 @@ public class TypeTokenTest {
         }, componentType);
     }
 
-    public <T> void testNulls() {
-        new NullPointerTester().testAllPublicStaticMethods(TypeToken.class);
-        new NullPointerTester()
-                .setDefault(TypeParameter.class, new TypeParameter<T>() {
-                })
-                .testAllPublicInstanceMethods(TypeToken.of(String.class));
-    }
+//    public <T> void testNulls() {
+//        new NullPointerTester().testAllPublicStaticMethods(TypeToken.class);
+//        new NullPointerTester()
+//                .setDefault(TypeParameter.class, new TypeParameter<T>() {
+//                })
+//                .testAllPublicInstanceMethods(TypeToken.of(String.class));
+//    }
 
     private static class Assignability<From, To> {
 

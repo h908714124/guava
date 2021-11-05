@@ -24,7 +24,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.google.common.testing.GcFinalization;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.TestCase;
 
 import java.lang.ref.WeakReference;
@@ -116,11 +115,11 @@ public class StripedTest extends TestCase {
         return concat(strongImplementations(), weakImplementations());
     }
 
-    public void testNull() throws Exception {
-        for (Striped<?> striped : allImplementations()) {
-            new NullPointerTester().testAllPublicInstanceMethods(striped);
-        }
-    }
+//    public void testNull() {
+//        for (Striped<?> striped : allImplementations()) {
+//            new NullPointerTester().testAllPublicInstanceMethods(striped);
+//        }
+//    }
 
     public void testSizes() {
         // not bothering testing all variations, since we know they share implementations

@@ -34,7 +34,6 @@ import com.google.common.collect.testing.google.SortedMapGenerators.ImmutableSor
 import com.google.common.collect.testing.google.SortedMapGenerators.ImmutableSortedMapKeyListGenerator;
 import com.google.common.collect.testing.google.SortedMapGenerators.ImmutableSortedMapValueListGenerator;
 import com.google.common.testing.CollectorTester;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -860,15 +859,14 @@ public class ImmutableSortedMapTest extends TestCase {
         assertNull(map.get(null));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointers() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(ImmutableSortedMap.class);
-        tester.testAllPublicInstanceMethods(ImmutableSortedMap.<String, Integer>naturalOrder());
-        tester.testAllPublicInstanceMethods(ImmutableSortedMap.of());
-        tester.testAllPublicInstanceMethods(ImmutableSortedMap.of("one", 1));
-        tester.testAllPublicInstanceMethods(ImmutableSortedMap.of("one", 1, "two", 2, "three", 3));
-    }
+//    public void testNullPointers() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(ImmutableSortedMap.class);
+//        tester.testAllPublicInstanceMethods(ImmutableSortedMap.<String, Integer>naturalOrder());
+//        tester.testAllPublicInstanceMethods(ImmutableSortedMap.of());
+//        tester.testAllPublicInstanceMethods(ImmutableSortedMap.of("one", 1));
+//        tester.testAllPublicInstanceMethods(ImmutableSortedMap.of("one", 1, "two", 2, "three", 3));
+//    }
 
     public void testNullValuesInCopyOfMap() {
         for (int i = 1; i <= 10; i++) {

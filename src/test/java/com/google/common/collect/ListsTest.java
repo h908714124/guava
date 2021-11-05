@@ -28,7 +28,6 @@ import com.google.common.collect.testing.features.CollectionSize;
 import com.google.common.collect.testing.features.ListFeature;
 import com.google.common.collect.testing.google.ListGenerators.CharactersOfCharSequenceGenerator;
 import com.google.common.collect.testing.google.ListGenerators.CharactersOfStringGenerator;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -406,11 +405,10 @@ public class ListsTest extends TestCase {
         assertEquals(SOME_COLLECTION, list);
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNullPointerExceptions() {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicStaticMethods(Lists.class);
-    }
+//    public void testNullPointerExceptions() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicStaticMethods(Lists.class);
+//    }
 
     /**
      * This is just here to illustrate how {@code Arrays#asList} differs from {@code

@@ -21,7 +21,6 @@ import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Converter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.testing.Helpers;
-import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.SerializableTester;
 import junit.framework.TestCase;
 
@@ -589,10 +588,9 @@ public class FloatsTest extends TestCase {
         }
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testNulls() {
-        new NullPointerTester().testAllPublicStaticMethods(Floats.class);
-    }
+//    public void testNulls() {
+//        new NullPointerTester().testAllPublicStaticMethods(Floats.class);
+//    }
 
     @GwtIncompatible // Float.toString returns different value in GWT.
     public void testStringConverter_convert() {
@@ -630,11 +628,10 @@ public class FloatsTest extends TestCase {
         assertEquals("1.0E-6", converter.reverse().convert(1e-6f));
     }
 
-    @GwtIncompatible // NullPointerTester
-    public void testStringConverter_nullPointerTester() throws Exception {
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(Floats.stringConverter());
-    }
+//    public void testStringConverter_nullPointerTester() {
+//        NullPointerTester tester = new NullPointerTester();
+//        tester.testAllPublicInstanceMethods(Floats.stringConverter());
+//    }
 
     public void testTryParse_withNullNoGwt() {
         assertNull(Floats.tryParse("null"));
