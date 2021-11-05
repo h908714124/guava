@@ -450,6 +450,10 @@ abstract class JSR166TestCase extends TestCase {
 
     /** Waits out termination of a thread pool or fails doing so. */
     void joinPool(ExecutorService exec) {
+        staticJoinPool(exec);
+    }
+
+    static void staticJoinPool(ExecutorService exec) {
         try {
             exec.shutdown();
             assertTrue(
