@@ -18,8 +18,6 @@ package com.google.common.util.concurrent;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.lang.reflect.Method;
 import java.nio.channels.spi.AbstractInterruptibleChannel;
@@ -30,8 +28,6 @@ import java.util.concurrent.locks.LockSupport;
 
 import static com.google.common.truth.Truth.assertThat;
 
-
-@RunWith(JUnit4.class)
 public final class InterruptibleTaskTest {
 
     // Regression test for a deadlock where a task could be stuck busy waiting for the task to

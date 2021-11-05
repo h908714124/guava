@@ -1,9 +1,10 @@
 package com.google.common.base;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class MoreObjectsTest extends TestCase {
+public class MoreObjectsTest {
 
+    @Test
     public void testNulls() {
     }
 }

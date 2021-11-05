@@ -1,8 +1,8 @@
-package com.google.common.base;
+package com.google.common.hash;
 
 import org.junit.Test;
 
-public class VerifyExceptionTest {
+public class LongAdderTest {
 
     @Test
     public void testNulls() {
