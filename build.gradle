@@ -62,6 +62,7 @@ test {
     }
     excludes << '**/*Tester.class'
     excludes << 'com/google/common/io/ResourcesTest.class'
+    excludes << 'com/google/common/util/concurrent/AbstractFutureFallbackAtomicHelperTest.class'
     excludes << 'com/google/common/io/FilesTest.class'
     excludes << '**/*$*0.class'
     excludes << '**/*$*1.class'

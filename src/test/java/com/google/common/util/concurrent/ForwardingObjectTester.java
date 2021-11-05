@@ -49,7 +49,7 @@ final class ForwardingObjectTester {
     }
 
     /**
-     * Ensures that all interface methods of {@code forwarderClass} are forwarded to the {@link
+     * Ensures that all interface methods of {@code forwarderClass} are forwarded to the {@code
      * ForwardingObject#delegate}. {@code forwarderClass} is assumed to only implement one interface.
      */
     static <T extends ForwardingObject> void testForwardingObject(final Class<T> forwarderClass) {
