@@ -471,4 +471,7 @@ public class SuppliersTest extends TestCase {
                 .addEqualityGroup(Suppliers.compose(Functions.constant(1), Suppliers.ofInstance("bar")))
                 .testEquals();
     }
+
+    public void testNulls() {
+    }
 }

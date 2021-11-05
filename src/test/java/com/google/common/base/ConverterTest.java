@@ -223,4 +223,7 @@ public class ConverterTest extends TestCase {
         Converter<String, String> dumb = Converter.from(toStringFunction(), toStringFunction());
         SerializableTester.reserializeAndAssert(dumb);
     }
+
+    public void testNulls() {
+    }
 }
