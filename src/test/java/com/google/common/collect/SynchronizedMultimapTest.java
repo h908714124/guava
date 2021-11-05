@@ -76,7 +76,7 @@ public class SynchronizedMultimapTest extends TestCase {
     private static final class TestMultimap<K, V> extends ForwardingSetMultimap<K, V>
             implements Serializable {
         final SetMultimap<K, V> delegate = HashMultimap.create();
-        public final Object mutex = new Integer(1); // something Serializable
+        public final Object mutex = new StringBuilder(); // something Serializable
 
         @Override
         protected SetMultimap<K, V> delegate() {

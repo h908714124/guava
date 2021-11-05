@@ -60,11 +60,8 @@ test {
     testLogging {
         events('failed')
     }
-    maxHeapSize = "2048m"
-    beforeTest { descriptor ->
-        logger.lifecycle("Running test: " + descriptor)
-    }
-    setForkEvery(100)
+    maxHeapSize = "1024m"
+    setForkEvery(64)
     setFailFast(true)
 }
 
