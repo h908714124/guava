@@ -64,6 +64,7 @@ test {
     excludes << '%regex[.*PackageSanityTests.*.class]'
     excludes << '%regex[.*[$]\\d+.class]'
     maxHeapSize = '1536m'
+    setForkEvery(256)
     setFailFast(true)
 }
 
