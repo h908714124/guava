@@ -61,7 +61,7 @@ test {
         events('failed')
     }
     maxHeapSize = "1024m"
-    setForkEvery(64)
+    setForkEvery(16)
     setFailFast(true)
 }
 
