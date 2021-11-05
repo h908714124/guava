@@ -49,8 +49,6 @@ public final class Objects extends ExtraObjectsMethodsForWeb {
      * java.util.Objects#equals} instead.
      */
     public static boolean equal(Object a, Object b) {
-        checkNotNull(a);
-        checkNotNull(b);
         return a == b || (a != null && a.equals(b));
     }
 

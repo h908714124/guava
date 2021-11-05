@@ -36,7 +36,6 @@ import static com.google.common.truth.Truth.assertThat;
  *
  * @author Ben Yu
  */
-@AndroidIncompatible // lots of failures, possibly some related to bad equals() implementations?
 public class TypeTokenResolutionTest extends TestCase {
 
     private static class Foo<A, B> {
