@@ -181,7 +181,6 @@ public class ImmutableRangeMapTest extends TestCase {
         }
     }
 
-    @AndroidIncompatible // slow
     public void testAsMapOfRanges() {
         for (Range<Integer> range1 : RANGES) {
             for (Range<Integer> range2 : RANGES) {

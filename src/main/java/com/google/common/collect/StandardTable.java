@@ -63,9 +63,7 @@ import static java.util.Objects.requireNonNull;
  * @author Jared Levy
  */
 class StandardTable<R, C, V> extends AbstractTable<R, C, V> implements Serializable {
-    @GwtTransient
     final Map<R, Map<C, V>> backingMap;
-    @GwtTransient
     final Supplier<? extends Map<C, V>> factory;
 
     StandardTable(Map<R, Map<C, V>> backingMap, Supplier<? extends Map<C, V>> factory) {

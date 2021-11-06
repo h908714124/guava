@@ -31,10 +31,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
 abstract class AbstractSortedMultiset<E> extends AbstractMultiset<E>
         implements SortedMultiset<E> {
-    @GwtTransient
     final Comparator<? super E> comparator;
 
     // needed for serialization
