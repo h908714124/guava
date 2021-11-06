@@ -62,10 +62,10 @@ test {
     }
     excludes << '**/*Tester.class'
     excludes << 'com/google/common/io/ResourcesTest.class'
-    excludes << 'com/google/common/util/concurrent/*.class'
-    excludes << 'com/google/common/io/*.class'
-//    excludes << 'com/google/common/collect/*.class'
     excludes << 'com/google/common/io/FilesTest.class'
+//    excludes << 'com/google/common/util/concurrent/*.class'
+//    excludes << 'com/google/common/io/*.class'
+    excludes << 'com/google/common/collect/*.class'
     excludes << '**/*$*0.class'
     excludes << '**/*$*1.class'
     excludes << '**/*$*2.class'
