@@ -22,8 +22,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.testing.IteratorTester;
-import com.google.common.testing.ClassSanityTester;
-import com.google.common.testing.NullPointerTester;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 

@@ -15,3 +15,6 @@ jobs:
           java-version: 17
 
       - run: ./gradlew build
+      - run: ./gradlew -Ptest-collect -Pcollect-A-H test
+      - run: ./gradlew -Ptest-collect -Pcollect-I-N test
+      - run: ./gradlew -Ptest-collect -Pcollect-O-Z test

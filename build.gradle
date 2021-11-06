@@ -63,23 +63,61 @@ test {
     excludes << '**/*Tester.class'
     excludes << 'com/google/common/io/ResourcesTest.class'
     excludes << 'com/google/common/io/FilesTest.class'
-//    excludes << 'com/google/common/util/concurrent/*.class'
-//    excludes << 'com/google/common/io/*.class'
-    if (!project.hasProperty('collect')) {
+    if (project.hasProperty('test-collect')) {
+        excludes << 'com/google/common/base/*.class'
+        excludes << 'com/google/common/cache/*.class'
+        excludes << 'com/google/common/escape/*.class'
+        excludes << 'com/google/common/eventbus/*.class'
+        excludes << 'com/google/common/graph/*.class'
+        excludes << 'com/google/common/hash/*.class'
+        excludes << 'com/google/common/html/*.class'
+        excludes << 'com/google/common/io/*.class'
+        excludes << 'com/google/common/math/*.class'
+        excludes << 'com/google/common/net/*.class'
+        excludes << 'com/google/common/primitives/*.class'
+        excludes << 'com/google/common/reflect/*.class'
+        excludes << 'com/google/common/util/concurrent/*.class'
+        excludes << 'com/google/common/xml/*.class'
+    } else {
         excludes << 'com/google/common/collect/*.class'
     }
-    excludes << '**/*$*0.class'
-    excludes << '**/*$*1.class'
-    excludes << '**/*$*2.class'
-    excludes << '**/*$*3.class'
-    excludes << '**/*$*4.class'
-    excludes << '**/*$*5.class'
-    excludes << '**/*$*6.class'
-    excludes << '**/*$*7.class'
-    excludes << '**/*$*8.class'
-    excludes << '**/*$*9.class'
+    // gradle throws OutOfMemoryError when running >800k tests at once,
+    // so we have to split the collect tests into smaller batches
+    if (!project.hasProperty('collect-A-H')) {
+//        excludes << 'com/google/common/collect/AtomicLongMapBasherTest.class'
+//        excludes << 'com/google/common/collect/ConcurrentHashMultisetBasherTest.class'
+        excludes << 'com/google/common/collect/A*.class'
+        excludes << 'com/google/common/collect/B*.class'
+        excludes << 'com/google/common/collect/C*.class'
+        excludes << 'com/google/common/collect/D*.class'
+        excludes << 'com/google/common/collect/E*.class'
+        excludes << 'com/google/common/collect/F*.class'
+        excludes << 'com/google/common/collect/G*.class'
+        excludes << 'com/google/common/collect/H*.class'
+    }
+    if (!project.hasProperty('collect-I-N')) {
+        excludes << 'com/google/common/collect/I*.class'
+        excludes << 'com/google/common/collect/J*.class'
+        excludes << 'com/google/common/collect/K*.class'
+        excludes << 'com/google/common/collect/M*.class'
+        excludes << 'com/google/common/collect/N*.class'
+    }
+    if (!project.hasProperty('collect-O-Z')) {
+        excludes << 'com/google/common/collect/O*.class'
+        excludes << 'com/google/common/collect/P*.class'
+        excludes << 'com/google/common/collect/Q*.class'
+        excludes << 'com/google/common/collect/R*.class'
+        excludes << 'com/google/common/collect/S*.class'
+        excludes << 'com/google/common/collect/T*.class'
+        excludes << 'com/google/common/collect/U*.class'
+        excludes << 'com/google/common/collect/V*.class'
+        excludes << 'com/google/common/collect/W*.class'
+        excludes << 'com/google/common/collect/X*.class'
+        excludes << 'com/google/common/collect/Y*.class'
+        excludes << 'com/google/common/collect/Z*.class'
+    }
     maxHeapSize = '1536m'
-    setForkEvery(16)
+    setForkEvery(64)
     setFailFast(true)
 }
 

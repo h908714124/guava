@@ -36,7 +36,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Mike Bostock
  */
 public class SynchronizedMapTest extends TestCase {
-    public final Object mutex = new Integer(1); // something Serializable
+    public final Object mutex = new StringBuilder(); // something Serializable
 
     protected <K, V> Map<K, V> create() {
         TestMap<K, V> inner = new TestMap<>(new HashMap<K, V>(), mutex);
