@@ -6,3 +6,5 @@ This is a fork of [guava](https://github.com/google/guava/tree/9830997ec9676dcf7
 but with a `module-info.java` and a gradle build.
 As with the original guava, you should not persist serialized forms
 and expect them to be compatible with future versions.
+
+See also [guava-testlib](https://github.com/jbock-java/guava-testlib).
