@@ -19,11 +19,8 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.google.common.graph.SuccessorsFunction;
-import com.google.common.graph.Traverser;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 
@@ -44,8 +41,6 @@ import java.nio.channels.FileChannel.MapMode;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -822,49 +817,6 @@ public final class Files {
         int dotIndex = fileName.lastIndexOf('.');
         return (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
     }
-
-    /**
-     * Returns a {@link Traverser} instance for the file and directory tree. The returned traverser
-     * starts from a {@link File} and will return all files and directories it encounters.
-     *
-     * <p><b>Warning:</b> {@code File} provides no support for symbolic links, and as such there is no
-     * way to ensure that a symbolic link to a directory is not followed when traversing the tree. In
-     * this case, iterables created by this traverser could contain files that are outside of the
-     * given directory or even be infinite if there is a symbolic link loop.
-     *
-     * <p>If available, consider using {@link MoreFiles#fileTraverser()} instead. It behaves the same
-     * except that it doesn't follow symbolic links and returns {@code Path} instances.
-     *
-     * <p>If the {@link File} passed to one of the {@link Traverser} methods does not exist or is not
-     * a directory, no exception will be thrown and the returned {@link Iterable} will contain a
-     * single element: that file.
-     *
-     * <p>Example: {@code Files.fileTraverser().depthFirstPreOrder(new File("/"))} may return files
-     * with the following paths: {@code ["/", "/etc", "/etc/config.txt", "/etc/fonts", "/home",
-     * "/home/alice", ...]}
-     *
-     * @since 23.5
-     */
-    @Beta
-    public static Traverser<File> fileTraverser() {
-        return Traverser.forTree(FILE_TREE);
-    }
-
-    private static final SuccessorsFunction<File> FILE_TREE =
-            new SuccessorsFunction<File>() {
-                @Override
-                public Iterable<File> successors(File file) {
-                    // check isDirectory() just because it may be faster than listFiles() on a non-directory
-                    if (file.isDirectory()) {
-                        File[] files = file.listFiles();
-                        if (files != null) {
-                            return Collections.unmodifiableList(Arrays.asList(files));
-                        }
-                    }
-
-                    return ImmutableList.of();
-                }
-            };
 
     /**
      * Returns a predicate that returns the result of {@link File#isDirectory} on input files.

@@ -10,7 +10,6 @@ module com.google.common {
     exports com.google.common.cache;
     exports com.google.common.escape;
     exports com.google.common.eventbus;
-    exports com.google.common.graph;
     exports com.google.common.hash;
     exports com.google.common.html;
     exports com.google.common.io;
